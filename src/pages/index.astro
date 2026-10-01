@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ModelList from '../components/ModelList.astro';
+const models = await getCollection('models');
+---
+<Base title="找到适合任务的小模型">
+  <section class="intro">
+    <p class="eyebrow">从用途出发，理解模型</p>
+    <h1>小模型，也有自己的专长。</h1>
+    <p class="lead">了解它擅长什么、有什么限制，以及如何在自己的设备上开始使用。</p>
+    <a class="button" href="/models/">浏览 {models.length} 个模型</a>
+  </section>
+  <section aria-label="样本模型">
+    <div class="section-heading"><h2>从这些模型开始</h2><a href="/methodology/">了解收录与评测方法</a></div>
+    <ModelList models={models.slice(0, 4)} />
+  </section>
+</Base>

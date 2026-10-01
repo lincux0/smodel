@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description?: string; }
+const { title, description = '按用途了解小模型的特点、能力依据与官方部署方式。' } = Astro.props;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} · 小模型图鉴</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+    <header class="site-header">
+      <a class="brand" href="/">小模型图鉴<span>smodel</span></a>
+      <nav aria-label="主导航">
+        <a href="/models/" aria-current={Astro.url.pathname.startsWith('/models/') ? 'page' : undefined}>模型目录</a>
+        <a href="/guides/official-quickstart/" aria-current={Astro.url.pathname.startsWith('/guides/') ? 'page' : undefined}>部署指南</a>
+        <a href="/methodology/" aria-current={Astro.url.pathname === '/methodology/' ? 'page' : undefined}>收录方法</a>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">内容根据官方资料整理。评测来源与运行验证状态分别标注。</footer>
+  </body>
+</html>

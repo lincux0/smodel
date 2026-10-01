@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { taskLabels } from '../../lib/catalog.ts';
+export async function getStaticPaths() {
+  return (await getCollection('models')).map((model) => ({ params: { id: model.id }, props: { model } }));
+}
+interface Props { model: CollectionEntry<'models'>; }
+const { data: model } = Astro.props.model;
+const kindLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
+const modalityLabels = { text: '文本', image: '图像', audio: '音频', vector: '向量', score: '相关性分数' };
+---
+<Base title={model.name} description={model.summary}>
+  <article class="detail">
+    <a class="back-link" href="/models/">返回模型目录</a>
+    <header class="intro compact">
+      <p class="eyebrow">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p>
+      <h1>{model.name}</h1>
+      <p class="lead">{model.summary}</p>
+      <p class="muted">最后核实：<time datetime={model.checkedAt}>{model.checkedAt}</time></p>
+    </header>
+    <section><h2>特点与限制</h2>
+      <div class="two-columns"><div><h3>主要特点</h3><ul>{model.features.map((feature) => <li>{feature}</li>)}</ul></div>
+      <div><h3>使用边界</h3><ul>{model.limitations.map((limitation) => <li>{limitation}</li>)}</ul></div></div>
+    </section>
+    <section><h2>模型信息</h2>
+      <dl class="facts">
+        <dt>家族与版本</dt><dd>{model.family} / {model.version}</dd>
+        <dt>输入与输出</dt><dd>{model.modalities.input.map((item) => modalityLabels[item]).join('、')} → {model.modalities.output.map((item) => modalityLabels[item]).join('、')}</dd>
+        <dt>公开参数规模</dt><dd>{model.parameters.totalB === null ? '未提供' : `${model.parameters.totalB}B（以以下来源口径为准）`}</dd>
+        <dt>激活 / 有效参数</dt><dd>{model.parameters.activeB === null ? '未提供' : `${model.parameters.activeB}B`} / {model.parameters.effectiveB === null ? '未提供' : `${model.parameters.effectiveB}B`}</dd>
+        <dt>参数口径</dt><dd>{model.parameters.notes} <a href={model.parameters.sourceUrl}>参数来源</a></dd>
+        <dt>原生上下文</dt><dd>{model.context.status === 'not-applicable' ? '不适用' : model.context.nativeTokens === null ? '未提供' : `${model.context.nativeTokens.toLocaleString('en-US')} tokens`}</dd>
+        <dt>扩展上下文</dt><dd>{model.context.extendedTokens === null ? (model.context.status === 'not-applicable' ? '不适用' : '未提供') : `${model.context.extendedTokens.toLocaleString('en-US')} tokens；${model.context.extension}`}</dd>
+        <dt>语言声明</dt><dd>{model.languages.length ? model.languages.join('、') : '未提供'}；语言支持不代表对应语言的评测水平。</dd>
+        <dt>权重许可</dt><dd><a href={model.licenses.weights.url}>{model.licenses.weights.name}</a></dd>
+        <dt>代码许可</dt><dd>{model.licenses.code ? <a href={model.licenses.code.url}>{model.licenses.code.name}</a> : '未核实'}</dd>
+        <dt>训练资料</dt><dd>{model.licenses.trainingDisclosure}</dd>
+      </dl>
+    </section>
+    <section><h2>能力依据</h2>
+      {model.evaluations.length === 0 ? <p class="empty-state">暂无可比评测。请结合特点、限制与官方资料判断适用性。</p> : model.evaluations.map((evaluation) => (
+        <div class="evidence">
+          <h3>{evaluation.benchmark}：{evaluation.value}{evaluation.unit}</h3>
+          <p>{kindLabels[evaluation.kind]} · {evaluation.language} · {evaluation.metric} · {evaluation.direction === 'higher' ? '数值越高越好' : '数值越低越好'}</p>
+          <p>数据集：{evaluation.dataset}；版本：{evaluation.version}；评测日期：{evaluation.date ?? '未提供'}。</p>
+          <p>{evaluation.settings}</p>
+          <p>{evaluation.comparable ? '可比性仍需核对其他模型的测试条件。' : '当前记录不参与跨模型排名。'} <a href={evaluation.sourceUrl}>查看评测来源</a></p>
+        </div>
+      ))}
+    </section>
+    <section><h2>运行条件与获取</h2>
+      {model.deployments.map((deployment) => (
+        <div class="deployment">
+          <h3>{deployment.runtime}</h3>
+          <p>{deployment.systems.length ? deployment.systems.join('、') : '系统支持未提供'} · {deployment.format} · {deployment.quantization ?? '未指定量化'}</p>
+          <p class="notice">{deployment.verification.status === 'site-verified' ? `本站已验证：${deployment.verification.verifiedAt}` : '官方支持；本站尚未进行推理验证。'}</p>
+          <p>硬件：{deployment.hardware.status === 'not-verified' ? '未核实' : deployment.hardware.status === 'measured' ? '实测' : '官方估算'}。{deployment.hardware.notes}</p>
+          <p>内存：{deployment.hardware.ramGb === null ? '未核实' : `${deployment.hardware.ramGb} GB`}；显存：{deployment.hardware.vramGb === null ? '未核实' : `${deployment.hardware.vramGb} GB`}。</p>
+          <p>依赖：{deployment.dependencies.length ? deployment.dependencies.join('、') : '以官方指引为准'}。</p>
+          <ol>{deployment.steps.map((step) => <li><strong>{step.title}</strong><p>{step.description}</p>{step.command && <pre><code>{step.command}</code></pre>}</li>)}</ol>
+          <div class="link-row"><a href={deployment.downloadUrl}>获取权重</a><a href={deployment.sourceUrl}>官方部署指引</a><a href={`/guides/${deployment.guideId}/`}>部署前检查</a></div>
+        </div>
+      ))}
+    </section>
+    <p><a class="button" href={model.officialUrl}>查看官方模型资料</a></p>
+  </article>
+</Base>

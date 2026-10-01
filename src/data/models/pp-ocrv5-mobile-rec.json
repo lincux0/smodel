@@ -1,0 +1,102 @@
+{
+  "id": "pp-ocrv5-mobile-rec",
+  "name": "PP-OCRv5 mobile rec",
+  "family": "PaddleOCR",
+  "version": "5",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": null,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "所查官方模型卡未提供总参数量；mobile命名和权重文件体积均不用于估算参数量。",
+    "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "简体中文",
+    "繁体中文",
+    "英语",
+    "日语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "所查模型卡介绍语言、复杂场景与评测结果，未提供完整训练数据清单。"
+  },
+  "summary": "识别文本行图像的移动端OCR组件，整页OCR需要配合检测等模块。",
+  "features": [
+    "中英日文本行识别",
+    "支持手写、竖排、拼音与生僻字场景",
+    "可接入PP-OCRv5流水线"
+  ],
+  "limitations": [
+    "这是文本行识别模型，不是完整的检测加识别流水线。",
+    "复杂版面、旋转与弯曲文本可能需要额外预处理模块。",
+    "模型卡未提供参数量；LLM式token上下文不适用。"
+  ],
+  "officialUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+  "checkedAt": "2026-10-01",
+  "deployments": [
+    {
+      "id": "official-paddleocr",
+      "runtime": "PaddleOCR",
+      "systems": [],
+      "format": "Paddle inference model",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec#model-usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "paddlepaddle==3.0.0（模型卡CPU示例；GPU安装需匹配CUDA）",
+        "paddleocr"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "打开部署来源链接，按官方安装章节配置依赖；依赖与模型版本需保持匹配。",
+          "command": null
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页推理示例加载此模型并处理对应输入；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": []
+}

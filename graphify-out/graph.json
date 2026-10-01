@@ -1,0 +1,2599 @@
+{
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "nodes": [
+    {
+      "id": "astro_config",
+      "label": "astro.config.mjs",
+      "file_type": "code",
+      "source_file": "astro.config.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "package",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_name",
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_version",
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_private",
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_type",
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_engines",
+      "label": "engines",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_engines_node",
+      "label": "node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_validate_content",
+      "label": "validate:content",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_check",
+      "label": "check",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_test",
+      "label": "test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_scripts_preview",
+      "label": "preview",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies",
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_astrojs_react",
+      "label": "@astrojs/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "astrojs_react",
+      "label": "@astrojs/react",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_astro",
+      "label": "astro",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "astro",
+      "label": "astro",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_react",
+      "label": "react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "react",
+      "label": "react",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_dependencies_react_dom",
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "react_dom",
+      "label": "react-dom",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies",
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies_astrojs_check",
+      "label": "@astrojs/check",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "astrojs_check",
+      "label": "@astrojs/check",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies_types_node",
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "types_node",
+      "label": "@types/node",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies_types_react",
+      "label": "@types/react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "types_react",
+      "label": "@types/react",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies_types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "types_react_dom",
+      "label": "@types/react-dom",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "package_devdependencies_typescript",
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "typescript",
+      "label": "typescript",
+      "file_type": "concept",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "scripts_validate_content",
+      "label": "validate-content.mjs",
+      "file_type": "code",
+      "source_file": "scripts/validate-content.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_modellist",
+      "label": "ModelList.astro",
+      "file_type": "code",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "astro_content",
+      "label": "astro:content",
+      "file_type": "code",
+      "source_file": "astro:content",
+      "confidence": "EXTRACTED",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_content_config",
+      "label": "content.config.ts",
+      "file_type": "code",
+      "source_file": "src/content.config.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_content_config_collections",
+      "label": "collections",
+      "file_type": "code",
+      "source_file": "src/content.config.ts",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_layouts_base",
+      "label": "Base.astro",
+      "file_type": "code",
+      "source_file": "src/layouts/Base.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog",
+      "label": "catalog.ts",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_text",
+      "label": "text",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_id",
+      "label": "id",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_url",
+      "label": "url",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_date",
+      "label": "date",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_size",
+      "label": "size",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_license",
+      "label": "license",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_tasklabels",
+      "label": "taskLabels",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_modelschema",
+      "label": "modelSchema",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_model",
+      "label": "Model",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L115",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_validatecatalog",
+      "label": "validateCatalog()",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L117",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_loadcatalog",
+      "label": "loadCatalog()",
+      "file_type": "code",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L134",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_404",
+      "label": "404.astro",
+      "file_type": "code",
+      "source_file": "src/pages/404.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_guides_id",
+      "label": "[id].astro",
+      "file_type": "code",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_guides_id_getstaticpaths",
+      "label": "getStaticPaths()",
+      "file_type": "code",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_index",
+      "label": "index.astro",
+      "file_type": "code",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_methodology",
+      "label": "methodology.astro",
+      "file_type": "code",
+      "source_file": "src/pages/methodology.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_id",
+      "label": "[id].astro",
+      "file_type": "code",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_id_getstaticpaths",
+      "label": "getStaticPaths()",
+      "file_type": "code",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_id_kindlabels",
+      "label": "kindLabels",
+      "file_type": "code",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_id_modalitylabels",
+      "label": "modalityLabels",
+      "file_type": "code",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_index",
+      "label": "index.astro",
+      "file_type": "code",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_catalog_test",
+      "label": "catalog.test.mjs",
+      "file_type": "code",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig",
+      "label": "tsconfig.json",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_extends",
+      "label": "extends",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_astro_tsconfigs_strict",
+      "label": "astro/tsconfigs/strict",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_include",
+      "label": "include",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_astro_types_d_ts",
+      "label": ".astro/types.d.ts",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref",
+      "label": "**/*",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_exclude",
+      "label": "exclude",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_dist",
+      "label": "dist",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_node_modules",
+      "label": "node_modules",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "ref_cache",
+      "label": ".cache",
+      "file_type": "concept",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_compileroptions_jsx",
+      "label": "jsx",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_compileroptions_jsximportsource",
+      "label": "jsxImportSource",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "tsconfig_compileroptions_allowimportingtsextensions",
+      "label": "allowImportingTsExtensions",
+      "file_type": "code",
+      "source_file": "tsconfig.json",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_小模型图鉴",
+      "label": "小模型图鉴",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_本地运行",
+      "label": "本地运行",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_校验与构建",
+      "label": "校验与构建",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L16",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_文档",
+      "label": "文档",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture",
+      "label": "ARCHITECTURE.md",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_项目架构与部署",
+      "label": "项目架构与部署",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_当前实现范围",
+      "label": "当前实现范围",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_数据流",
+      "label": "数据流",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_目录职责",
+      "label": "目录职责",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L28",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_页面",
+      "label": "页面",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L45",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_本地开发与产物",
+      "label": "本地开发与产物",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L56",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_vercel_预览部署_暂缓",
+      "label": "Vercel 预览部署（暂缓）",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L62",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_graphify",
+      "label": "Graphify",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L78",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide",
+      "label": "CONTENT_GUIDE.md",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_内容维护指南",
+      "label": "内容维护指南",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_新建模型条目",
+      "label": "新建模型条目",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_字段与缺失值",
+      "label": "字段与缺失值",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_来源_许可与内容信任",
+      "label": "来源、许可与内容信任",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L95",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_评测记录与可比性",
+      "label": "评测记录与可比性",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L103",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_content_guide_维护与校验",
+      "label": "维护与校验",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L109",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan",
+      "label": "DEVELOPMENT_PLAN.md",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "label": "小模型信息合集网站分阶段开发方案",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_1_项目目标",
+      "label": "1. 项目目标",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_1_1_已确认的首版方向",
+      "label": "1.1 已确认的首版方向",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_1_2_首版范围与边界",
+      "label": "1.2 首版范围与边界",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_2_内容与数据规范",
+      "label": "2. 内容与数据规范",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L35",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_2_1_模型身份与分类",
+      "label": "2.1 模型身份与分类",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L37",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_2_2_能力呈现",
+      "label": "2.2 能力呈现",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L46",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_2_3_最小数据结构",
+      "label": "2.3 最小数据结构",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L61",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_2_4_数据可信度与维护规则",
+      "label": "2.4 数据可信度与维护规则",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L73",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_3_页面与交互范围",
+      "label": "3. 页面与交互范围",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L83",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_4_技术与发布架构",
+      "label": "4. 技术与发布架构",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L98",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_5_分阶段实施计划",
+      "label": "5. 分阶段实施计划",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L116",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段一_内容规范与项目基础",
+      "label": "阶段一：内容规范与项目基础",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L120",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段二_视觉系统与动效原型",
+      "label": "阶段二：视觉系统与动效原型",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L141",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段三_核心选型功能",
+      "label": "阶段三：核心选型功能",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L162",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段四_首批内容与公开发布",
+      "label": "阶段四：首批内容与公开发布",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L181",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段五_维护效率与内容迭代",
+      "label": "阶段五：维护效率与内容迭代",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L204",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_阶段六_自动采集候选与人工审核",
+      "label": "阶段六：自动采集候选与人工审核",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L222",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_6_实施与验收约定",
+      "label": "6. 实施与验收约定",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L242",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_7_约束与后续决策",
+      "label": "7. 约束与后续决策",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L254",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_7_1_vercel_hobby",
+      "label": "7.1 Vercel Hobby",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L256",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_7_2_后续决策触发条件",
+      "label": "7.2 后续决策触发条件",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L264",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_development_plan_8_调研依据",
+      "label": "8. 调研依据",
+      "file_type": "document",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L276",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart",
+      "label": "official-quickstart.md",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart_1_核对具体型号与许可",
+      "label": "1. 核对具体型号与许可",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart_2_选择对应工具链",
+      "label": "2. 选择对应工具链",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L12",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart_3_检查运行条件",
+      "label": "3. 检查运行条件",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart_4_使用官方最小示例",
+      "label": "4. 使用官方最小示例",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_data_guides_official_quickstart_5_保留复现信息",
+      "label": "5. 保留复现信息",
+      "file_type": "document",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L28",
+      "_origin": "ast"
+    }
+  ],
+  "links": [
+    {
+      "source": "astro_config",
+      "target": "ref_astro_config",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "astro.config.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "astro_config",
+      "target": "ref_astrojs_react",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "astro.config.mjs",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_version",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_private",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_type",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_engines",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_engines",
+      "target": "package_engines_node",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_dev",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_validate_content",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_check",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_test",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_scripts",
+      "target": "package_scripts_preview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_dependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_astrojs_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies_astrojs_react",
+      "target": "astrojs_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_astro",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies_astro",
+      "target": "astro",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies_react",
+      "target": "react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_dependencies_react_dom",
+      "target": "react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package",
+      "target": "package_devdependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_astrojs_check",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies_astrojs_check",
+      "target": "astrojs_check",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_node",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies_types_node",
+      "target": "types_node",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_react",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies_types_react",
+      "target": "types_react",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_types_react_dom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies_types_react_dom",
+      "target": "types_react_dom",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies",
+      "target": "package_devdependencies_typescript",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "package_devdependencies_typescript",
+      "target": "typescript",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "scripts_validate_content",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-content.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "scripts_validate_content",
+      "target": "src_lib_catalog_loadcatalog",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/validate-content.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "ref_astro_content",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "ref_astro_loaders",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "ref_astro_zod",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "src_lib_catalog_loadcatalog",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "src_lib_catalog_modelschema",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_content_config",
+      "target": "src_content_config_collections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content.config.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_layouts_base",
+      "target": "src_styles_global",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/layouts/Base.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "ref_node_fs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "ref_node_path",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "ref_node_url",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "ref_astro_zod",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_url",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_date",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_size",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_license",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_modelschema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_model",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_validatecatalog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog",
+      "target": "src_lib_catalog_loadcatalog",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_loadcatalog",
+      "target": "src_lib_catalog_validatecatalog",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog.ts",
+      "source_location": "L153",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_404",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/404.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_guides_id",
+      "target": "ref_astro_content",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_guides_id",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_guides_id",
+      "target": "src_pages_guides_id_getstaticpaths",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_guides_id",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/guides/[id].astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_components_modellist",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_methodology",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/methodology.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "ref_astro_content",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_pages_models_id_getstaticpaths",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_pages_models_id_kindlabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "src_pages_models_id_modalitylabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_id",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/[id].astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_components_modellist",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "ref_node_assert_strict",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "ref_node_test",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_loadcatalog",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_validatecatalog",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_extends",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig",
+      "target": "ref_astro_tsconfigs_strict",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_include",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_include",
+      "target": "ref_astro_types_d_ts",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_include",
+      "target": "ref",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_exclude",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_exclude",
+      "target": "ref_dist",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_exclude",
+      "target": "ref_node_modules",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_exclude",
+      "target": "ref_cache",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "context": "import",
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig",
+      "target": "tsconfig_compileroptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_compileroptions",
+      "target": "tsconfig_compileroptions_jsx",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_compileroptions",
+      "target": "tsconfig_compileroptions_jsximportsource",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tsconfig_compileroptions",
+      "target": "tsconfig_compileroptions_allowimportingtsextensions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tsconfig.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "readme_小模型图鉴",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "docs_development_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_小模型图鉴",
+      "target": "readme_本地运行",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "docs_content_guide",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_小模型图鉴",
+      "target": "readme_校验与构建",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_小模型图鉴",
+      "target": "readme_文档",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "docs_architecture",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture",
+      "target": "docs_architecture_项目架构与部署",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_当前实现范围",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_数据流",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_目录职责",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_页面",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_本地开发与产物",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_vercel_预览部署_暂缓",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_graphify",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide",
+      "target": "docs_content_guide_内容维护指南",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide",
+      "target": "docs_development_plan",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_内容维护指南",
+      "target": "docs_content_guide_新建模型条目",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_内容维护指南",
+      "target": "docs_content_guide_字段与缺失值",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_内容维护指南",
+      "target": "docs_content_guide_来源_许可与内容信任",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_内容维护指南",
+      "target": "docs_content_guide_评测记录与可比性",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_内容维护指南",
+      "target": "docs_content_guide_维护与校验",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan",
+      "target": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_1_项目目标",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_1_项目目标",
+      "target": "docs_development_plan_1_1_已确认的首版方向",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_1_项目目标",
+      "target": "docs_development_plan_1_2_首版范围与边界",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_2_内容与数据规范",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_2_内容与数据规范",
+      "target": "docs_development_plan_2_1_模型身份与分类",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_2_内容与数据规范",
+      "target": "docs_development_plan_2_2_能力呈现",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_2_内容与数据规范",
+      "target": "docs_development_plan_2_3_最小数据结构",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_2_内容与数据规范",
+      "target": "docs_development_plan_2_4_数据可信度与维护规则",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_3_页面与交互范围",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_4_技术与发布架构",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_5_分阶段实施计划",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段一_内容规范与项目基础",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段二_视觉系统与动效原型",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L141",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段三_核心选型功能",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段四_首批内容与公开发布",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段五_维护效率与内容迭代",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L204",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_5_分阶段实施计划",
+      "target": "docs_development_plan_阶段六_自动采集候选与人工审核",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L222",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_6_实施与验收约定",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L242",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_7_约束与后续决策",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L254",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_7_约束与后续决策",
+      "target": "docs_development_plan_7_1_vercel_hobby",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L256",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_7_约束与后续决策",
+      "target": "docs_development_plan_7_2_后续决策触发条件",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L264",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_development_plan_小模型信息合集网站分阶段开发方案",
+      "target": "docs_development_plan_8_调研依据",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L276",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_data_guides_official_quickstart",
+      "target": "src_data_guides_official_quickstart_1_核对具体型号与许可",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_data_guides_official_quickstart",
+      "target": "src_data_guides_official_quickstart_2_选择对应工具链",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_data_guides_official_quickstart",
+      "target": "src_data_guides_official_quickstart_3_检查运行条件",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_data_guides_official_quickstart",
+      "target": "src_data_guides_official_quickstart_4_使用官方最小示例",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_data_guides_official_quickstart",
+      "target": "src_data_guides_official_quickstart_5_保留复现信息",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/data/guides/official-quickstart.md",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "directed": false
+}

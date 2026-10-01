@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ModelList from '../../components/ModelList.astro';
+const models = await getCollection('models');
+---
+<Base title="模型目录">
+  <section class="intro compact">
+    <h1>模型目录</h1>
+    <p class="lead">{models.length} 个样本，涵盖文本、视觉、检索、语音与文字识别。逐项查看特点、限制与官方指引。</p>
+  </section>
+  <ModelList models={models} />
+</Base>

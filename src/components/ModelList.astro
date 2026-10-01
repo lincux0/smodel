@@ -1,0 +1,22 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { taskLabels } from '../lib/catalog.ts';
+interface Props { models: CollectionEntry<'models'>[]; }
+const { models } = Astro.props;
+---
+<ul class="model-list">
+  {models.map(({ data: model }) => (
+    <li>
+      <div>
+        <p class="model-meta">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p>
+        <h2><a href={`/models/${model.id}/`}>{model.name}</a></h2>
+        <p>{model.summary}</p>
+      </div>
+      <div class="model-facts">
+        <span title={model.parameters.notes}>{model.parameters.totalB === null ? '规模未提供' : `公开规模 ${model.parameters.totalB}B（口径见详情）`}</span>
+        <span>{model.licenses.weights.name}</span>
+        <span>核实于 {model.checkedAt}</span>
+      </div>
+    </li>
+  ))}
+</ul>
