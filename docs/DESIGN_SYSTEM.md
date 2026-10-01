@@ -95,3 +95,11 @@
 官方链接框与复制按钮高度统一52px；窄屏上下布局仍同高，长链接保留细横向滚动条。命令区域保留多行空间。排序选择项简写公开规模，未知值仍排在最后。选择器选中标记使用CSS两条直线绘制，不使用字体勾号。
 
 2026-10-01验收：生产构建28页、Astro检查0错误/警告/提示；Playwright验证320/390/1440px链接框和按钮均52px、复制真实链接成功，标签换行无页面横向溢出，过滤显示2/21、空结果0/21，排序名称与直线标记正常。
+
+## 指针局部高光
+
+首页用途卡片与模型卡片使用220px半径的白色/浅青径向渐变，随鼠标局部坐标移动，180ms淡入淡出。光层位于文字下方，继承圆角且pointer-events:none，不模糊正文或遮挡链接、复选框。共享布局通过事件委托处理pointermove，用requestAnimationFrame合并同帧更新；离开卡片、窗口失焦和设备/动态偏好变化时清除。无新增依赖。
+
+仅hover:hover且pointer:fine的鼠标启用；触屏、笔输入与prefers-reduced-motion:reduce不启用追随。原有键盘焦点、筛选动效与卡片悬停保持各自职责。参考[MDN径向渐变](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient)、[requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)及[Astro客户端脚本](https://docs.astro.build/en/guides/client-side-scripts/)。
+
+2026-10-01验收：Astro检查0错误/警告/提示，构建28页；Playwright验证鼠标位置从70px到220px时高光同步，离开后透明度归零，动态切换减少动效清除高光，触屏无高光、无横向溢出，复选框选择和用途卡片跳转正常。目视截图确认高光柔和、文字清晰。

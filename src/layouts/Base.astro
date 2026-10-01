@@ -38,3 +38,41 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <footer class="site-footer"><span>内容根据官方资料整理。评测来源与运行验证状态分别标注。</span><span><a href="/contribute/">贡献与许可</a> · <a href="https://github.com/lincux0/smodel">源码</a></span></footer>
   </body>
 </html>
+
+<script>
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let activeCard: HTMLElement | null = null;
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  const clearGlow = () => {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    activeCard?.classList.remove('has-pointer-glow');
+    activeCard = null;
+  };
+  document.addEventListener('pointermove', (event) => {
+    if (!finePointer.matches || reducedMotion.matches || event.pointerType !== 'mouse') { clearGlow(); return; }
+    const card = event.target instanceof Element ? event.target.closest<HTMLElement>('[data-model-card], .task-tile') : null;
+    if (!card) { clearGlow(); return; }
+    if (card !== activeCard) { clearGlow(); activeCard = card; }
+    x = event.clientX;
+    y = event.clientY;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      if (!activeCard) return;
+      const rect = activeCard.getBoundingClientRect();
+      activeCard.style.setProperty('--glow-x', `${x - rect.left}px`);
+      activeCard.style.setProperty('--glow-y', `${y - rect.top}px`);
+      activeCard.classList.add('has-pointer-glow');
+    });
+  }, { passive: true });
+  document.addEventListener('pointerout', (event) => {
+    if (activeCard && (!(event.relatedTarget instanceof Node) || !activeCard.contains(event.relatedTarget))) clearGlow();
+  });
+  finePointer.addEventListener('change', clearGlow);
+  reducedMotion.addEventListener('change', clearGlow);
+  addEventListener('blur', clearGlow);
+</script>

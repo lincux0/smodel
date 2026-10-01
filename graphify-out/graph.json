@@ -1193,6 +1193,14 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_design_system_模型信息细节",
+      "label": "模型信息细节",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L91",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_development_plan",
       "label": "DEVELOPMENT_PLAN.md",
       "file_type": "document",
@@ -3550,6 +3558,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
       "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_模型信息细节",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L91",
       "weight": 1.0,
       "_origin": "ast"
     },
