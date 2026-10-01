@@ -87,9 +87,9 @@
       ],
       "steps": [
         {
-          "title": "按官方示例准备环境",
-          "description": "打开部署来源链接，按官方安装章节配置依赖；依赖与模型版本需保持匹配。",
-          "command": null
+          "title": "安装 Python 依赖",
+          "description": "在独立 Python 环境执行官方 Usage 的依赖安装。此处将 Colab 的 pip 写法转换为终端命令，并给版本条件加引号。espeak-ng 与中文、日语 G2P 依赖需按官方 Advanced Usage 和操作系统另行安装；本命令不等于完整部署，本站未执行模型。",
+          "command": "python -m pip install \"kokoro>=0.9.4\" soundfile"
         },
         {
           "title": "加载指定模型",

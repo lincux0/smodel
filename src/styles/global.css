@@ -45,7 +45,7 @@ html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; line-height: 1.65; }
 a { color: var(--accent); text-underline-offset: .22em; }
 a:hover { color: var(--accent-dark); text-decoration-thickness: 2px; }
-a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #3a948c; outline-offset: 4px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid #3a948c; outline-offset: 4px; }
 button, select { font: inherit; }
 button { color: inherit; }
 ::selection { color: white; background: var(--accent); }
@@ -134,6 +134,12 @@ p { margin-bottom: 14px; }
 .model-facts span { padding: 5px 8px; background: rgb(255 255 255 / 54%); color: #596360; font-size: 10px; }
 .compare-check { position: relative; z-index: 2; display: inline-flex; min-height: 44px; align-items: center; gap: 7px; padding: 0 4px; color: var(--muted); font-size: 11px; white-space: nowrap; }
 .compare-check input { width: 16px; height: 16px; accent-color: var(--accent); }
+.compare-check:has(input:disabled) { opacity: .55; }
+.compare-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 10px; }
+.compare-actions a, .compare-actions button { color: #e2eeea; min-height: 44px; display: inline-flex; align-items: center; font-size: 12px; }
+.compare-actions span, .compare-actions [data-copy-fallback] { width: 100%; overflow-wrap: anywhere; font-size: 12px; }
+[data-results-count] { margin-top: 18px; color: var(--muted); font-size: 13px; }
+[data-reset-filters] { min-height: 44px; border: var(--border); border-radius: var(--radius-sm); background: var(--paper); padding: 8px 16px; color: var(--accent); cursor: pointer; }
 .compare-check:focus-within { outline: 3px solid #3a948c; outline-offset: 4px; }
 .compare-tray-head button { min-height: 44px; min-width: 44px; }
 .catalog-empty { grid-column: 1 / -1; padding: 42px; border: 1px dashed #bfc9c4; color: var(--ink-soft); text-align: center; }
@@ -222,7 +228,7 @@ code { font-family: var(--mono); }
   .compare-tray { right: 10px; bottom: 10px; left: 10px; width: calc(100% - 20px); padding: 12px; }
   .compare-items { grid-template-columns: 1fr; max-height: 28vh; overflow: auto; }
   .compare-warning { line-height: 1.45; }
-  body.has-compare-tray { padding-bottom: max(280px, 40vh); }
+  body.has-compare-tray { padding-bottom: max(440px, 65vh); }
   .two-columns { grid-template-columns: 1fr; }
   .facts { grid-template-columns: 1fr; }
   .facts dt { padding-bottom: 2px; border-bottom: 0; }

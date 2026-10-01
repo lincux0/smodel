@@ -53,7 +53,7 @@
 
 目录原型使用 Web Animations API 对筛选或排序后的卡片位置做短暂过渡，时长 240ms；用户开启减少动态效果时跳过这段布局动画。页面 CSS 也通过 `prefers-reduced-motion: reduce` 缩短过渡、关闭平滑滚动。新增脚本动画必须读取相同偏好，动态偏好变化后应停止后续非必要动画。Astro 客户端脚本由框架处理、打包为模块；参见 [Astro 客户端脚本](https://docs.astro.build/en/guides/client-side-scripts/) 与 [MDN `Element.animate()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)。
 
-部署步骤展开与复制反馈使用 180ms 的透明度和轻微位移动效。详情页提供官方链接复制，数据存在命令时显示命令复制；当前样本命令均为空，不补造部署命令。复制使用 Clipboard API，并向用户提供成功或失败文本；无安全上下文或浏览器拒绝权限时保留可手动选择的内容。状态文字使用 `aria-live="polite"`，不只通过颜色或图标表达。参见 [MDN `Clipboard.writeText()`](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)。
+部署步骤展开与复制反馈使用 180ms 的透明度和轻微位移动效。详情页提供官方链接复制，数据存在命令时显示命令复制；缺失命令不补造。阶段三补充了有官方来源的 Kokoro 安装命令，未作为本站推理实测。复制使用 Clipboard API，并向用户提供成功或失败文本；无安全上下文或浏览器拒绝权限时保留可手动选择的内容。状态文字使用 `aria-live="polite"`，不只通过颜色或图标表达。参见 [MDN `Clipboard.writeText()`](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)。
 
 ## 可访问性与输入方式
 
@@ -70,7 +70,7 @@
 
 ## 阶段二原型与阶段三功能边界
 
-阶段二用于审阅颜色、材质、排版、断点、卡片和代表性交互反馈。当前模型筛选、排序、选择最多三个条目与比较栏用于验证密度和动效，不构成完整选型流程。阶段三再完善搜索与组合筛选、可恢复和分享的 URL 状态、跨用途与评测可比性、完整对比详情、复制命令及错误恢复，并覆盖刷新、浏览器前进后退、键盘和移动设备。原型数据不应呈现为统一智能排名，也不替代用户对视觉方向的验收。
+阶段二用于审阅颜色、材质、排版、断点、卡片和代表性交互反馈，维护者已确认。阶段三已完善搜索与组合筛选、可恢复和分享的 URL 状态、同用途选择限制、完整对比详情、命令复制及错误反馈，并覆盖刷新、浏览器前进后退、键盘和窄屏模拟。对比卡片沿用 14px 圆角，小控件使用 8px 圆角；错误和未知值保持文字说明，不呈现统一智能排名。
 
 ## 阶段二验收记录
 

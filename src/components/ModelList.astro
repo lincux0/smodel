@@ -1,14 +1,16 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { taskLabels } from '../lib/catalog.ts';
+import { parameterBand } from '../lib/catalog-query.ts';
 interface Props { models: CollectionEntry<'models'>[]; interactive?: boolean; }
 const { models, interactive = false } = Astro.props;
 ---
 <div class="model-list-shell" data-model-catalog={interactive ? 'true' : undefined}>
-  {interactive && <p class="sr-only" data-results-count role="status"></p>}
+  {interactive && <p data-results-count role="status" aria-live="polite"></p>}
+  {interactive && <p data-selection-error role="status" aria-live="polite" hidden></p>}
   <ul class="model-list">
     {models.map(({ data: model }, index) => (
-      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-parameters={model.parameters.totalB === null ? '未提供' : `${model.parameters.totalB}B`} data-license={model.licenses.weights.name} data-parameter-notes={model.parameters.notes} data-checked={model.checkedAt}>
+      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-size={parameterBand(model.parameters.totalB)} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-parameter-notes={model.parameters.notes} data-checked={model.checkedAt}>
         <div>
           <div class="model-card-top">
             <p class="model-meta">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p>
@@ -25,16 +27,20 @@ const { models, interactive = false } = Astro.props;
         </div>
       </li>
     ))}
-    {interactive && <li class="catalog-empty" data-empty-state hidden>当前用途暂无收录模型。</li>}
+    {interactive && <li class="catalog-empty" data-empty-state hidden><p>没有符合条件的模型。</p><button type="button" data-reset-filters>清空筛选条件</button></li>}
   </ul>
   {interactive && <aside class="compare-tray" data-compare-tray hidden aria-label="已选模型对比">
     <div class="compare-tray-head"><h2>选中 <span data-selected-count>0</span> / 3</h2><button type="button" data-clear-compare>清空</button></div>
     <div class="compare-items" data-compare-items></div>
     <p class="compare-warning" data-compare-warning aria-live="polite"></p>
+    <div class="compare-actions"><a href="/compare/" data-compare-link hidden>查看完整对比</a><button type="button" data-copy-compare hidden>复制分享链接</button><a href="/compare/" data-copy-fallback hidden></a><span data-copy-status role="status" aria-live="polite"></span></div>
   </aside>}
 </div>
 
 {interactive && <script>
+  import { validateComparison } from '../lib/compare.ts';
+  import { parseCatalogQuery, writeCatalogQuery } from '../lib/catalog-query.ts';
+
   const catalog = document.querySelector('[data-model-catalog]');
   if (catalog) {
     const cards = [...catalog.querySelectorAll<HTMLLIElement>('[data-model-card]')];
@@ -42,14 +48,53 @@ const { models, interactive = false } = Astro.props;
     const tray = catalog.querySelector<HTMLElement>('[data-compare-tray]')!;
     const compareItems = catalog.querySelector<HTMLElement>('[data-compare-items]')!;
     const warning = catalog.querySelector<HTMLElement>('[data-compare-warning]')!;
+    const selectionError = catalog.querySelector<HTMLElement>('[data-selection-error]')!;
     const selectedCount = catalog.querySelector<HTMLElement>('[data-selected-count]')!;
-    const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-task-filter]')];
-    const sortControl = document.querySelector<HTMLSelectElement>('[data-sort-control]');
+    const queryControls = [...document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-query]')];
+    const taskControl = catalog.parentElement?.querySelector<HTMLSelectElement>('[data-query="task"]');
+    const sizeControl = catalog.parentElement?.querySelector<HTMLSelectElement>('[data-query="size"]');
+    const compareLink = catalog.querySelector<HTMLAnchorElement>('[data-compare-link]')!;
+    const copyButton = catalog.querySelector<HTMLButtonElement>('[data-copy-compare]')!;
+    const copyFallback = catalog.querySelector<HTMLAnchorElement>('[data-copy-fallback]')!;
+    const copyStatus = catalog.querySelector<HTMLElement>('[data-copy-status]')!;
     const selected = new Set<string>();
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    const validTasks = new Set(filterButtons.map((button) => button.dataset.taskFilter));
-    let activeTask = new URLSearchParams(location.search).get('task') || 'all';
-    if (!validTasks.has(activeTask)) activeTask = 'all';
+    const queryOptions = {
+      tasks: [...(taskControl?.options ?? [])].map(({ value }) => value).filter((value) => value !== 'all'),
+      sizes: [...(sizeControl?.options ?? [])].map(({ value }) => value).filter((value) => value !== 'all'),
+      licenses: [...new Set(cards.map((card) => card.dataset.license!))],
+      runtimes: [...new Set(cards.flatMap((card) => JSON.parse(card.dataset.runtimes ?? '[]') as string[]))],
+    };
+    let state = parseCatalogQuery(location.search, queryOptions);
+    for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+
+    const commonTasks = (chosen: HTMLLIElement[]) => chosen.length < 2 ? [] : chosen[0].dataset.tasks!.split(' ').filter((task) => chosen.every((card) => card.dataset.tasks!.split(' ').includes(task)));
+    const restoreSelection = () => {
+      const params = new URLSearchParams(location.search);
+      if (!params.has('ids')) { selectionError.hidden = true; return; }
+      const requested = (params.get('ids') ?? '').split(',');
+      const models = cards.map((card) => ({ id: card.dataset.id!, tasks: card.dataset.tasks!.split(' ') }));
+      const comparison = validateComparison(requested, models);
+      if (!comparison.ok) {
+        selectionError.textContent = comparison.message;
+        selectionError.hidden = false;
+        return;
+      }
+      selectionError.hidden = true;
+      const chosen = comparison.ids.map((id) => cards.find((card) => card.dataset.id === id)!);
+      chosen.forEach((card) => selected.add(card.dataset.id!));
+      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+    };
+    restoreSelection();
+
+    const persist = (mode: 'push' | 'replace' = 'push') => {
+      selectionError.hidden = true;
+      const url = writeCatalogQuery(new URL(location.href), state);
+      if (selected.size) url.searchParams.set('ids', [...selected].join(','));
+      else url.searchParams.delete('ids');
+      if (url.href === location.href) return;
+      history[mode === 'push' ? 'pushState' : 'replaceState']({}, '', url);
+    };
 
     const animateLayout = (change: () => void) => {
       const before = new Map(cards.filter((card) => !card.hidden).map((card) => [card, card.getBoundingClientRect()]));
@@ -64,27 +109,39 @@ const { models, interactive = false } = Astro.props;
       }
     };
 
-    const render = (updateHistory = false) => {
-      const taskFilter = (card: HTMLLIElement) => activeTask === 'all' || card.dataset.tasks!.split(' ').includes(activeTask);
+    const render = () => {
+      const needle = state.q.toLocaleLowerCase('zh-CN');
+      const matches = (card: HTMLLIElement) => {
+        const tasks = card.dataset.tasks!.split(' ');
+        const search = (card.dataset.search ?? '').toLocaleLowerCase('zh-CN');
+        const runtimes = JSON.parse(card.dataset.runtimes ?? '[]') as string[];
+        return (!needle || needle.split(' ').every((word) => search.includes(word)))
+          && (state.task === 'all' || tasks.includes(state.task))
+          && (state.size === 'all' || card.dataset.size === state.size)
+          && (state.license === 'all' || card.dataset.license === state.license)
+          && (state.runtime === 'all' || runtimes.includes(state.runtime));
+      };
       animateLayout(() => {
-        const visible = cards.filter(taskFilter);
-        for (const card of cards) card.hidden = !taskFilter(card);
-        const order = sortControl?.value || 'recent';
-        visible.sort((a, b) => order === 'name' ? (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'zh-CN') : order === 'size' ? (Number.parseFloat(b.dataset.parameters ?? '') || -1) - (Number.parseFloat(a.dataset.parameters ?? '') || -1) : (b.dataset.checked ?? '').localeCompare(a.dataset.checked ?? ''));
+        const visible = cards.filter(matches);
+        for (const card of cards) card.hidden = !matches(card);
+        visible.sort((a, b) => {
+          if (state.sort === 'name') return (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'zh-CN');
+          if (state.sort === 'size') {
+            const left = a.dataset.parameters === '' ? null : Number(a.dataset.parameters);
+            const right = b.dataset.parameters === '' ? null : Number(b.dataset.parameters);
+            return left === null ? right === null ? 0 : 1 : right === null ? -1 : left - right;
+          }
+          return (b.dataset.checked ?? '').localeCompare(a.dataset.checked ?? '');
+        });
         for (const card of visible) list.append(card);
       });
-      for (const button of filterButtons) button.setAttribute('aria-pressed', String(button.dataset.taskFilter === activeTask));
-      if (updateHistory) {
-        const url = new URL(location.href);
-        activeTask === 'all' ? url.searchParams.delete('task') : url.searchParams.set('task', activeTask);
-        history.pushState({}, '', url);
-      }
-      catalog.querySelector('[data-empty-state]')?.toggleAttribute('hidden', cards.some((card) => !card.hidden));
+      catalog.querySelector('[data-empty-state]')?.toggleAttribute('hidden', visibleCount() > 0);
       const results = catalog.querySelector('[data-results-count]');
-      if (results) results.textContent = `显示 ${cards.filter((card) => !card.hidden).length} 个模型。`;
-      if (sortControl) sortControl.setAttribute('aria-label', '排序模型目录');
+      if (results) results.textContent = `显示 ${visibleCount()} / ${cards.length} 个模型。`;
       renderCompare();
     };
+
+    const visibleCount = () => cards.filter((card) => !card.hidden).length;
 
     const renderCompare = () => {
       const chosen = cards.filter((card) => selected.has(card.dataset.id!));
@@ -93,7 +150,13 @@ const { models, interactive = false } = Astro.props;
       document.body.classList.toggle('has-compare-tray', chosen.length > 0);
       if (wasHidden && !tray.hidden && !reduceMotion.matches) tray.animate([{ opacity: 0, transform: 'translateY(14px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 180, easing: 'ease-out' });
       selectedCount.textContent = String(chosen.length);
-      for (const input of catalog.querySelectorAll<HTMLInputElement>('[data-compare]')) input.disabled = !input.checked && chosen.length >= 3;
+      for (const input of catalog.querySelectorAll<HTMLInputElement>('[data-compare]')) {
+        input.checked = selected.has(input.closest<HTMLLIElement>('[data-model-card]')!.dataset.id!);
+        if (input.checked) { input.disabled = false; continue; }
+        const candidate = input.closest<HTMLLIElement>('[data-model-card]')!;
+        const compatible = chosen.length === 0 || commonTasks([...chosen, candidate]).length > 0;
+        input.disabled = chosen.length >= 3 || !compatible;
+      }
       compareItems.replaceChildren(...chosen.map((card) => {
         const item = document.createElement('div');
         item.className = 'compare-item';
@@ -104,29 +167,80 @@ const { models, interactive = false } = Astro.props;
         item.append(title, details);
         return item;
       }));
+      copyStatus.textContent = '';
+      copyFallback.hidden = true;
       if (chosen.length > 1) {
-        const shared = chosen[0].dataset.tasks!.split(' ').filter((task) => chosen.every((card) => card.dataset.tasks!.split(' ').includes(task)));
-        warning.textContent = shared.length ? `共同用途：${shared.map((task) => filterButtons.find((button) => button.dataset.taskFilter === task)?.textContent).join('、')}。参数口径请查看详情；不同条件的评测不可直接横向排名。` : '所选模型用途不同，不能直接比较能力；评测需在相同任务与条件下核对。';
-      } else warning.textContent = '对比原型：展示用途、公开参数和许可。参数统计口径可能不同，评测不作跨模型排名。';
+        const shared = commonTasks(chosen);
+        warning.textContent = `共同用途：${shared.map((task) => taskControl?.querySelector<HTMLOptionElement>(`option[value="${CSS.escape(task)}"]`)?.textContent ?? task).join('、')}。参数口径请查看详情；不同条件的评测不可直接横向排名。`;
+      } else warning.textContent = '请继续选择有共同用途的型号；一次最多三个。参数统计口径可能不同，评测不作跨模型排名。';
+      compareLink.hidden = chosen.length < 2;
+      copyButton.hidden = chosen.length < 2;
+      if (chosen.length > 1) {
+        const shared = commonTasks(chosen);
+        const compareUrl = new URL('/compare/', location.origin);
+        compareUrl.searchParams.set('ids', chosen.map((card) => card.dataset.id!).join(','));
+        compareUrl.searchParams.set('task', shared.includes(state.task) ? state.task : shared[0]);
+        compareLink.href = `${compareUrl.pathname}${compareUrl.search}`;
+        copyFallback.href = compareLink.href;
+      }
     };
 
-    filterButtons.forEach((button) => button.addEventListener('click', () => { activeTask = button.dataset.taskFilter ?? 'all'; render(true); }));
-    sortControl?.addEventListener('change', () => render());
+    queryControls.forEach((control) => control.addEventListener(control instanceof HTMLInputElement ? 'input' : 'change', () => {
+      const key = control.dataset.query as keyof typeof state;
+      state[key] = key === 'q' ? control.value.trim().replace(/\s+/g, ' ').slice(0, 120) : control.value;
+      render();
+      persist(key === 'q' ? 'replace' : 'push');
+    }));
+    catalog.querySelector('[data-reset-filters]')?.addEventListener('click', () => {
+      state = { q: '', task: 'all', size: 'all', license: 'all', runtime: 'all', sort: 'recent' };
+      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+      render();
+      persist();
+    });
     catalog.addEventListener('change', (event) => {
       if (!(event.target instanceof HTMLInputElement) || !event.target.matches('[data-compare]')) return;
       const input = event.target;
       const id = input.closest<HTMLLIElement>('[data-model-card]')!.dataset.id!;
-      input.checked ? selected.add(id) : selected.delete(id);
+      if (input.checked) {
+        const chosen = cards.filter((card) => selected.has(card.dataset.id!));
+        const candidate = input.closest<HTMLLIElement>('[data-model-card]')!;
+        if (chosen.length >= 3 || (chosen.length && !commonTasks([...chosen, candidate]).length)) {
+          input.checked = false;
+          warning.textContent = chosen.length >= 3 ? '一次最多选择 3 个模型。' : '这个模型与已选模型没有共同用途，不能加入同一组对比。';
+          return;
+        }
+        selected.add(id);
+      } else selected.delete(id);
       renderCompare();
+      persist();
     });
     catalog.querySelector('[data-clear-compare]')?.addEventListener('click', () => {
       selected.clear();
       catalog.querySelectorAll<HTMLInputElement>('[data-compare]').forEach((input) => { input.checked = false; });
       renderCompare();
+      persist();
+    });
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(new URL(compareLink.href, location.href).href);
+        copyStatus.textContent = '已复制对比分享链接。';
+        copyFallback.hidden = true;
+      } catch {
+        copyStatus.textContent = '自动复制不可用，请使用下方链接。';
+        copyFallback.textContent = new URL(compareLink.href, location.href).href;
+        copyFallback.hidden = false;
+      }
     });
     addEventListener('popstate', () => {
-      const task = new URLSearchParams(location.search).get('task') || 'all';
-      activeTask = validTasks.has(task) ? task : 'all';
+      state = parseCatalogQuery(location.search, queryOptions);
+      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+      selected.clear();
+      catalog.querySelectorAll<HTMLInputElement>('[data-compare]').forEach((input) => { input.checked = false; });
+      restoreSelection();
+      for (const card of cards) {
+        const input = card.querySelector<HTMLInputElement>('[data-compare]');
+        if (input) input.checked = selected.has(card.dataset.id!);
+      }
       render();
     });
     render();

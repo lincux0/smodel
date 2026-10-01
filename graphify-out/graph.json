@@ -300,6 +300,42 @@
       "_origin": "ast"
     },
     {
+      "id": "src_components_modellist_animatelayout",
+      "label": "animateLayout()",
+      "file_type": "code",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L99",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_modellist_render",
+      "label": "render()",
+      "file_type": "code",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L112",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_modellist_visiblecount",
+      "label": "visibleCount()",
+      "file_type": "code",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L144",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_modellist_rendercompare",
+      "label": "renderCompare()",
+      "file_type": "code",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L146",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "astro_content",
       "label": "astro:content",
       "file_type": "code",
@@ -329,6 +365,77 @@
       "file_type": "code",
       "source_file": "src/layouts/Base.astro",
       "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query",
+      "label": "catalog-query.ts",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_catalogquerykeys",
+      "label": "catalogQueryKeys",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_catalogquerystate",
+      "label": "CatalogQueryState",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_catalogqueryoptions",
+      "label": "CatalogQueryOptions",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L12",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_defaults",
+      "label": "defaults",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L19",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_parsecatalogquery",
+      "label": "parseCatalogQuery()",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L21",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_writecatalogquery",
+      "label": "writeCatalogQuery()",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_catalog_query_parameterband",
+      "label": "parameterBand()",
+      "file_type": "code",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L47",
+      "_callable": true,
       "_origin": "ast"
     },
     {
@@ -432,10 +539,55 @@
       "_origin": "ast"
     },
     {
+      "id": "src_lib_compare",
+      "label": "compare.ts",
+      "file_type": "code",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_compare_comparablemodel",
+      "label": "ComparableModel",
+      "file_type": "code",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L1",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_compare_comparison",
+      "label": "Comparison",
+      "file_type": "code",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L2",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_compare_validatecomparison",
+      "label": "validateComparison()",
+      "file_type": "code",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L4",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "src_pages_404",
       "label": "404.astro",
       "file_type": "code",
       "source_file": "src/pages/404.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_compare",
+      "label": "compare.astro",
+      "file_type": "code",
+      "source_file": "src/pages/compare.astro",
       "source_location": "L1",
       "_origin": "ast"
     },
@@ -454,6 +606,14 @@
       "source_file": "src/pages/guides/[id].astro",
       "source_location": "L5",
       "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_guides_id_related",
+      "label": "related",
+      "file_type": "code",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L11",
       "_origin": "ast"
     },
     {
@@ -514,10 +674,50 @@
       "_origin": "ast"
     },
     {
+      "id": "src_pages_models_index_taskcounts",
+      "label": "taskCounts",
+      "file_type": "code",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_index_licenseoptions",
+      "label": "licenseOptions",
+      "file_type": "code",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L13",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_index_runtimeoptions",
+      "label": "runtimeOptions",
+      "file_type": "code",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_models_index_sizeoptions",
+      "label": "sizeOptions",
+      "file_type": "code",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
       "id": "tests_catalog_test",
       "label": "catalog.test.mjs",
       "file_type": "code",
       "source_file": "tests/catalog.test.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_compare_test",
+      "label": "compare.test.mjs",
+      "file_type": "code",
+      "source_file": "tests/compare.test.mjs",
       "source_location": "L1",
       "_origin": "ast"
     },
@@ -766,7 +966,15 @@
       "label": "页面",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L45",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_architecture_目录与对比状态",
+      "label": "目录与对比状态",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L59",
       "_origin": "ast"
     },
     {
@@ -774,7 +982,7 @@
       "label": "本地开发与产物",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L56",
+      "source_location": "L69",
       "_origin": "ast"
     },
     {
@@ -782,7 +990,7 @@
       "label": "Vercel 部署",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L62",
+      "source_location": "L75",
       "_origin": "ast"
     },
     {
@@ -790,7 +998,7 @@
       "label": "Graphify",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L89",
+      "source_location": "L104",
       "_origin": "ast"
     },
     {
@@ -814,7 +1022,7 @@
       "label": "新建模型条目",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L5",
+      "source_location": "L9",
       "_origin": "ast"
     },
     {
@@ -822,7 +1030,7 @@
       "label": "字段与缺失值",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L86",
+      "source_location": "L90",
       "_origin": "ast"
     },
     {
@@ -830,7 +1038,7 @@
       "label": "来源、许可与内容信任",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L95",
+      "source_location": "L99",
       "_origin": "ast"
     },
     {
@@ -838,7 +1046,7 @@
       "label": "评测记录与可比性",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L103",
+      "source_location": "L107",
       "_origin": "ast"
     },
     {
@@ -846,7 +1054,7 @@
       "label": "维护与校验",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L109",
+      "source_location": "L113",
       "_origin": "ast"
     },
     {
@@ -870,7 +1078,7 @@
       "label": "视觉方向",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L7",
+      "source_location": "L9",
       "_origin": "ast"
     },
     {
@@ -878,7 +1086,7 @@
       "label": "设计变量",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L11",
+      "source_location": "L13",
       "_origin": "ast"
     },
     {
@@ -886,7 +1094,7 @@
       "label": "布局与组件",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L38",
+      "source_location": "L40",
       "_origin": "ast"
     },
     {
@@ -894,7 +1102,7 @@
       "label": "动效规范",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L48",
+      "source_location": "L50",
       "_origin": "ast"
     },
     {
@@ -902,7 +1110,7 @@
       "label": "可访问性与输入方式",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L56",
+      "source_location": "L58",
       "_origin": "ast"
     },
     {
@@ -910,7 +1118,7 @@
       "label": "Astro 与渐进增强",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L65",
+      "source_location": "L67",
       "_origin": "ast"
     },
     {
@@ -918,7 +1126,7 @@
       "label": "阶段二原型与阶段三功能边界",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "_origin": "ast"
     },
     {
@@ -926,7 +1134,7 @@
       "label": "阶段二验收记录",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "_origin": "ast"
     },
     {
@@ -1054,7 +1262,7 @@
       "label": "阶段三：核心选型功能",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L164",
+      "source_location": "L168",
       "_origin": "ast"
     },
     {
@@ -1062,7 +1270,7 @@
       "label": "阶段四：首批内容与公开发布",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L183",
+      "source_location": "L193",
       "_origin": "ast"
     },
     {
@@ -1070,7 +1278,7 @@
       "label": "阶段五：维护效率与内容迭代",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L206",
+      "source_location": "L216",
       "_origin": "ast"
     },
     {
@@ -1078,7 +1286,7 @@
       "label": "阶段六：自动采集候选与人工审核",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L224",
+      "source_location": "L234",
       "_origin": "ast"
     },
     {
@@ -1086,7 +1294,7 @@
       "label": "6. 实施与验收约定",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L244",
+      "source_location": "L254",
       "_origin": "ast"
     },
     {
@@ -1094,7 +1302,7 @@
       "label": "7. 约束与后续决策",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L266",
       "_origin": "ast"
     },
     {
@@ -1102,7 +1310,7 @@
       "label": "7.1 Vercel Hobby",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L258",
+      "source_location": "L268",
       "_origin": "ast"
     },
     {
@@ -1110,7 +1318,7 @@
       "label": "7.2 后续决策触发条件",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L266",
+      "source_location": "L276",
       "_origin": "ast"
     },
     {
@@ -1118,7 +1326,7 @@
       "label": "8. 调研依据",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L278",
+      "source_location": "L288",
       "_origin": "ast"
     },
     {
@@ -1578,7 +1786,110 @@
     },
     {
       "source": "src_components_modellist",
+      "target": "src_lib_catalog_query",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_lib_catalog_query_parameterband",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_components_modellist_animatelayout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_components_modellist_render",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_components_modellist_visiblecount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_components_modellist_rendercompare",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L146",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist_render",
+      "target": "src_components_modellist_animatelayout",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist_render",
+      "target": "src_components_modellist_visiblecount",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist_render",
+      "target": "src_components_modellist_rendercompare",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "source_location": "L141",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
       "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ModelList.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_modellist",
+      "target": "src_lib_compare",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ModelList.astro",
@@ -1666,6 +1977,76 @@
       "relation": "imports_from",
       "confidence": "EXTRACTED",
       "source_file": "src/layouts/Base.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_catalogquerykeys",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_catalogquerystate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_catalogqueryoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_defaults",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_parsecatalogquery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_writecatalogquery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_catalog_query",
+      "target": "src_lib_catalog_query_parameterband",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/catalog-query.ts",
+      "source_location": "L47",
+      "weight": 1.0,
       "_origin": "ast"
     },
     {
@@ -1834,11 +2215,90 @@
       "_origin": "ast"
     },
     {
+      "source": "src_lib_compare",
+      "target": "src_lib_compare_comparablemodel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_compare",
+      "target": "src_lib_compare_comparison",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_compare",
+      "target": "src_lib_compare_validatecomparison",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/compare.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "src_pages_404",
       "target": "src_layouts_base",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/404.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_compare",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/compare.astro",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_compare",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/compare.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_compare",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/compare.astro",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_compare",
+      "target": "astro_content",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/compare.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_compare",
+      "target": "src_lib_compare",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/compare.astro",
       "_origin": "ast"
     },
     {
@@ -1870,6 +2330,16 @@
       "confidence": "EXTRACTED",
       "source_file": "src/pages/guides/[id].astro",
       "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_guides_id",
+      "target": "src_pages_guides_id_related",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/guides/[id].astro",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2069,6 +2539,46 @@
     },
     {
       "source": "src_pages_models_index",
+      "target": "src_pages_models_index_taskcounts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_pages_models_index_licenseoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_pages_models_index_runtimeoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_pages_models_index_sizeoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
       "target": "astro_content",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
@@ -2127,6 +2637,116 @@
       "confidence": "EXTRACTED",
       "source_file": "tests/catalog.test.mjs",
       "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_query",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_query_parameterband",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_query_parsecatalogquery",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_catalog_test",
+      "target": "src_lib_catalog_query_writecatalogquery",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/catalog.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "ref_node_assert_strict",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "ref_node_test",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "src_lib_compare",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "src_lib_compare_validatecomparison",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_compare_test",
+      "target": "src_lib_catalog_loadcatalog",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/compare.test.mjs",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2452,7 +3072,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L45",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_目录与对比状态",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2462,7 +3092,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L56",
+      "source_location": "L69",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2472,7 +3102,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L62",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2482,7 +3112,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L89",
+      "source_location": "L104",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2512,7 +3142,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L5",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2522,7 +3152,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L86",
+      "source_location": "L90",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2532,7 +3162,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L95",
+      "source_location": "L99",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2542,7 +3172,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L103",
+      "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2552,7 +3182,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L109",
+      "source_location": "L113",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2572,7 +3202,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L7",
+      "source_location": "L9",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2582,7 +3212,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L11",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2592,7 +3222,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L38",
+      "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2602,7 +3232,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L48",
+      "source_location": "L50",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2612,7 +3242,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L56",
+      "source_location": "L58",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2622,7 +3252,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L65",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2632,7 +3262,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2642,7 +3272,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2802,7 +3432,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L164",
+      "source_location": "L168",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2812,7 +3442,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L183",
+      "source_location": "L193",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2822,7 +3452,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L206",
+      "source_location": "L216",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2832,7 +3462,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L224",
+      "source_location": "L234",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2842,7 +3472,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L244",
+      "source_location": "L254",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2852,7 +3482,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L266",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2862,7 +3492,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L258",
+      "source_location": "L268",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2872,7 +3502,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L266",
+      "source_location": "L276",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2882,7 +3512,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L278",
+      "source_location": "L288",
       "weight": 1.0,
       "_origin": "ast"
     },

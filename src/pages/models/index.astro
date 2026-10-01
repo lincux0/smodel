@@ -10,6 +10,15 @@ const taskCounts = Object.entries(taskLabels).map(([id, label]) => ({
   label,
   count: models.filter(({ data }) => data.tasks.includes(id as keyof typeof taskLabels)).length,
 })).filter((task) => task.count > 0);
+const licenseOptions = [...new Set(models.map(({ data }) => data.licenses.weights.name))].sort();
+const runtimeOptions = [...new Set(models.flatMap(({ data }) => data.deployments.map(({ runtime }) => runtime)))].sort();
+const sizeOptions = [
+  { id: 'under-1b', label: '小于 1B' },
+  { id: '1-3b', label: '1B 至小于 3B' },
+  { id: '3-8b', label: '3B 至小于 8B' },
+  { id: '8b-plus', label: '8B 及以上' },
+  { id: 'unknown', label: '规模未提供' },
+];
 ---
 <Base title="模型目录">
   <section class="catalog-head">
@@ -21,14 +30,31 @@ const taskCounts = Object.entries(taskLabels).map(([id, label]) => ({
     <div class="catalog-count" aria-label={`${models.length} 个收录型号`}><strong>{String(models.length).padStart(2, '0')}</strong><span>收录型号</span></div>
   </section>
   <section class="catalog-tools" aria-label="筛选和排序模型">
-    <div>
-      <span class="filter-label">用途筛选</span>
-      <div class="filter-list" role="group" aria-label="按用途筛选">
-        <button class="filter-button" type="button" data-task-filter="all" aria-pressed="true">全部 <span>{models.length}</span></button>
-        {taskCounts.map(({ id, label, count }) => <button class="filter-button" type="button" data-task-filter={id} aria-pressed="false">{label} <span>{count}</span></button>)}
-      </div>
+    <label class="catalog-search"><span class="filter-label">搜索模型</span><input type="search" data-query="q" placeholder="名称、系列或用途" autocomplete="off" maxlength="120"></label>
+    <div class="catalog-filter-grid" aria-label="组合筛选">
+      <label class="sort-control"><span class="filter-label">用途</span><select data-query="task"><option value="all">全部用途</option>{taskCounts.map(({ id, label }) => <option value={id}>{label}</option>)}</select></label>
+      <label class="sort-control"><span class="filter-label">参数规模</span><select data-query="size"><option value="all">全部规模</option>{sizeOptions.map(({ id, label }) => <option value={id}>{label}</option>)}</select></label>
+      <label class="sort-control"><span class="filter-label">权重许可</span><select data-query="license"><option value="all">全部许可</option>{licenseOptions.map((license) => <option value={license}>{license}</option>)}</select></label>
+      <label class="sort-control"><span class="filter-label">部署运行时</span><select data-query="runtime"><option value="all">全部运行时</option>{runtimeOptions.map((runtime) => <option value={runtime}>{runtime}</option>)}</select></label>
+      <label class="sort-control"><span class="filter-label">排序方式</span><select data-query="sort"><option value="recent">最近核实</option><option value="name">名称 A–Z</option><option value="size">公开规模（未知在后）</option></select></label>
     </div>
-    <label class="sort-control"><span class="filter-label">排序方式</span><select data-sort-control><option value="recent">最近核实</option><option value="name">名称 A–Z</option><option value="size">参数规模</option></select></label>
   </section>
   <ModelList models={models} interactive />
+  <p class="muted">规模按各来源公开口径筛选，不代表相同统计范围或运行内存；未知规模独立收录，详情保留口径说明。</p>
 </Base>
+
+<style>
+  .catalog-tools { grid-template-columns: minmax(220px, .8fr) minmax(0, 2fr); }
+  .catalog-search { display: grid; align-content: end; gap: 8px; }
+  .catalog-search input { width: 100%; min-height: 44px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-md); background: var(--paper); color: var(--ink); font: inherit; }
+  .catalog-filter-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+  .catalog-filter-grid .sort-control { min-width: 0; }
+  .catalog-filter-grid select { width: 100%; min-width: 0; }
+  @media (max-width: 760px) {
+    .catalog-tools { grid-template-columns: 1fr; }
+    .catalog-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 480px) {
+    .catalog-filter-grid { grid-template-columns: 1fr; }
+  }
+</style>

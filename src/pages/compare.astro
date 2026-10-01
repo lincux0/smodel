@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { taskLabels } from '../lib/catalog.ts';
+const models = await getCollection('models');
+const size = (value: number | null) => value === null ? '未提供' : `${value}B`;
+const context = (model: typeof models[number]['data']) => model.context.status === 'not-applicable' ? '不适用' : model.context.nativeTokens === null ? '未提供' : `${model.context.nativeTokens.toLocaleString('en-US')} tokens`;
+const evidenceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
+---
+<Base title="同用途模型对比" description="对比同用途模型的能力依据、许可、运行条件与部署来源。">
+  <section class="catalog-head"><div><p class="eyebrow">MODEL COMPARISON / 02</p><h1>同用途模型对比</h1><p class="lead">逐项核对特点与运行条件。参数口径和评测条件分别保留，不生成统一能力排名。</p></div></section>
+  <div class="comparison-tools">
+    <a class="button-secondary" href="/models/">返回目录选型</a>
+    <button class="button" data-copy-comparison type="button" disabled>复制对比链接</button>
+    <p data-share-status role="status"></p>
+  </div>
+  <p data-comparison-error role="alert" tabindex="-1" class="empty-state">请从目录选择最多三个同用途模型，再打开对比。</p>
+  <p data-comparison-task hidden></p>
+  {Object.entries(taskLabels).map(([id, label]) => <span hidden data-task-name={id}>{label}</span>)}
+  <noscript><p>此页面通过浏览器读取链接中的型号。请启用 JavaScript 进行对比，或返回目录逐个阅读静态详情。</p></noscript>
+  <div class="comparison-grid" data-comparison-grid></div>
+  {models.map(({ data: model }) => <template data-comparison-model={model.id} data-tasks={model.tasks.join(' ')}>
+    <article class="comparison-card">
+      <header><p class="eyebrow">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p><h2><a href={`/models/${model.id}/`}>{model.name}</a></h2><p>{model.summary}</p><button class="remove-model" type="button" data-remove={model.id} aria-label={`移除 ${model.name}`}>移除此模型</button></header>
+      <section><h3>特点与限制</h3><h4>主要特点</h4><ul>{model.features.map((item) => <li>{item}</li>)}</ul><h4>使用边界</h4><ul>{model.limitations.map((item) => <li>{item}</li>)}</ul></section>
+      <section><h3>规模与上下文</h3><dl><dt>公开参数规模</dt><dd>{size(model.parameters.totalB)}</dd><dt>激活 / 有效参数</dt><dd>{size(model.parameters.activeB)} / {size(model.parameters.effectiveB)}</dd><dt>参数口径</dt><dd>{model.parameters.notes} <a href={model.parameters.sourceUrl}>来源</a></dd><dt>原生上下文</dt><dd>{context(model)}</dd><dt>扩展上下文</dt><dd>{model.context.status === 'not-applicable' ? '不适用' : model.context.extendedTokens === null ? '未提供' : `${model.context.extendedTokens.toLocaleString('en-US')} tokens；${model.context.extension}`}</dd><dt>输入 / 输出</dt><dd>{model.modalities.input.join('、')} / {model.modalities.output.join('、')}</dd><dt>语言声明</dt><dd>{model.languages.length ? model.languages.join('、') : '未提供'}</dd></dl></section>
+      <section><h3>许可与开放程度</h3><dl><dt>权重许可</dt><dd><a href={model.licenses.weights.url}>{model.licenses.weights.name}</a></dd><dt>代码许可</dt><dd>{model.licenses.code ? <a href={model.licenses.code.url}>{model.licenses.code.name}</a> : '未核实'}</dd><dt>训练资料</dt><dd>{model.licenses.trainingDisclosure}</dd></dl></section>
+      <section><h3>能力依据</h3>{model.evaluations.length === 0 ? <p>暂无可比评测，不能以缺失值推断能力。</p> : model.evaluations.map((evaluation) => <div class="evaluation"><h4>{evaluation.benchmark} · {evaluation.value}{evaluation.unit}</h4><p>{evidenceLabels[evaluation.kind]} · {evaluation.language} · {evaluation.metric} · {evaluation.direction === 'higher' ? '越高越好' : '越低越好'}</p><p>数据集：{evaluation.dataset}；版本：{evaluation.version}；评测日期：{evaluation.date ?? '未提供'}。</p><p>{evaluation.settings}</p><p>{evaluation.comparable ? '仍需逐项核对其他记录的任务与测试条件。' : '不参与跨模型排名。'} <a href={evaluation.sourceUrl}>评测来源</a></p></div>)}</section>
+      <section><h3>运行条件与部署</h3>{model.deployments.map((deployment) => <div class="comparison-deployment"><h4>{deployment.runtime}</h4><p>{deployment.systems.length ? deployment.systems.join('、') : '系统支持未提供'} · {deployment.format} · {deployment.quantization ?? '未指定量化'}</p><p>{deployment.hardware.status === 'not-verified' ? '硬件未核实' : deployment.hardware.status === 'measured' ? '硬件实测' : '官方估算'}；内存 {deployment.hardware.ramGb ?? '未核实'} GB / 显存 {deployment.hardware.vramGb ?? '未核实'} GB。</p><p>{deployment.hardware.notes}</p><p>{deployment.verification.status === 'site-verified' ? `本站已验证 ${deployment.verification.verifiedAt}` : '官方支持；本站未进行推理验证。'}</p><div class="link-row"><a href={deployment.downloadUrl}>获取权重</a><a href={deployment.sourceUrl}>官方部署</a><a href={`/guides/${deployment.guideId}/`}>部署前检查</a></div></div>)}</section>
+      <footer><a class="button-secondary" href={`/models/${model.id}/`}>查看完整说明与步骤</a><p class="muted">核实于 {model.checkedAt} · <a href={model.officialUrl}>官方模型资料</a></p></footer>
+    </article>
+  </template>)}
+</Base>
+
+<script>
+  import { validateComparison } from '../lib/compare.ts';
+  const templates = [...document.querySelectorAll<HTMLTemplateElement>('[data-comparison-model]')];
+  const models = templates.map((template) => ({ id: template.dataset.comparisonModel!, tasks: template.dataset.tasks!.split(' ') }));
+  const grid = document.querySelector<HTMLElement>('[data-comparison-grid]')!;
+  const error = document.querySelector<HTMLElement>('[data-comparison-error]')!;
+  const taskLabel = document.querySelector<HTMLElement>('[data-comparison-task]')!;
+  const copy = document.querySelector<HTMLButtonElement>('[data-copy-comparison]')!;
+  const status = document.querySelector<HTMLElement>('[data-share-status]')!;
+  const taskNames = new Map([...document.querySelectorAll<HTMLElement>('[data-task-name]')].map((item) => [item.dataset.taskName!, item.textContent]));
+  let ids: string[] = [];
+  let task: string | null = null;
+  function render() {
+    const query = new URLSearchParams(location.search);
+    ids = query.get('ids')?.split(',') ?? [];
+    task = query.get('task');
+    const result = validateComparison(ids, models, task);
+    grid.replaceChildren();
+    status.textContent = '';
+    error.hidden = result.ok;
+    taskLabel.hidden = !result.ok;
+    copy.disabled = !result.ok;
+    if (!result.ok) { error.textContent = result.message; return; }
+    task = result.task;
+    taskLabel.textContent = `共同用途：${taskNames.get(result.task)}。仅对照资料，不将不同条件评测混排。`;
+    for (const id of ids) grid.append(templates.find((template) => template.dataset.comparisonModel === id)!.content.cloneNode(true));
+  }
+  grid.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest<HTMLButtonElement>('[data-remove]');
+    if (!button) return;
+    const url = new URL(location.href);
+    const remaining = ids.filter((id) => id !== button.dataset.remove);
+    remaining.length ? url.searchParams.set('ids', remaining.join(',')) : url.searchParams.delete('ids');
+    history.pushState({}, '', url);
+    render();
+    (grid.querySelector<HTMLButtonElement>('[data-remove]') ?? error).focus();
+  });
+  copy.addEventListener('click', async () => {
+    const url = new URL('/compare/', location.origin);
+    url.searchParams.set('ids', ids.join(','));
+    if (task) url.searchParams.set('task', task);
+    try { await navigator.clipboard.writeText(url.href); status.textContent = '对比链接已复制。'; }
+    catch { status.textContent = `复制失败，请手动复制：${url.href}`; }
+  });
+  addEventListener('popstate', render);
+  render();
+</script>
+
+<style>
+  .comparison-tools { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-5); }
+  .comparison-tools button { cursor: pointer; }
+  .comparison-tools p { width: 100%; overflow-wrap: anywhere; font-size: 13px; }
+  .comparison-tools button:disabled { opacity: .5; cursor: default; }
+  .comparison-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+  .comparison-card { min-width: 0; padding: var(--space-5); border: var(--border); border-radius: var(--radius-md); background: var(--paper); overflow-wrap: anywhere; }
+  .comparison-card h2 { font-size: 22px; }
+  .comparison-card h3 { font-size: 17px; }
+  .comparison-card h4 { font-size: 13px; margin-bottom: 8px; }
+  .comparison-card p, .comparison-card li, .comparison-card dd { font-size: 13px; color: var(--ink-soft); }
+  .comparison-card ul { padding-left: 18px; }
+  .comparison-card section { border-top: var(--border); padding-top: var(--space-5); margin-top: var(--space-5); }
+  .comparison-card dt { color: var(--muted); font-size: 12px; }
+  .comparison-card dd { margin: 0 0 14px; }
+  .remove-model { min-height: 44px; border: var(--border); border-radius: var(--radius-sm); background: white; padding: 8px 12px; color: var(--accent); cursor: pointer; }
+  .comparison-deployment + .comparison-deployment { border-top: var(--border); padding-top: 16px; margin-top: 16px; }
+  .comparison-card footer { margin-top: 24px; }
+  .comparison-card footer p { margin-top: 12px; }
+  @media (max-width: 900px) { .comparison-grid { grid-template-columns: 1fr; } }
+</style>

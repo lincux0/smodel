@@ -10,7 +10,7 @@
     "dev": "astro dev",
     "validate:content": "node scripts/validate-content.mjs",
     "check": "astro check",
-    "test": "node --test tests/catalog.test.mjs",
+    "test": "node --test",
     "build": "npm run validate:content && npm run check && astro build",
     "preview": "astro preview"
   },

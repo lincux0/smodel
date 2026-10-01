@@ -8,7 +8,8 @@ export async function getStaticPaths() {
 interface Props { guide: CollectionEntry<'guides'>; }
 const { guide } = Astro.props;
 const { Content } = await render(guide);
+const related = (await getCollection('models')).filter(({ data }) => data.deployments.some((deployment) => deployment.guideId === guide.id));
 ---
 <Base title={guide.data.title} description={guide.data.description}>
-  <article class="prose"><h1>{guide.data.title}</h1><p class="lead">{guide.data.description}</p><Content /></article>
+  <article class="prose"><h1>{guide.data.title}</h1><p class="lead">{guide.data.description}</p><Content /><section><h2>使用本指南的模型</h2><p>通用检查完成后，请继续核对型号对应的部署步骤、依赖与官方来源。</p><ul>{related.map(({ data }) => <li><a href={`/models/${data.id}/`}>{data.name}</a></li>)}</ul></section></article>
 </Base>
