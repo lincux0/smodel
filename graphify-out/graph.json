@@ -989,19 +989,27 @@
       "_origin": "ast"
     },
     {
-      "id": "readme_本地运行",
-      "label": "本地运行",
+      "id": "readme_使用",
+      "label": "使用",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L9",
       "_origin": "ast"
     },
     {
-      "id": "readme_校验与构建",
-      "label": "校验与构建",
+      "id": "readme_获取源码与贡献",
+      "label": "获取源码与贡献",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L16",
+      "source_location": "L20",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_许可",
+      "label": "许可",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L30",
       "_origin": "ast"
     },
     {
@@ -1009,7 +1017,7 @@
       "label": "文档",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L29",
+      "source_location": "L36",
       "_origin": "ast"
     },
     {
@@ -1093,6 +1101,14 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_architecture_首个公开版本",
+      "label": "首个公开版本",
+      "file_type": "document",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L112",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_content_guide",
       "label": "CONTENT_GUIDE.md",
       "file_type": "document",
@@ -1113,7 +1129,7 @@
       "label": "新建模型条目",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L9",
+      "source_location": "L11",
       "_origin": "ast"
     },
     {
@@ -1121,7 +1137,7 @@
       "label": "字段与缺失值",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L90",
+      "source_location": "L92",
       "_origin": "ast"
     },
     {
@@ -1129,7 +1145,7 @@
       "label": "来源、许可与内容信任",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L99",
+      "source_location": "L101",
       "_origin": "ast"
     },
     {
@@ -1137,7 +1153,7 @@
       "label": "评测记录与可比性",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L107",
+      "source_location": "L111",
       "_origin": "ast"
     },
     {
@@ -1145,7 +1161,7 @@
       "label": "维护与校验",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L113",
+      "source_location": "L117",
       "_origin": "ast"
     },
     {
@@ -1369,7 +1385,7 @@
       "label": "阶段五：维护效率与内容迭代",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L216",
+      "source_location": "L218",
       "_origin": "ast"
     },
     {
@@ -1377,7 +1393,7 @@
       "label": "阶段六：自动采集候选与人工审核",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L234",
+      "source_location": "L236",
       "_origin": "ast"
     },
     {
@@ -1385,7 +1401,7 @@
       "label": "6. 实施与验收约定",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L254",
+      "source_location": "L256",
       "_origin": "ast"
     },
     {
@@ -1393,7 +1409,7 @@
       "label": "7. 约束与后续决策",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L266",
+      "source_location": "L268",
       "_origin": "ast"
     },
     {
@@ -1401,7 +1417,7 @@
       "label": "7.1 Vercel Hobby",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "_origin": "ast"
     },
     {
@@ -1409,7 +1425,7 @@
       "label": "7.2 后续决策触发条件",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L276",
+      "source_location": "L278",
       "_origin": "ast"
     },
     {
@@ -1417,7 +1433,47 @@
       "label": "8. 调研依据",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L288",
+      "source_location": "L290",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_release",
+      "label": "RELEASE.md",
+      "file_type": "document",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_release_0_1_0_发布说明",
+      "label": "0.1.0 发布说明",
+      "file_type": "document",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_release_发布前验证",
+      "label": "发布前验证",
+      "file_type": "document",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_release_源码与部署",
+      "label": "源码与部署",
+      "file_type": "document",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_release_上线验证",
+      "label": "上线验证",
+      "file_type": "document",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L21",
       "_origin": "ast"
     },
     {
@@ -1442,6 +1498,14 @@
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
       "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_阶段一原有模型复核",
+      "label": "阶段一原有模型复核",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L25",
       "_origin": "ast"
     },
     {
@@ -3204,22 +3268,42 @@
       "_origin": "ast"
     },
     {
+      "source": "readme_小模型图鉴",
+      "target": "readme_使用",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "readme",
       "target": "docs_development_plan",
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L3",
+      "source_location": "L18",
       "weight": 1.0,
       "_origin": "ast"
     },
     {
       "source": "readme_小模型图鉴",
-      "target": "readme_本地运行",
+      "target": "readme_获取源码与贡献",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L5",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "contributing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3229,17 +3313,47 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L14",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "docs_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast"
     },
     {
       "source": "readme_小模型图鉴",
-      "target": "readme_校验与构建",
+      "target": "readme_许可",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L16",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "d_smodel_license_md",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "license_content",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3249,7 +3363,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L29",
+      "source_location": "L36",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3259,7 +3373,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L33",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3269,7 +3383,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L34",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3374,6 +3488,26 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_architecture_项目架构与部署",
+      "target": "docs_architecture_首个公开版本",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture",
+      "target": "docs_release",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_content_guide",
       "target": "docs_content_guide_内容维护指南",
       "relation": "contains",
@@ -3394,12 +3528,32 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_content_guide",
+      "target": "docs_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide",
+      "target": "contributing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_content_guide_内容维护指南",
       "target": "docs_content_guide_新建模型条目",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L9",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3409,7 +3563,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L90",
+      "source_location": "L92",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3419,7 +3573,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L99",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide",
+      "target": "license_content",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L107",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3429,7 +3593,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L107",
+      "source_location": "L111",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3439,7 +3603,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L113",
+      "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3704,12 +3868,22 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_development_plan",
+      "target": "docs_release",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L216",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_development_plan_5_分阶段实施计划",
       "target": "docs_development_plan_阶段五_维护效率与内容迭代",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L216",
+      "source_location": "L218",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3719,7 +3893,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L234",
+      "source_location": "L236",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3729,7 +3903,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L254",
+      "source_location": "L256",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3739,7 +3913,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L266",
+      "source_location": "L268",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3749,7 +3923,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3759,7 +3933,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L276",
+      "source_location": "L278",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3769,7 +3943,47 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L288",
+      "source_location": "L290",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_release",
+      "target": "docs_release_0_1_0_发布说明",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_release_0_1_0_发布说明",
+      "target": "docs_release_发布前验证",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_release_0_1_0_发布说明",
+      "target": "docs_release_源码与部署",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_release_0_1_0_发布说明",
+      "target": "docs_release_上线验证",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/RELEASE.md",
+      "source_location": "L21",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3790,6 +4004,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
       "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources_模型来源与字段口径",
+      "target": "docs_sources_阶段一原有模型复核",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast"
     },

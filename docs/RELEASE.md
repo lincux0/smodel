@@ -20,4 +20,4 @@ Vercel Git连接尝试因账号缺少GitHub Login Connection失败；本次通�
 
 ## 上线验证
 
-待本次正式部署完成后记录；上述本地检查不代替线上结果。
+2026-10-01：master已推送至指定GitHub仓库，Vercel正式部署READY并绑定 https://smodel.vercel.app。未登录浏览器检查目录21条、站点地图26个URL均200、robots正确、未知路由404；源码ZIP及SHA256摘要200，浏览器计算的摘要与下载摘要一致。最终复核将Qwen Coder 7B的默认32K与YaRN扩展128K分列，修正后3项测试与生产构建重新通过。后续修正通过CLI补发。

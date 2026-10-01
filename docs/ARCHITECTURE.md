@@ -78,8 +78,8 @@ Node.js 24.x；依赖以根目录 `package-lock.json` 锁定。首次使用 `npm
 
 - [正式站点](https://smodel.vercel.app)：可公开访问。
 - [阶段一预览](https://smodel-qvp4mmn1b-zav5.vercel.app)：保留 Vercel 登录保护，已通过 CLI 授权访问检查。
-- [阶段二视觉原型](https://smodel-ky1tbwmab-zav5.vercel.app)：云端构建与检查通过，维护者已确认视觉方向。正式站点保持阶段一版本。
-- [阶段三核心功能](https://smodel-eyqp4h7t7-zav5.vercel.app)：云端构建、检查通过，部署 READY；包括统一圆角和核心选型功能。预览需登录，正式公开发布按阶段四推进。
+- [阶段二视觉原型](https://smodel-ky1tbwmab-zav5.vercel.app)：云端构建与检查通过，维护者已确认视觉方向。此为历史预览记录；正式站点现为阶段四0.1.0。
+- [阶段三核心功能](https://smodel-eyqp4h7t7-zav5.vercel.app)：云端构建、检查通过，部署 READY；包括统一圆角和核心选型功能。预览需登录，正式公开发布已完成，见发布说明。
 
 `vercel.json` 固定 Astro 框架预设、`npm ci` 安装、`npm run build` 构建与 `dist` 输出，云端使用 Node.js 24.x。`.vercelignore` 排除本地凭据、环境文件、缓存、依赖目录、测试和文档，上传前已核对清单。
 
@@ -107,7 +107,7 @@ npx vercel --prod
 
 输出位于 `graphify-out/graph.json`。本地缓存和运行侧文件不提交，源码变更后重新更新图。
 
-当前 Graphify 对 10 个 Astro 文件报告语法解析限制，21 个模型 JSON 未生成节点；只读完整性诊断还报告 19 条悬空端点边。图包含 183 个节点和 230 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
+当前 Graphify 对 10 个 Astro 文件报告语法解析限制，21 个模型 JSON 未生成节点；只读完整性诊断还报告 19 条悬空端点边。图包含 191 个节点和 246 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
 
 ## 首个公开版本
 

@@ -24,9 +24,9 @@
     "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct"
   },
   "context": {
-    "nativeTokens": 131072,
-    "extendedTokens": null,
-    "extension": null,
+    "nativeTokens": 32768,
+    "extendedTokens": 131072,
+    "extension": "默认配置32,768 tokens；超过此长度须在支持的运行时配置YaRN，factor=4.0，original_max_position_embeddings=32768。静态YaRN可能影响短文本表现，未进行本站验证。",
     "status": "documented",
     "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct"
   },
