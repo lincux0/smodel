@@ -13,7 +13,7 @@ const { models, interactive = false } = Astro.props;
       <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-size={parameterBand(model.parameters.totalB)} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-parameter-notes={model.parameters.notes} data-checked={model.checkedAt}>
         <div>
           <div class="model-card-top">
-            <p class="model-meta">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p>
+            <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
             {interactive && <label class="compare-check"><input type="checkbox" data-compare />加入对比</label>}
             {!interactive && <span class="model-number">{String(index + 1).padStart(2, '0')}</span>}
           </div>
@@ -143,7 +143,10 @@ const { models, interactive = false } = Astro.props;
       });
       catalog.querySelector('[data-empty-state]')?.toggleAttribute('hidden', visibleCount() > 0);
       const results = catalog.querySelector('[data-results-count]');
-      if (results) results.textContent = `显示 ${visibleCount()} / ${cards.length} 个模型。`;
+      if (results) {
+        results.textContent = `${visibleCount()}/${cards.length}`;
+        results.setAttribute('aria-label', `显示 ${visibleCount()} 个模型，共 ${cards.length} 个`);
+      }
       renderCompare();
     };
 

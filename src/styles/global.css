@@ -131,6 +131,11 @@ p { margin-bottom: 14px; }
 .model-list > li:hover { transform: translateY(-3px); border-color: #9aada6; box-shadow: 0 14px 32px rgb(25 44 42 / 7%); }
 .model-card-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
 .model-meta { margin: 0 0 12px; color: var(--accent); font-size: 10px; letter-spacing: .07em; }
+.model-task-tags { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.model-task-tag { padding: 3px 8px; border: 1px solid #c8dcd4; border-radius: var(--radius-pill); background: #e5efe9; color: #285d4d; line-height: 1.5; letter-spacing: 0; white-space: nowrap; }
+.model-task-tag[data-task='coding'], .model-task-tag[data-task='embedding'], .model-task-tag[data-task='reranking'] { border-color: #cbd9e3; background: #e8eff4; color: #365a72; }
+.model-task-tag[data-task='image-understanding'], .model-task-tag[data-task='ocr'] { border-color: #ddd2e5; background: #f0eaf4; color: #665079; }
+.model-task-tag[data-task='speech-recognition'], .model-task-tag[data-task='text-to-speech'] { border-color: #e4d8bd; background: #f4efdf; color: #75602a; }
 .model-number { color: #909995; font: 10px var(--mono); }
 .model-list h2 { margin: 0 0 10px; font-size: clamp(18px, 2.1vw, 24px); }
 .model-list h2 a { color: var(--ink); text-decoration: none; }
@@ -197,8 +202,10 @@ body.has-compare-tray { padding-bottom: 170px; }
 .link-row a { font-size: 12px; }
 pre { overflow-x: auto; padding: 14px; border: 1px solid #d7ded9; background: #e8ece8; color: #283735; font: 12px/1.7 var(--mono); }
 code { font-family: var(--mono); }
-.copy-row { display: flex; align-items: start; gap: 10px; }
+.copy-row { display: flex; align-items: stretch; gap: 10px; }
 .copy-row pre { min-width: 0; flex: 1; margin: 0; }
+.copy-row pre, .copy-row .copy-button { min-height: 52px; }
+.copy-group .copy-row pre { height: 52px; max-height: 52px; padding-block: 10px; scrollbar-width: thin; }
 .copy-button { min-height: 44px; padding: 7px 11px; border: 1px solid #b9c5bf; background: var(--paper); color: var(--accent-dark); cursor: pointer; font-size: 11px; }
 .copy-status { min-height: 1.5em; margin-top: 4px; color: var(--accent-dark); font-size: 11px; }
 .site-footer { display: flex; justify-content: space-between; gap: 25px; padding-block: 28px 36px; margin-top: 55px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
