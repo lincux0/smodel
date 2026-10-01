@@ -138,5 +138,5 @@ const listId = `catalog-options-${name}`;
   .catalog-select :global(.catalog-select-option) { min-height: 40px; display: flex; align-items: center; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--ink-soft); cursor: pointer; font-size: 12px; }
   .catalog-select :global(.catalog-select-option.is-active) { background: #e9efeb; color: var(--ink); }
   .catalog-select :global(.catalog-select-option[aria-selected="true"]) { background: var(--accent); color: white; }
-  .catalog-select :global(.catalog-select-option[aria-selected="true"]::after) { margin-left: auto; color: #d7e9e4; content: '✓'; font-size: 11px; }
+  .catalog-select :global(.catalog-select-option[aria-selected="true"]::after) { content: ''; flex: 0 0 9px; width: 9px; height: 5px; margin-left: auto; border-left: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
 </style>
