@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
-interface Props { title: string; description?: string; }
-const { title, description = '按用途了解小模型的特点、能力依据与官方部署方式。' } = Astro.props;
+interface Props { title: string; description?: string; noindex?: boolean; }
+const { title, description = '按用途了解小模型的特点、能力依据与官方部署方式。', noindex = false } = Astro.props;
+const pageTitle = Astro.url.pathname === '/' ? title : `${title} · 小模型图鉴`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -9,8 +11,18 @@ const { title, description = '按用途了解小模型的特点、能力依据�
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="小模型图鉴" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} · 小模型图鉴</title>
+    <title>{pageTitle}</title>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到正文</a>
@@ -23,6 +35,6 @@ const { title, description = '按用途了解小模型的特点、能力依据�
       </nav>
     </header>
     <main id="main"><slot /></main>
-    <footer class="site-footer">内容根据官方资料整理。评测来源与运行验证状态分别标注。</footer>
+    <footer class="site-footer"><span>内容根据官方资料整理。评测来源与运行验证状态分别标注。</span><span><a href="/contribute/">贡献与许可</a> · <a href="https://github.com/lincux0/smodel">源码</a></span></footer>
   </body>
 </html>

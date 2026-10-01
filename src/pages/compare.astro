@@ -7,7 +7,7 @@ const size = (value: number | null) => value === null ? '未提供' : `${value}B
 const context = (model: typeof models[number]['data']) => model.context.status === 'not-applicable' ? '不适用' : model.context.nativeTokens === null ? '未提供' : `${model.context.nativeTokens.toLocaleString('en-US')} tokens`;
 const evidenceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
 ---
-<Base title="同用途模型对比" description="对比同用途模型的能力依据、许可、运行条件与部署来源。">
+<Base title="同用途模型对比" description="对比同用途模型的能力依据、许可、运行条件与部署来源。" noindex>
   <section class="catalog-head"><div><p class="eyebrow">MODEL COMPARISON / 02</p><h1>同用途模型对比</h1><p class="lead">逐项核对特点与运行条件。参数口径和评测条件分别保留，不生成统一能力排名。</p></div></section>
   <div class="comparison-tools">
     <a class="button-secondary" href="/models/">返回目录选型</a>

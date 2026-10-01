@@ -1,42 +1,42 @@
 # 小模型图鉴
 
-按用途了解小模型的特点、能力依据与官方部署方式。阶段一至三已完成：统一视觉与圆角、目录搜索和组合筛选、同用途模型对比、部署指南与来源。首批内容扩充和公开发布按[开发方案](docs/DEVELOPMENT_PLAN.md)继续推进。
+小模型图鉴按用途整理开源及开放权重模型，提供能力依据、许可说明、局限和部署入口。当前仓库目录包含 21 个经来源核对的型号，覆盖文本与代码、图像理解、语音、向量检索、重排、OCR 和语音合成。目录是人工维护的代表性集合，不宣称穷尽所有模型或提供统一能力排名。
 
-## 本地运行
+公开网站：[小模型图鉴](https://smodel.vercel.app)。当前仓库中的 21 条数据属于阶段四发布内容，正式站点版本以部署更新为准。
 
-使用 Node.js 24.x 和 npm。
+模型卡中的官方评测仅保留其来源和条件；当前样本没有本站推理实测。模型权重不存放在本仓库。到模型详情页选择“获取权重”，会跳转至对应的官方模型页或发布仓库；下载可能需要接受各自的许可条款。
+
+## 使用
+
+本地开发需要 Node.js 24.x 和 npm：
 
 ```sh
 npm ci
 npm run dev
 ```
 
-打开终端输出的本地地址。正式条目位于 `src/data/models/`，内容维护方式见[内容维护指南](docs/CONTENT_GUIDE.md)。
+运行 `npm run validate:content` 校验条目，`npm test` 运行测试，`npm run build` 检查并生成静态页面；生成目录为 `dist/`。项目按静态内容部署在 Vercel Hobby。当前阶段四数据已进入仓库，正式站点发布状态以 [项目开发方案](docs/DEVELOPMENT_PLAN.md) 和线上页面为准。
 
-## 校验与构建
+## 获取源码与贡献
+
+GitHub 仓库：[lincux0/smodel](https://github.com/lincux0/smodel)。
 
 ```sh
-npm run validate:content
-npm test
-npm run build
-npm run preview
+git clone https://github.com/lincux0/smodel.git
 ```
 
-`build` 包含数据校验、Astro / TypeScript 检查和静态页面生成，输出目录为 `dist/`。只有 `npm ci` 需要下载依赖，内容校验和构建读取本地已审查数据。
+可通过仓库提交 Issue 或 Pull Request；提交前请阅读[贡献指南](CONTRIBUTING.md)、[内容维护指南](docs/CONTENT_GUIDE.md)和[来源记录](docs/SOURCES.md)。模型详情中的“获取权重”链接会打开官方来源；仓库仅保存目录数据和说明，不包含模型权重。也可从[网站贡献页](https://smodel.vercel.app/contribute/)下载0.1.0源码包及SHA256摘要。
 
-当前模型部署信息引用官方资料，尚未进行本站模型推理验证；官方评测数字不代表本站实测。
+## 许可
+
+- 网站程序与界面代码：MIT，见 [LICENSE](LICENSE)。
+- 维护者和贡献者撰写的原创模型整理、指南和文章：CC BY 4.0，见 [LICENSE-CONTENT.md](LICENSE-CONTENT.md)。
+- 模型权重、上游代码和第三方材料：遵循各自来源的许可；具体权重许可在模型详情页列出。
 
 ## 文档
 
 - [分阶段开发方案](docs/DEVELOPMENT_PLAN.md)
-- [内容维护与模板](docs/CONTENT_GUIDE.md)
+- [内容维护指南](docs/CONTENT_GUIDE.md)
+- [模型来源与字段口径](docs/SOURCES.md)
 - [项目架构与部署](docs/ARCHITECTURE.md)
 - [视觉与动效规范](docs/DESIGN_SYSTEM.md)
-
-正式站点：[小模型图鉴](https://smodel.vercel.app)。Vercel Hobby 项目 `zav5/smodel` 已连接，正式与预览部署均已验证。
-
-阶段二[历史视觉预览](https://smodel-ky1tbwmab-zav5.vercel.app)已通过维护者审阅。正式站点仍为阶段一版本。
-
-最新[阶段三功能预览](https://smodel-eyqp4h7t7-zav5.vercel.app)包含已确认视觉方向、统一圆角与完整选型功能（需登录有项目权限的 Vercel 账号）。正式发布与首批内容扩充按阶段四推进。
-
-当前机器已保存 Vercel CLI 登录凭据；在凭据有效期内，运行 `npx vercel --target preview` 创建预览，运行 `npx vercel --prod` 发布正式站点。部署配置和凭据说明见[项目架构与部署](docs/ARCHITECTURE.md)。当前未配置 Git 自动部署。

@@ -368,6 +368,14 @@
       "_origin": "ast"
     },
     {
+      "id": "src_layouts_base_canonical",
+      "label": "canonical",
+      "file_type": "code",
+      "source_file": "src/layouts/Base.astro",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
       "id": "src_lib_catalog_query",
       "label": "catalog-query.ts",
       "file_type": "code",
@@ -592,6 +600,14 @@
       "_origin": "ast"
     },
     {
+      "id": "src_pages_contribute",
+      "label": "contribute.astro",
+      "file_type": "code",
+      "source_file": "src/pages/contribute.astro",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
       "id": "src_pages_guides_id",
       "label": "[id].astro",
       "file_type": "code",
@@ -703,6 +719,49 @@
       "file_type": "code",
       "source_file": "src/pages/models/index.astro",
       "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_robots_txt",
+      "label": "robots.txt.ts",
+      "file_type": "code",
+      "source_file": "src/pages/robots.txt.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_robots_txt_get",
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/pages/robots.txt.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_sitemap_xml",
+      "label": "sitemap.xml.ts",
+      "file_type": "code",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_sitemap_xml_escapexml",
+      "label": "escapeXml()",
+      "file_type": "code",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L4",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_sitemap_xml_get",
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L6",
+      "_callable": true,
       "_origin": "ast"
     },
     {
@@ -879,6 +938,38 @@
       "file_type": "code",
       "source_file": "vercel.json",
       "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "contributing",
+      "label": "CONTRIBUTING.md",
+      "file_type": "document",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "contributing_贡献指南",
+      "label": "贡献指南",
+      "file_type": "document",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "license_content",
+      "label": "LICENSE-CONTENT.md",
+      "file_type": "document",
+      "source_file": "LICENSE-CONTENT.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "license_content_原创内容许可",
+      "label": "原创内容许可",
+      "file_type": "document",
+      "source_file": "LICENSE-CONTENT.md",
+      "source_location": "L1",
       "_origin": "ast"
     },
     {
@@ -1327,6 +1418,30 @@
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
       "source_location": "L288",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources",
+      "label": "SOURCES.md",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_模型来源与字段口径",
+      "label": "模型来源与字段口径",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_阶段四新增模型",
+      "label": "阶段四新增模型",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L5",
       "_origin": "ast"
     },
     {
@@ -1973,6 +2088,16 @@
     },
     {
       "source": "src_layouts_base",
+      "target": "src_layouts_base_canonical",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/layouts/Base.astro",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_layouts_base",
       "target": "src_styles_global",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
@@ -2302,6 +2427,14 @@
       "_origin": "ast"
     },
     {
+      "source": "src_pages_contribute",
+      "target": "src_layouts_base",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/contribute.astro",
+      "_origin": "ast"
+    },
+    {
       "source": "src_pages_guides_id",
       "target": "ref_astro_content",
       "relation": "imports_from",
@@ -2583,6 +2716,80 @@
       "relation": "imports_from",
       "confidence": "EXTRACTED",
       "source_file": "src/pages/models/index.astro",
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_robots_txt",
+      "target": "ref_astro",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/robots.txt.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_robots_txt",
+      "target": "src_pages_robots_txt_get",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/robots.txt.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_sitemap_xml",
+      "target": "ref_astro",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_sitemap_xml",
+      "target": "ref_astro_content",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_sitemap_xml",
+      "target": "src_pages_sitemap_xml_escapexml",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_sitemap_xml",
+      "target": "src_pages_sitemap_xml_get",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_sitemap_xml_get",
+      "target": "src_pages_sitemap_xml_escapexml",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/sitemap.xml.ts",
+      "source_location": "L17",
+      "weight": 1.0,
       "_origin": "ast"
     },
     {
@@ -2933,6 +3140,56 @@
       "confidence": "EXTRACTED",
       "source_file": "vercel.json",
       "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "contributing",
+      "target": "contributing_贡献指南",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "contributing",
+      "target": "docs_content_guide",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "contributing",
+      "target": "docs_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "contributing",
+      "target": "license_content",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "CONTRIBUTING.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "license_content",
+      "target": "license_content_原创内容许可",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "LICENSE-CONTENT.md",
+      "source_location": "L1",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3513,6 +3770,26 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
       "source_location": "L288",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources",
+      "target": "docs_sources_模型来源与字段口径",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources_模型来源与字段口径",
+      "target": "docs_sources_阶段四新增模型",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast"
     },
