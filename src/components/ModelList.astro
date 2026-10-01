@@ -66,7 +66,13 @@ const { models, interactive = false } = Astro.props;
       runtimes: [...new Set(cards.flatMap((card) => JSON.parse(card.dataset.runtimes ?? '[]') as string[]))],
     };
     let state = parseCatalogQuery(location.search, queryOptions);
-    for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+    const syncControls = () => {
+      for (const control of queryControls) {
+        control.value = state[control.dataset.query as keyof typeof state];
+        control.dispatchEvent(new Event('catalog:sync'));
+      }
+    };
+    syncControls();
 
     const commonTasks = (chosen: HTMLLIElement[]) => chosen.length < 2 ? [] : chosen[0].dataset.tasks!.split(' ').filter((task) => chosen.every((card) => card.dataset.tasks!.split(' ').includes(task)));
     const restoreSelection = () => {
@@ -83,7 +89,7 @@ const { models, interactive = false } = Astro.props;
       selectionError.hidden = true;
       const chosen = comparison.ids.map((id) => cards.find((card) => card.dataset.id === id)!);
       chosen.forEach((card) => selected.add(card.dataset.id!));
-      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+      syncControls();
     };
     restoreSelection();
 
@@ -193,7 +199,7 @@ const { models, interactive = false } = Astro.props;
     }));
     catalog.querySelector('[data-reset-filters]')?.addEventListener('click', () => {
       state = { q: '', task: 'all', size: 'all', license: 'all', runtime: 'all', sort: 'recent' };
-      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+      syncControls();
       render();
       persist();
     });
@@ -233,7 +239,7 @@ const { models, interactive = false } = Astro.props;
     });
     addEventListener('popstate', () => {
       state = parseCatalogQuery(location.search, queryOptions);
-      for (const control of queryControls) control.value = state[control.dataset.query as keyof typeof state];
+      syncControls();
       selected.clear();
       catalog.querySelectorAll<HTMLInputElement>('[data-compare]').forEach((input) => { input.checked = false; });
       restoreSelection();

@@ -1,0 +1,142 @@
+---
+interface Option { value: string; label: string; }
+interface Props { label: string; name: 'task' | 'size' | 'license' | 'runtime' | 'sort'; options: Option[]; }
+const { label, name, options } = Astro.props;
+const listId = `catalog-options-${name}`;
+---
+<div class="sort-control catalog-select-control">
+  <span class="filter-label">{label}</span>
+  <div class="catalog-select" data-catalog-select>
+    <select data-query={name} aria-label={label}>
+      {options.map(({ value, label: optionLabel }) => <option value={value}>{optionLabel}</option>)}
+    </select>
+    <button class="catalog-select-trigger" type="button" role="combobox" aria-label={label} aria-haspopup="listbox" aria-expanded="false" aria-controls={listId} aria-activedescendant="" hidden>
+      <span data-select-value></span><span class="catalog-select-caret" aria-hidden="true"></span>
+    </button>
+    <div class="catalog-select-popup" id={listId} role="listbox" aria-label={label} hidden></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-catalog-select]').forEach((root, index) => {
+    const select = root.querySelector<HTMLSelectElement>('select[data-query]')!;
+    const trigger = root.querySelector<HTMLButtonElement>('[role="combobox"]')!;
+    const popup = root.querySelector<HTMLElement>('[role="listbox"]')!;
+    const valueLabel = root.querySelector<HTMLElement>('[data-select-value]')!;
+    const options = [...select.options].map((option, optionIndex) => {
+      const item = document.createElement('div');
+      item.id = `${popup.id}-${index}-${optionIndex}`;
+      item.className = 'catalog-select-option';
+      item.setAttribute('role', 'option');
+      item.dataset.value = option.value;
+      item.textContent = option.label;
+      popup.append(item);
+      return item;
+    });
+    let activeIndex = Math.max(0, select.selectedIndex);
+
+    const sync = () => {
+      const selectedIndex = Math.max(0, select.selectedIndex);
+      valueLabel.textContent = select.options[selectedIndex]?.label ?? '';
+      options.forEach((option, optionIndex) => option.setAttribute('aria-selected', String(optionIndex === selectedIndex)));
+      if (!popup.hidden) setActive(selectedIndex);
+    };
+    const setActive = (nextIndex: number) => {
+      const clampedIndex = Math.max(0, Math.min(options.length - 1, nextIndex));
+      if (clampedIndex === activeIndex && trigger.getAttribute('aria-activedescendant') === options[activeIndex]?.id) return;
+      activeIndex = clampedIndex;
+      trigger.setAttribute('aria-activedescendant', options[activeIndex]?.id ?? '');
+      options.forEach((option, optionIndex) => option.classList.toggle('is-active', optionIndex === activeIndex));
+      options[activeIndex]?.scrollIntoView({ block: 'nearest' });
+    };
+    const close = () => {
+      popup.hidden = true;
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.removeAttribute('aria-activedescendant');
+    };
+    const open = (nextIndex = select.selectedIndex) => {
+      popup.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      setActive(nextIndex);
+    };
+    const choose = (nextIndex: number) => {
+      const option = select.options[nextIndex];
+      if (!option) return;
+      const changed = select.value !== option.value;
+      select.value = option.value;
+      sync();
+      close();
+      if (changed) select.dispatchEvent(new Event('change', { bubbles: true }));
+      trigger.focus();
+    };
+
+    sync();
+    select.hidden = true;
+    trigger.hidden = false;
+    trigger.addEventListener('click', () => popup.hidden ? open() : close());
+    trigger.addEventListener('keydown', (event) => {
+      switch (event.key) {
+        case 'ArrowDown':
+          event.preventDefault();
+          popup.hidden ? open(Math.min(select.options.length - 1, select.selectedIndex + 1)) : setActive(activeIndex + 1);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          popup.hidden ? open(Math.max(0, select.selectedIndex - 1)) : setActive(activeIndex - 1);
+          break;
+        case 'Home': event.preventDefault(); open(0); break;
+        case 'End': event.preventDefault(); open(select.options.length - 1); break;
+        case 'Enter':
+        case ' ':
+          event.preventDefault();
+          popup.hidden ? open() : choose(activeIndex);
+          break;
+        case 'Escape': if (!popup.hidden) { event.preventDefault(); close(); } break;
+        case 'Tab': close(); break;
+      }
+    });
+    options.forEach((option, optionIndex) => {
+      option.addEventListener('pointermove', () => { if (optionIndex !== activeIndex) setActive(optionIndex); });
+      option.addEventListener('mousedown', (event) => event.preventDefault());
+      option.addEventListener('click', () => choose(optionIndex));
+    });
+    select.addEventListener('change', sync);
+    select.addEventListener('catalog:sync', sync);
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (target instanceof Node && !root.contains(target)) close();
+    });
+  });
+</script>
+
+<style>
+  .catalog-select-control { min-width: 0; }
+  .catalog-select { position: relative; }
+  .catalog-select select, .catalog-select-trigger {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+  }
+  .catalog-select select { appearance: auto; }
+  .catalog-select-trigger { cursor: pointer; transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease; }
+  .catalog-select-trigger:hover, .catalog-select-trigger[aria-expanded="true"] { border-color: var(--accent); background: var(--white); }
+  .catalog-select-caret { width: 7px; height: 7px; flex: 0 0 7px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: translateY(-2px) rotate(45deg); transition: transform var(--duration-fast) ease; }
+  .catalog-select-trigger[aria-expanded="true"] .catalog-select-caret { transform: translateY(2px) rotate(225deg); }
+  .catalog-select-popup { position: absolute; z-index: 8; top: calc(100% + 6px); right: 0; left: 0; max-height: min(280px, 45vh); overflow-y: auto; padding: 5px; border: var(--border); border-radius: var(--radius-md); background: var(--paper); box-shadow: 0 16px 34px rgb(22 39 36 / 14%); }
+  .catalog-select :global(.catalog-select-option) { min-height: 40px; display: flex; align-items: center; padding: 8px 10px; border-radius: var(--radius-sm); color: var(--ink-soft); cursor: pointer; font-size: 12px; }
+  .catalog-select :global(.catalog-select-option.is-active) { background: #e9efeb; color: var(--ink); }
+  .catalog-select :global(.catalog-select-option[aria-selected="true"]) { background: var(--accent); color: white; }
+  .catalog-select :global(.catalog-select-option[aria-selected="true"]::after) { margin-left: auto; color: #d7e9e4; content: '✓'; font-size: 11px; }
+</style>

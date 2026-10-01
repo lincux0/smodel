@@ -24,8 +24,8 @@
 | `--line` | `#d9ddda` | 常规分隔线与边框 |
 | `--paper` | `#f8f9f6` | 面板和控件底色 |
 | `--white` | `#fff` | 白色表面 |
-| `--font-sans` | Segoe UI、Microsoft YaHei UI、Microsoft YaHei、sans-serif | 正文与界面文字 |
-| `--mono` | Cascadia Mono、SFMono-Regular、Consolas、monospace | 参数、编号、短标签 |
+| `--font-sans` | 中文版JetBrains Mono（英文与数字）、Segoe UI、PingFang SC、Microsoft YaHei UI、Microsoft YaHei、Noto Sans CJK SC、sans-serif | 正文与界面文字 |
+| `--mono` | 与--font-sans共享无衬线回退栈 | 参数、编号、短标签 |
 | `--space-1`–`--space-7` | 4 / 8 / 12 / 16 / 24 / 32 / 48px | 间距级数 |
 | `--radius-sm` / `--radius-md` / `--radius-lg` / `--radius-pill` | 8 / 14 / 22 / 999px | 控件与代码块、卡片与步骤、重点面板与浮层、胶囊筛选 |
 | `--border` | `1px solid var(--line)` | 标准边框 |
@@ -35,7 +35,7 @@
 | `--ease` | `cubic-bezier(.2, .75, .25, 1)` | 轻柔进入与位移 |
 | `--duration-fast` / `--duration-layout` | 180 / 240ms | 控件反馈、目录位置过渡 |
 
-字体使用系统字体以避免额外网络请求；字体回退时，布局和内容仍须可读。文本与背景对比应符合 WCAG 2.2 AA；颜色不单独承担状态表达，需同时提供文字、图标或形态线索。
+中文版英文与数字使用自托管JetBrains Mono v2.304（400/500/600/700，WOFF2，OFL-1.1许可见public/fonts/jetbrains-mono/OFL.txt），font-display: swap按需加载字重；unicode-range限定拉丁字符，中文使用系统无衬线字体。所有元信息和代码共享中文无衬线回退，避免monospace缺少中文字形后回退到衬线。规则限定html:lang(zh)，未来英文版字体另行确定。字体回退时，布局和内容仍须可读。文本与背景对比应符合 WCAG 2.2 AA；颜色不单独承担状态表达，需同时提供文字、图标或形态线索。
 
 ## 布局与组件
 
@@ -79,3 +79,11 @@
 这些检查属于浏览器模拟，不等同于实际移动设备或完整 WCAG 审计。维护者已确认总体视觉方向；截图保存在忽略的 `output/` 目录。
 
 维护者已确认总体视觉方向，并要求补齐统一圆角。已按 8/14/22px 分别覆盖小控件、内容卡片和重点面板；胶囊筛选保持完全圆角，轨道装饰仍为圆形。
+
+## 控件统一
+
+全站复选框保留原生input语义，采用圆形勾选标记；移除label:focus-within与input轮廓叠加。鼠标点击不保留外框，键盘focus-visible使用圆形光环，高对比模式恢复系统控件。当前唯一复选框入口是模型目录加入对比。
+
+目录五个选择器由CatalogSelect复用，原生select保留为筛选状态源和无脚本回退；脚本增强圆角纸面弹层、深青选中项与勾号。支持方向键、Home/End、Enter/Space、Escape、Tab、外部点击关闭，URL初始化、前进后退与清空筛选同步显示。
+
+2026-10-01本次验收：3项Node测试通过，Astro检查0错误/警告/提示，生产构建28页。Playwright检查五个弹层样式、方向键/Home/End/Enter/Escape/Tab、URL初始化/返回/重置、复选框鼠标无外框及键盘圆形焦点，320/390/1440px无横向溢出；无脚本保留五个原生选择器和21条静态模型。CDP实际字形核实中文Microsoft YaHei UI、英文数字JetBrains Mono（本机Windows），不把CSS声明等同字体加载成功。

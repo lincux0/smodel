@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ModelList from '../../components/ModelList.astro';
+import CatalogSelect from '../../components/CatalogSelect.astro';
 import { taskLabels } from '../../lib/catalog.ts';
 
 const models = await getCollection('models');
@@ -32,11 +33,11 @@ const sizeOptions = [
   <section class="catalog-tools" aria-label="筛选和排序模型">
     <label class="catalog-search"><span class="filter-label">搜索模型</span><input type="search" data-query="q" placeholder="名称、系列或用途" autocomplete="off" maxlength="120"></label>
     <div class="catalog-filter-grid" aria-label="组合筛选">
-      <label class="sort-control"><span class="filter-label">用途</span><select data-query="task"><option value="all">全部用途</option>{taskCounts.map(({ id, label }) => <option value={id}>{label}</option>)}</select></label>
-      <label class="sort-control"><span class="filter-label">参数规模</span><select data-query="size"><option value="all">全部规模</option>{sizeOptions.map(({ id, label }) => <option value={id}>{label}</option>)}</select></label>
-      <label class="sort-control"><span class="filter-label">权重许可</span><select data-query="license"><option value="all">全部许可</option>{licenseOptions.map((license) => <option value={license}>{license}</option>)}</select></label>
-      <label class="sort-control"><span class="filter-label">部署运行时</span><select data-query="runtime"><option value="all">全部运行时</option>{runtimeOptions.map((runtime) => <option value={runtime}>{runtime}</option>)}</select></label>
-      <label class="sort-control"><span class="filter-label">排序方式</span><select data-query="sort"><option value="recent">最近核实</option><option value="name">名称 A–Z</option><option value="size">公开规模（未知在后）</option></select></label>
+      <CatalogSelect label="用途" name="task" options={[{ value: 'all', label: '全部用途' }, ...taskCounts.map(({ id, label }) => ({ value: id, label }))]} />
+      <CatalogSelect label="参数规模" name="size" options={[{ value: 'all', label: '全部规模' }, ...sizeOptions.map(({ id, label }) => ({ value: id, label }))]} />
+      <CatalogSelect label="权重许可" name="license" options={[{ value: 'all', label: '全部许可' }, ...licenseOptions.map((license) => ({ value: license, label: license }))]} />
+      <CatalogSelect label="部署运行时" name="runtime" options={[{ value: 'all', label: '全部运行时' }, ...runtimeOptions.map((runtime) => ({ value: runtime, label: runtime }))]} />
+      <CatalogSelect label="排序方式" name="sort" options={[{ value: 'recent', label: '最近核实' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模（未知在后）' }]} />
     </div>
   </section>
   <ModelList models={models} interactive />
