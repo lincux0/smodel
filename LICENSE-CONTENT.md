@@ -13,3 +13,5 @@ Copyright © 2026 smodel contributors。
 网站程序、原创界面与构建配置采用根目录 `LICENSE` 中的 MIT 许可。技术维护文档采用 MIT；模型内容 JSON 中的原创叙述及 `src/data/guides/` 文本采用上述 CC BY 4.0，事实与第三方资料不因文件格式改变其权利归属。
 
 提交贡献代表你有权提交这些内容，并同意相应部分以以上许可提供；请同时保留第三方来源与必要的许可标注。
+
+JetBrains Mono字体为第三方资源，采用SIL Open Font License 1.1，许可原文位于public/fonts/jetbrains-mono/OFL.txt；不属于本站MIT或CC BY 4.0授权范围。
