@@ -634,6 +634,54 @@
       "_origin": "ast"
     },
     {
+      "id": "vercel",
+      "label": "vercel.json",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "vercel_schema",
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "vercel_framework",
+      "label": "framework",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "vercel_installcommand",
+      "label": "installCommand",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L4",
+      "_origin": "ast"
+    },
+    {
+      "id": "vercel_buildcommand",
+      "label": "buildCommand",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "vercel_outputdirectory",
+      "label": "outputDirectory",
+      "file_type": "code",
+      "source_file": "vercel.json",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
       "id": "readme",
       "label": "README.md",
       "file_type": "document",
@@ -730,8 +778,8 @@
       "_origin": "ast"
     },
     {
-      "id": "docs_architecture_vercel_预览部署_暂缓",
-      "label": "Vercel 预览部署（暂缓）",
+      "id": "docs_architecture_vercel_部署",
+      "label": "Vercel 部署",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
       "source_location": "L62",
@@ -742,7 +790,7 @@
       "label": "Graphify",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L78",
+      "source_location": "L89",
       "_origin": "ast"
     },
     {
@@ -2095,6 +2143,56 @@
       "_origin": "ast"
     },
     {
+      "source": "vercel",
+      "target": "vercel_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vercel.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "vercel",
+      "target": "vercel_framework",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vercel.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "vercel",
+      "target": "vercel_installcommand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vercel.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "vercel",
+      "target": "vercel_buildcommand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vercel.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "vercel",
+      "target": "vercel_outputdirectory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "vercel.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "readme",
       "target": "readme_小模型图鉴",
       "relation": "contains",
@@ -2226,7 +2324,7 @@
     },
     {
       "source": "docs_architecture_项目架构与部署",
-      "target": "docs_architecture_vercel_预览部署_暂缓",
+      "target": "docs_architecture_vercel_部署",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
@@ -2240,7 +2338,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L78",
+      "source_location": "L89",
       "weight": 1.0,
       "_origin": "ast"
     },

@@ -1,0 +1,13 @@
+.git/
+.vercel/
+.cache/
+.astro/
+.playwright-mcp/
+node_modules/
+dist/
+output/
+graphify-out/
+docs/
+tests/
+.env
+.env.*

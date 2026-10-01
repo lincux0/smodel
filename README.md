@@ -32,4 +32,6 @@ npm run preview
 - [内容维护与模板](docs/CONTENT_GUIDE.md)
 - [项目架构与部署](docs/ARCHITECTURE.md)
 
-Vercel 云端预览部署按维护者要求暂缓。本地构建通过不代表云端部署已完成。
+正式站点：[小模型图鉴](https://smodel.vercel.app)。Vercel Hobby 项目 `zav5/smodel` 已连接，正式与预览部署均已验证。
+
+当前机器已保存 Vercel CLI 登录凭据；在凭据有效期内，运行 `npx vercel --target preview` 创建预览，运行 `npx vercel --prod` 发布正式站点。部署配置和凭据说明见[项目架构与部署](docs/ARCHITECTURE.md)。当前未配置 Git 自动部署。

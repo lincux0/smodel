@@ -59,15 +59,26 @@ Node.js 24.x；依赖以根目录 `package-lock.json` 锁定。首次使用 `npm
 
 `dist/`、`node_modules/`、`.astro/`、`.cache/`、`.vercel/` 和本地环境文件不提交。npm 使用工作区 `.cache/npm/`，避免依赖用户全局缓存写入权限。
 
-## Vercel 预览部署（暂缓）
+## Vercel 部署
 
-维护者已要求先完成本地开发，云端预览尚未配置或验证。后续登录后按以下路径继续：
+已于 2026-10-01 连接 Vercel Hobby 工作区 `zav5` 下的 `smodel` 项目，并完成正式及预览部署：
 
-1. 使用 Vercel CLI 登录个人账号。
-2. 在项目根目录运行 `npx vercel`，关联或创建项目，使用预览环境。
-3. 使用 Astro 框架预设，安装命令为 `npm ci`，构建命令为 `npm run build`，输出为 `dist`，Node.js 为 24.x。
-4. 检查部署日志、生成的预览地址、首页、模型详情和未知路由。
-5. 记录实测结果，再将开发方案中对应任务标为完成。
+- [正式站点](https://smodel.vercel.app)：可公开访问。
+- [阶段一预览](https://smodel-qvp4mmn1b-zav5.vercel.app)：保留 Vercel 登录保护，已通过 CLI 授权访问检查。
+
+`vercel.json` 固定 Astro 框架预设、`npm ci` 安装、`npm run build` 构建与 `dist` 输出，云端使用 Node.js 24.x。`.vercelignore` 排除本地凭据、环境文件、缓存、依赖目录、测试和文档，上传前已核对清单。
+
+当前 Windows 用户的 CLI 凭据保存在 `%APPDATA%\com.vercel.cli\Data\auth.json`，文件权限仅允许当前用户访问；凭据不在仓库内。在令牌有效且未撤销期间，后续 CLI 命令自动使用此连接。项目关联保存在忽略的 `.vercel/project.json`；CLI 生成的 `.env.local` 也不提交或上传。
+
+```sh
+npx vercel whoami
+npx vercel --target preview
+npx vercel --prod
+```
+
+其他机器或新克隆需自行登录，再运行 `npx vercel link --project smodel --scope zav5`。每次发布后检查部署日志和目标页面。
+
+本次云端内容校验通过（8 个模型、1 篇指南），Astro 检查为 0 错误、0 警告、0 提示，部署状态为 READY。正式站点通过浏览器验证首页、目录、8 个模型详情、方法说明和公共指南返回 200，未知路由返回 404；预览首页授权访问返回 200。本机 Node 直接请求曾连接超时，线上访问结果以随后实际浏览器及 CLI 检查为准。
 
 需要 Git 自动部署时，先确定远端仓库并由维护者连接 Vercel。当前没有配置 Git 远端，不将本地提交视为已推送。
 
@@ -81,4 +92,4 @@ Node.js 24.x；依赖以根目录 `package-lock.json` 锁定。首次使用 `npm
 
 输出位于 `graphify-out/graph.json`。本地缓存和运行侧文件不提交，源码变更后重新更新图。
 
-当前 Graphify 对 8 个 Astro 文件报告语法解析限制，8 个模型 JSON 未生成节点；只读完整性诊断还报告 14 条悬空端点边。图包含 129 个节点和 152 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
+当前 Graphify 对 8 个 Astro 文件报告语法解析限制，8 个模型 JSON 未生成节点；只读完整性诊断还报告 14 条悬空端点边。图包含 135 个节点和 157 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
