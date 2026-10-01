@@ -465,6 +465,22 @@
       "_origin": "ast"
     },
     {
+      "id": "src_pages_index_tasks",
+      "label": "tasks",
+      "file_type": "code",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_pages_index_activetasks",
+      "label": "activeTasks",
+      "file_type": "code",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
       "id": "src_pages_methodology",
       "label": "methodology.astro",
       "file_type": "code",
@@ -487,22 +503,6 @@
       "source_file": "src/pages/models/[id].astro",
       "source_location": "L6",
       "_callable": true,
-      "_origin": "ast"
-    },
-    {
-      "id": "src_pages_models_id_kindlabels",
-      "label": "kindLabels",
-      "file_type": "code",
-      "source_file": "src/pages/models/[id].astro",
-      "source_location": "L11",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_pages_models_id_modalitylabels",
-      "label": "modalityLabels",
-      "file_type": "code",
-      "source_file": "src/pages/models/[id].astro",
-      "source_location": "L12",
       "_origin": "ast"
     },
     {
@@ -850,6 +850,86 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_design_system",
+      "label": "DESIGN_SYSTEM.md",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_视觉与动效规范",
+      "label": "视觉与动效规范",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_视觉方向",
+      "label": "视觉方向",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_设计变量",
+      "label": "设计变量",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L11",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_布局与组件",
+      "label": "布局与组件",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_动效规范",
+      "label": "动效规范",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L48",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_可访问性与输入方式",
+      "label": "可访问性与输入方式",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L56",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_astro_与渐进增强",
+      "label": "Astro 与渐进增强",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L65",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_阶段二原型与阶段三功能边界",
+      "label": "阶段二原型与阶段三功能边界",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L69",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_design_system_阶段二验收记录",
+      "label": "阶段二验收记录",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L73",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_development_plan",
       "label": "DEVELOPMENT_PLAN.md",
       "file_type": "document",
@@ -974,7 +1054,7 @@
       "label": "阶段三：核心选型功能",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L162",
+      "source_location": "L164",
       "_origin": "ast"
     },
     {
@@ -982,7 +1062,7 @@
       "label": "阶段四：首批内容与公开发布",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L181",
+      "source_location": "L183",
       "_origin": "ast"
     },
     {
@@ -990,7 +1070,7 @@
       "label": "阶段五：维护效率与内容迭代",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L204",
+      "source_location": "L206",
       "_origin": "ast"
     },
     {
@@ -998,7 +1078,7 @@
       "label": "阶段六：自动采集候选与人工审核",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L222",
+      "source_location": "L224",
       "_origin": "ast"
     },
     {
@@ -1006,7 +1086,7 @@
       "label": "6. 实施与验收约定",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L242",
+      "source_location": "L244",
       "_origin": "ast"
     },
     {
@@ -1014,7 +1094,7 @@
       "label": "7. 约束与后续决策",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L254",
+      "source_location": "L256",
       "_origin": "ast"
     },
     {
@@ -1022,7 +1102,7 @@
       "label": "7.1 Vercel Hobby",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L258",
       "_origin": "ast"
     },
     {
@@ -1030,7 +1110,7 @@
       "label": "7.2 后续决策触发条件",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L264",
+      "source_location": "L266",
       "_origin": "ast"
     },
     {
@@ -1038,7 +1118,7 @@
       "label": "8. 调研依据",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L276",
+      "source_location": "L278",
       "_origin": "ast"
     },
     {
@@ -1825,6 +1905,48 @@
     },
     {
       "source": "src_pages_index",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_pages_index_tasks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
+      "target": "src_pages_index_activetasks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/index.astro",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_index",
       "target": "astro_content",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
@@ -1895,26 +2017,6 @@
     },
     {
       "source": "src_pages_models_id",
-      "target": "src_pages_models_id_kindlabels",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/models/[id].astro",
-      "source_location": "L11",
-      "weight": 1.0,
-      "_origin": "ast"
-    },
-    {
-      "source": "src_pages_models_id",
-      "target": "src_pages_models_id_modalitylabels",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/models/[id].astro",
-      "source_location": "L12",
-      "weight": 1.0,
-      "_origin": "ast"
-    },
-    {
-      "source": "src_pages_models_id",
       "target": "astro_content",
       "relation": "imports_from",
       "confidence": "EXTRACTED",
@@ -1940,6 +2042,28 @@
       "confidence": "EXTRACTED",
       "source_file": "src/pages/models/index.astro",
       "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_pages_models_index",
+      "target": "src_lib_catalog_tasklabels",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/models/index.astro",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2263,6 +2387,16 @@
       "_origin": "ast"
     },
     {
+      "source": "readme",
+      "target": "docs_design_system",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_architecture",
       "target": "docs_architecture_项目架构与部署",
       "relation": "contains",
@@ -2279,6 +2413,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
       "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_architecture",
+      "target": "docs_design_system",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L5",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2409,6 +2553,96 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
       "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system",
+      "target": "docs_design_system_视觉与动效规范",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_视觉方向",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_设计变量",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_布局与组件",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_动效规范",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_可访问性与输入方式",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_astro_与渐进增强",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_阶段二原型与阶段三功能边界",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_阶段二验收记录",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2553,12 +2787,22 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_development_plan",
+      "target": "docs_design_system",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L162",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_development_plan_5_分阶段实施计划",
       "target": "docs_development_plan_阶段三_核心选型功能",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L162",
+      "source_location": "L164",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2568,7 +2812,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L181",
+      "source_location": "L183",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2578,7 +2822,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L204",
+      "source_location": "L206",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2588,7 +2832,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L222",
+      "source_location": "L224",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2598,7 +2842,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L242",
+      "source_location": "L244",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2608,7 +2852,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L254",
+      "source_location": "L256",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2618,7 +2862,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L258",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2628,7 +2872,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L264",
+      "source_location": "L266",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2638,7 +2882,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L276",
+      "source_location": "L278",
       "weight": 1.0,
       "_origin": "ast"
     },

@@ -2,17 +2,52 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ModelList from '../components/ModelList.astro';
+import { taskLabels } from '../lib/catalog.ts';
+
 const models = await getCollection('models');
+const tasks = Object.entries(taskLabels).map(([id, label], index) => ({
+  id,
+  label,
+  count: models.filter(({ data }) => data.tasks.includes(id as keyof typeof taskLabels)).length,
+  number: String(index + 1).padStart(2, '0'),
+}));
+const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
 ---
-<Base title="找到适合任务的小模型">
-  <section class="intro">
-    <p class="eyebrow">从用途出发，理解模型</p>
-    <h1>小模型，也有自己的专长。</h1>
-    <p class="lead">了解它擅长什么、有什么限制，以及如何在自己的设备上开始使用。</p>
-    <a class="button" href="/models/">浏览 {models.length} 个模型</a>
+<Base title="小模型图鉴 | 按用途选择轻量模型">
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="hero-copy">
+      <p class="eyebrow">SMALL MODEL INDEX · 2026</p>
+      <h1 id="home-title">小模型，<br /><span>各有所长。</span></h1>
+      <p class="lead">从任务出发，查看模型的能力依据、使用边界与官方部署方式。每条信息都能追溯来源，未知之处如实标注。</p>
+      <div class="hero-actions">
+        <a class="button" href="/models/">浏览全部 {models.length} 个模型 <span aria-hidden="true">↗</span></a>
+        <a class="text-link" href="#task-heading">按用途开始 ↓</a>
+      </div>
+    </div>
+    <aside class="hero-index" aria-label="当前目录信息">
+      <div class="index-top"><span>MODEL INDEX</span><span>REV. 01</span></div>
+      <div class="index-orbit" aria-hidden="true"><span class="orbit-core"></span></div>
+      <div class="index-bottom"><span>收录型号</span><strong>{String(models.length).padStart(2, '0')}</strong><span>正在维护</span></div>
+    </aside>
   </section>
-  <section aria-label="样本模型">
-    <div class="section-heading"><h2>从这些模型开始</h2><a href="/methodology/">了解收录与评测方法</a></div>
+
+  <section class="section" aria-labelledby="task-heading">
+    <div class="section-heading"><div><p class="kicker">01 / 按任务浏览</p><h2 id="task-heading">你想让模型做什么？</h2></div><span class="muted">选择一种用途开始</span></div>
+    <div class="task-grid">
+      {tasks.filter(({ id }) => activeTasks.has(id as keyof typeof taskLabels)).map(({ id, label, count, number }) => (
+        <a class="task-tile" href={`/models/?task=${id}`}>
+          <span class="task-number">TASK {number}</span>
+          <strong>{label}</strong>
+          <span class="task-count">{String(count).padStart(2, '0')} 个型号 <span aria-hidden="true">↗</span></span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="section-heading"><div><p class="kicker">02 / 样本条目</p><h2 id="featured-heading">先看几个具体型号</h2></div><a href="/models/">前往完整目录 ↗</a></div>
     <ModelList models={models.slice(0, 4)} />
   </section>
+
+  <aside class="home-note"><span>本站记录官方资料与已知限制，不提供跨用途总排名。</span><a href="/methodology/">如何理解评测与未知值 →</a></aside>
 </Base>

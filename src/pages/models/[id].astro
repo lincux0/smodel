@@ -19,12 +19,16 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
       <h1>{model.name}</h1>
       <p class="lead">{model.summary}</p>
       <p class="muted">最后核实：<time datetime={model.checkedAt}>{model.checkedAt}</time></p>
+      <div class="copy-group">
+        <div class="copy-row"><pre><code>{model.officialUrl}</code></pre><button class="copy-button" type="button" data-copy data-copy-label="复制官方链接">复制官方链接</button></div>
+        <p class="copy-status" data-copy-status aria-live="polite"></p>
+      </div>
     </header>
-    <section><h2>特点与限制</h2>
+    <section class="detail-section"><h2>特点与限制</h2>
       <div class="two-columns"><div><h3>主要特点</h3><ul>{model.features.map((feature) => <li>{feature}</li>)}</ul></div>
       <div><h3>使用边界</h3><ul>{model.limitations.map((limitation) => <li>{limitation}</li>)}</ul></div></div>
     </section>
-    <section><h2>模型信息</h2>
+    <section class="detail-section"><h2>模型信息</h2>
       <dl class="facts">
         <dt>家族与版本</dt><dd>{model.family} / {model.version}</dd>
         <dt>输入与输出</dt><dd>{model.modalities.input.map((item) => modalityLabels[item]).join('、')} → {model.modalities.output.map((item) => modalityLabels[item]).join('、')}</dd>
@@ -39,7 +43,7 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
         <dt>训练资料</dt><dd>{model.licenses.trainingDisclosure}</dd>
       </dl>
     </section>
-    <section><h2>能力依据</h2>
+    <section class="detail-section"><h2>能力依据</h2>
       {model.evaluations.length === 0 ? <p class="empty-state">暂无可比评测。请结合特点、限制与官方资料判断适用性。</p> : model.evaluations.map((evaluation) => (
         <div class="evidence">
           <h3>{evaluation.benchmark}：{evaluation.value}{evaluation.unit}</h3>
@@ -50,7 +54,7 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
         </div>
       ))}
     </section>
-    <section><h2>运行条件与获取</h2>
+    <section class="detail-section"><h2>运行条件与获取</h2>
       {model.deployments.map((deployment) => (
         <div class="deployment">
           <h3>{deployment.runtime}</h3>
@@ -59,7 +63,18 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
           <p>硬件：{deployment.hardware.status === 'not-verified' ? '未核实' : deployment.hardware.status === 'measured' ? '实测' : '官方估算'}。{deployment.hardware.notes}</p>
           <p>内存：{deployment.hardware.ramGb === null ? '未核实' : `${deployment.hardware.ramGb} GB`}；显存：{deployment.hardware.vramGb === null ? '未核实' : `${deployment.hardware.vramGb} GB`}。</p>
           <p>依赖：{deployment.dependencies.length ? deployment.dependencies.join('、') : '以官方指引为准'}。</p>
-          <ol>{deployment.steps.map((step) => <li><strong>{step.title}</strong><p>{step.description}</p>{step.command && <pre><code>{step.command}</code></pre>}</li>)}</ol>
+          <div class="deployment-steps" aria-label="部署步骤">
+            {deployment.steps.map((step, index) => (
+              <details class="deployment-step" open={index === 0}>
+                <summary><span class="model-number">STEP {String(index + 1).padStart(2, '0')}</span>　{step.title}</summary>
+                <div class="step-body">
+                  <p>{step.description}</p>
+                  {step.command && <div class="copy-row"><pre><code>{step.command}</code></pre><button class="copy-button" type="button" data-copy>复制命令</button></div>}
+                  {step.command && <p class="copy-status" data-copy-status aria-live="polite"></p>}
+                </div>
+              </details>
+            ))}
+          </div>
           <div class="link-row"><a href={deployment.downloadUrl}>获取权重</a><a href={deployment.sourceUrl}>官方部署指引</a><a href={`/guides/${deployment.guideId}/`}>部署前检查</a></div>
         </div>
       ))}
@@ -67,3 +82,23 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
     <p><a class="button" href={model.officialUrl}>查看官方模型资料</a></p>
   </article>
 </Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const row = button.closest<HTMLElement>('.copy-row')!;
+      const command = row.querySelector('code')?.textContent ?? '';
+      const status = button.closest<HTMLElement>('.step-body, .copy-group')!.querySelector<HTMLElement>('[data-copy-status]')!;
+      const label = button.dataset.copyLabel ?? '复制命令';
+      try {
+        await navigator.clipboard.writeText(command);
+        button.textContent = '已复制';
+        status.textContent = '内容已复制到剪贴板。';
+      } catch {
+        button.textContent = '复制失败';
+        status.textContent = '浏览器未授权剪贴板，请手动选择并复制内容。';
+      }
+      window.setTimeout(() => { button.textContent = label; }, 1800);
+    });
+  });
+</script>

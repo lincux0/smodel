@@ -1,6 +1,6 @@
 # 小模型图鉴
 
-按用途了解小模型的特点、能力依据与官方部署方式。当前处于阶段一：已建立内容结构和基础静态页面，完整视觉、动效和筛选对比功能按[开发方案](docs/DEVELOPMENT_PLAN.md)推进。
+按用途了解小模型的特点、能力依据与官方部署方式。阶段一已完成；阶段二提供视觉系统与交互原型，完整选型功能按[开发方案](docs/DEVELOPMENT_PLAN.md)推进。
 
 ## 本地运行
 
@@ -31,7 +31,10 @@ npm run preview
 - [分阶段开发方案](docs/DEVELOPMENT_PLAN.md)
 - [内容维护与模板](docs/CONTENT_GUIDE.md)
 - [项目架构与部署](docs/ARCHITECTURE.md)
+- [视觉与动效规范](docs/DESIGN_SYSTEM.md)
 
 正式站点：[小模型图鉴](https://smodel.vercel.app)。Vercel Hobby 项目 `zav5/smodel` 已连接，正式与预览部署均已验证。
+
+阶段二[视觉原型预览](https://smodel-ky1tbwmab-zav5.vercel.app)已发布（需登录有项目权限的 Vercel 账号）。正式站点仍为阶段一版本，待视觉审阅后再发布新设计。
 
 当前机器已保存 Vercel CLI 登录凭据；在凭据有效期内，运行 `npx vercel --target preview` 创建预览，运行 `npx vercel --prod` 发布正式站点。部署配置和凭据说明见[项目架构与部署](docs/ARCHITECTURE.md)。当前未配置 Git 自动部署。

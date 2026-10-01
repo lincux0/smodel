@@ -2,12 +2,33 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import ModelList from '../../components/ModelList.astro';
+import { taskLabels } from '../../lib/catalog.ts';
+
 const models = await getCollection('models');
+const taskCounts = Object.entries(taskLabels).map(([id, label]) => ({
+  id,
+  label,
+  count: models.filter(({ data }) => data.tasks.includes(id as keyof typeof taskLabels)).length,
+})).filter((task) => task.count > 0);
 ---
 <Base title="模型目录">
-  <section class="intro compact">
-    <h1>模型目录</h1>
-    <p class="lead">{models.length} 个样本，涵盖文本、视觉、检索、语音与文字识别。逐项查看特点、限制与官方指引。</p>
+  <section class="catalog-head">
+    <div>
+      <p class="eyebrow">MODEL INDEX / 01</p>
+      <h1>模型目录</h1>
+      <p class="lead">按任务筛选，逐个了解模型的长处、边界与部署入口。参数和评测各自保留来源口径。</p>
+    </div>
+    <div class="catalog-count" aria-label={`${models.length} 个收录型号`}><strong>{String(models.length).padStart(2, '0')}</strong><span>收录型号</span></div>
   </section>
-  <ModelList models={models} />
+  <section class="catalog-tools" aria-label="筛选和排序模型">
+    <div>
+      <span class="filter-label">用途筛选</span>
+      <div class="filter-list" role="group" aria-label="按用途筛选">
+        <button class="filter-button" type="button" data-task-filter="all" aria-pressed="true">全部 <span>{models.length}</span></button>
+        {taskCounts.map(({ id, label, count }) => <button class="filter-button" type="button" data-task-filter={id} aria-pressed="false">{label} <span>{count}</span></button>)}
+      </div>
+    </div>
+    <label class="sort-control"><span class="filter-label">排序方式</span><select data-sort-control><option value="recent">最近核实</option><option value="name">名称 A–Z</option><option value="size">参数规模</option></select></label>
+  </section>
+  <ModelList models={models} interactive />
 </Base>
