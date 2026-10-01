@@ -1,0 +1,96 @@
+{
+  "id": "qwen3-0-6b",
+  "name": "Qwen3-0.6B",
+  "family": "Qwen",
+  "version": "3",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方卡标注总参数0.6B、非嵌入参数0.44B；按总参数口径展示。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-0.6B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-0.6B"
+  },
+  "languages": [
+    "多语言（官方称支持100余种语言与方言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-0.6B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡和技术报告提供训练与后训练概述，未提供完整可复核的逐样本训练集清单。"
+  },
+  "summary": "紧凑型通用指令模型，支持思考与非思考模式切换，适合轻量文本和代码任务候选。",
+  "features": [
+    "官方标注0.6B总参数、0.44B非嵌入参数",
+    "支持思考与非思考聊天模式",
+    "卡片称支持100余种语言与方言"
+  ],
+  "limitations": [
+    "思考模式会增加输出长度和推理开销。",
+    "本站未复现评测，也未验证设备表现。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-0.6B",
+  "checkedAt": "2026-10-01",
+  "deployments": [
+    {
+      "id": "official-runtime",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-0.6B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-0.6B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（最新版）",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "安装当前兼容的 PyTorch 与 Transformers；按目标设备选择 PyTorch 配置。",
+          "command": "python -m pip install -U transformers torch"
+        },
+        {
+          "title": "加载模型",
+          "description": "从官方卡加载 Qwen/Qwen3-0.6B，使用卡片示例的 tokenizer 聊天模板。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于精度、输入、运行时与硬件，不从参数量或文件体积推算资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": []
+}
