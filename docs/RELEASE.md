@@ -21,3 +21,5 @@
 ## 上线验证
 
 2026-10-01：master已推送至指定GitHub仓库，Vercel正式部署READY并绑定 https://smodel.vercel.app。未登录浏览器检查目录21条、站点地图26个URL均200、robots正确、未知路由404；源码ZIP及SHA256摘要200，浏览器计算的摘要与下载摘要一致。最终复核将Qwen Coder 7B的默认32K与YaRN扩展128K分列，修正后3项测试与生产构建重新通过。后续修正通过CLI补发。
+
+Git自动部署验收（2026-10-01）：提交477b031推送master后，Vercel部署dpl_2czxdpbaNoTnXrV1ddA94BmPjtHe记录source=git、target=production、githubCommitSha与该提交一致；部署READY并绑定smodel.vercel.app。线上目录21条，首页、贡献页、站点地图、robots和源码包均200。
