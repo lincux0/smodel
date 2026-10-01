@@ -93,9 +93,9 @@ npx vercel --prod
 
 其他机器或新克隆需自行登录，再运行 `npx vercel link --project smodel --scope zav5`。每次发布后检查部署日志和目标页面。
 
-本次云端内容校验通过（8 个模型、1 篇指南），Astro 检查为 0 错误、0 警告、0 提示，部署状态为 READY。正式站点通过浏览器验证首页、目录、8 个模型详情、方法说明和公共指南返回 200，未知路由返回 404；预览首页授权访问返回 200。本机 Node 直接请求曾连接超时，线上访问结果以随后实际浏览器及 CLI 检查为准。
+阶段一历史云端内容校验通过（8 个模型、1 篇指南），Astro 检查为 0 错误、0 警告、0 提示，部署状态为 READY。正式站点通过浏览器验证首页、目录、8 个模型详情、方法说明和公共指南返回 200，未知路由返回 404；预览首页授权访问返回 200。本机 Node 直接请求曾连接超时，线上访问结果以随后实际浏览器及 CLI 检查为准。
 
-需要 Git 自动部署时，先确定远端仓库并由维护者连接 Vercel。Git 远端为 https://github.com/lincux0/smodel.git。Vercel Git 自动连接目前因账号缺少 GitHub Login Connection 未完成；当前通过 CLI 正式部署，不将源码推送视为自动部署成功。
+2026-10-01：维护者完成 GitHub 登录关联及 Vercel GitHub App 的仓库授权后，项目已成功连接 https://github.com/lincux0/smodel.git。Vercel API 核实 Git provider 为 github，仓库为 lincux0/smodel，正式发布分支为 master。向 master 推送用于触发正式部署；其他分支用于预览。连接成功与实际 Git 触发部署分别核实，首版此前通过 CLI 发布。
 
 静态 Astro 无需 Vercel 服务端适配器。后续如果增加按需服务端渲染，再评估适配器与套餐用量。
 

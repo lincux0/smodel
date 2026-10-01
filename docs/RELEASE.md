@@ -16,7 +16,7 @@
 
 源码包为0.1.0发布前审查快照，仅包含src、docs、scripts、tests、public/favicon.svg、依赖锁文件、配置、README、贡献和许可文件。排除.git、.env、.vercel、缓存、node_modules、dist和下载包自身；不含模型权重。使用PowerShell Compress-Archive生成，并检查条目名单。SHA256摘要随包提供。
 
-Vercel Git连接尝试因账号缺少GitHub Login Connection失败；本次通过既有CLI连接正式发布。需要在Vercel账号设置关联GitHub登录后重试Git连接，才能将后续push自动发布。源码推送和部署分别核实。
+首版通过既有CLI连接正式发布。2026-10-01，维护者完成GitHub登录关联与仓库授权后，Vercel Git连接成功；API核实仓库lincux0/smodel、正式分支master。通过本次部署文档提交验证push触发，部署结果以Vercel记录为准；源码包仍为0.1.0首版快照。
 
 ## 上线验证
 
