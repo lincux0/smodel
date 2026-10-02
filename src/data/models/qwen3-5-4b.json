@@ -99,6 +99,7 @@
   ],
   "evaluations": [
     {
+      "id": "mmlu-pro",
       "benchmark": "MMLU-Pro",
       "dataset": "MMLU-Pro",
       "language": "en",
@@ -107,12 +108,205 @@
       "unit": "%",
       "direction": "higher",
       "version": "官方模型卡报告（未标独立评测版本）",
-      "settings": "官方卡语言基准表报告Qwen3.5-4B为79.1；该项未完整披露prompt、shot数、采样及推理配置，本站未复现，不与其他配置直接比较。",
+      "settings": "官方卡语言基准表中 Qwen3.5-4B 列为 79.1。该项未完整披露prompt、shot数、采样、推理模式或生成长度；本站未复现。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
       "date": null,
-      "checkedAt": "2026-10-01",
+      "checkedAt": "2026-10-02",
       "kind": "official-report",
-      "comparable": false
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "c-eval",
+      "benchmark": "C-Eval",
+      "dataset": "C-Eval",
+      "language": "zh",
+      "metric": "accuracy",
+      "value": 85.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡语言基准表中 Qwen3.5-4B 列为 85.1。该项未完整披露prompt、shot数、采样、推理模式或生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 55.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6（官方卡未注明数据时间范围）",
+      "settings": "官方卡列 Qwen3.5-4B 分数为 55.8，并仅注明 LiveCodeBench v6，未注明数据时间范围。模型卡未披露该项的few-shot、提示模板、采样、推理模式和输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "mmmu-pro",
+      "benchmark": "MMMU-Pro",
+      "dataset": "MMMU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 66.3,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡视觉语言基准表中 Qwen3.5-4B 列为 66.3。该项未完整披露prompt、shot数、采样、图像预处理、推理模式或生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、图像处理与推理配置及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可将其列入中英文知识问答候选：官方卡列英文 MMLU-Pro 79.1%、中文 C-Eval 85.1%。两项考试成绩不能直接说明中文写作或日常对话表现。",
+      "strengths": [
+        "官方成绩覆盖英文知识问答与中文考试基准。"
+      ],
+      "limitations": [
+        "考试结果不能替代中文写作和自然对话验证。",
+        "评测条件未完整披露，不能与其他记录横向排名。",
+        "本站未复现这两项评测。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "c-eval"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可作为需执行测试核验的代码生成候选：官方卡报告 LiveCodeBench v6 为 55.8%，但未注明数据时间范围。该单项成绩不能保证复杂项目修改正确。",
+      "strengths": [
+        "官方表格含该型号的代码基准结果。"
+      ],
+      "limitations": [
+        "复杂项目修改仍需在目标仓库运行测试验证。",
+        "模型卡未披露足够完整的生成配置，不能横向排名。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为图文问答候选：官方视觉语言表列出 MMMU-Pro 66.3%。该单项基准不能保证 OCR 准确或细节图像识别效果。",
+      "strengths": [
+        "官方表格报告该型号的图文推理成绩。"
+      ],
+      "limitations": [
+        "OCR 与细节图像识别需要按目标输入另行验证。",
+        "图像预处理和提示等条件没有完整披露。",
+        "本站未使用本地图片输入验证。"
+      ],
+      "evidenceIds": [
+        "mmmu-pro"
+      ]
     }
   ]
 }

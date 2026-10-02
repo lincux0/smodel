@@ -46,7 +46,7 @@
     },
     "trainingDisclosure": "所查模型卡介绍语言、复杂场景与评测结果，未提供完整训练数据清单。"
   },
-  "summary": "识别文本行图像的移动端OCR组件，整页OCR需要配合检测等模块。",
+  "summary": "文本行识别组件，可作为印刷中英文字和多场景识别候选；同一官方表中手写中文整行准确率低于印刷中文和英文，手写能力需按目标字迹单独验证。分数来自发布方内部多场景表，非本站复测。",
   "features": [
     "中英日文本行识别",
     "支持手写、竖排、拼音与生僻字场景",
@@ -58,7 +58,7 @@
     "模型卡未提供参数量；LLM式token上下文不适用。"
   ],
   "officialUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-02",
   "deployments": [
     {
       "id": "official-paddleocr",
@@ -98,5 +98,188 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "printed-chinese-accuracy",
+      "benchmark": "PP-OCRv5 text-recognition evaluation",
+      "dataset": "官方多场景识别评测集：Printed Chinese类别",
+      "language": "简体中文",
+      "metric": "整行准确率",
+      "value": 0.8605,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "模型卡报告；未披露数据集版本",
+      "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的类别结果，不含文本检测流水线。官方定义任一字符（含标点）错误则整行计错；拆分、样本量和推理参数未披露。",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方）",
+      "externalModelId": "PaddlePaddle/PP-OCRv5_mobile_rec",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露具体测试拆分、样本量、模型revision或完整输入预处理配置；该类别准确率不能与其他评测集或整套OCR流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+        "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      }
+    },
+    {
+      "id": "printed-english-accuracy",
+      "benchmark": "PP-OCRv5 text-recognition evaluation",
+      "dataset": "官方多场景识别评测集：Printed English类别",
+      "language": "英语",
+      "metric": "整行准确率",
+      "value": 0.8753,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "模型卡报告；未披露数据集版本",
+      "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的类别结果，不含文本检测流水线。官方定义任一字符（含标点）错误则整行计错；拆分、样本量和推理参数未披露。",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方）",
+      "externalModelId": "PaddlePaddle/PP-OCRv5_mobile_rec",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露具体测试拆分、样本量、模型revision或完整输入预处理配置；该类别准确率不能与其他评测集或整套OCR流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+        "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      }
+    },
+    {
+      "id": "handwritten-chinese-accuracy",
+      "benchmark": "PP-OCRv5 text-recognition evaluation",
+      "dataset": "官方多场景识别评测集：Handwritten Chinese类别",
+      "language": "简体中文",
+      "metric": "整行准确率",
+      "value": 0.4166,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "模型卡报告；未披露数据集版本",
+      "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的手写中文类别结果，不含文本检测流水线。官方说明任一字符（含标点）错误则整行计错；数据拆分、样本量和推理参数未披露。",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方）",
+      "externalModelId": "PaddlePaddle/PP-OCRv5_mobile_rec",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露测试拆分、样本量、模型revision或完整预处理配置；该类别分数仅用于描述原报告场景，不与其他数据集或整套OCR流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+        "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      }
+    },
+    {
+      "id": "average-accuracy",
+      "benchmark": "PP-OCRv5 text-recognition evaluation",
+      "dataset": "官方多场景识别评测集：Average汇总列",
+      "language": "多语言及多场景",
+      "metric": "平均整行准确率",
+      "value": 0.8015,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "模型卡报告；未披露数据集版本",
+      "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的官方Average汇总值，不含文本检测流水线。官方说明任一字符（含标点）错误则整行计错；卡片未披露该汇总的聚合权重、测试拆分、样本量和推理参数。",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方）",
+      "externalModelId": "PaddlePaddle/PP-OCRv5_mobile_rec",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未说明Average的聚合权重，也未披露测试拆分、样本量、模型revision或完整预处理配置；该汇总分仅代表原报告口径，不与其他数据集或整套OCR流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
+        "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "适合作为印刷中英文文本行识别候选；同一官方内部评测表的手写中文分数（0.4166）低于印刷中文（0.8605）和印刷英文（0.8753），此差异仅说明该官方评测场景内的表现边界，不能外推为通用手写准确率。Average为0.8015，但官方未披露聚合权重；目标版面仍需验证。",
+      "strengths": [
+        "结果直接对应mobile_rec文本行识别组件，未混用mobile_det或整套OCR流水线分数。",
+        "模型卡按整行严格计分，包含印刷中文、印刷英文和手写中文等类别结果。"
+      ],
+      "limitations": [
+        "手写中文0.4166低于同一官方表中的印刷中文0.8605和印刷英文0.8753；此比较仅限该官方内部评测场景，数据集和样本详情未披露。",
+        "官方Average列为0.8015，但没有说明聚合权重；不得称为加权平均。",
+        "官方未公开具体数据集版本、样本拆分、样本量和完整推理设置，未找到同一mobile_rec组件及条件的独立交叉核实。"
+      ],
+      "evidenceIds": [
+        "printed-chinese-accuracy",
+        "printed-english-accuracy",
+        "handwritten-chinese-accuracy",
+        "average-accuracy"
+      ]
+    }
+  ]
 }

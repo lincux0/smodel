@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-核对日期：2026-10-01。当前目录共21个型号：阶段一原有8个和阶段四新增13个。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录的是来源与字段核对，不代表本站下载或运行了模型。`evaluations` 留空表示本目录未登记可按统一条件复核的成绩；硬件字段均标为本站未实测。未在所列来源中得到可靠数值的字段不作推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02。目录共21个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -38,3 +38,18 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 | Whisper small | [OpenAI模型表与用法](https://github.com/openai/whisper#available-models-and-languages) · [MIT许可](https://github.com/openai/whisper/blob/main/LICENSE) | small多语言档参数约244M，非`small.en`；原始OpenAI仓库发布路径按MIT记录权重与代码。Hugging Face转换权重有不同的卡片许可标签，应按实际使用的工件核对。30秒是音频窗口，不是token上下文。本站未复现WER。 |
 
 网站代码使用 MIT，原创整理和指南使用 CC BY 4.0；这些许可不套用于第三方模型权重。型号详情页的“获取权重”链接跳转到各自官方模型页或上游仓库，模型文件不存放于本站代码仓库。来源复核、内容校验和构建都不等于本站完成模型推理测试。
+
+## 首批能力依据
+
+以下为少量指标事实引用，摘要由本站原创撰写；不复制整份报告、截图或官方整表。各项条件及使用说明保存于模型 JSON，未披露的配置明确保留未知。所有原始模型变体保持独立，不将这些引用称为本站复现或统一排名。
+
+| 型号 | 评测出处 | 身份与口径 |
+| --- | --- | --- |
+| Gemma 4 E2B IT | [官方模型卡](https://huggingface.co/google/gemma-4-E2B-it) · [技术报告 Table 7](https://arxiv.org/html/2607.02770) | 取 E2B 指令版的 MMLU Pro、LiveCodeBench v6、MMMU Pro；ASR 只取英文 FLEURS WER，不混用中文/日文/韩文 CER 或多语言平均。 |
+| Qwen3.5-4B | [官方模型卡](https://huggingface.co/Qwen/Qwen3.5-4B) | 取 4B 列的 MMLU-Pro、C-Eval、LiveCodeBench v6、MMMU-Pro；MMLU-Pro 原有 79.1% 记录迁移而不重复添加。 |
+| Qwen3-4B | [后续官方卡的对照表](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) | 只取表内明确的原版 Qwen3-4B Non-Thinking 列，不取该页面发布的 Instruct-2507 型号或 Base 型号成绩；LiveCodeBench 保存表明的题目窗口。 |
+| Qwen3-Embedding-0.6B | [官方模型卡](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) | 取 MTEB Multilingual 表内0.6B行的 Mean(Task)、Retrieval、STS；不取8B成绩，官方自报不标成独立复测，聚合任务及运行条件不足以统一比较。 |
+| Whisper small | [OpenAI 原始论文](https://cdn.openai.com/papers/whisper.pdf) | 取附录 Table 11 的 Common Voice 9 印尼语 WER 18.4%、中文 CER 29.4%，及 Table 13 的 FLEURS 印尼语 WER 16.3%；中文口径按附录 C 的逐字符分隔说明，不借用英文专用版或转换权重成绩。 |
+| PP-OCRv5 mobile rec | [官方模型卡](https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec) | 少量摘录文字行识别准确率，任一字符或标点错误即整行错误；不混入文字检测或完整流程的成绩，内评估集未完整披露。 |
+
+能力字段维护与 AA 数据使用边界见 [能力依据规范](CAPABILITY_EVIDENCE.md)。AA 仅作为原站参考入口，当前不导入其数值、排名或衍生评分。

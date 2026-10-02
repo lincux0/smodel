@@ -101,5 +101,228 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU Pro",
+      "dataset": "MMLU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 60.0,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Google 官方卡的 instruction-tuned 表列 Gemma 4 E2B 为 60.0%。未披露该行的 few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E2B-it",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E2B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E2B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 44.0,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6",
+      "settings": "Google 官方卡的 instruction-tuned 表列 Gemma 4 E2B 为 44.0%。未披露该行的 few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E2B-it",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E2B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E2B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "mmmu-pro",
+      "benchmark": "MMMU Pro",
+      "dataset": "MMMU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 44.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Google 官方卡视觉表列 Gemma 4 E2B 为 44.2%。未披露该行的few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E2B-it",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E2B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E2B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "fleurs-en-wer",
+      "benchmark": "FLEURS ASR",
+      "dataset": "FLEURS",
+      "language": "en",
+      "metric": "word error rate",
+      "value": 0.08,
+      "unit": "ratio",
+      "direction": "lower",
+      "version": "官方技术报告 Table 7",
+      "settings": "Google 官方技术报告将英文列为 WER，Gemma 4 E2B 数值为 0.080。其他测试语言中带星号的列使用 CER；此记录只取英文 WER。报告未给出该行的模型revision、few-shot、提示模板或生成长度；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2607.02770",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E2B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告给出了数据集、英文列和WER指标，但未披露模型revision及足以统一复测的音频、解码和提示配置。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2607.02770",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖报告原文或第三方内容许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为英语知识问答候选：官方 MMLU Pro 成绩为 60.0%。该指标不能说明中文长文写作或事实回答可靠性。",
+      "strengths": [
+        "已登记一项英语知识与推理基准的官方成绩。"
+      ],
+      "limitations": [
+        "MMLU Pro 单项考试成绩不能替代目标场景验证。",
+        "本站未运行模型验证实际对话表现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可作为需执行测试核验的代码生成候选：官方 LiveCodeBench v6 成绩为 44.0%。单一基准不能保证复杂项目修改正确。",
+      "strengths": [
+        "官方报告包含该型号的代码生成基准成绩。"
+      ],
+      "limitations": [
+        "复杂项目修改仍需在目标仓库运行测试验证。",
+        "提示、采样和生成长度等条件未完整披露。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为图文问答候选：官方 MMMU Pro 成绩为 44.2%。该单项视觉推理结果不能保证 OCR 准确或细节图像识别效果。",
+      "strengths": [
+        "官方报告提供多模态视觉推理基准数据。"
+      ],
+      "limitations": [
+        "OCR 与细节识别需要按目标图像另行验证。",
+        "本站未使用本地图片输入验证识图效果。"
+      ],
+      "evidenceIds": [
+        "mmmu-pro"
+      ]
+    },
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为英语语音转写候选：官方 FLEURS 英语行的 WER 为 0.080（越低越好）。该数据只说明报告所列英语测试结果。",
+      "strengths": [
+        "官方报告提供一项明确区分 WER 与 CER 的语音识别结果。"
+      ],
+      "limitations": [
+        "该结果不能代表其他语言或本站音频的实际识别效果。",
+        "音频与解码配置不足以复现统一条件比较。"
+      ],
+      "evidenceIds": [
+        "fleurs-en-wer"
+      ]
+    }
+  ]
 }

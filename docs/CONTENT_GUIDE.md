@@ -110,6 +110,8 @@
 
 ## 评测记录与可比性
 
+结论、配置、证据关联与第三方结果使用范围见 [能力依据规范](CAPABILITY_EVIDENCE.md)。新增评测需填写稳定 `id`、`task`、`publisher`、`externalModelId`、`modelConfig`、`conditions`、`comparisonGroup`、`nonComparableReason` 和 `rights`。条件未知保留空值。模型可填写 `assessments`，按用途引用本模型同用途 `evidenceIds`，缺省为空数组。旧非空记录需迁移，空 `evaluations` 不需添加虚构记录。
+
 一条记录对应一个明确指标结果。记录基准与数据集/划分、语言、单位、指标方向、模型/基准版本、测试设置、来源、评测日期（未知可为 `null`）和本次核实日期。`unit` 必须是非空文字；无单位时填写“无单位”。`kind` 应准确区分官方报告、第三方结果和本站实测；没有可靠成绩就保持 `evaluations: []`，不要用虚构数字占位。
 
 只有任务、数据集及划分、语言、指标定义、版本和关键测试条件足够一致时，`comparable` 才能为 `true`。缺少条件或仅有宣传性数字时置 `false`，不得用于同一排序或暗示直接胜负。不同单位或方向的数值不直接比较；保留历史结果及其版本，不将旧评测描述成当前排名。

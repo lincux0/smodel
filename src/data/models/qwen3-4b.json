@@ -92,5 +92,118 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "mmlu-pro-nonthinking",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "score",
+      "value": 58.0,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方卡未注明数据版本",
+      "settings": "Qwen 官方 Qwen3-4B-Instruct-2507 卡的对照表单独列出旧版 Qwen3-4B Non-Thinking，数值为 58.0。此记录取该旧版列，不取新版 2507 列。shot数、prompt、采样和输出长度未在表内披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方对照表明确标为原 Qwen3-4B Non-Thinking，但未给模型revision及完整评测参数，不能与其他评测条件不明的记录统一比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    },
+    {
+      "id": "livecodebench-v6-nonthinking",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 26.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6（25.02-25.05）",
+      "settings": "Qwen 官方 Qwen3-4B-Instruct-2507 卡的对照表单独列出旧版 Qwen3-4B Non-Thinking，数值为 26.4。此记录取该旧版列，不取新版 2507 列。shot数、prompt、采样和输出长度未在表内披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方对照表明确标为原 Qwen3-4B Non-Thinking，但未给模型revision及完整评测参数，不能与其他评测条件不明的记录统一比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "若需求是关闭思考的英语知识问答，可将原版 Qwen3-4B 列为候选：官方 Non-Thinking 列的 MMLU-Pro 为 58.0%。该成绩不能代表开启思考模式或中文写作表现。",
+      "strengths": [
+        "已有该型号英语知识基准的官方记录。"
+      ],
+      "limitations": [
+        "该分数只对应关闭思考模式。",
+        "shot数、提示词和解码设置未披露，本站未复现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro-nonthinking"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可将关闭思考的原版 Qwen3-4B 作为代码生成候选，并通过实际测试核验：官方 Non-Thinking 列的 LiveCodeBench v6 成绩为 26.4%。该结果不能保证复杂项目修改正确，也不代表开启思考结果。",
+      "strengths": [
+        "已有该型号代码任务的一项官方基准记录。"
+      ],
+      "limitations": [
+        "复杂项目修改需在目标仓库执行测试，具体生成条件也未完整披露。",
+        "本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6-nonthinking"
+      ]
+    }
+  ]
 }

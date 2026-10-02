@@ -52,7 +52,7 @@
     "不能把8B型号的榜单成绩转移到此0.6B型号。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-02",
   "deployments": [
     {
       "id": "official-sentence-transformers",
@@ -93,5 +93,147 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "mteb-multilingual-mean-task",
+      "benchmark": "MTEB (Multilingual)",
+      "dataset": "MTEB Multilingual benchmark aggregate",
+      "language": "多语言",
+      "metric": "Mean (Task)",
+      "value": 64.33,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "MTEB leaderboard snapshot 2025-05-24（按模型卡注记）",
+      "settings": "Qwen模型卡逐型号列出0.6B结果；此项为基准任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+      "date": "2025-05-24",
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未披露足以复现及对齐的模型revision、任务提示、编码和评测拆分条件；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      }
+    },
+    {
+      "id": "mteb-multilingual-retrieval",
+      "benchmark": "MTEB (Multilingual)",
+      "dataset": "MTEB Multilingual benchmark retrieval aggregate",
+      "language": "多语言",
+      "metric": "Retrieval",
+      "value": 64.64,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "MTEB leaderboard snapshot 2025-05-24（按模型卡注记）",
+      "settings": "Qwen模型卡逐型号列出0.6B结果；此项为检索类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+      "date": "2025-05-24",
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未披露足以复现及对齐的模型revision、查询指令、索引/检索设定和具体评测拆分；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      }
+    },
+    {
+      "id": "mteb-multilingual-sts",
+      "benchmark": "MTEB (Multilingual)",
+      "dataset": "MTEB Multilingual benchmark semantic textual similarity aggregate",
+      "language": "多语言",
+      "metric": "STS",
+      "value": 76.17,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "MTEB leaderboard snapshot 2025-05-24（按模型卡注记）",
+      "settings": "Qwen模型卡逐型号列出0.6B结果；此项为语义文本相似度类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+      "date": "2025-05-24",
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未披露足以复现及对齐的模型revision、相似度计算设定和具体评测拆分；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "可作为多语言语义检索与相似度任务的候选；发布方报告的MTEB任务均值、Retrieval和STS分数提供基准参考，目标语料仍需单独评测。",
+      "strengths": [
+        "同一基准汇总表按型号明确列出Qwen3-Embedding-0.6B，未借用4B或8B成绩。",
+        "MTEB Multilingual、Retrieval和STS三个口径均有报告数值。"
+      ],
+      "limitations": [
+        "这些是Qwen发布方引用MTEB leaderboard的结果，不是本站复测；模型卡注明leaderboard数据日期为2025-05-24。",
+        "MTEB结果数据集为CC0且存在该型号记录，但添加记录的PR提交者afalf与模型发布方的关系未核实，因此不把该记录表述为独立复测或交叉印证。",
+        "该表未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。"
+      ],
+      "evidenceIds": [
+        "mteb-multilingual-mean-task",
+        "mteb-multilingual-retrieval",
+        "mteb-multilingual-sts"
+      ]
+    }
+  ]
 }

@@ -55,7 +55,7 @@
     "本条采用OpenAI原始权重的MIT许可；Hugging Face转换仓库元数据另标Apache-2.0，应分别核对所用工件。"
   ],
   "officialUrl": "https://github.com/openai/whisper",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-02",
   "deployments": [
     {
       "id": "official-openai-whisper",
@@ -100,5 +100,147 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "commonvoice9-indonesian-wer",
+      "benchmark": "Whisper zero-shot evaluation",
+      "dataset": "Common Voice 9",
+      "language": "印尼语",
+      "metric": "WER",
+      "value": 18.4,
+      "unit": "%",
+      "direction": "lower",
+      "version": "附录D.2.2 Table 11；OpenAI原始论文附录；多语言 Whisper small（244M）对应表格行，非small.en或蒸馏版",
+      "settings": "论文实验描述为zero-shot，不使用对应数据集训练集微调。引用原论文中的多语言Whisper small结果；不代表Hugging Face转换权重的独立评测或用户本地runtime。该表未给出足以复现的完整解码配置。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "OpenAI（原始论文作者）",
+      "externalModelId": "Whisper small (multilingual; original paper)",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "原文未给出完整解码设置、evaluation split标识及运行时版本，不能与其他配置直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录少量评测事实并保留论文署名与来源链接；此引用不更改原报告或数据的许可。"
+      }
+    },
+    {
+      "id": "commonvoice9-chinese-cer",
+      "benchmark": "Whisper zero-shot evaluation",
+      "dataset": "Common Voice 9",
+      "language": "中文",
+      "metric": "CER",
+      "value": 29.4,
+      "unit": "%",
+      "direction": "lower",
+      "version": "附录D.2.2 Table 11；OpenAI原始论文附录；多语言 Whisper small（244M）对应表格行，非small.en或蒸馏版",
+      "settings": "论文实验描述为zero-shot，不使用对应数据集训练集微调。引用原论文中的多语言Whisper small结果；不代表Hugging Face转换权重的独立评测或用户本地runtime。该表未给出足以复现的完整解码配置。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "OpenAI（原始论文作者）",
+      "externalModelId": "Whisper small (multilingual; original paper)",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "表格标题统称WER；论文附录C说明中文在标准化后按字符间插入空格，因此此语言实际测量CER。原文未给出完整解码设置、evaluation split标识及运行时版本。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录少量评测事实并保留论文署名与来源链接；此引用不更改原报告或数据的许可。"
+      }
+    },
+    {
+      "id": "fleurs-indonesian-wer",
+      "benchmark": "Whisper zero-shot evaluation",
+      "dataset": "FLEURS",
+      "language": "印尼语",
+      "metric": "WER",
+      "value": 16.3,
+      "unit": "%",
+      "direction": "lower",
+      "version": "附录D.2.4 Table 13；OpenAI原始论文附录；多语言 Whisper small（244M）对应表格行，非small.en或蒸馏版",
+      "settings": "论文实验描述为zero-shot，不使用对应数据集训练集微调。引用原论文中的多语言Whisper small结果；不代表Hugging Face转换权重的独立评测或用户本地runtime。该表未给出足以复现的完整解码配置。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "OpenAI（原始论文作者）",
+      "externalModelId": "Whisper small (multilingual; original paper)",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "原文未给出完整解码设置、evaluation split标识及运行时版本，不能与其他配置直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录少量评测事实并保留论文署名与来源链接；此引用不更改原报告或数据的许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为多语言语音转写候选：原论文对多语言 Whisper small 报告了 Common Voice 9 印尼语与中文、FLEURS 印尼语结果，适合先关注这些语言和相近语音场景；中文数值按论文说明实为CER。零样本基准成绩不能保证不同音频分布或本地runtime表现。",
+      "strengths": [
+        "原论文直接报告多语言 Whisper small（244M）行，型号不依赖Hugging Face仓库命名推断，也未借用small.en或蒸馏版成绩。",
+        "公开表覆盖印尼语及中文转写；论文称其评测采用zero-shot、不用目标数据集训练集微调。"
+      ],
+      "limitations": [
+        "证据均来自OpenAI原论文，尚无相同型号和配置的第二来源交叉核实；完整解码配置、评测拆分标识和runtime信息未披露。",
+        "Common Voice 9中文行的表头虽写WER，论文附录C说明无空格语言经过逐字符分隔，实际等效CER；不要与普通WER横向混比。",
+        "论文指标不等于Hugging Face转换权重或用户本地runtime的实测结果。"
+      ],
+      "evidenceIds": [
+        "commonvoice9-indonesian-wer",
+        "commonvoice9-chinese-cer",
+        "fleurs-indonesian-wer"
+      ]
+    }
+  ]
 }
