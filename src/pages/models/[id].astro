@@ -15,7 +15,7 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
   <article class="detail">
     <a class="back-link" href="/models/">返回模型目录</a>
     <header class="intro compact">
-      <p class="eyebrow">{model.tasks.map((task) => taskLabels[task]).join(' / ')}</p>
+      <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
       <h1>{model.name}</h1>
       <p class="lead">{model.summary}</p>
       <p class="muted">最后核实：<time datetime={model.checkedAt}>{model.checkedAt}</time></p>
