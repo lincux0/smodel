@@ -92,5 +92,147 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "qwen3-reranker-paper-mteb-r",
+      "benchmark": "MTEB-R",
+      "dataset": "MTEB (English, v2) retrieval subset",
+      "language": "英语",
+      "metric": "检索任务集汇总分（论文表格口径）",
+      "value": 65.8,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "Qwen3 Embedding技术报告 Table 4（arXiv v1）",
+      "settings": "Qwen团队自评；将Qwen3-Embedding-0.6B召回的top-100候选交给此reranker排序。论文说明分数来自作者运行；表中未给出所有基准子任务聚合细节及完整推理配置。",
+      "sourceUrl": "https://arxiv.org/abs/2506.05176",
+      "date": "2025-06-05",
+      "kind": "official-report",
+      "publisher": "Qwen团队（模型发布方）",
+      "externalModelId": "Qwen3-Reranker-0.6B",
+      "task": "reranking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.05176",
+        "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "qwen3-reranker-paper-cmteb-r",
+      "benchmark": "CMTEB-R",
+      "dataset": "CMTEB (Chinese, v1) retrieval subset",
+      "language": "中文",
+      "metric": "检索任务集汇总分（论文表格口径）",
+      "value": 71.31,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "Qwen3 Embedding技术报告 Table 4（arXiv v1）",
+      "settings": "Qwen团队自评；将Qwen3-Embedding-0.6B召回的top-100候选交给此reranker排序。论文说明分数来自作者运行；表中未给出所有基准子任务聚合细节及完整推理配置。",
+      "sourceUrl": "https://arxiv.org/abs/2506.05176",
+      "date": "2025-06-05",
+      "kind": "official-report",
+      "publisher": "Qwen团队（模型发布方）",
+      "externalModelId": "Qwen3-Reranker-0.6B",
+      "task": "reranking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.05176",
+        "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "qwen3-reranker-paper-mmteb-r",
+      "benchmark": "MMTEB-R",
+      "dataset": "MTEB Multilingual retrieval subset",
+      "language": "多语言",
+      "metric": "检索任务集汇总分（论文表格口径）",
+      "value": 66.36,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "Qwen3 Embedding技术报告 Table 4（arXiv v1）",
+      "settings": "Qwen团队自评；将Qwen3-Embedding-0.6B召回的top-100候选交给此reranker排序。论文说明分数来自作者运行；表中未给出所有基准子任务聚合细节及完整推理配置。",
+      "sourceUrl": "https://arxiv.org/abs/2506.05176",
+      "date": "2025-06-05",
+      "kind": "official-report",
+      "publisher": "Qwen团队（模型发布方）",
+      "externalModelId": "Qwen3-Reranker-0.6B",
+      "task": "reranking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.05176",
+        "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    }
+  ],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "official-only",
+      "summary": "发布方报告的MTEB-R、CMTEB-R和MMTEB-R任务集汇总分分别为65.80、71.31和66.36，显示模型在作者所设定的top-100候选重排评测中有公开成绩；这不是独立复测，也不能代表召回能力或任意检索语料效果。",
+      "strengths": [
+        "原报告明确对应Qwen3-Reranker-0.6B，并披露先由Qwen3-Embedding-0.6B召回top-100候选的评测流程。",
+        "报告覆盖英文、中文和多语言检索子集。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号重排结果。",
+        "汇总任务分不等同于单一可横比指标；底层具体子任务及完整推理配置未在汇总表中充分展开。",
+        "重排只能调整已召回候选次序，不能说明召回覆盖率或最终问答质量。"
+      ],
+      "evidenceIds": [
+        "qwen3-reranker-paper-mteb-r",
+        "qwen3-reranker-paper-cmteb-r",
+        "qwen3-reranker-paper-mmteb-r"
+      ]
+    }
+  ]
 }

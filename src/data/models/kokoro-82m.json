@@ -110,5 +110,19 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Kokoro-82M语音质量数据，暂不据零散榜单或AA成绩判断音质高低。",
+      "strengths": [],
+      "limitations": [
+        "模型卡列出的语言和声音属于功能说明，不是质量评测证据。",
+        "试听自然度会随语种、音色、文本长度、G2P、运行时与量化变化；需要同条件听测或可复现MOS评测。",
+        "AA数据仅链接原站，本记录没有导入其数值。"
+      ],
+      "evidenceIds": []
+    }
+  ]
 }

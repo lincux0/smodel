@@ -94,5 +94,147 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "whisper-paper-base-cv9-indonesian-wer",
+      "benchmark": "Whisper原论文附录D.2",
+      "dataset": "Common Voice 9",
+      "language": "印度尼西亚语",
+      "metric": "WER",
+      "value": 36.1,
+      "unit": "%",
+      "direction": "lower",
+      "version": "OpenAI Whisper论文 Table 11（Common Voice 9）",
+      "settings": "论文报告的多语言Whisper base 零样本结果；附录未完整列明此行的模型revision、解码参数和评测split标识。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "kind": "official-report",
+      "publisher": "OpenAI（论文作者及模型发布方）",
+      "externalModelId": "Whisper base（多语言版）",
+      "task": "speech-recognition",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "whisper-paper-base-cv9-chinese-cer",
+      "benchmark": "Whisper原论文附录D.2.2",
+      "dataset": "Common Voice 9",
+      "language": "中文",
+      "metric": "CER（论文表头写WER；按附录C口径等效字符错误率）",
+      "value": 44.9,
+      "unit": "%",
+      "direction": "lower",
+      "version": "OpenAI Whisper论文 Table 11（Common Voice 9）",
+      "settings": "论文表格以WER标题列值；附录C说明中文等无空格语言会在字符间加空格，因此该值实为等效CER。多语言Whisper base 零样本；revision、解码参数及split标识未完整列明。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "kind": "official-report",
+      "publisher": "OpenAI（论文作者及模型发布方）",
+      "externalModelId": "Whisper base（多语言版）",
+      "task": "speech-recognition",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "whisper-paper-base-fleurs-indonesian-wer",
+      "benchmark": "Whisper原论文附录D.2.4",
+      "dataset": "FLEURS",
+      "language": "印度尼西亚语",
+      "metric": "WER",
+      "value": 33.1,
+      "unit": "%",
+      "direction": "lower",
+      "version": "OpenAI Whisper论文 Table 13（FLEURS）",
+      "settings": "论文报告的多语言Whisper base 零样本结果；附录未完整列明此行的模型revision、解码参数和评测split标识。",
+      "sourceUrl": "https://cdn.openai.com/papers/whisper.pdf",
+      "date": null,
+      "kind": "official-report",
+      "publisher": "OpenAI（论文作者及模型发布方）",
+      "externalModelId": "Whisper base（多语言版）",
+      "task": "speech-recognition",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://cdn.openai.com/papers/whisper.pdf",
+        "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为多语言语音转写候选：OpenAI原论文报告了该档在Common Voice 9印尼语、中文及FLEURS印尼语上的零样本成绩。中文数值按论文预处理说明应读作CER；公开数据只支持这些语种和测试集，不代表目标音频或部署表现。",
+      "strengths": [
+        "原论文直接列出多语言Whisper base型号结果，没有借用英语专用版或蒸馏版。",
+        "同一论文同时给出Common Voice 9与FLEURS印尼语成绩，以及中文字符错误率参考。"
+      ],
+      "limitations": [
+        "目前只有模型发布方原论文报告，未找到相同型号及条件的独立复测。",
+        "论文表格未完整说明revision、解码配置和精确split；不同音频分布需重新测试。",
+        "Common Voice 9中文表头标作WER，但附录C说明中文按字符分隔，故值等效CER，不能与普通WER直接比较。"
+      ],
+      "evidenceIds": [
+        "whisper-paper-base-cv9-indonesian-wer",
+        "whisper-paper-base-cv9-chinese-cer",
+        "whisper-paper-base-fleurs-indonesian-wer"
+      ]
+    }
+  ]
 }

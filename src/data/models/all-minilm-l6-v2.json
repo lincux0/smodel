@@ -91,5 +91,147 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "rteb-chatdoctor-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "医疗问答检索（测试集）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.5295,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB Results PR #264（2025-08）",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
+      "date": null,
+      "kind": "third-party",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
+      "task": "embedding",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "rteb-ds1000-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "DS-1000 数据科学代码检索（测试集）",
+      "language": "英语、Python代码",
+      "metric": "nDCG@10",
+      "value": 0.3451,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB Results PR #264（2025-08）",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
+      "date": null,
+      "kind": "third-party",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
+      "task": "embedding",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    },
+    {
+      "id": "rteb-mbpp-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "MBPP Python代码检索（测试集）",
+      "language": "英语、Python代码",
+      "metric": "nDCG@10",
+      "value": 0.746,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB Results PR #264（2025-08）",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
+      "date": null,
+      "kind": "third-party",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
+      "task": "embedding",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "checkedAt": "2026-10-02",
+      "comparable": false,
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "insufficient",
+      "summary": "社区提交的MTEB/RTEB结果提供了英语医疗问答、数据科学和Python代码检索测试集上的参考分数（nDCG@10分别为0.5295、0.3451、0.7460），与模型卡的英语句向量定位相符；但提交者与模型发布方的关系未核实，不能据此视为独立复测或充分交叉验证。",
+      "strengths": [
+        "MTEB结果库以CC0发布成绩数据，并提供准确型号对应的社区任务记录。",
+        "三项结果对应明确的测试集，分别覆盖医疗问答、数据科学和基础Python代码检索。"
+      ],
+      "limitations": [
+        "目前只有单个社区提交；其与模型发布方的关系未核实，因此证据状态不足以确认独立性。",
+        "结果未列模型revision和完整提示配置；不同任务分数不可相互排名。",
+        "模型卡定位英语句子/短段落，结果不能证明中文表现或任意领域检索质量。"
+      ],
+      "evidenceIds": [
+        "rteb-chatdoctor-ndcg10",
+        "rteb-ds1000-ndcg10",
+        "rteb-mbpp-ndcg10"
+      ]
+    }
+  ]
 }
