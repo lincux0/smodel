@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { taskLabels } from '../lib/catalog.ts';
+import CapabilityEvidence from '../components/CapabilityEvidence.astro';
 const models = await getCollection('models');
 const size = (value: number | null) => value === null ? '未提供' : `${value}B`;
 const context = (model: typeof models[number]['data']) => model.context.status === 'not-applicable' ? '不适用' : model.context.nativeTokens === null ? '未提供' : `${model.context.nativeTokens.toLocaleString('en-US')} tokens`;
-const evidenceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
 ---
 <Base title="同用途模型对比" description="对比同用途模型的能力依据、许可、运行条件与部署来源。" noindex>
   <section class="catalog-head"><div><p class="eyebrow">MODEL COMPARISON / 02</p><h1>同用途模型对比</h1><p class="lead">逐项核对特点与运行条件。参数口径和评测条件分别保留，不生成统一能力排名。</p></div></section>
@@ -25,7 +25,7 @@ const evidenceLabels = { 'official-report': '官方报告', 'third-party': '第�
       <section><h3>特点与限制</h3><h4>主要特点</h4><ul>{model.features.map((item) => <li>{item}</li>)}</ul><h4>使用边界</h4><ul>{model.limitations.map((item) => <li>{item}</li>)}</ul></section>
       <section><h3>规模与上下文</h3><dl><dt>公开参数规模</dt><dd>{size(model.parameters.totalB)}</dd><dt>激活 / 有效参数</dt><dd>{size(model.parameters.activeB)} / {size(model.parameters.effectiveB)}</dd><dt>参数口径</dt><dd>{model.parameters.notes} <a href={model.parameters.sourceUrl}>来源</a></dd><dt>原生上下文</dt><dd>{context(model)}</dd><dt>扩展上下文</dt><dd>{model.context.status === 'not-applicable' ? '不适用' : model.context.extendedTokens === null ? '未提供' : `${model.context.extendedTokens.toLocaleString('en-US')} tokens；${model.context.extension}`}</dd><dt>输入 / 输出</dt><dd>{model.modalities.input.join('、')} / {model.modalities.output.join('、')}</dd><dt>语言声明</dt><dd>{model.languages.length ? model.languages.join('、') : '未提供'}</dd></dl></section>
       <section><h3>许可与开放程度</h3><dl><dt>权重许可</dt><dd><a href={model.licenses.weights.url}>{model.licenses.weights.name}</a></dd><dt>代码许可</dt><dd>{model.licenses.code ? <a href={model.licenses.code.url}>{model.licenses.code.name}</a> : '未核实'}</dd><dt>训练资料</dt><dd>{model.licenses.trainingDisclosure}</dd></dl></section>
-      <section><h3>能力依据</h3>{model.evaluations.length === 0 ? <p>暂无可比评测，不能以缺失值推断能力。</p> : model.evaluations.map((evaluation) => <div class="evaluation"><h4>{evaluation.benchmark} · {evaluation.value}{evaluation.unit}</h4><p>{evidenceLabels[evaluation.kind]} · {evaluation.language} · {evaluation.metric} · {evaluation.direction === 'higher' ? '越高越好' : '越低越好'}</p><p>数据集：{evaluation.dataset}；版本：{evaluation.version}；评测日期：{evaluation.date ?? '未提供'}。</p><p>{evaluation.settings}</p><p>{evaluation.comparable ? '仍需逐项核对其他记录的任务与测试条件。' : '不参与跨模型排名。'} <a href={evaluation.sourceUrl}>评测来源</a></p></div>)}</section>
+      <section><h3>能力依据</h3><CapabilityEvidence model={model} compact /></section>
       <section><h3>运行条件与部署</h3>{model.deployments.map((deployment) => <div class="comparison-deployment"><h4>{deployment.runtime}</h4><p>{deployment.systems.length ? deployment.systems.join('、') : '系统支持未提供'} · {deployment.format} · {deployment.quantization ?? '未指定量化'}</p><p>{deployment.hardware.status === 'not-verified' ? '硬件未核实' : deployment.hardware.status === 'measured' ? '硬件实测' : '官方估算'}；内存 {deployment.hardware.ramGb ?? '未核实'} GB / 显存 {deployment.hardware.vramGb ?? '未核实'} GB。</p><p>{deployment.hardware.notes}</p><p>{deployment.verification.status === 'site-verified' ? `本站已验证 ${deployment.verification.verifiedAt}` : '官方支持；本站未进行推理验证。'}</p><div class="link-row"><a href={deployment.downloadUrl}>获取权重</a><a href={deployment.sourceUrl}>官方部署</a><a href={`/guides/${deployment.guideId}/`}>部署前检查</a></div></div>)}</section>
       <footer><a class="button-secondary" href={`/models/${model.id}/`}>查看完整说明与步骤</a><p class="muted">核实于 {model.checkedAt} · <a href={model.officialUrl}>官方模型资料</a></p></footer>
     </article>
@@ -57,7 +57,11 @@ const evidenceLabels = { 'official-report': '官方报告', 'third-party': '第�
     if (!result.ok) { error.textContent = result.message; return; }
     task = result.task;
     taskLabel.textContent = `共同用途：${taskNames.get(result.task)}。仅对照资料，不将不同条件评测混排。`;
-    for (const id of ids) grid.append(templates.find((template) => template.dataset.comparisonModel === id)!.content.cloneNode(true));
+    for (const id of ids) {
+      const card = templates.find((template) => template.dataset.comparisonModel === id)!.content.cloneNode(true) as DocumentFragment;
+      card.querySelectorAll<HTMLElement>('[data-capability-task]').forEach((item) => { item.hidden = item.dataset.capabilityTask !== result.task; });
+      grid.append(card);
+    }
   }
   grid.addEventListener('click', (event) => {
     if (!(event.target instanceof Element)) return;

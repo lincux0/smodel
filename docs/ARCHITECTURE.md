@@ -21,7 +21,7 @@ src/data/guides/*.md
 
 模型集合使用函数 loader，开发或构建加载时都会调用共享校验，直接执行 `astro build` 也不能绕过模型校验。模型 ID 必须与文件名一致，部署方案的 `guideId` 必须存在，同一模型的部署 ID 不可重复。JSON schema 使用严格字段校验，帮助发现拼写错误。
 
-`npm run validate:content` 检查 JSON 结构、ID 和指南引用；`npm run check` 和构建进一步检查 Markdown 元数据、Astro 页面和 TypeScript。
+`npm run validate:content` 检查 JSON 结构、ID 和指南引用，并校验评测 ID、任务归属、摘要证据引用、证据状态和比较组条件一致性；`npm run check` 和构建进一步检查 Markdown 元数据、Astro 页面和 TypeScript。结构校验不验证数据真假或第三方授权，仍需人工核实。
 
 内容使用转义后的文本和 Markdown 渲染。来源字段只接受 HTTPS 链接；模型简介与特征不作为原始 HTML 插入页面。
 
@@ -35,6 +35,7 @@ src/data/guides/*.md
 | `src/data/guides/` | 公共部署指南 Markdown |
 | `src/layouts/Base.astro` | 文档结构、导航、基础元信息和页脚 |
 | `src/components/ModelList.astro` | 首页与目录复用的模型列表 |
+| `src/components/CapabilityEvidence.astro` | 详情与对比共用的用途结论、成绩、来源与原生展开条件 |
 | `src/lib/catalog-query.ts` | 目录 URL 状态白名单、默认值与参数分段 |
 | `src/lib/compare.ts` | 对比型号数量、身份和共同用途校验 |
 | `src/pages/` | 静态路由与内容展示 |
@@ -107,9 +108,9 @@ npx vercel --prod
 
 输出位于 `graphify-out/graph.json`。本地缓存和运行侧文件不提交，源码变更后重新更新图。
 
-当前 Graphify 对 11 个 Astro 文件报告语法解析限制，21 个模型 JSON 未生成节点；只读完整性诊断还报告 20 条悬空端点边。图包含 187 个节点和 239 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
+当前 Graphify 对 12 个 Astro 文件报告语法解析限制，21 个模型 JSON 未生成节点；只读完整性诊断还报告 20 条悬空端点边。图包含 207 个节点和 268 条原始边，不能保证所有关系可遍历。这些页面与数据的关系需要以源码、内容校验和构建验证为依据，结构图属于部分源码索引，不代表完整项目图。
 
-2026-10-02用途标签与首页配色调整后已重新运行上述AST更新命令；工具未检测到代码图结构变化，输出保持187节点、239边、20条悬空端点边。样式与页面标记的实际变化以源码及浏览器验证为准。
+2026-10-02用途标签与首页配色调整时图保持187节点、239边；随后能力依据组件与校验更新后重新执行AST更新，图为207节点、268边、20条悬空端点边。样式、页面标记和评测事实以源码及实际验证为准。
 
 ## 首个公开版本
 

@@ -3,12 +3,12 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { taskLabels } from '../../lib/catalog.ts';
+import CapabilityEvidence from '../../components/CapabilityEvidence.astro';
 export async function getStaticPaths() {
   return (await getCollection('models')).map((model) => ({ params: { id: model.id }, props: { model } }));
 }
 interface Props { model: CollectionEntry<'models'>; }
 const { data: model } = Astro.props.model;
-const kindLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
 const modalityLabels = { text: '文本', image: '图像', audio: '音频', vector: '向量', score: '相关性分数' };
 ---
 <Base title={model.name} description={model.summary}>
@@ -43,17 +43,7 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', vecto
         <dt>训练资料</dt><dd>{model.licenses.trainingDisclosure}</dd>
       </dl>
     </section>
-    <section class="detail-section"><h2>能力依据</h2>
-      {model.evaluations.length === 0 ? <p class="empty-state">暂无可比评测。请结合特点、限制与官方资料判断适用性。</p> : model.evaluations.map((evaluation) => (
-        <div class="evidence">
-          <h3>{evaluation.benchmark}：{evaluation.value}{evaluation.unit}</h3>
-          <p>{kindLabels[evaluation.kind]} · {evaluation.language} · {evaluation.metric} · {evaluation.direction === 'higher' ? '数值越高越好' : '数值越低越好'}</p>
-          <p>数据集：{evaluation.dataset}；版本：{evaluation.version}；评测日期：{evaluation.date ?? '未提供'}。</p>
-          <p>{evaluation.settings}</p>
-          <p>{evaluation.comparable ? '可比性仍需核对其他模型的测试条件。' : '当前记录不参与跨模型排名。'} <a href={evaluation.sourceUrl}>查看评测来源</a></p>
-        </div>
-      ))}
-    </section>
+    <section class="detail-section"><h2>能力依据</h2><CapabilityEvidence model={model} /></section>
     <section class="detail-section"><h2>运行条件与获取</h2>
       {model.deployments.map((deployment) => (
         <div class="deployment">

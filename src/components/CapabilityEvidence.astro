@@ -1,0 +1,52 @@
+---
+import type { Model } from '../lib/catalog.ts';
+import { taskLabels } from '../lib/catalog.ts';
+interface Props { model: Model; compact?: boolean; }
+const { model, compact = false } = Astro.props;
+const statusLabels = { 'official-only': '仅官方依据', corroborated: '官方与第三方交叉核实', insufficient: '证据不足' };
+const sourceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
+const rightsLabels = { citation: '引用来源', 'open-data': '开放数据', 'site-owned': '本站整理' };
+const variantLabels = { base: '基础版', instruct: '指令版', specialized: '专用版' };
+const show = (value: string | number | null) => value === null || value === '' ? '未提供' : String(value);
+const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit === 'ratio' ? `${value}（比率）` : unit === '无单位' ? String(value) : `${value} ${unit}`;
+---
+<div class="capability-evidence">
+  <p class="capability-variant">模型变体：{variantLabels[model.variant]}；家族与版本：{model.family} / {model.version}</p>
+  {model.tasks.map((task) => {
+    const assessment = model.assessments.find((item) => item.task === task);
+    const evaluations = model.evaluations.filter((item) => item.task === task);
+    const titleId = `${model.id}-capability-${task}`;
+    return <section class="capability-task" data-capability-task={task} aria-labelledby={titleId}>
+      {compact ? <h4 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h4> : <h3 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h3>}
+      <p>{assessment?.summary ?? '该用途尚无足够评测依据。'}</p>
+      {assessment?.strengths.length ? <div><strong>已有依据支持</strong><ul>{assessment.strengths.map((item) => <li>{item}</li>)}</ul></div> : null}
+      {assessment?.limitations.length ? <div><strong>证据限制</strong><ul>{assessment.limitations.map((item) => <li>{item}</li>)}</ul></div> : null}
+      {evaluations.length ? evaluations.map((evaluation) => {
+        const detailsId = `${model.id}-evidence-${evaluation.id}`;
+        const cited = assessment?.evidenceIds.includes(evaluation.id) ?? false;
+        return <article class="capability-result">
+          <p class="capability-result-title"><strong>{evaluation.benchmark} · {score(evaluation.value, evaluation.unit)}</strong><span class="capability-source" data-source={evaluation.kind}>{sourceLabels[evaluation.kind]} · {evaluation.publisher}</span></p>
+          <p class="capability-result-meta">{evaluation.metric} · {evaluation.direction === 'higher' ? '越高越好' : '越低越好'} · {evaluation.language}{cited ? ' · 摘要引用' : ''}</p>
+          <details id={detailsId} class="capability-details">
+            <summary>展开评测条件与来源</summary>
+            <div class="capability-detail-body">
+              <dl class="capability-facts">
+                <dt>模型标识 / 修订</dt><dd>{show(evaluation.externalModelId)} / {show(evaluation.modelConfig.revision)}</dd>
+                <dt>思考模式</dt><dd>{evaluation.modelConfig.thinking === 'unknown' ? '未知' : evaluation.modelConfig.thinking === 'enabled' ? '启用' : evaluation.modelConfig.thinking === 'disabled' ? '关闭' : '不适用'}</dd>
+                <dt>量化 / 运行时</dt><dd>{show(evaluation.modelConfig.quantization)} / {show(evaluation.modelConfig.runtime)}</dd>
+                <dt>数据集 / 划分</dt><dd>{evaluation.dataset} / {show(evaluation.conditions.split)}</dd>
+                <dt>基准 / 报告版本</dt><dd>{evaluation.version}</dd>
+                <dt>Few-shot / 输出上限</dt><dd>{show(evaluation.conditions.fewShot)} / {show(evaluation.conditions.outputTokens)} tokens</dd>
+                <dt>提示模板 / 设置</dt><dd>{show(evaluation.conditions.promptTemplate)}；{evaluation.settings}</dd>
+                <dt>评测日期 / 核实日期</dt><dd>{evaluation.date ?? '未提供'} / {evaluation.checkedAt}</dd>
+                <dt>来源</dt><dd><a href={evaluation.sourceUrl}>{evaluation.sourceUrl}</a></dd>
+                <dt>来源使用说明</dt><dd>{rightsLabels[evaluation.rights.status]}；许可：{show(evaluation.rights.license)}；{evaluation.rights.notes} <a href={evaluation.rights.url}>查看说明</a></dd>
+                <dt>比较状态</dt><dd>{evaluation.comparable ? `比较组 ${evaluation.comparisonGroup}` : `不可比：${evaluation.nonComparableReason}`}</dd>
+              </dl>
+            </div>
+          </details>
+        </article>;
+      }) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
+    </section>;
+  })}
+</div>

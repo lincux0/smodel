@@ -37,6 +37,7 @@ git clone https://github.com/lincux0/smodel.git
 
 - [分阶段开发方案](docs/DEVELOPMENT_PLAN.md)
 - [内容维护指南](docs/CONTENT_GUIDE.md)
+- [能力依据与评测整理](docs/CAPABILITY_EVIDENCE.md)
 - [模型来源与字段口径](docs/SOURCES.md)
 - [项目架构与部署](docs/ARCHITECTURE.md)
 - [视觉与动效规范](docs/DESIGN_SYSTEM.md)
