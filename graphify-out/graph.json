@@ -1111,7 +1111,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L119",
+      "source_location": "L123",
       "_origin": "ast"
     },
     {
@@ -1355,11 +1355,19 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_design_system_可展开能力卡片",
+      "label": "可展开能力卡片",
+      "file_type": "document",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L113",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_design_system_指针局部高光",
       "label": "指针局部高光",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L113",
+      "source_location": "L123",
       "_origin": "ast"
     },
     {
@@ -3657,7 +3665,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L119",
+      "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3667,7 +3675,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L121",
+      "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4023,11 +4031,21 @@
     },
     {
       "source": "docs_design_system_视觉与动效规范",
-      "target": "docs_design_system_指针局部高光",
+      "target": "docs_design_system_可展开能力卡片",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
       "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_design_system_视觉与动效规范",
+      "target": "docs_design_system_指针局部高光",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DESIGN_SYSTEM.md",
+      "source_location": "L123",
       "weight": 1.0,
       "_origin": "ast"
     },
