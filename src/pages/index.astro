@@ -17,7 +17,6 @@ const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
   <section class="home-hero" aria-labelledby="home-title">
     <div class="hero-copy">
       <h1 id="home-title">小模型，<br /><span>各有所长。</span></h1>
-      <p class="lead">从任务出发，查看模型的能力依据、使用边界与官方部署方式。每条信息都能追溯来源，未知之处如实标注。</p>
       <div class="hero-actions">
         <a class="button" href="/models/">浏览全部 {models.length} 个模型 <span aria-hidden="true">↗</span></a>
         <a class="text-link" href="#task-heading">按用途开始 ↓</a>
@@ -34,7 +33,7 @@ const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
     <div class="section-heading"><div><p class="kicker">01 / 按任务浏览</p><h2 id="task-heading">你想让模型做什么？</h2></div><span class="muted">选择一种用途开始</span></div>
     <div class="task-grid">
       {tasks.filter(({ id }) => activeTasks.has(id as keyof typeof taskLabels)).map(({ id, label, count, number }) => (
-        <a class="task-tile" href={`/models/?task=${id}`}>
+        <a class="task-tile" data-task={id} href={`/models/?task=${id}`}>
           <span class="task-number">TASK {number}</span>
           <strong>{label}</strong>
           <span class="task-count">{String(count).padStart(2, '0')} 个型号 <span aria-hidden="true">↗</span></span>
