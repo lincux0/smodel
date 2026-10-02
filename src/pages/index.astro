@@ -16,7 +16,6 @@ const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
 <Base title="小模型图鉴 | 按用途选择轻量模型">
   <section class="home-hero" aria-labelledby="home-title">
     <div class="hero-copy">
-      <p class="eyebrow">SMALL MODEL INDEX · 2026</p>
       <h1 id="home-title">小模型，<br /><span>各有所长。</span></h1>
       <p class="lead">从任务出发，查看模型的能力依据、使用边界与官方部署方式。每条信息都能追溯来源，未知之处如实标注。</p>
       <div class="hero-actions">
@@ -49,5 +48,4 @@ const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
     <ModelList models={models.slice(0, 4)} />
   </section>
 
-  <aside class="home-note"><span>本站记录官方资料与已知限制，不提供跨用途总排名。</span><a href="/methodology/">如何理解评测与未知值 →</a></aside>
 </Base>
