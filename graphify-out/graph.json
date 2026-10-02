@@ -300,6 +300,47 @@
       "_origin": "ast"
     },
     {
+      "id": "src_components_capabilityevidence_statuslabels",
+      "label": "statusLabels",
+      "file_type": "code",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L6",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_capabilityevidence_sourcelabels",
+      "label": "sourceLabels",
+      "file_type": "code",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L7",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_capabilityevidence_rightslabels",
+      "label": "rightsLabels",
+      "file_type": "code",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L8",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_capabilityevidence_variantlabels",
+      "label": "variantLabels",
+      "file_type": "code",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L9",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_components_capabilityevidence_score",
+      "label": "score()",
+      "file_type": "code",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L11",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
       "id": "src_components_capabilityevidence_show",
       "label": "show()",
       "file_type": "code",
@@ -1070,7 +1111,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L117",
+      "source_location": "L119",
       "_origin": "ast"
     },
     {
@@ -2061,6 +2102,56 @@
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
       "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_capabilityevidence",
+      "target": "src_components_capabilityevidence_statuslabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_capabilityevidence",
+      "target": "src_components_capabilityevidence_sourcelabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_capabilityevidence",
+      "target": "src_components_capabilityevidence_rightslabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_capabilityevidence",
+      "target": "src_components_capabilityevidence_variantlabels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_components_capabilityevidence",
+      "target": "src_components_capabilityevidence_score",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CapabilityEvidence.astro",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3566,7 +3657,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L117",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3576,7 +3667,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L119",
+      "source_location": "L121",
       "weight": 1.0,
       "_origin": "ast"
     },

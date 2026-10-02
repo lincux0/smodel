@@ -10,7 +10,7 @@ const variantLabels = { base: '基础版', instruct: '指令版', specialized: '
 const show = (value: string | number | null) => value === null || value === '' ? '未提供' : String(value);
 const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit === 'ratio' ? `${value}（比率）` : unit === '无单位' ? String(value) : `${value} ${unit}`;
 ---
-<div class="capability-evidence">
+<div class="capability-evidence" data-compact={compact ? 'true' : undefined}>
   <p class="capability-variant">模型变体：{variantLabels[model.variant]}；家族与版本：{model.family} / {model.version}</p>
   {model.tasks.map((task) => {
     const assessment = model.assessments.find((item) => item.task === task);
@@ -25,7 +25,7 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
       </div>
       <div class="capability-preview">
         {evaluations.length ? evaluations.slice(0, 3).map((evaluation) => <div class="capability-preview-result">
-          <span>{evaluation.benchmark}</span><strong>{score(evaluation.value, evaluation.unit)}</strong>
+          <span>{evaluation.benchmark}</span><strong>{evaluation.value}<span>{evaluation.unit === '%' ? '%' : evaluation.unit === 'ratio' ? '比率' : evaluation.unit === '无单位' ? '' : evaluation.unit}</span></strong>
           <small>{sourceLabels[evaluation.kind]} · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
         </div>) : <p class="capability-preview-empty">暂无可靠公开成绩</p>}
       </div>
