@@ -1251,6 +1251,14 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_content_guide_计划型号的筛选与来源",
+      "label": "计划型号的筛选与来源",
+      "file_type": "document",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L125",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_design_system",
       "label": "DESIGN_SYSTEM.md",
       "file_type": "document",
@@ -3660,6 +3668,16 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_architecture",
+      "target": "docs_content_guide",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_architecture_项目架构与部署",
       "target": "docs_architecture_首个公开版本",
       "relation": "contains",
@@ -3896,6 +3914,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
       "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide_维护与校验",
+      "target": "docs_content_guide_计划型号的筛选与来源",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L125",
       "weight": 1.0,
       "_origin": "ast"
     },
