@@ -92,5 +92,284 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "mmlu-redux-thinking",
+      "benchmark": "MMLU-Redux",
+      "dataset": "MMLU-Redux",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 55.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "未单独标注基准版本",
+      "settings": "Qwen3技术报告 Table 19，精确型号 Qwen3-0.6B，Thinking 模式。 报告未完整给出该行的模型revision、提示模板、采样与输出预算。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    },
+    {
+      "id": "mmlu-redux-nonthinking",
+      "benchmark": "MMLU-Redux",
+      "dataset": "MMLU-Redux",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 44.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "未单独标注基准版本",
+      "settings": "Qwen3技术报告 Table 20，精确型号 Qwen3-0.6B，Non-thinking 模式。 报告未完整给出该行的模型revision、提示模板、采样与输出预算。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    },
+    {
+      "id": "gpqa-diamond-thinking",
+      "benchmark": "GPQA Diamond",
+      "dataset": "GPQA Diamond",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 27.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "未单独标注基准版本",
+      "settings": "Qwen3技术报告 Table 19，精确型号 Qwen3-0.6B，Thinking 模式。 报告未完整给出该行的模型revision、提示模板、采样与输出预算。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    },
+    {
+      "id": "gpqa-diamond-nonthinking",
+      "benchmark": "GPQA Diamond",
+      "dataset": "GPQA Diamond",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 22.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "未单独标注基准版本",
+      "settings": "Qwen3技术报告 Table 20，精确型号 Qwen3-0.6B，Non-thinking 模式。 报告未完整给出该行的模型revision、提示模板、采样与输出预算。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    },
+    {
+      "id": "livecodebench-v5-thinking",
+      "benchmark": "LiveCodeBench v5",
+      "dataset": "LiveCodeBench v5",
+      "language": "code",
+      "metric": "pass@1 score",
+      "value": 13.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v5（题目期 2024.10–2025.02）",
+      "settings": "Qwen3技术报告 Table 19，精确型号 Qwen3-0.6B，Thinking 模式。技术报告说明LiveCodeBench v5采用 2024.10–2025.02 题目；该记录的提示、采样和输出上限未完整披露。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    },
+    {
+      "id": "livecodebench-v5-nonthinking",
+      "benchmark": "LiveCodeBench v5",
+      "dataset": "LiveCodeBench v5",
+      "language": "code",
+      "metric": "pass@1 score",
+      "value": 3.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v5（题目期 2024.10–2025.02）",
+      "settings": "Qwen3技术报告 Table 20，精确型号 Qwen3-0.6B，Non-thinking 模式。技术报告说明LiveCodeBench v5采用 2024.10–2025.02 题目；该记录的提示、采样和输出上限未完整披露。",
+      "sourceUrl": "https://arxiv.org/html/2505.09388v1",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源没有披露可复现比较所需的模型revision、运行时或完整提示与生成配置；保留原始来源上下文，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2505.09388v1",
+        "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方表格分别报告Thinking与Non-thinking模式的MMLU-Redux（55.6% / 44.6%）和GPQA Diamond（27.9% / 22.9%）；推理模式与知识问答成绩相关，单项考试不能代表中文写作或日常对话。",
+      "strengths": [
+        "同一技术报告分别列出明确尺寸的思考与非思考结果。"
+      ],
+      "limitations": [
+        "两种模式数值不同，使用时应按提示模板与推理预算选择。",
+        "报告没有披露足够完整的每项生成配置，本站未复现。",
+        "英文基准不能直接代表中文长文写作。"
+      ],
+      "evidenceIds": [
+        "mmlu-redux-thinking",
+        "mmlu-redux-nonthinking",
+        "gpqa-diamond-thinking",
+        "gpqa-diamond-nonthinking"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方Qwen3技术报告给出LiveCodeBench v5 Thinking 13.2% 与 Non-thinking 3.6%；结果随推理模式明显变化，不能直接当成项目级代码修改成功率。",
+      "strengths": [
+        "官方报告覆盖竞赛式代码生成，且明确区分思考模式。"
+      ],
+      "limitations": [
+        "LiveCodeBench只覆盖算法题，不等价于仓库级工程任务。",
+        "v4与v5题目窗口和评测实现不同，不能按数值直接比较。",
+        "提示、运行时和输出长度并未全部披露，本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v5-thinking",
+        "livecodebench-v5-nonthinking"
+      ]
+    }
+  ]
 }

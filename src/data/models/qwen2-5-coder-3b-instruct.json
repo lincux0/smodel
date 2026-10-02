@@ -93,5 +93,160 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "humaneval-plus",
+      "benchmark": "HumanEval+",
+      "dataset": "HumanEval+",
+      "language": "code",
+      "metric": "score",
+      "value": 80.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "EvalPlus（Qwen技术报告Table 16）",
+      "settings": "Qwen2.5-Coder技术报告Table 16中精确Instruct型号 Qwen2.5-Coder-3B-Instruct 的HumanEval+成绩为80.5；报告没有披露该型号的提示、采样、输出预算或生成环境，本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2409.12186v3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方报告没有披露可复现比较所需的模型revision及完整采样、提示和输出设置；原样记录成绩，不与配置不明的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.12186v3",
+        "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "task": "coding"
+    },
+    {
+      "id": "livecodebench-2024-07-09",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 10.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "题目期 2024.07–2024.09",
+      "settings": "Qwen2.5-Coder技术报告Table 16列出 Qwen2.5-Coder-3B-Instruct LiveCodeBench Pass@1=10.8%；正文说明采用 2024.07–2024.09 题目。具体提示、采样和输出长度未完整披露，本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2409.12186v3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方报告没有披露可复现比较所需的模型revision及完整采样、提示和输出设置；原样记录成绩，不与配置不明的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.12186v3",
+        "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "task": "coding"
+    },
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "score",
+      "value": 35.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Qwen2.5-Coder技术报告Table 20",
+      "settings": "官方报告Table 20的精确Instruct型号 Qwen2.5-Coder-3B-Instruct MMLU-Pro成绩为35.2；提示、shot、采样和输出长度未完整披露。",
+      "sourceUrl": "https://arxiv.org/html/2409.12186v3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen2.5-Coder-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方报告没有披露可复现比较所需的模型revision及完整采样、提示和输出设置；原样记录成绩，不与配置不明的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.12186v3",
+        "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "task": "text-generation"
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方报告Table 20列出该精确Instruct型号的MMLU-Pro成绩35.2%。这是知识问答基准结果，不能外推为中文写作、开放式对话或事实可靠性。",
+      "strengths": [
+        "官方报告提供该精确Instruct型号的通用知识基准成绩。"
+      ],
+      "limitations": [
+        "单个英文知识基准不能代表其他文本任务。",
+        "提示、shot和生成设置没有完整披露，本站未复现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方技术报告对该精确Instruct型号报告HumanEval+ 80.5%与LiveCodeBench Pass@1 10.8%。这显示其在短程序功能正确性和竞赛题生成上有直接基准证据，但不代表代码仓库级修改或本地部署质量。",
+      "strengths": [
+        "官方报告提供该精确Instruct型号的HumanEval+和LiveCodeBench成绩。"
+      ],
+      "limitations": [
+        "LiveCodeBench只覆盖竞赛题，不能替代真实仓库任务。",
+        "报告未披露完整采样与运行配置，本站未复现。",
+        "不应将这些分数与Qwen系列不同题目期或不同提示结果直接排名。"
+      ],
+      "evidenceIds": [
+        "humaneval-plus",
+        "livecodebench-2024-07-09"
+      ]
+    }
+  ]
 }

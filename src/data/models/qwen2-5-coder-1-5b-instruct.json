@@ -93,5 +93,118 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "humaneval-plus",
+      "benchmark": "HumanEval+",
+      "dataset": "HumanEval+",
+      "language": "code",
+      "metric": "score",
+      "value": 66.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "EvalPlus（Qwen技术报告Table 16）",
+      "settings": "Qwen2.5-Coder技术报告Table 16中精确Instruct型号 Qwen2.5-Coder-1.5B-Instruct 的HumanEval+成绩为66.5；报告没有披露该型号的提示、采样、输出预算或生成环境，本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2409.12186v3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方报告没有披露可复现比较所需的模型revision及完整采样、提示和输出设置；原样记录成绩，不与配置不明的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.12186v3",
+        "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "task": "coding"
+    },
+    {
+      "id": "livecodebench-2024-07-09",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 6.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "题目期 2024.07–2024.09",
+      "settings": "Qwen2.5-Coder技术报告Table 16列出 Qwen2.5-Coder-1.5B-Instruct LiveCodeBench Pass@1=6.1%；正文说明采用 2024.07–2024.09 题目。具体提示、采样和输出长度未完整披露，本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2409.12186v3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方报告没有披露可复现比较所需的模型revision及完整采样、提示和输出设置；原样记录成绩，不与配置不明的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.12186v3",
+        "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "task": "coding"
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "官方资料确认Qwen2.5-Coder-1.5B-Instruct为代码指令型号，但未找到可机器核实的该精确型号通用文本基准成绩；系列技术报告的数值表覆盖Base结果，不能移植到Instruct版本。",
+      "strengths": [
+        "官方型号卡确认此版本经过指令微调，可直接按对话模板使用。"
+      ],
+      "limitations": [
+        "没有确认到精确Instruct型号的通用语言成绩；同尺寸Base结果不适用。",
+        "本站未复现通用问答或写作能力。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方技术报告对该精确Instruct型号报告HumanEval+ 66.5%与LiveCodeBench Pass@1 6.1%。这显示其在短程序功能正确性和竞赛题生成上有直接基准证据，但不代表代码仓库级修改或本地部署质量。",
+      "strengths": [
+        "官方报告提供该精确Instruct型号的HumanEval+和LiveCodeBench成绩。"
+      ],
+      "limitations": [
+        "LiveCodeBench只覆盖竞赛题，不能替代真实仓库任务。",
+        "报告未披露完整采样与运行配置，本站未复现。",
+        "不应将这些分数与Qwen系列不同题目期或不同提示结果直接排名。"
+      ],
+      "evidenceIds": [
+        "humaneval-plus",
+        "livecodebench-2024-07-09"
+      ]
+    }
+  ]
 }
