@@ -39,7 +39,7 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 
 网站代码使用 MIT，原创整理和指南使用 CC BY 4.0；这些许可不套用于第三方模型权重。型号详情页的“获取权重”链接跳转到各自官方模型页或上游仓库，模型文件不存放于本站代码仓库。来源复核、内容校验和构建都不等于本站完成模型推理测试。
 
-## 首批能力依据
+## 首批能力依据（历史）
 
 以下为少量指标事实引用，摘要由本站原创撰写；不复制整份报告、截图或官方整表。各项条件及使用说明保存于模型 JSON，未披露的配置明确保留未知。所有原始模型变体保持独立，不将这些引用称为本站复现或统一排名。
 
@@ -53,3 +53,44 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 | PP-OCRv5 mobile rec | [官方模型卡](https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec) | 少量摘录文字行识别准确率，任一字符或标点错误即整行错误；不混入文字检测或完整流程的成绩，内评估集未完整披露。 |
 
 能力字段维护与 AA 数据使用边界见 [能力依据规范](CAPABILITY_EVIDENCE.md)。AA 仅作为原站参考入口，当前不导入其数值、排名或衍生评分。
+
+## 全目录能力依据审核（2026-10-02）
+
+本轮覆盖全部21个型号、35个型号用途组合。累计92条成绩（77条官方报告、15条第三方记录），比首批新增72条；35条用途摘要中25条仅官方依据、7条有官方与第三方佐证、3条证据不足。状态描述证据覆盖与独立性，不描述能力高低。所有成绩仍不可直接跨配置比较，本站未执行模型推理。
+
+| 型号 | 成绩数 | 用途结论及出处 |
+| --- | ---: | --- |
+| Gemma 3 1B IT | 4 | 文本多来源；Google模型卡与Epoch GPQA，保留低于随机基线的成绩及条件限制。 |
+| Gemma 3 4B IT | 5 | 文本多来源、视觉仅官方；Google模型卡与Epoch GPQA，MMMU取验证集。 |
+| Gemma 4 E2B IT | 4 | 文本、代码、视觉、语音均仅官方；保留首批准确变体成绩。 |
+| Qwen3-0.6B | 6 | 文本和代码仅官方；原报告Table 19–20，思考开关分别记录。 |
+| Qwen3-1.7B | 10 | 文本与代码多来源；官方报告、Epoch GPQA、SmolLM3对照评测。 |
+| Qwen3-4B | 12 | 文本与代码多来源；原报告及后续对照表、Epoch、SmolLM3；不借用Instruct-2507成绩。 |
+| Qwen3-8B | 8 | 文本多来源、代码仅官方；官方报告及Epoch GPQA。 |
+| Qwen3.5-4B | 4 | 文本、代码、视觉均仅官方；保留首批记录，不借用其他尺寸。 |
+| Qwen2.5-Coder-1.5B-Instruct | 2 | 代码仅官方；HumanEval+及LiveCodeBench。通用文本仍证据不足，无可靠精确Instruct成绩。 |
+| Qwen2.5-Coder-3B-Instruct | 3 | 文本与代码仅官方；原报告Table 16/20，MMLU-Pro35.2%。 |
+| Qwen2.5-Coder-7B-Instruct | 3 | 文本与代码仅官方；原报告Table 16/20，MMLU-Pro45.6%。 |
+| SmolLM3-3B | 6 | 文本与代码仅官方；模型卡IFEval、GlobalMMLU、LiveCodeBench v4按思考模式分列。 |
+| all-MiniLM-L6-v2 | 3 | MTEB/RTEB社区检索记录；提交者身份关系未知，单来源仍证据不足。 |
+| Qwen3-Embedding-0.6B | 3 | 向量检索仅官方；保留MTEB多语言成绩，厂商提交不视为独立复测。 |
+| Qwen3-Reranker-0.6B | 3 | 重排仅官方；原报告Table 4，基于Qwen3-Embedding-0.6B召回top-100。 |
+| Whisper tiny | 3 | 语音仅官方；原论文Common Voice 9印尼语WER49.6%、中文CER52.4%、FLEURS印尼语WER51.7%。 |
+| Whisper base | 3 | 语音仅官方；同三项分别36.1%、44.9%、33.1%。 |
+| Whisper small | 3 | 语音仅官方；同三项分别18.4%、29.4%、16.3%。 |
+| Whisper medium | 3 | 语音仅官方；同三项分别11.6%、23.2%、10.2%。 |
+| PP-OCRv5 mobile rec | 4 | OCR仅官方；保留文字行识别内评估，平均值的聚合权重未知。 |
+| Kokoro-82M | 0 | 音质与可懂度证据不足；未找到满足准入条件的可靠成绩，不填推测分数。 |
+
+本轮主要新增来源：
+
+- [Google Gemma 3模型卡](https://ai.google.dev/gemma/docs/core/model_card_3)：准确IT尺寸的知识、指令遵循和视觉指标。
+- [Qwen3技术报告](https://arxiv.org/html/2505.09388v1)：Table 17–20的准确尺寸及模式；LiveCodeBench v5与其他版本分开。
+- [Qwen2.5-Coder技术报告](https://arxiv.org/html/2409.12186v3)：Table 16/20的Instruct成绩，LiveCodeBench题期2024.07–2024.09；非Base成绩。
+- [SmolLM3官方卡](https://huggingface.co/HuggingFaceTB/SmolLM3-3B)：SmolLM3自报及Qwen3-1.7B/4B的外部对照评测；引用少量事实而非转载整表。
+- [Epoch GPQA Diamond](https://epoch.ai/benchmarks/gpqa-diamond)及[数据使用说明](https://epoch.ai/benchmarks/use-this-data)：采用Epoch自身运行的数据，CC BY 4.0署名；保留导出记录标识、日期与条件缺口，不用外部转载文件冒充其独立测量。
+- [MTEB Results PR #264](https://github.com/embeddings-benchmark/results/pull/264)及[结果库](https://github.com/embeddings-benchmark/results)：CC0结果数据。all-MiniLM-L6-v2三项测试集nDCG@10，社区提交者fzoll与发布方关系未核实，不称独立复测。
+- [Qwen3 Embedding报告](https://arxiv.org/html/2506.05176v1)：Table 4作者自报的重排结果。
+- [Whisper原论文](https://cdn.openai.com/papers/whisper.pdf)：附录Table 11/13。中文原表表头为WER，但附录C规定逐字符分隔，按等效CER记录；均为原始多语言尺寸。
+
+另核对EvalPlus公开结果库，未找到上述Coder Instruct/Qwen3精确型号可用记录，因此未从该库导入成绩。使用评测工具产生的官方成绩仍属于官方自报，不因此成为第三方结果。AA继续仅提供链接。

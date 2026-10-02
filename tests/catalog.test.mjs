@@ -68,6 +68,24 @@ test('评测 schema 保留空值并校验证据身份、用途与来源关系', 
   assert.throws(() => validateCatalog([corroborated], guideIds), /独立的官方与第三方来源/);
 });
 
+test('现有型号逐用途完成证据审核，并仅链接 AA 而不收录其成绩', () => {
+  const { models } = loadCatalog();
+  for (const model of models) {
+    for (const task of model.tasks) {
+      const assessment = model.assessments.find((item) => item.task === task);
+      assert.ok(assessment, `${model.id}：${task} 缺少证据审核结论`);
+      if (!model.evaluations.some((item) => item.task === task)) {
+        assert.equal(assessment.status, 'insufficient', `${model.id}：无成绩用途不得标为已核实`);
+        assert.ok(assessment.limitations.length, `${model.id}：说明尚未核实的能力边界`);
+      }
+    }
+    for (const record of model.evaluations) {
+      assert.doesNotMatch(record.publisher, /Artificial Analysis|人工分析|\bAA\b/i);
+      assert.doesNotMatch(new URL(record.sourceUrl).hostname, /(^|\.)artificialanalysis(?:cdn)?\.(ai|com)$/i);
+    }
+  }
+});
+
 test('可比记录只在比较组的基准与测试口径一致时通过', () => {
   const { models, guideIds } = loadCatalog();
   const pair = models.flatMap((left, index) => models.slice(index + 1).map((right) => [left, right]))

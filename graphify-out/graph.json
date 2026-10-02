@@ -1179,11 +1179,19 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_capability_evidence_开放结果与独立性",
+      "label": "开放结果与独立性",
+      "file_type": "document",
+      "source_file": "docs/CAPABILITY_EVIDENCE.md",
+      "source_location": "L41",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_capability_evidence_维护与验收",
       "label": "维护与验收",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L41",
+      "source_location": "L47",
       "_origin": "ast"
     },
     {
@@ -3686,6 +3694,16 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_capability_evidence",
+      "target": "docs_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CAPABILITY_EVIDENCE.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_capability_evidence_能力依据与评测整理",
       "target": "docs_capability_evidence_数据与展示",
       "relation": "contains",
@@ -3726,8 +3744,8 @@
       "_origin": "ast"
     },
     {
-      "source": "docs_capability_evidence_能力依据与评测整理",
-      "target": "docs_capability_evidence_维护与验收",
+      "source": "docs_capability_evidence_来源与使用条件",
+      "target": "docs_capability_evidence_开放结果与独立性",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
@@ -3736,12 +3754,12 @@
       "_origin": "ast"
     },
     {
-      "source": "docs_capability_evidence",
-      "target": "docs_sources",
-      "relation": "references",
+      "source": "docs_capability_evidence_能力依据与评测整理",
+      "target": "docs_capability_evidence_维护与验收",
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L45",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3751,7 +3769,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L45",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
