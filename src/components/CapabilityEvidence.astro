@@ -17,7 +17,21 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
     const evaluations = model.evaluations.filter((item) => item.task === task);
     const titleId = `${model.id}-capability-${task}`;
     return <section class="capability-task" data-capability-task={task} aria-labelledby={titleId}>
+      <details class="capability-card">
+      <summary class="capability-card-summary">
+      <div class="capability-card-heading">
       {compact ? <h4 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h4> : <h3 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h3>}
+      <span class="capability-card-toggle" aria-hidden="true"></span>
+      </div>
+      <div class="capability-preview">
+        {evaluations.length ? evaluations.slice(0, 3).map((evaluation) => <div class="capability-preview-result">
+          <span>{evaluation.benchmark}</span><strong>{score(evaluation.value, evaluation.unit)}</strong>
+          <small>{sourceLabels[evaluation.kind]} · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
+        </div>) : <p class="capability-preview-empty">暂无可靠公开成绩</p>}
+      </div>
+      <span class="capability-card-hint"><span class="when-closed">查看评估与来源</span><span class="when-open">收起补充信息</span>{evaluations.length > 3 ? ` · 共 ${evaluations.length} 项成绩` : ''}</span>
+      </summary>
+      <div class="capability-card-body">
       <p>{assessment?.summary ?? '该用途尚无足够评测依据。'}</p>
       {assessment?.strengths.length ? <div><strong>已有依据支持</strong><ul>{assessment.strengths.map((item) => <li>{item}</li>)}</ul></div> : null}
       {assessment?.limitations.length ? <div><strong>证据限制</strong><ul>{assessment.limitations.map((item) => <li>{item}</li>)}</ul></div> : null}
@@ -47,6 +61,8 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
           </details>
         </article>;
       }) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
+      </div>
+      </details>
     </section>;
   })}
 </div>

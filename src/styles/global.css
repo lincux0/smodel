@@ -194,10 +194,24 @@ body.has-compare-tray { padding-bottom: 170px; }
 .evidence h3, .deployment h3 { margin-bottom: 10px; }
 .evidence p, .deployment p { color: var(--ink-soft); font-size: 13px; }
 .capability-variant { color: var(--muted); font-size: 12px; }
-.capability-task + .capability-task { margin-top: 22px; padding-top: 18px; border-top: var(--border); }
+.capability-task + .capability-task { margin-top: 12px; }
+.capability-card { border: var(--border); border-radius: var(--radius-md); background: linear-gradient(145deg, #fafbf8, #ecefea); overflow-wrap: anywhere; }
+.capability-card-summary { padding: 18px; cursor: pointer; list-style: none; }
+.capability-card-summary::-webkit-details-marker { display: none; }
+.capability-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.capability-card-toggle { width: 8px; height: 8px; flex: 0 0 auto; border-right: 1.5px solid var(--accent-dark); border-bottom: 1.5px solid var(--accent-dark); transform: rotate(45deg); transition: transform var(--duration-fast); }
+.capability-card[open] .capability-card-toggle { transform: rotate(225deg); }
+.capability-preview { display: grid; gap: 10px; margin-top: 10px; }
+.capability-preview-result { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: 13px; }
+.capability-preview-result small { color: var(--muted); font-size: 11px; }
+.capability-preview-empty { margin: 0; color: var(--muted); font-size: 13px; }
+.capability-card-hint { display: block; margin-top: 12px; color: var(--accent-dark); font-size: 11px; }
+.capability-card .when-open, .capability-card[open] .when-closed { display: none; }
+.capability-card[open] .when-open { display: inline; }
+.capability-card-body { margin-inline: 18px; padding-block: 16px 18px; border-top: var(--border); }
 .capability-task h3, .capability-task h4 { margin-bottom: 8px; }
 .capability-status { color: var(--muted); font-size: 12px; font-weight: 400; letter-spacing: 0; vertical-align: middle; }
-.capability-task > p, .capability-task li { color: var(--ink-soft); font-size: 13px; }
+.capability-card-body > p, .capability-task li { color: var(--ink-soft); font-size: 13px; }
 .capability-task ul { padding-left: 20px; }
 .capability-result { min-width: 0; padding: 15px; margin-top: 12px; border: 1px solid var(--line); border-radius: var(--radius-md); background: linear-gradient(145deg, #fafbf8, #ecefea); overflow-wrap: anywhere; }
 .capability-result-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 6px; }

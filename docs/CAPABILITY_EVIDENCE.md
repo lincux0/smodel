@@ -22,7 +22,7 @@
 
 结构以 [catalog.ts](../src/lib/catalog.ts) 为准。原有评测字段保留，新增记录身份 `id`、任务 `task`、评测者 `publisher` 和 `externalModelId`；`modelConfig` 记录权重 revision、思考模式、量化和运行时；`conditions` 记录划分、shot 数、提示模板和输出预算；`comparisonGroup` 与 `nonComparableReason` 明确比较资格；`rights` 记录使用口径、许可链接和说明。
 
-模型顶层 `assessments` 按用途记录结论、优势、限制和关联 `evidenceIds`，缺省为空数组。详情与对比复用 `CapabilityEvidence.astro`，显示用途标签、证据状态、编辑结论、成绩及来源，原生 `details/summary` 展开条件和日期。每个用途均保留覆盖反馈，没有记录时说明证据不足，不显示虚构的 0 分。详情阅读和证据展开不依赖 JavaScript；对比沿用已有 URL 选择。
+模型顶层 `assessments` 按用途记录结论、优势、限制和关联 `evidenceIds`，缺省为空数组。详情与对比复用 `CapabilityEvidence.astro`，每个用途以原生 `details/summary` 卡片展示，默认折叠。摘要显示用途标签、证据状态和按维护顺序列出的最多三项成绩（含单位、来源类别、语言及已知思考开关）；超过三项提示总数，摘要顺序不表示排名。展开显示编辑结论、优势、限制及全部成绩，每项成绩仍可展开条件、日期和来源。没有记录时说明证据不足，不显示虚构的 0 分。详情阅读和证据展开不依赖 JavaScript；对比沿用已有 URL 选择。
 
 ## 可比性与单位
 
