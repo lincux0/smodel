@@ -98,5 +98,283 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "ifeval-no-thinking",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 76.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 No Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    },
+    {
+      "id": "global-mmlu-no-thinking",
+      "benchmark": "Global MMLU",
+      "dataset": "Global MMLU",
+      "language": "multilingual",
+      "metric": "score",
+      "value": 53.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 No Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    },
+    {
+      "id": "ifeval-thinking",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 71.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    },
+    {
+      "id": "global-mmlu-thinking",
+      "benchmark": "Global MMLU",
+      "dataset": "Global MMLU",
+      "language": "multilingual",
+      "metric": "score",
+      "value": 64.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    },
+    {
+      "id": "livecodebench-v4-no-thinking",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench",
+      "language": "en",
+      "metric": "score",
+      "value": 15.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v4",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 No Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    },
+    {
+      "id": "livecodebench-v4-thinking",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench",
+      "language": "en",
+      "metric": "score",
+      "value": 30,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v4",
+      "settings": "HuggingFaceTB 官方卡说明评测使用 lighteval，除非另有说明均为 zero-shot；该行分属 Extended Thinking 表。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "HuggingFaceTB",
+      "externalModelId": "HuggingFaceTB/SmolLM3-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件，且扩展思考模式必须与关闭模式分开比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方 zero-shot 表报告 Global MMLU 关闭思考为 53.5%、开启扩展思考为 64.1%；IFEval 则分别为 76.7% 和 71.2%。结果显示模式会改变不同任务的表现，不能把单一模式成绩泛化为整体对话质量。",
+      "strengths": [
+        "官方将两种 extended thinking 设置分表报告，可观察模式变化。",
+        "Global MMLU 提供多语言知识问答信号。"
+      ],
+      "limitations": [
+        "Global MMLU 汇总分不说明中文单独表现；不能用其替代中文专项评测。",
+        "开启思考并未令 IFEval 同步提升；运行成本和输出长度也未在该分数中体现。"
+      ],
+      "evidenceIds": [
+        "ifeval-no-thinking",
+        "global-mmlu-no-thinking",
+        "ifeval-thinking",
+        "global-mmlu-thinking"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方 LiveCodeBench v4 zero-shot 分数为关闭思考 15.2%、开启扩展思考 30.0%；说明此基准对思考模式敏感，但不代表任意代码任务成功率。",
+      "strengths": [
+        "同一官方评测来源报告了两种模式，可明确呈现模式差异。"
+      ],
+      "limitations": [
+        "仓库内复杂代码修改仍需真实运行测试验证。",
+        "评测者为模型发布方，尚无独立复测；采样和生成预算未充分披露。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v4-no-thinking",
+        "livecodebench-v4-thinking"
+      ]
+    }
+  ]
 }

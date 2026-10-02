@@ -96,5 +96,244 @@
       }
     }
   ],
-  "evaluations": []
+  "evaluations": [
+    {
+      "id": "gpqa-diamond",
+      "benchmark": "GPQA Diamond",
+      "dataset": "GPQA Diamond",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 30.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "Google 官方 Gemma 3 IT 4B 表列 30.8；该表注明 0-shot。本站未复现。",
+      "sourceUrl": "https://ai.google.dev/gemma/docs/core/model_card_3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-3-4b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的权重revision、提示模板及完整生成配置，无法与统一条件复测比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+        "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      }
+    },
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 90.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "Google 官方 Gemma 3 IT 4B 表列 90.2；该表注明 0-shot。本站未复现。",
+      "sourceUrl": "https://ai.google.dev/gemma/docs/core/model_card_3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-3-4b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的权重revision、提示模板及完整生成配置，无法与统一条件复测比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+        "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      }
+    },
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU Pro",
+      "dataset": "MMLU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 43.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明基准版本",
+      "settings": "Google 官方 Gemma 3 IT 4B 表列 43.6；该表注明 0-shot。本站未复现。",
+      "sourceUrl": "https://ai.google.dev/gemma/docs/core/model_card_3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-3-4b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的权重revision、提示模板及完整生成配置，无法与统一条件复测比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+        "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      }
+    },
+    {
+      "id": "mmmu-val",
+      "benchmark": "MMMU",
+      "dataset": "MMMU validation",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 48.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "validation split；官方模型卡未注明基准版本",
+      "settings": "Google 官方多模态表列 Gemma 3 IT 4B 在 MMMU validation 为 48.8。模型卡未在该表给出 shot 数及完整图像提示、解码配置；本站未复现。",
+      "sourceUrl": "https://ai.google.dev/gemma/docs/core/model_card_3",
+      "date": null,
+      "checkedAt": "2026-10-02",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-3-4b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的权重revision、提示模板及完整生成配置，无法与统一条件复测比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
+        "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      }
+    },
+    {
+      "id": "gpqa-diamond-epoch-2026-08-28",
+      "benchmark": "GPQA Diamond",
+      "dataset": "GPQA Diamond",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 23.23,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Epoch AI run; GPQA Diamond benchmark 1.0.6",
+      "settings": "Epoch AI internal run; mean_score=0.23232323 (displayed as percent), stderr=0.018690142324718148; Epoch describes its GPQA method as zero-shot chain-of-thought with model API-default temperature. GPQA Diamond has 198 questions. This run is not a reproduction of the Google model-card setting. Run started 2026-08-28.；页面成绩按百分比保留两位小数（导出原值 23.232323232323232%）。",
+      "sourceUrl": "https://epoch.ai/benchmarks/gpqa-diamond",
+      "date": "2026-08-28",
+      "checkedAt": "2026-10-02",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Epoch AI",
+      "externalModelId": "gemma-3-4b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": "zero-shot chain-of-thought",
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "虽为同一 GPQA Diamond 基准，Epoch 与 Google 官方成绩存在差异且未共享完全一致的模型revision、提示和生成预算，不能据此直接排名。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC BY 4.0",
+        "url": "https://epoch.ai/benchmarks/use-this-data",
+        "notes": "Epoch AI 将内部评测数据以 CC BY 许可提供复用；按要求署名 Epoch AI 并链接数据说明。"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "corroborated",
+      "summary": "Google 官方 GPQA Diamond 为 30.8%，Epoch AI 对精确 IT 4B 型号的独立测试为 23.23%；不同来源结果差异明显，不能将官方分数当作稳定复现值。官方另报告 IFEval 90.2% 与 MMLU Pro 43.6%（0-shot）。",
+      "strengths": [
+        "相较 1B 同系列官方表格分数更高，但这是厂商同表报告，仍不是本站独立复测。",
+        "官方资料给出指令遵循、知识推理等不同侧面的成绩。",
+        "Epoch AI 对精确 IT 4B 型号进行了独立 GPQA Diamond 测试，可看到另一套评测设置下的结果。"
+      ],
+      "limitations": [
+        "官方 GPQA 高于 25% 随机猜测基线，而 Epoch 测试略低于该线；来源结论不一致，需按具体配置复核。",
+        "这些英文基准不能证明中文输出同等可靠。",
+        "Epoch AI 分数低于 Google 官方报告；两者模型revision及生成条件未完全对齐，当前证据不支持稳定的横向排名。"
+      ],
+      "evidenceIds": [
+        "gpqa-diamond",
+        "ifeval",
+        "mmlu-pro",
+        "gpqa-diamond-epoch-2026-08-28"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "官方 MMMU validation 成绩为 48.8%，为大学学科多模态问答的一项信号；单一基准不能代表 OCR、图表或真实图像的全部效果。",
+      "strengths": [
+        "官方表格报告了精确 IT 4B 变体的视觉推理结果。"
+      ],
+      "limitations": [
+        "该表没有列出完整图像预处理和提示配置，不能作为统一条件横向排名。",
+        "本站未使用本地图片进行复测。"
+      ],
+      "evidenceIds": [
+        "mmmu-val"
+      ]
+    }
+  ]
 }
