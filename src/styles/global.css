@@ -209,6 +209,7 @@ body.has-compare-tray { padding-bottom: 170px; }
 .capability-evidence[data-compact] { grid-template-columns: minmax(0, 1fr); }
 .capability-variant { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 12px; }
 .capability-task { min-width: 0; }
+.capability-task:last-child:nth-of-type(odd) { grid-column: 1 / -1; }
 .capability-card { border: var(--border); border-radius: var(--radius-md); background: linear-gradient(145deg, #fafbf8, #ecefea); overflow-wrap: anywhere; }
 .capability-card-summary { padding: 22px; cursor: pointer; list-style: none; }
 .capability-card-summary::-webkit-details-marker { display: none; }
@@ -216,6 +217,8 @@ body.has-compare-tray { padding-bottom: 170px; }
 .capability-card-toggle { width: 8px; height: 8px; flex: 0 0 auto; border-right: 1.5px solid var(--accent-dark); border-bottom: 1.5px solid var(--accent-dark); transform: rotate(45deg); transition: transform var(--duration-fast); }
 .capability-card[open] .capability-card-toggle { transform: rotate(225deg); }
 .capability-preview { display: grid; margin-top: 16px; }
+.capability-evidence:not([data-compact]) > .capability-task:last-child:nth-of-type(odd) .capability-preview { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 0 24px; }
+.capability-evidence:not([data-compact]) > .capability-task:last-child:nth-of-type(odd) .capability-preview-result { grid-template-columns: minmax(0, 1fr); align-items: start; align-content: start; }
 .capability-preview-result { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 14px; padding-block: 12px; border-top: var(--border); }
 .capability-preview-result > span { font-size: 16px; font-weight: 500; }
 .capability-preview-result strong { color: var(--accent-dark); font-size: 32px; font-weight: 600; line-height: 1.2; }
@@ -226,6 +229,7 @@ body.has-compare-tray { padding-bottom: 170px; }
 .capability-card .when-open, .capability-card[open] .when-closed { display: none; }
 .capability-card[open] .when-open { display: inline; }
 .capability-card-body { margin-inline: 22px; padding-block: 16px 22px; border-top: var(--border); }
+.capability-evidence-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; color: var(--muted); font-size: 12px; }
 .capability-group { min-width: 0; margin-top: 18px; }
 .capability-group-heading { margin: 0; padding: 0 0 8px; border-bottom: var(--border); color: var(--ink-soft); font-size: 12px; font-weight: 500; }
 .capability-group-meta { margin: 7px 0 0; color: var(--muted); font-size: 11px; }
