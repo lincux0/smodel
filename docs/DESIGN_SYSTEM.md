@@ -53,6 +53,10 @@
 
 目录原型使用 Web Animations API 对筛选或排序后的卡片位置做短暂过渡，时长 240ms；用户开启减少动态效果时跳过这段布局动画。页面 CSS 也通过 `prefers-reduced-motion: reduce` 缩短过渡、关闭平滑滚动。新增脚本动画必须读取相同偏好，动态偏好变化后应停止后续非必要动画。Astro 客户端脚本由框架处理、打包为模块；参见 [Astro 客户端脚本](https://docs.astro.build/en/guides/client-side-scripts/) 与 [MDN `Element.animate()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/animate)。
 
+页面切换保持多页导航，使用原生同源跨文档 View Transitions：旧页140ms淡出，新页300ms淡入。首次直达或刷新时，首屏内容容器（首页、目录/对比页标题、详情页标题、文档正文）以360ms透明度与10px上浮入场；不对整个main设置transform，以免改变固定对比栏的定位参照。head内的pagereveal监听在原生转场时标记当前文档，避免入场动画叠加；标记随该文档保留，后退恢复不会重新触发入场。减少动态效果模式关闭页面转场与入场；不支持跨文档API时保留普通导航及入场效果，不迁移客户端路由或增加动画依赖。参见 [Astro原生与客户端转场区别](https://docs.astro.build/en/guides/view-transitions/)和[浏览器跨文档转场](https://developer.chrome.com/docs/web-platform/view-transitions/cross-document)。
+
+转场opt-in和减少动效规则内联于head，确保首次冷访问的新文档在外部样式加载前已经声明支持，避免首次导航被浏览器取消。2026-10-06：生产构建28页、Astro检查0错误/警告/提示、6项现有测试通过；本机Playwright Chromium验证首次入场、同源转场不叠加入场、减少动效模式0运行动画，以及筛选、固定对比栏、复制和后退恢复。390px代表页面无横向溢出；该结果不是全部浏览器或真实移动设备的兼容性证明。
+
 部署步骤展开与复制反馈使用 180ms 的透明度和轻微位移动效。详情页提供官方链接复制，数据存在命令时显示命令复制；缺失命令不补造。阶段三补充了有官方来源的 Kokoro 安装命令，未作为本站推理实测。复制使用 Clipboard API，并向用户提供成功或失败文本；无安全上下文或浏览器拒绝权限时保留可手动选择的内容。状态文字使用 `aria-live="polite"`，不只通过颜色或图标表达。参见 [MDN `Clipboard.writeText()`](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText)。
 
 ## 可访问性与输入方式

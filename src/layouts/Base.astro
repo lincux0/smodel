@@ -23,6 +23,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{pageTitle}</title>
+    <style is:inline>
+      @view-transition { navigation: auto; }
+      @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+    </style>
+    <script is:inline>
+      // Run before the first render so a native transition uses only its own animation.
+      addEventListener('pagereveal', (event) => {
+        if (event.viewTransition) document.documentElement.dataset.pageTransition = 'true';
+      });
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到正文</a>

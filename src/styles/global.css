@@ -65,6 +65,18 @@ button { color: inherit; }
 .site-header nav a:hover, .site-header nav a[aria-current] { color: var(--accent); }
 .site-header nav a[aria-current] { text-decoration: underline; text-underline-offset: 7px; }
 main { min-height: 66vh; }
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes page-arrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes page-leave { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-page-transition]) main > :is(.home-hero, .intro, .catalog-head, .prose),
+  html:not([data-page-transition]) main > .detail > .intro { animation: page-enter 360ms var(--ease) both; }
+  ::view-transition-old(root) { animation: page-leave 140ms ease-out both; }
+  ::view-transition-new(root) { animation: page-arrive 300ms var(--ease) both; }
+}
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { line-height: 1.22; letter-spacing: -.035em; }
 h1 { font-size: clamp(2.45rem, 6.8vw, 5.8rem); font-weight: 500; }
@@ -310,5 +322,6 @@ code { font-family: var(--mono); }
   .site-footer { flex-direction: column; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
