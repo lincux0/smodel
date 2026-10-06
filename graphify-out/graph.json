@@ -304,7 +304,7 @@
       "label": "show()",
       "file_type": "code",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L63",
+      "source_location": "L64",
       "_callable": true,
       "_origin": "ast"
     },
@@ -1132,7 +1132,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L126",
+      "source_location": "L128",
       "_origin": "ast"
     },
     {
@@ -1396,7 +1396,7 @@
       "label": "指针局部高光",
       "file_type": "document",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L127",
+      "source_location": "L129",
       "_origin": "ast"
     },
     {
@@ -1812,7 +1812,7 @@
       "label": "多来源增量维护",
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L97",
+      "source_location": "L98",
       "_origin": "ast"
     },
     {
@@ -2320,7 +2320,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L63",
+      "source_location": "L64",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3964,7 +3964,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L124",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3974,7 +3974,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L126",
+      "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3984,7 +3984,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L128",
+      "source_location": "L130",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4404,7 +4404,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DESIGN_SYSTEM.md",
-      "source_location": "L127",
+      "source_location": "L129",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4929,12 +4929,12 @@
       "_origin": "ast"
     },
     {
-      "source": "docs_sources",
+      "source": "docs_sources_模型来源与字段口径",
       "target": "docs_sources_多来源增量维护",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L97",
+      "source_location": "L98",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4944,7 +4944,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4954,7 +4954,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4964,7 +4964,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L101",
+      "source_location": "L102",
       "weight": 1.0,
       "_origin": "ast"
     },

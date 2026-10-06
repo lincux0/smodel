@@ -25,18 +25,19 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
       <details class="capability-card">
       <summary class="capability-card-summary">
       <div class="capability-card-heading">
-      {compact ? <h4 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h4> : <h3 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span> <span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span></h3>}
+      {compact ? <h4 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span></h4> : <h3 id={titleId}><span class="model-task-tag" data-task={task}>{taskLabels[task]}</span></h3>}
       <span class="capability-card-toggle" aria-hidden="true"></span>
       </div>
       <div class="capability-preview">
         {evaluations.length ? preview.map((evaluation) => <div class="capability-preview-result">
           <span>{evaluation.benchmark} · {evaluation.metric}</span><strong>{evaluation.value}<span>{evaluation.unit === '%' ? '%' : evaluation.unit === 'ratio' ? '比率' : evaluation.unit === '无单位' ? '' : evaluation.unit}</span></strong>
-          <small><span class="capability-source" data-source={evaluation.kind}>{sourceLabels[evaluation.kind]} · {evaluation.publisher}</span><span class="capability-independence" data-independence={evaluation.provenance.independence}>{independenceLabels[evaluation.provenance.independence]}</span> · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
+          <small>{evaluation.dataset} · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
         </div>) : <p class="capability-preview-empty">暂无可靠公开成绩</p>}
       </div>
-      <span class="capability-card-hint"><span>{evaluations.length} 条成绩 · {evidenceSummary.sourceCount} 个评测来源 · {evidenceSummary.independentCount} 个独立来源{evidenceSummary.unverifiedCount ? ` · ${evidenceSummary.unverifiedCount} 个独立性待确认` : ''}</span><span class="when-closed"> · 查看详情</span><span class="when-open"> · 收起补充信息</span></span>
+      <span class="capability-card-hint"><span class="when-closed">查看评估与来源</span><span class="when-open">收起补充信息</span></span>
       </summary>
       <div class="capability-card-body">
+      <p class="capability-evidence-meta"><span class="capability-status">{statusLabels[assessment?.status ?? 'insufficient']}</span><span>{evaluations.length} 条成绩 · {evidenceSummary.sourceCount} 个评测来源 · {evidenceSummary.independentCount} 个独立来源{evidenceSummary.unverifiedCount ? ` · ${evidenceSummary.unverifiedCount} 个独立性待确认` : ''}</span></p>
       <p>{assessment?.summary ?? '该用途尚无足够评测依据。'}</p>
       {assessment?.strengths.length ? <div><strong>已有依据支持</strong><ul>{assessment.strengths.map((item) => <li>{item}</li>)}</ul></div> : null}
       {assessment?.limitations.length ? <div><strong>证据限制</strong><ul>{assessment.limitations.map((item) => <li>{item}</li>)}</ul></div> : null}
