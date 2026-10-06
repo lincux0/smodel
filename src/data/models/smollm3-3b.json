@@ -137,6 +137,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -177,6 +182,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -217,6 +227,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -257,6 +272,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -297,6 +317,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -337,6 +362,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "smollm3-3b-smollm3-card-thinking",
+        "independence": "first-party"
       }
     }
   ],

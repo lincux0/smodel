@@ -107,7 +107,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为基准任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -132,6 +132,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
         "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "independence": "first-party"
       }
     },
     {
@@ -147,7 +152,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为检索类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -172,6 +177,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
         "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "independence": "first-party"
       }
     },
     {
@@ -187,7 +197,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为语义文本相似度类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -212,14 +222,154 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
         "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-hume-arxiv-clustering-vmeasure",
+      "benchmark": "MTEB / HUME",
+      "dataset": "HUMEArxivClusteringP2P（revision 6d2f0e9d4f4a51cb54332acaef10478928f0fed8）",
+      "language": "英语",
+      "metric": "V-measure",
+      "value": 0.69058,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.34.7",
+      "settings": "结果仓库记录指标 v_measure，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMEArxivClusteringP2P.json",
+      "date": null,
+      "checkedAt": "2026-10-06",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "provenance": {
+        "sourceId": "mteb-pr-281-unverified",
+        "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
+        "independence": "unknown"
+      },
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": "b22da495047858cce924d27d76261e96be6febc0",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、模型revision、MTEB版本、测试拆分和指标明确，但执行者与提示/运行配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0 1.0 Universal",
+        "url": "https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
+        "notes": "MTEB Results 结果仓库声明CC0。本站仅复用单项聚合成绩，不转载基准样本；各基准数据集自身的许可不因结果仓库许可而改变。"
+      }
+    },
+    {
+      "id": "mteb-hume-core17-reranking-map",
+      "benchmark": "MTEB / HUME",
+      "dataset": "HUMECore17InstructionReranking（Qwen3-Embedding向量参与候选排序）",
+      "language": "英语",
+      "metric": "MAP",
+      "value": 0.969722,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.34.7",
+      "settings": "结果仓库记录指标 map，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMECore17InstructionReranking.json",
+      "date": null,
+      "checkedAt": "2026-10-06",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "provenance": {
+        "sourceId": "mteb-pr-281-unverified",
+        "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
+        "independence": "unknown"
+      },
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": "b22da495047858cce924d27d76261e96be6febc0",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、模型revision、MTEB版本、测试拆分和指标明确，但执行者与提示/运行配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0 1.0 Universal",
+        "url": "https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
+        "notes": "MTEB Results 结果仓库声明CC0。本站仅复用单项聚合成绩，不转载基准样本；各基准数据集自身的许可不因结果仓库许可而改变。"
+      }
+    },
+    {
+      "id": "mteb-hume-sick-r-spearman",
+      "benchmark": "MTEB / HUME",
+      "dataset": "HUMESICK-R（revision cf7172d4b730a743570f25291d04abeee086c824）",
+      "language": "英语",
+      "metric": "Spearman 相关系数",
+      "value": 0.932601,
+      "unit": "相关系数（−1–1）",
+      "direction": "higher",
+      "version": "MTEB 1.34.7",
+      "settings": "结果仓库记录指标 spearman，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMESICK-R.json",
+      "date": null,
+      "checkedAt": "2026-10-06",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "provenance": {
+        "sourceId": "mteb-pr-281-unverified",
+        "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
+        "independence": "unknown"
+      },
+      "externalModelId": "Qwen/Qwen3-Embedding-0.6B",
+      "modelConfig": {
+        "revision": "b22da495047858cce924d27d76261e96be6febc0",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、模型revision、MTEB版本、测试拆分和指标明确，但执行者与提示/运行配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0 1.0 Universal",
+        "url": "https://github.com/embeddings-benchmark/results/blob/main/LICENSE",
+        "notes": "MTEB Results 结果仓库声明CC0。本站仅复用单项聚合成绩，不转载基准样本；各基准数据集自身的许可不因结果仓库许可而改变。"
       }
     }
   ],
   "assessments": [
     {
       "task": "embedding",
-      "status": "official-only",
-      "summary": "可作为多语言语义检索与相似度任务的候选；发布方报告的MTEB任务均值、Retrieval和STS分数提供基准参考，目标语料仍需单独评测。",
+      "status": "independence-unverified",
+      "summary": "可作为多语言语义检索与相似度任务的候选；发布方报告的MTEB任务均值、Retrieval和STS分数提供基准参考，目标语料仍需单独评测。 MTEB结果库另列同一精确权重的HUME聚类、重排和语义相似度分项；其执行者未披露，独立性待确认。",
       "strengths": [
         "同一基准汇总表按型号明确列出Qwen3-Embedding-0.6B，未借用4B或8B成绩。",
         "MTEB Multilingual、Retrieval和STS三个口径均有报告数值。"
@@ -227,12 +377,16 @@
       "limitations": [
         "这些是Qwen发布方引用MTEB leaderboard的结果，不是本站复测；模型卡注明leaderboard数据日期为2025-05-24。",
         "MTEB结果数据集为CC0且存在该型号记录，但添加记录的PR提交者afalf与模型发布方的关系未核实，因此不把该记录表述为独立复测或交叉印证。",
-        "该表未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。"
+        "该表未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。",
+        "MTEB Results PR #281 的三个任务级结果标记为独立性待确认，不构成与官方报告的独立交叉佐证。"
       ],
       "evidenceIds": [
         "mteb-multilingual-mean-task",
         "mteb-multilingual-retrieval",
-        "mteb-multilingual-sts"
+        "mteb-multilingual-sts",
+        "mteb-hume-arxiv-clustering-vmeasure",
+        "mteb-hume-core17-reranking-map",
+        "mteb-hume-sick-r-spearman"
       ]
     }
   ]

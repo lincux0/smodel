@@ -127,10 +127,15 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
     },
     {
       "id": "rteb-ds1000-ndcg10",
@@ -167,10 +172,15 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
     },
     {
       "id": "rteb-mbpp-ndcg10",
@@ -207,10 +217,15 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
     }
   ],
   "assessments": [

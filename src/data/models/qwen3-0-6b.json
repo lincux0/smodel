@@ -131,6 +131,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -171,6 +176,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -211,6 +221,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -251,6 +266,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -291,6 +311,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -331,6 +356,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-0-6b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     }
   ],

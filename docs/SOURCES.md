@@ -94,3 +94,9 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 - [Whisper原论文](https://cdn.openai.com/papers/whisper.pdf)：附录Table 11/13。中文原表表头为WER，但附录C规定逐字符分隔，按等效CER记录；均为原始多语言尺寸。
 
 另核对EvalPlus公开结果库，未找到上述Coder Instruct/Qwen3精确型号可用记录，因此未从该库导入成绩。使用评测工具产生的官方成绩仍属于官方自报，不因此成为第三方结果。AA继续仅提供链接。
+
+## 多来源增量维护
+
+2026-10-06：既有92条成绩保留，新增Qwen3-8B的两条Epoch AI OTIS Mock AIME 2024-2025数学记录（CC BY 4.0，自有运行日志）以及Qwen3-Embedding-0.6B的三条MTEB/HUME分项（CC0，提交执行者关系未知）。总计97条；新记录未加入可比组。运行标识、模型配置与结果出处在对应JSON中保留。
+
+许可准入及核验范围见 [评测来源规范](EVIDENCE_SOURCES.md)、[通用/代码/视觉覆盖表](EVIDENCE_GENERAL_COVERAGE.md)、[检索/语音/OCR覆盖表](EVIDENCE_SPECIAL_COVERAGE.md)。AA仅链接；未核实完整快照或具体结果许可的平台不宣称已完成数据接入。

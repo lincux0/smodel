@@ -131,6 +131,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -171,6 +176,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -211,6 +221,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -251,6 +266,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -291,6 +311,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -331,6 +356,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-1-7b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -371,6 +401,11 @@
         "license": "CC BY 4.0",
         "url": "https://creativecommons.org/licenses/by/4.0/",
         "notes": "Epoch AI基准数据页说明数据可按CC BY 4.0署名后使用和再分发；本条保留Epoch AI署名及运行记录链接。"
+      },
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "qwen3-1-7b-epoch-gpqa-2026-08-qwen3-1-7b",
+        "independence": "independent"
       }
     },
     {
@@ -411,6 +446,11 @@
         "license": "CC BY 4.0",
         "url": "https://creativecommons.org/licenses/by/4.0/",
         "notes": "Epoch AI基准数据页说明数据可按CC BY 4.0署名后使用和再分发；本条保留Epoch AI署名及运行记录链接。"
+      },
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "qwen3-1-7b-epoch-gpqa-2026-08-qwen3-1-7b-none",
+        "independence": "independent"
       }
     },
     {
@@ -451,6 +491,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅引用该模型卡表格中的少量成绩事实。SmolLM3权重或代码许可不自动授权转载第三方模型成绩，故按事实引用并保留来源链接。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "qwen3-1-7b-livecodebench-v4-nonthinking",
+        "independence": "independent"
       }
     },
     {
@@ -491,6 +536,11 @@
         "license": null,
         "url": "https://huggingface.co/HuggingFaceTB/SmolLM3-3B",
         "notes": "仅引用该模型卡表格中的少量成绩事实。SmolLM3权重或代码许可不自动授权转载第三方模型成绩，故按事实引用并保留来源链接。"
+      },
+      "provenance": {
+        "sourceId": "huggingface-tb",
+        "runId": "qwen3-1-7b-livecodebench-v4-thinking",
+        "independence": "independent"
       }
     }
   ],

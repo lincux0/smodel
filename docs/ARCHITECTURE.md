@@ -23,6 +23,8 @@ src/data/guides/*.md
 
 `npm run validate:content` 检查 JSON 结构、ID 和指南引用，并校验评测 ID、任务归属、摘要证据引用、证据状态和比较组条件一致性；`npm run check` 和构建进一步检查 Markdown 元数据、Astro 页面和 TypeScript。结构校验不验证数据真假或第三方授权，仍需人工核实。
 
+评测通过 `provenance` 区分实际评测者、原始运行批次与独立性，禁止同批次同口径的转载重复导入，并在目录加载阶段拒绝AA成绩和许可缺失的开放数据记录。`src/lib/evidence.ts` 提供按来源与指标挑选摘要、按指标分组及来源去重统计，详情和对比复用同一个静态组件；不新增网络请求或客户端评测服务。准入范围见 [评测来源规范](EVIDENCE_SOURCES.md)。
+
 内容使用转义后的文本和 Markdown 渲染。来源字段只接受 HTTPS 链接；模型简介与特征不作为原始 HTML 插入页面。
 
 ## 目录职责
@@ -36,6 +38,7 @@ src/data/guides/*.md
 | `src/layouts/Base.astro` | 文档结构、导航、基础元信息和页脚 |
 | `src/components/ModelList.astro` | 首页与目录复用的模型列表 |
 | `src/components/CapabilityEvidence.astro` | 详情与对比共用的用途结论、成绩、来源与原生展开条件 |
+| `src/lib/evidence.ts` | 评测来源统计、摘要选择与多来源指标分组 |
 | `src/lib/catalog-query.ts` | 目录 URL 状态白名单、默认值与参数分段 |
 | `src/lib/compare.ts` | 对比型号数量、身份和共同用途校验 |
 | `src/pages/` | 静态路由与内容展示 |
@@ -103,6 +106,8 @@ npx vercel --prod
 参考：[Astro Vercel 部署](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel CLI 部署](https://vercel.com/docs/cli/deploy)。
 
 ## Graphify
+
+2026-10-06多来源更新已执行 `graphify update . --no-cluster`，仅更新代码AST，不执行语义提取。当前图包含229节点、309条原始边和22条悬空端点边；仍有12个Astro文件的语法提取限制，21个模型JSON未生成节点，成绩与条件以原始来源、内容校验和浏览器验证为准。
 
 使用 `graphify update . --no-cluster` 更新代码 AST 结构图，不执行语义提取或社区模型命名。图用于源码定位，不证明 JSON、Markdown 与运行时关系；以上数据流以源码和校验结果为准。
 

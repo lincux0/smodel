@@ -132,6 +132,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -172,6 +177,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -212,6 +222,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -252,6 +267,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -292,6 +312,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-thinking",
+        "independence": "first-party"
       }
     },
     {
@@ -332,6 +357,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2505.09388v1",
         "notes": "少量引用Qwen技术报告中的评测事实；评测结果及报告采用何种许可未由模型权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-8b-qwen3-report-2025-nonthinking",
+        "independence": "first-party"
       }
     },
     {
@@ -372,6 +402,11 @@
         "license": "CC BY 4.0",
         "url": "https://creativecommons.org/licenses/by/4.0/",
         "notes": "Epoch AI基准数据页说明数据可按CC BY 4.0署名后使用和再分发；本条保留Epoch AI署名及运行记录链接。"
+      },
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "qwen3-8b-epoch-gpqa-2026-08-qwen3-8b",
+        "independence": "independent"
       }
     },
     {
@@ -412,6 +447,101 @@
         "license": "CC BY 4.0",
         "url": "https://creativecommons.org/licenses/by/4.0/",
         "notes": "Epoch AI基准数据页说明数据可按CC BY 4.0署名后使用和再分发；本条保留Epoch AI署名及运行记录链接。"
+      },
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "qwen3-8b-epoch-gpqa-2026-08-qwen3-8b-none",
+        "independence": "independent"
+      }
+    },
+    {
+      "id": "epoch-otis-aime-default-label",
+      "benchmark": "OTIS Mock AIME 2024-2025",
+      "dataset": "OTIS Mock AIME 2024-2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 56.11,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Epoch AI self-run, 2026-08-27",
+      "settings": "Epoch AI 官方 benchmark_data.zip 的 otis_mock_aime_2024_2025.csv：model_version=qwen3-8b，mean_score=0.5611111111111111，stderr=0.0645035213369854；折算为 56.11% ± 6.45 个百分点（标准误）。CSV run id=gG2B6fLUDBy5jRraxL2pz8；条目没有披露足以映射本地思考模式的完整推理设置，故 thinking 保留 unknown。",
+      "sourceUrl": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FgG2B6fLUDBy5jRraxL2pz8.eval",
+      "date": "2026-08-27",
+      "checkedAt": "2026-10-06",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Epoch AI",
+      "externalModelId": "qwen3-8b",
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "epoch-gg2b6fludby5jrraxl2pz8",
+        "independence": "independent"
+      },
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "Epoch AI 发布的独立自测成绩，model_version 精确为 qwen3-8b。推理模式、运行时、提示和生成条件不完整，且与另一模式的映射未核实；不并入跨记录排名。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC BY 4.0",
+        "url": "https://epoch.ai/benchmarks/use-this-data",
+        "notes": "Epoch AI 声明其自有评测结果数据按 CC BY 4.0 提供再分发。仅引用派生分数并署名 Epoch AI；OTIS 题目与答案仍归原作者，不复制题目内容。"
+      }
+    },
+    {
+      "id": "epoch-otis-aime-none-label",
+      "benchmark": "OTIS Mock AIME 2024-2025",
+      "dataset": "OTIS Mock AIME 2024-2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 22.22,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Epoch AI self-run, 2026-08-27",
+      "settings": "Epoch AI 官方 benchmark_data.zip 的 otis_mock_aime_2024_2025.csv：model_version=qwen3-8b_none，mean_score=0.2222222222222222，stderr=0.0452770806168054；折算为 22.22% ± 4.53 个百分点（标准误）。CSV run id=ASLdzByzxxMxFeLc7dwTPi；条目没有披露足以映射本地思考模式的完整推理设置，故 thinking 保留 unknown。",
+      "sourceUrl": "https://logs.epoch.ai/inspect-viewer/36231d6d/viewer.html?log_file=https%3A%2F%2Flogs.epoch.ai%2Finspect_ai_logs%2FASLdzByzxxMxFeLc7dwTPi.eval",
+      "date": "2026-08-27",
+      "checkedAt": "2026-10-06",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Epoch AI",
+      "externalModelId": "qwen3-8b_none",
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "epoch-asldzbyzxxmxfelc7dwtpi",
+        "independence": "independent"
+      },
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "Epoch AI 发布的独立自测成绩，model_version 精确为 qwen3-8b_none。名称暗示不同推理设置，但完整运行配置未披露；与 qwen3-8b 的模式映射未核实，不并入跨记录排名。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC BY 4.0",
+        "url": "https://epoch.ai/benchmarks/use-this-data",
+        "notes": "Epoch AI 声明其自有评测结果数据按 CC BY 4.0 提供再分发。仅引用派生分数并署名 Epoch AI；OTIS 题目与答案仍归原作者，不复制题目内容。"
       }
     }
   ],
@@ -419,7 +549,7 @@
     {
       "task": "text-generation",
       "status": "corroborated",
-      "summary": "官方表格分别报告Thinking与Non-thinking模式的MMLU-Redux（87.5% / 79.5%）和GPQA Diamond（62% / 39.3%）；推理模式与知识问答成绩相关，单项考试不能代表中文写作或日常对话。Epoch AI另对精确型号做了GPQA Diamond内部评测；其导出标签和分数可核验，但思考设置与部署配置没有完整披露，不能据此宣布严格同条件复现。",
+      "summary": "官方表格分别报告Thinking与Non-thinking模式的MMLU-Redux（87.5% / 79.5%）和GPQA Diamond（62% / 39.3%）；推理模式与知识问答成绩相关，单项考试不能代表中文写作或日常对话。Epoch AI另对精确型号做了GPQA Diamond内部评测；其导出标签和分数可核验，但思考设置与部署配置没有完整披露，不能据此宣布严格同条件复现。 Epoch AI 还发布了 OTIS Mock AIME 2024-2025 的独立记录（qwen3-8b 为 56.11%±6.45 个百分点，qwen3-8b_none 为 22.22%±4.53 个百分点）；两条的思考配置映射与提示条件未完全披露，不能据此与官方分数直接排名。",
       "strengths": [
         "同一技术报告分别列出明确尺寸的思考与非思考结果。",
         "有Epoch AI独立GPQA评测记录，可作为外部参照。"
@@ -435,7 +565,9 @@
         "gpqa-diamond-thinking",
         "gpqa-diamond-nonthinking",
         "epoch-gpqa-diamond-thinking",
-        "epoch-gpqa-diamond-nonthinking"
+        "epoch-gpqa-diamond-nonthinking",
+        "epoch-otis-aime-default-label",
+        "epoch-otis-aime-none-label"
       ]
     },
     {

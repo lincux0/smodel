@@ -128,10 +128,15 @@
         "url": "https://arxiv.org/abs/2506.05176",
         "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-reranker-mteb-report",
+        "independence": "first-party"
+      }
     },
     {
       "id": "qwen3-reranker-paper-cmteb-r",
@@ -168,10 +173,15 @@
         "url": "https://arxiv.org/abs/2506.05176",
         "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-reranker-mteb-report",
+        "independence": "first-party"
+      }
     },
     {
       "id": "qwen3-reranker-paper-mmteb-r",
@@ -208,10 +218,15 @@
         "url": "https://arxiv.org/abs/2506.05176",
         "notes": "仅引用Qwen团队技术报告中的少量评测事实并标注作者与来源；不复制整表或基准数据，报告及底层数据继续适用各自许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-reranker-mteb-report",
+        "independence": "first-party"
+      }
     }
   ],
   "assessments": [

@@ -132,7 +132,12 @@
         "url": "https://arxiv.org/html/2409.12186v3",
         "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
       },
-      "task": "coding"
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-coder-3b-instruct-qwen25coder-report-2024",
+        "independence": "first-party"
+      }
     },
     {
       "id": "livecodebench-2024-07-09",
@@ -172,7 +177,12 @@
         "url": "https://arxiv.org/html/2409.12186v3",
         "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
       },
-      "task": "coding"
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-coder-3b-instruct-qwen25coder-report-2024",
+        "independence": "first-party"
+      }
     },
     {
       "id": "mmlu-pro",
@@ -212,7 +222,12 @@
         "url": "https://arxiv.org/html/2409.12186v3",
         "notes": "仅引用Qwen官方技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
       },
-      "task": "text-generation"
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-coder-3b-instruct-qwen25coder-report-2024",
+        "independence": "first-party"
+      }
     }
   ],
   "assessments": [

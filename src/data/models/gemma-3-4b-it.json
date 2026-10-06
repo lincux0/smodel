@@ -135,6 +135,11 @@
         "license": null,
         "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
         "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-3-4b-it-gemma3-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -175,6 +180,11 @@
         "license": null,
         "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
         "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-3-4b-it-gemma3-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -215,6 +225,11 @@
         "license": null,
         "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
         "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-3-4b-it-gemma3-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -255,6 +270,11 @@
         "license": null,
         "url": "https://ai.google.dev/gemma/docs/core/model_card_3",
         "notes": "仅摘录少量官方评测事实并署名链接；未复制报告表格或数据集。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-3-4b-it-gemma3-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -295,6 +315,11 @@
         "license": "CC BY 4.0",
         "url": "https://epoch.ai/benchmarks/use-this-data",
         "notes": "Epoch AI 将内部评测数据以 CC BY 许可提供复用；按要求署名 Epoch AI 并链接数据说明。"
+      },
+      "provenance": {
+        "sourceId": "epoch-ai",
+        "runId": "gemma-3-4b-it-epoch-gpqa-2026-08-gemma-3-4b-it",
+        "independence": "independent"
       }
     }
   ],

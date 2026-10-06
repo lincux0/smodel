@@ -1,10 +1,12 @@
 ---
 import type { Model } from '../lib/catalog.ts';
 import { taskLabels } from '../lib/catalog.ts';
+import { groupEvidence, selectEvidencePreview, summarizeEvidence } from '../lib/evidence.ts';
 interface Props { model: Model; compact?: boolean; }
 const { model, compact = false } = Astro.props;
-const statusLabels = { 'official-only': '仅官方依据', corroborated: '官方与第三方交叉核实', insufficient: '证据不足' };
+const statusLabels = { 'official-only': '仅官方依据', 'single-source': '单一评测来源', corroborated: '独立多来源佐证', 'independence-unverified': '独立性待确认', insufficient: '证据不足' };
 const sourceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
+const independenceLabels = { 'first-party': '官方自测', independent: '独立评测', unknown: '独立性待确认' };
 const rightsLabels = { citation: '引用来源', 'open-data': '开放数据', 'site-owned': '本站整理' };
 const variantLabels = { base: '基础版', instruct: '指令版', specialized: '专用版' };
 const show = (value: string | number | null) => value === null || value === '' ? '未提供' : String(value);
@@ -15,6 +17,9 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
   {model.tasks.map((task) => {
     const assessment = model.assessments.find((item) => item.task === task);
     const evaluations = model.evaluations.filter((item) => item.task === task);
+    const preview = selectEvidencePreview(evaluations);
+    const evidenceSummary = summarizeEvidence(evaluations);
+    const groups = groupEvidence(evaluations);
     const titleId = `${model.id}-capability-${task}`;
     return <section class="capability-task" data-capability-task={task} aria-labelledby={titleId}>
       <details class="capability-card">
@@ -24,43 +29,50 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
       <span class="capability-card-toggle" aria-hidden="true"></span>
       </div>
       <div class="capability-preview">
-        {evaluations.length ? evaluations.slice(0, 3).map((evaluation) => <div class="capability-preview-result">
-          <span>{evaluation.benchmark}</span><strong>{evaluation.value}<span>{evaluation.unit === '%' ? '%' : evaluation.unit === 'ratio' ? '比率' : evaluation.unit === '无单位' ? '' : evaluation.unit}</span></strong>
-          <small>{sourceLabels[evaluation.kind]} · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
+        {evaluations.length ? preview.map((evaluation) => <div class="capability-preview-result">
+          <span>{evaluation.benchmark} · {evaluation.metric}</span><strong>{evaluation.value}<span>{evaluation.unit === '%' ? '%' : evaluation.unit === 'ratio' ? '比率' : evaluation.unit === '无单位' ? '' : evaluation.unit}</span></strong>
+          <small><span class="capability-source" data-source={evaluation.kind}>{sourceLabels[evaluation.kind]} · {evaluation.publisher}</span><span class="capability-independence" data-independence={evaluation.provenance.independence}>{independenceLabels[evaluation.provenance.independence]}</span> · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : ''}</small>
         </div>) : <p class="capability-preview-empty">暂无可靠公开成绩</p>}
       </div>
-      <span class="capability-card-hint"><span class="when-closed">查看评估与来源</span><span class="when-open">收起补充信息</span>{evaluations.length > 3 ? ` · 共 ${evaluations.length} 项成绩` : ''}</span>
+      <span class="capability-card-hint"><span>{evaluations.length} 条成绩 · {evidenceSummary.sourceCount} 个评测来源 · {evidenceSummary.independentCount} 个独立来源{evidenceSummary.unverifiedCount ? ` · ${evidenceSummary.unverifiedCount} 个独立性待确认` : ''}</span><span class="when-closed"> · 查看详情</span><span class="when-open"> · 收起补充信息</span></span>
       </summary>
       <div class="capability-card-body">
       <p>{assessment?.summary ?? '该用途尚无足够评测依据。'}</p>
       {assessment?.strengths.length ? <div><strong>已有依据支持</strong><ul>{assessment.strengths.map((item) => <li>{item}</li>)}</ul></div> : null}
       {assessment?.limitations.length ? <div><strong>证据限制</strong><ul>{assessment.limitations.map((item) => <li>{item}</li>)}</ul></div> : null}
-      {evaluations.length ? evaluations.map((evaluation) => {
-        const detailsId = `${model.id}-evidence-${evaluation.id}`;
-        const cited = assessment?.evidenceIds.includes(evaluation.id) ?? false;
-        return <article class="capability-result">
-          <p class="capability-result-title"><strong>{evaluation.benchmark} · {score(evaluation.value, evaluation.unit)}</strong><span class="capability-source" data-source={evaluation.kind}>{sourceLabels[evaluation.kind]} · {evaluation.publisher}</span></p>
-          <p class="capability-result-meta">{evaluation.metric} · {evaluation.direction === 'higher' ? '越高越好' : '越低越好'} · {evaluation.language}{cited ? ' · 摘要引用' : ''}</p>
-          <details id={detailsId} class="capability-details">
-            <summary>展开评测条件与来源</summary>
-            <div class="capability-detail-body">
-              <dl class="capability-facts">
-                <dt>模型标识 / 修订</dt><dd>{show(evaluation.externalModelId)} / {show(evaluation.modelConfig.revision)}</dd>
-                <dt>思考模式</dt><dd>{evaluation.modelConfig.thinking === 'unknown' ? '未知' : evaluation.modelConfig.thinking === 'enabled' ? '启用' : evaluation.modelConfig.thinking === 'disabled' ? '关闭' : '不适用'}</dd>
-                <dt>量化 / 运行时</dt><dd>{show(evaluation.modelConfig.quantization)} / {show(evaluation.modelConfig.runtime)}</dd>
-                <dt>数据集 / 划分</dt><dd>{evaluation.dataset} / {show(evaluation.conditions.split)}</dd>
-                <dt>基准 / 报告版本</dt><dd>{evaluation.version}</dd>
-                <dt>Few-shot / 输出上限</dt><dd>{show(evaluation.conditions.fewShot)} / {show(evaluation.conditions.outputTokens)} tokens</dd>
-                <dt>提示模板 / 设置</dt><dd>{show(evaluation.conditions.promptTemplate)}；{evaluation.settings}</dd>
-                <dt>评测日期 / 核实日期</dt><dd>{evaluation.date ?? '未提供'} / {evaluation.checkedAt}</dd>
-                <dt>来源</dt><dd><a href={evaluation.sourceUrl}>{evaluation.sourceUrl}</a></dd>
-                <dt>来源使用说明</dt><dd>{rightsLabels[evaluation.rights.status]}；许可：{show(evaluation.rights.license)}；{evaluation.rights.notes} <a href={evaluation.rights.url}>查看说明</a></dd>
-                <dt>比较状态</dt><dd>{evaluation.comparable ? `比较组 ${evaluation.comparisonGroup}` : `不可比：${evaluation.nonComparableReason}`}</dd>
-              </dl>
-            </div>
-          </details>
-        </article>;
-      }) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
+      {evaluations.length ? groups.map((group) => <section class="capability-group" aria-label={`${group.label} 评测记录`}>
+        <h4 class="capability-group-heading">{group.label}</h4>
+        <p class="capability-group-meta">{group.records[0].dataset} · {group.records[0].language} · {group.records[0].version}</p>
+        <div class="capability-group-records" data-record-count={group.records.length > 1 ? 'multiple' : 'single'}>{group.records.map((evaluation) => {
+          const detailsId = `${model.id}-evidence-${evaluation.id}`;
+          const cited = assessment?.evidenceIds.includes(evaluation.id) ?? false;
+          return <article class="capability-result">
+            <p class="capability-result-title"><strong>{score(evaluation.value, evaluation.unit)}</strong><span class="capability-source" data-source={evaluation.kind}>{sourceLabels[evaluation.kind]} · {evaluation.publisher}</span><span class="capability-independence" data-independence={evaluation.provenance.independence}>{independenceLabels[evaluation.provenance.independence]}</span></p>
+            <p class="capability-result-meta">{evaluation.benchmark} · {evaluation.metric} · {evaluation.direction === 'higher' ? '越高越好' : '越低越好'} · {evaluation.language}{evaluation.modelConfig.thinking === 'enabled' ? ' · 思考开启' : evaluation.modelConfig.thinking === 'disabled' ? ' · 思考关闭' : evaluation.modelConfig.thinking === 'unknown' ? ' · 思考配置未知' : ''}{cited ? ' · 摘要引用' : ''}</p>
+            {group.records.length > 1 ? <p class="capability-result-meta">来源型号：{show(evaluation.externalModelId)}</p> : null}
+            <details id={detailsId} class="capability-details">
+              <summary>展开评测条件与来源</summary>
+              <div class="capability-detail-body">
+                <dl class="capability-facts">
+                  <dt>模型标识 / 修订</dt><dd>{show(evaluation.externalModelId)} / {show(evaluation.modelConfig.revision)}</dd>
+                  <dt>思考模式</dt><dd>{evaluation.modelConfig.thinking === 'unknown' ? '未知' : evaluation.modelConfig.thinking === 'enabled' ? '启用' : evaluation.modelConfig.thinking === 'disabled' ? '关闭' : '不适用'}</dd>
+                  <dt>量化 / 运行时</dt><dd>{show(evaluation.modelConfig.quantization)} / {show(evaluation.modelConfig.runtime)}</dd>
+                  <dt>数据集 / 划分</dt><dd>{evaluation.dataset} / {show(evaluation.conditions.split)}</dd>
+                  <dt>基准 / 报告版本</dt><dd>{evaluation.version}</dd>
+                  <dt>Few-shot / 输出上限</dt><dd>{show(evaluation.conditions.fewShot)} / {show(evaluation.conditions.outputTokens)} tokens</dd>
+                  <dt>提示模板 / 设置</dt><dd>{show(evaluation.conditions.promptTemplate)}；{evaluation.settings}</dd>
+                  <dt>评测日期 / 核实日期</dt><dd>{evaluation.date ?? '未提供'} / {evaluation.checkedAt}</dd>
+                  <dt>评测身份</dt><dd>{independenceLabels[evaluation.provenance.independence]}</dd>
+                  <dt>来源标识 / 评测批次</dt><dd>{evaluation.provenance.sourceId} / {evaluation.provenance.runId}</dd>
+                  <dt>来源</dt><dd><a href={evaluation.sourceUrl}>{evaluation.sourceUrl}</a></dd>
+                  <dt>来源使用说明</dt><dd>{rightsLabels[evaluation.rights.status]}；许可：{show(evaluation.rights.license)}；{evaluation.rights.notes} <a href={evaluation.rights.url}>查看说明</a></dd>
+                  <dt>比较状态</dt><dd>{evaluation.comparable ? `比较组 ${evaluation.comparisonGroup}` : `不可比：${evaluation.nonComparableReason}`}</dd>
+                </dl>
+              </div>
+            </details>
+          </article>;
+        })}</div>
+      </section>) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
       </div>
       </details>
     </section>;

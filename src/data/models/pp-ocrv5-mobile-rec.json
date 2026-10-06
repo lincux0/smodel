@@ -112,7 +112,7 @@
       "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的类别结果，不含文本检测流水线。官方定义任一字符（含标点）错误则整行计错；拆分、样本量和推理参数未披露。",
       "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
       "date": null,
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -137,6 +137,11 @@
         "license": null,
         "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
         "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      },
+      "provenance": {
+        "sourceId": "paddleocr",
+        "runId": "paddleocr-ppocrv5-mobile-rec-report",
+        "independence": "first-party"
       }
     },
     {
@@ -152,7 +157,7 @@
       "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的类别结果，不含文本检测流水线。官方定义任一字符（含标点）错误则整行计错；拆分、样本量和推理参数未披露。",
       "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
       "date": null,
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -177,6 +182,11 @@
         "license": null,
         "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
         "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      },
+      "provenance": {
+        "sourceId": "paddleocr",
+        "runId": "paddleocr-ppocrv5-mobile-rec-report",
+        "independence": "first-party"
       }
     },
     {
@@ -192,7 +202,7 @@
       "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的手写中文类别结果，不含文本检测流水线。官方说明任一字符（含标点）错误则整行计错；数据拆分、样本量和推理参数未披露。",
       "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
       "date": null,
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -217,6 +227,11 @@
         "license": null,
         "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
         "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      },
+      "provenance": {
+        "sourceId": "paddleocr",
+        "runId": "paddleocr-ppocrv5-mobile-rec-report",
+        "independence": "first-party"
       }
     },
     {
@@ -232,7 +247,7 @@
       "settings": "仅为PP-OCRv5_mobile_rec文本行识别组件的官方Average汇总值，不含文本检测流水线。官方说明任一字符（含标点）错误则整行计错；卡片未披露该汇总的聚合权重、测试拆分、样本量和推理参数。",
       "sourceUrl": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
       "date": null,
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -257,6 +272,11 @@
         "license": null,
         "url": "https://huggingface.co/PaddlePaddle/PP-OCRv5_mobile_rec",
         "notes": "仅记录少量评测事实并保留PaddleOCR来源链接；此引用不更改原卡片或数据的许可。"
+      },
+      "provenance": {
+        "sourceId": "paddleocr",
+        "runId": "paddleocr-ppocrv5-mobile-rec-report",
+        "independence": "first-party"
       }
     }
   ],

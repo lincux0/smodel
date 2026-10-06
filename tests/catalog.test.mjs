@@ -44,6 +44,7 @@ test('评测 schema 保留空值并校验证据身份、用途与来源关系', 
     value: 81, unit: '%', direction: 'higher', version: 'v1', settings: '设置未完整提供',
     sourceUrl: 'https://benchmark.example/report', date: null, checkedAt: '2026-10-02', kind: 'official-report',
     task, publisher: '发布方', externalModelId: null,
+    provenance: { sourceId: 'publisher', runId: 'sample-report', independence: 'first-party' },
     modelConfig: { revision: null, thinking: 'unknown', quantization: null, runtime: null },
     conditions: { split: null, fewShot: null, promptTemplate: null, outputTokens: null },
     comparable: false, comparisonGroup: null, nonComparableReason: '推理配置和数据划分未完整披露。',
@@ -63,9 +64,30 @@ test('评测 schema 保留空值并校验证据身份、用途与来源关系', 
   assert.throws(() => validateCatalog([{ ...model, assessments: [{ ...model.assessments[0], evidenceIds: ['missing-result'] }] }], guideIds), /引用不存在的评测/);
   assert.throws(() => validateCatalog([{ ...model, evaluations: [evaluation({ task: 'speech-recognition' })] }], guideIds), /不在模型用途中/);
   const corroborated = structuredClone(model);
-  corroborated.evaluations.push(evaluation({ id: 'copied-result', kind: 'third-party', sourceUrl: 'https://benchmark.example/reposted', publisher: '发布方' }));
+  corroborated.evaluations.push(evaluation({ id: 'copied-result', kind: 'third-party', sourceUrl: 'https://benchmark.example/reposted', publisher: '发布方',
+    provenance: { sourceId: 'publisher', runId: 'mirror-report', independence: 'unknown' } }));
   corroborated.assessments[0] = { ...corroborated.assessments[0], status: 'corroborated', evidenceIds: ['sample-result', 'copied-result'] };
-  assert.throws(() => validateCatalog([corroborated], guideIds), /独立的官方与第三方来源/);
+  assert.throws(() => validateCatalog([corroborated], guideIds), /已核实独立性/);
+  const independent = structuredClone(model);
+  independent.evaluations.push(evaluation({ id: 'independent-result', kind: 'third-party', publisher: 'Independent Lab', sourceUrl: 'https://independent.example/result',
+    provenance: { sourceId: 'independent-lab', runId: 'independent-report', independence: 'independent' } }));
+  independent.assessments[0] = { ...independent.assessments[0], status: 'corroborated', evidenceIds: ['sample-result', 'independent-result'] };
+  assert.doesNotThrow(() => validateCatalog([independent], guideIds));
+  independent.evaluations[0].kind = 'third-party';
+  independent.evaluations[0].provenance.independence = 'independent';
+  assert.doesNotThrow(() => validateCatalog([independent], guideIds));
+  independent.evaluations[1].provenance.independence = 'unknown';
+  independent.evaluations[0].provenance.independence = 'unknown';
+  assert.throws(() => validateCatalog([independent], guideIds), /已核实独立性/);
+  const sameRun = structuredClone(model);
+  sameRun.evaluations.push(evaluation({ id: 'mirror-result', sourceUrl: 'https://mirror.example/result' }));
+  assert.throws(() => validateCatalog([sameRun], guideIds), /重复评测批次成绩/);
+  sameRun.evaluations[1].provenance.sourceId = 'different-publisher';
+  assert.throws(() => validateCatalog([sameRun], guideIds), /同一评测批次/);
+  assert.throws(() => validateCatalog([{ ...model, evaluations: [evaluation({ provenance: { sourceId: 'publisher', runId: 'sample-report', independence: 'independent' } })] }], guideIds), /官方报告必须/);
+  assert.throws(() => validateCatalog([{ ...model, evaluations: [evaluation({ rights: { status: 'open-data', license: null, url: 'https://benchmark.example/terms', notes: '待确认' } })] }], guideIds), /需要明确许可/);
+  assert.throws(() => validateCatalog([{ ...model, evaluations: [evaluation({ publisher: 'Artificial Analysis' })] }], guideIds), /AA 当前仅允许链接/);
+  assert.throws(() => validateCatalog([{ ...model, evaluations: [evaluation({ sourceUrl: 'https://artificialanalysis.ai/leaderboards/models' })] }], guideIds), /AA 当前仅允许链接/);
 });
 
 test('现有型号逐用途完成证据审核，并仅链接 AA 而不收录其成绩', () => {
@@ -96,6 +118,7 @@ test('可比记录只在比较组的基准与测试口径一致时通过', () =>
     id: 'shared-result', benchmark: 'Shared benchmark', dataset: 'Shared set', language: 'zh', metric: 'accuracy',
     value: 81, unit: '%', direction: 'higher', version: 'v1', settings: 'temperature=0', sourceUrl: 'https://benchmark.example/report',
     date: null, checkedAt: '2026-10-02', kind: 'third-party', task, publisher: 'Independent Lab', externalModelId: model.id,
+    provenance: { sourceId: 'independent-lab', runId: 'shared-report', independence: 'independent' },
     modelConfig: { revision: `revision-${model.id}`, thinking: 'disabled', quantization: 'bf16', runtime: 'Transformers' },
     conditions: { split, fewShot: 0, promptTemplate: 'chat-v1', outputTokens: 512 },
     comparable: true, comparisonGroup: 'shared-benchmark-v1', nonComparableReason: null,

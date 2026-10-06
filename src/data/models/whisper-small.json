@@ -136,10 +136,15 @@
         "url": "https://cdn.openai.com/papers/whisper.pdf",
         "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "openai",
+        "runId": "openai-whisper-paper-appendix-d",
+        "independence": "first-party"
+      }
     },
     {
       "id": "whisper-paper-small-cv9-chinese-cer",
@@ -176,10 +181,15 @@
         "url": "https://cdn.openai.com/papers/whisper.pdf",
         "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "openai",
+        "runId": "openai-whisper-paper-appendix-d",
+        "independence": "first-party"
+      }
     },
     {
       "id": "whisper-paper-small-fleurs-indonesian-wer",
@@ -216,10 +226,15 @@
         "url": "https://cdn.openai.com/papers/whisper.pdf",
         "notes": "仅记录论文中的少量型号成绩并链接原始论文；不复制论文表格、音频或基准数据，引用不更改论文或数据集许可。"
       },
-      "checkedAt": "2026-10-02",
+      "checkedAt": "2026-10-06",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。"
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "provenance": {
+        "sourceId": "openai",
+        "runId": "openai-whisper-paper-appendix-d",
+        "independence": "first-party"
+      }
     }
   ],
   "assessments": [

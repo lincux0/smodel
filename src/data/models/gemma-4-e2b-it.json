@@ -140,6 +140,11 @@
         "license": null,
         "url": "https://huggingface.co/google/gemma-4-E2B-it",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e2b-it-gemma4-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -180,6 +185,11 @@
         "license": null,
         "url": "https://huggingface.co/google/gemma-4-E2B-it",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e2b-it-gemma4-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -220,6 +230,11 @@
         "license": null,
         "url": "https://huggingface.co/google/gemma-4-E2B-it",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e2b-it-gemma4-model-card",
+        "independence": "first-party"
       }
     },
     {
@@ -260,6 +275,11 @@
         "license": null,
         "url": "https://arxiv.org/html/2607.02770",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖报告原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e2b-it-gemma4-report-2026",
+        "independence": "first-party"
       }
     }
   ],

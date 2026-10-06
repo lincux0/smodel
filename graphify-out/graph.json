@@ -300,52 +300,11 @@
       "_origin": "ast"
     },
     {
-      "id": "src_components_capabilityevidence_statuslabels",
-      "label": "statusLabels",
-      "file_type": "code",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L6",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_components_capabilityevidence_sourcelabels",
-      "label": "sourceLabels",
-      "file_type": "code",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L7",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_components_capabilityevidence_rightslabels",
-      "label": "rightsLabels",
-      "file_type": "code",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L8",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_components_capabilityevidence_variantlabels",
-      "label": "variantLabels",
-      "file_type": "code",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L9",
-      "_origin": "ast"
-    },
-    {
-      "id": "src_components_capabilityevidence_score",
-      "label": "score()",
-      "file_type": "code",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L11",
-      "_callable": true,
-      "_origin": "ast"
-    },
-    {
       "id": "src_components_capabilityevidence_show",
       "label": "show()",
       "file_type": "code",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L54",
+      "source_location": "L63",
       "_callable": true,
       "_origin": "ast"
     },
@@ -553,7 +512,7 @@
       "label": "modelSchema",
       "file_type": "code",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L87",
+      "source_location": "L103",
       "_origin": "ast"
     },
     {
@@ -561,7 +520,7 @@
       "label": "Model",
       "file_type": "code",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L168",
+      "source_location": "L184",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast"
@@ -571,7 +530,7 @@
       "label": "validateCatalog()",
       "file_type": "code",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L170",
+      "source_location": "L186",
       "_callable": true,
       "_origin": "ast"
     },
@@ -580,7 +539,7 @@
       "label": "loadCatalog()",
       "file_type": "code",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L237",
+      "source_location": "L274",
       "_callable": true,
       "_origin": "ast"
     },
@@ -618,6 +577,51 @@
       "file_type": "code",
       "source_file": "src/lib/compare.ts",
       "source_location": "L4",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_evidence",
+      "label": "evidence.ts",
+      "file_type": "code",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_evidence_evaluation",
+      "label": "Evaluation",
+      "file_type": "code",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L3",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_evidence_summarizeevidence",
+      "label": "summarizeEvidence()",
+      "file_type": "code",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_evidence_groupevidence",
+      "label": "groupEvidence()",
+      "file_type": "code",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "src_lib_evidence_selectevidencepreview",
+      "label": "selectEvidencePreview()",
+      "file_type": "code",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L26",
       "_callable": true,
       "_origin": "ast"
     },
@@ -784,6 +788,23 @@
       "file_type": "code",
       "source_file": "tests/compare.test.mjs",
       "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_evidence_test",
+      "label": "evidence.test.mjs",
+      "file_type": "code",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "tests_evidence_test_record",
+      "label": "record()",
+      "file_type": "code",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L5",
+      "_callable": true,
       "_origin": "ast"
     },
     {
@@ -1063,7 +1084,7 @@
       "label": "目录职责",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L28",
+      "source_location": "L30",
       "_origin": "ast"
     },
     {
@@ -1071,7 +1092,7 @@
       "label": "页面",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L48",
+      "source_location": "L51",
       "_origin": "ast"
     },
     {
@@ -1079,7 +1100,7 @@
       "label": "目录与对比状态",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L60",
+      "source_location": "L63",
       "_origin": "ast"
     },
     {
@@ -1087,7 +1108,7 @@
       "label": "本地开发与产物",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L70",
+      "source_location": "L73",
       "_origin": "ast"
     },
     {
@@ -1095,7 +1116,7 @@
       "label": "Vercel 部署",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L76",
+      "source_location": "L79",
       "_origin": "ast"
     },
     {
@@ -1103,7 +1124,7 @@
       "label": "Graphify",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L105",
+      "source_location": "L108",
       "_origin": "ast"
     },
     {
@@ -1111,7 +1132,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L123",
+      "source_location": "L126",
       "_origin": "ast"
     },
     {
@@ -1151,7 +1172,7 @@
       "label": "数据与展示",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L21",
+      "source_location": "L23",
       "_origin": "ast"
     },
     {
@@ -1159,7 +1180,7 @@
       "label": "可比性与单位",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L27",
+      "source_location": "L29",
       "_origin": "ast"
     },
     {
@@ -1167,7 +1188,7 @@
       "label": "来源与使用条件",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L33",
+      "source_location": "L35",
       "_origin": "ast"
     },
     {
@@ -1175,7 +1196,7 @@
       "label": "Artificial Analysis",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L37",
+      "source_location": "L41",
       "_origin": "ast"
     },
     {
@@ -1183,7 +1204,7 @@
       "label": "开放结果与独立性",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L43",
+      "source_location": "L47",
       "_origin": "ast"
     },
     {
@@ -1191,7 +1212,7 @@
       "label": "维护与验收",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L49",
+      "source_location": "L53",
       "_origin": "ast"
     },
     {
@@ -1579,6 +1600,126 @@
       "_origin": "ast"
     },
     {
+      "id": "docs_evidence_general_coverage",
+      "label": "EVIDENCE_GENERAL_COVERAGE.md",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_general_coverage_通用_代码与视觉评测来源覆盖台账",
+      "label": "通用、代码与视觉评测来源覆盖台账",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_general_coverage_数据使用口径",
+      "label": "数据使用口径",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_general_coverage_型号覆盖",
+      "label": "型号覆盖",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L17",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_general_coverage_arena_快照核验范围",
+      "label": "Arena 快照核验范围",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_general_coverage_后续准入条件",
+      "label": "后续准入条件",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L40",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_sources",
+      "label": "EVIDENCE_SOURCES.md",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_sources_评测来源与导入边界",
+      "label": "评测来源与导入边界",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_sources_来源准入",
+      "label": "来源准入",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_sources_身份_批次与独立性",
+      "label": "身份、批次与独立性",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_sources_导入流程",
+      "label": "导入流程",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L36",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_special_coverage",
+      "label": "EVIDENCE_SPECIAL_COVERAGE.md",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_special_coverage_专项模型评测来源覆盖",
+      "label": "专项模型评测来源覆盖",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_special_coverage_新增的_mteb_分项",
+      "label": "新增的 MTEB 分项",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L14",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_evidence_special_coverage_来源入口",
+      "label": "来源入口",
+      "file_type": "document",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L24",
+      "_origin": "ast"
+    },
+    {
       "id": "docs_release",
       "label": "RELEASE.md",
       "file_type": "document",
@@ -1664,6 +1805,14 @@
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
       "source_location": "L57",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_多来源增量维护",
+      "label": "多来源增量维护",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L97",
       "_origin": "ast"
     },
     {
@@ -2123,51 +2272,45 @@
     },
     {
       "source": "src_components_capabilityevidence",
-      "target": "src_components_capabilityevidence_statuslabels",
-      "relation": "contains",
+      "target": "src_lib_evidence",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L6",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
     {
       "source": "src_components_capabilityevidence",
-      "target": "src_components_capabilityevidence_sourcelabels",
-      "relation": "contains",
+      "target": "src_lib_evidence_groupevidence",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L7",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
     {
       "source": "src_components_capabilityevidence",
-      "target": "src_components_capabilityevidence_rightslabels",
-      "relation": "contains",
+      "target": "src_lib_evidence_selectevidencepreview",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L8",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
     {
       "source": "src_components_capabilityevidence",
-      "target": "src_components_capabilityevidence_variantlabels",
-      "relation": "contains",
+      "target": "src_lib_evidence_summarizeevidence",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L9",
-      "weight": 1.0,
-      "_origin": "ast"
-    },
-    {
-      "source": "src_components_capabilityevidence",
-      "target": "src_components_capabilityevidence_score",
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L11",
+      "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2177,7 +2320,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/CapabilityEvidence.astro",
-      "source_location": "L54",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2535,7 +2678,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L87",
+      "source_location": "L103",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2545,7 +2688,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L168",
+      "source_location": "L184",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2555,7 +2698,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L170",
+      "source_location": "L186",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2565,7 +2708,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L237",
+      "source_location": "L274",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2576,7 +2719,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/catalog.ts",
-      "source_location": "L256",
+      "source_location": "L293",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -2607,6 +2750,68 @@
       "confidence": "EXTRACTED",
       "source_file": "src/lib/compare.ts",
       "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_catalog",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_catalog_model",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_evidence_evaluation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_evidence_summarizeevidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_evidence_groupevidence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "src_lib_evidence",
+      "target": "src_lib_evidence_selectevidencepreview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/evidence.ts",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3192,6 +3397,82 @@
       "_origin": "ast"
     },
     {
+      "source": "tests_evidence_test",
+      "target": "ref_node_assert_strict",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "ref_node_test",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "src_lib_evidence",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "src_lib_evidence_groupevidence",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "src_lib_evidence_selectevidencepreview",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "src_lib_evidence_summarizeevidence",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "tests_evidence_test",
+      "target": "tests_evidence_test_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/evidence.test.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "tsconfig",
       "target": "tsconfig_extends",
       "relation": "contains",
@@ -3608,12 +3889,22 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_architecture",
+      "target": "docs_evidence_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/ARCHITECTURE.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_architecture_项目架构与部署",
       "target": "docs_architecture_目录职责",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3623,7 +3914,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L48",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3633,7 +3924,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L60",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3643,7 +3934,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L70",
+      "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3653,7 +3944,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L76",
+      "source_location": "L79",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3663,7 +3954,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L105",
+      "source_location": "L108",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3673,7 +3964,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L121",
+      "source_location": "L124",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3683,7 +3974,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L123",
+      "source_location": "L126",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3693,7 +3984,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L125",
+      "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3743,7 +4034,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L21",
+      "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3753,7 +4044,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L27",
+      "source_location": "L29",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3763,7 +4054,37 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L33",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_capability_evidence",
+      "target": "docs_evidence_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CAPABILITY_EVIDENCE.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_capability_evidence",
+      "target": "docs_evidence_general_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CAPABILITY_EVIDENCE.md",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_capability_evidence",
+      "target": "docs_evidence_special_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CAPABILITY_EVIDENCE.md",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3773,7 +4094,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L37",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3783,7 +4104,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L43",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3793,7 +4114,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L49",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3803,7 +4124,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3924,6 +4245,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
       "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_content_guide",
+      "target": "docs_evidence_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/CONTENT_GUIDE.md",
+      "source_location": "L137",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4348,6 +4679,156 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_evidence_general_coverage",
+      "target": "docs_evidence_general_coverage_通用_代码与视觉评测来源覆盖台账",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_general_coverage_通用_代码与视觉评测来源覆盖台账",
+      "target": "docs_evidence_general_coverage_数据使用口径",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_general_coverage",
+      "target": "docs_capability_evidence",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_general_coverage_通用_代码与视觉评测来源覆盖台账",
+      "target": "docs_evidence_general_coverage_型号覆盖",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_general_coverage_型号覆盖",
+      "target": "docs_evidence_general_coverage_arena_快照核验范围",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_general_coverage_型号覆盖",
+      "target": "docs_evidence_general_coverage_后续准入条件",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources",
+      "target": "docs_evidence_sources_评测来源与导入边界",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources_评测来源与导入边界",
+      "target": "docs_evidence_sources_来源准入",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources",
+      "target": "docs_evidence_general_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources",
+      "target": "docs_evidence_special_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources_评测来源与导入边界",
+      "target": "docs_evidence_sources_身份_批次与独立性",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_sources_评测来源与导入边界",
+      "target": "docs_evidence_sources_导入流程",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SOURCES.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_special_coverage",
+      "target": "docs_evidence_special_coverage_专项模型评测来源覆盖",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_special_coverage_专项模型评测来源覆盖",
+      "target": "docs_evidence_special_coverage_新增的_mteb_分项",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_evidence_special_coverage_专项模型评测来源覆盖",
+      "target": "docs_evidence_special_coverage_来源入口",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_release",
       "target": "docs_release_0_1_0_发布说明",
       "relation": "contains",
@@ -4444,6 +4925,46 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
       "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources",
+      "target": "docs_sources_多来源增量维护",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources",
+      "target": "docs_evidence_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources",
+      "target": "docs_evidence_general_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources",
+      "target": "docs_evidence_special_coverage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L101",
       "weight": 1.0,
       "_origin": "ast"
     },

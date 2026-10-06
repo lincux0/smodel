@@ -136,6 +136,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-4b-qwen-model-card-unknown",
+        "independence": "first-party"
       }
     },
     {
@@ -176,6 +181,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-4b-qwen-model-card-unknown",
+        "independence": "first-party"
       }
     },
     {
@@ -216,6 +226,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-4b-qwen-model-card-unknown",
+        "independence": "first-party"
       }
     },
     {
@@ -256,6 +271,11 @@
         "license": null,
         "url": "https://huggingface.co/Qwen/Qwen3.5-4B",
         "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-4b-qwen-model-card-unknown",
+        "independence": "first-party"
       }
     }
   ],

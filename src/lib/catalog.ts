@@ -41,6 +41,11 @@ const evaluationSchema = z.object({
   comparable: z.boolean(),
   task: z.enum(Object.keys(taskLabels) as [keyof typeof taskLabels, ...Array<keyof typeof taskLabels>]),
   publisher: text,
+  provenance: z.object({
+    sourceId: id,
+    runId: id,
+    independence: z.enum(['first-party', 'independent', 'unknown']),
+  }).strict(),
   externalModelId: text.nullable(),
   modelConfig: z.object({
     revision: text.nullable(),
@@ -63,6 +68,17 @@ const evaluationSchema = z.object({
     notes: text,
   }).strict(),
 }).strict().superRefine((value, ctx) => {
+  if (/Artificial Analysis|人工分析|\bAA\b/i.test(value.publisher)
+    || /artificial-?analysis|(?:^|-)aa(?:-|$)/i.test(value.provenance.sourceId)
+    || [value.sourceUrl, value.rights.url].some((link) => /(^|\.)artificialanalysis(?:cdn)?\.(ai|com)$/i.test(new URL(link).hostname))) {
+    ctx.addIssue({ code: 'custom', message: 'AA 当前仅允许链接，不得导入评测成绩' });
+  }
+  if (value.kind === 'official-report' && value.provenance.independence !== 'first-party') {
+    ctx.addIssue({ code: 'custom', path: ['provenance'], message: '官方报告必须标记为厂商自测，不能计为独立评测' });
+  }
+  if (value.rights.status === 'open-data' && value.rights.license === null) {
+    ctx.addIssue({ code: 'custom', path: ['rights'], message: '开放结果数据需要明确许可' });
+  }
   const errorRate = /\b(?:wer|cer|word error rate|character error rate)\b/i.test(value.metric);
   if (value.unit.includes('%') && (value.value < 0 || (!errorRate && value.value > 100))) {
     ctx.addIssue({ code: 'custom', path: ['value'], message: '百分比成绩必须在 0 到 100 之间' });
@@ -157,7 +173,7 @@ export const modelSchema = z.object({
   evaluations: z.array(evaluationSchema),
   assessments: z.array(z.object({
     task: z.enum(Object.keys(taskLabels) as [keyof typeof taskLabels, ...Array<keyof typeof taskLabels>]),
-    status: z.enum(['official-only', 'corroborated', 'insufficient']),
+    status: z.enum(['official-only', 'single-source', 'independence-unverified', 'corroborated', 'insufficient']),
     summary: text,
     strengths: z.array(text),
     limitations: z.array(text),
@@ -182,9 +198,21 @@ export function validateCatalog(entries: unknown[], guideIds: string[]): Model[]
       if (!guides.has(deployment.guideId)) throw new Error(`${model.id}：不存在的指南 ${deployment.guideId}`);
     }
     const evaluationIds = new Set<string>();
+    const runs = new Map<string, Model['evaluations'][number]>();
+    const results = new Set<string>();
     for (const evaluation of model.evaluations) {
       if (evaluationIds.has(evaluation.id)) throw new Error(`${model.id}：重复评测 ID ${evaluation.id}`);
       evaluationIds.add(evaluation.id);
+      const run = runs.get(evaluation.provenance.runId);
+      if (run && (run.provenance.sourceId !== evaluation.provenance.sourceId
+        || run.provenance.independence !== evaluation.provenance.independence)) {
+        throw new Error(`${model.id}：同一评测批次不能归属不同评测者或独立性`);
+      }
+      runs.set(evaluation.provenance.runId, evaluation);
+      const resultKey = JSON.stringify([evaluation.provenance.runId, evaluation.task, evaluation.benchmark,
+        evaluation.dataset, evaluation.language, evaluation.metric, evaluation.unit, evaluation.version, evaluation.modelConfig, evaluation.conditions]);
+      if (results.has(resultKey)) throw new Error(`${model.id}：重复评测批次成绩，转载不能重复导入`);
+      results.add(resultKey);
       if (!model.tasks.includes(evaluation.task)) throw new Error(`${model.id}：评测用途 ${evaluation.task} 不在模型用途中`);
       if (evaluation.comparisonGroup) {
         const group = comparisonGroups.get(evaluation.comparisonGroup) ?? [];
@@ -211,11 +239,20 @@ export function validateCatalog(entries: unknown[], guideIds: string[]): Model[]
         throw new Error(`${model.id}：仅官方摘要只能引用官方报告`);
       }
       if (assessment.status === 'corroborated') {
-        const official = references.find(({ kind }) => kind === 'official-report');
-        const thirdParty = references.find(({ kind }) => kind === 'third-party');
-        if (!official || !thirdParty || official.publisher === thirdParty.publisher || official.sourceUrl === thirdParty.sourceUrl) {
-          throw new Error(`${model.id}：交叉核实需要独立的官方与第三方来源`);
+        const verified = references.filter(({ provenance }) => provenance.independence !== 'unknown');
+        const independent = verified.filter(({ provenance }) => provenance.independence === 'independent');
+        if (!independent.some((left) => verified.some((right) => left.provenance.sourceId !== right.provenance.sourceId
+          && left.provenance.runId !== right.provenance.runId && left.publisher !== right.publisher && left.sourceUrl !== right.sourceUrl))) {
+          throw new Error(`${model.id}：交叉核实需要不同批次、不同评测者且已核实独立性的来源`);
         }
+      }
+      if (assessment.status === 'single-source' && (!references.length
+        || new Set(references.map(({ provenance }) => provenance.sourceId)).size !== 1
+        || references.some(({ provenance }) => provenance.independence === 'unknown'))) {
+        throw new Error(`${model.id}：单一来源摘要需要一个已确认的评测者`);
+      }
+      if (assessment.status === 'independence-unverified' && !references.some(({ provenance }) => provenance.independence === 'unknown')) {
+        throw new Error(`${model.id}：独立性待确认摘要需要关系未知的评测记录`);
       }
     }
     return model;
