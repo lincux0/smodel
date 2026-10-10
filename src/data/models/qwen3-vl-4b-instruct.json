@@ -1,0 +1,152 @@
+{
+  "id": "qwen3-vl-4b-instruct",
+  "name": "Qwen3-VL-4B-Instruct",
+  "family": "Qwen",
+  "version": "3-VL",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 4,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方型号档位为4B语言骨干；HF权重元数据safetensors张量参数和为4,437,815,808（约4.44B），包含视觉编码器等组件，官方未按整模单列参数总量。此处保留官方型号档位，不把张量和当作官方参数口径。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 262144,
+    "extendedTokens": 1000000,
+    "extension": "YaRN；官方说明Interleaved-MRoPE的位置编号增长比常规RoPE慢，扩展到1M上下文时建议factor取2或3而非4，并需要运行时支持。",
+    "status": "documented",
+    "sourceUrl": "https://github.com/QwenLM/Qwen3-VL"
+  },
+  "languages": [
+    "多语言（官方说明OCR支持32种语言，未列全部语种）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct"
+    },
+    "code": null,
+    "trainingDisclosure": "官方提供模型卡与系列仓库说明，介绍架构改动与能力方向；未公开完整训练数据清单。"
+  },
+  "summary": "支持文本、图像与视频输入的 4B 级视觉语言模型，侧重界面操作、空间感知与文档识别。",
+  "features": [
+    "原生256K上下文，可用YaRN扩展至1M",
+    "OCR支持32种语言，官方称改善低光、模糊与倾斜场景",
+    "支持从图像或视频生成Draw.io、HTML、CSS与JS代码",
+    "官方给出Instruct与Thinking两套推荐生成参数"
+  ],
+  "limitations": [
+    "4B是官方语言骨干档位，不能直接视为整个多模态系统的全部参数。",
+    "官方性能表以图片形式发布，未提供可复制的数值表，本页不引用无法核对的分数。",
+    "Transformers需按官方说明从源码安装，模型卡注明当时版本尚未正式发布。",
+    "扩展上下文需要运行时支持与额外配置；本站未验证图像、视频与OCR的实际效果。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
+  "checkedAt": "2026-10-10",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct#quickstart",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求从源码安装最新版）",
+        "torch",
+        "torchvision",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "官方模型卡要求从源码安装transformers，并说明当时标注的版本尚未正式发布；本站未执行该命令，依赖与模型版本需保持匹配。",
+          "command": "python -m pip install git+https://github.com/huggingface/transformers"
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页示例用Qwen3VLForConditionalGeneration与AutoProcessor加载此模型并处理图像与文本输入；官方建议多图与视频场景启用flash_attention_2。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、图像分辨率、视频帧数与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct文本成绩。官方提供纯文本性能表，但以图片形式发布，本页不引用无法核对的数值。",
+      "strengths": [
+        "官方明确该型号与8B同批发布，并提供Instruct版本的推荐生成参数。",
+        "官方说明该系列在文本理解上与同规模纯文本模型对齐。"
+      ],
+      "limitations": [
+        "官方纯文本性能表为图片，未提供可复制的数值、评测条件或模型revision，无法作为可核对记录。",
+        "官方提示部分基准使用内部构建数据集，复现资产当时尚未发布。",
+        "未找到许可明确且确认为独立方的同型号文本评测。",
+        "本站未运行该模型验证中文写作或长文本表现。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "coding",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct代码成绩。官方强调从图像或视频生成前端代码，但未给出可核对的代码基准数值表。",
+      "strengths": [
+        "官方将视觉代码生成列为该代重点能力，说明可用于Draw.io、HTML、CSS与JS生成。"
+      ],
+      "limitations": [
+        "视觉代码生成没有公开的标准化基准，官方也未在模型卡给出对应分数。",
+        "通用代码能力不能由同系列其他规模型号的成绩推断。",
+        "未找到许可明确且确认为独立方的同型号代码评测。",
+        "本站未用真实仓库或界面截图验证生成代码的正确性。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "image-understanding",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct视觉成绩。官方视觉与文本性能表均为图片，本页不引用无法核对的分数。",
+      "strengths": [
+        "官方说明OCR语言数由上一代扩展到32种，并改善低光、模糊、倾斜与长文档结构解析。",
+        "官方给出空间感知、2D/3D定位与界面操作等能力方向，并列出Instruct版本的推荐参数。"
+      ],
+      "limitations": [
+        "官方视觉性能表为图片，未提供可复制的数值、评测框架版本与模型revision。",
+        "官方评测设置说明使用vLLM与VLMEvalKit、lmms-eval，并提到部分提示词经过修改、部分基准为内部构建，条件未完全公开。",
+        "OCR语言数属于功能说明，不是准确率证据。",
+        "本站未使用本地图片或文档验证识别与定位效果。"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

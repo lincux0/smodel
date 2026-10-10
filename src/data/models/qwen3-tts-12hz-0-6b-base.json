@@ -1,0 +1,222 @@
+{
+  "id": "qwen3-tts-12hz-0-6b-base",
+  "name": "Qwen3-TTS-12Hz-0.6B-Base",
+  "family": "Qwen",
+  "version": "3-TTS-12Hz",
+  "variant": "specialized",
+  "tasks": [
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方型号档位为0.6B；HF权重元数据safetensors张量参数和为914,643,008（约0.91B），包含语音分词器等配套组件，官方未按整模单列参数总量。此处保留官方型号档位。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "中文",
+    "英语",
+    "日语",
+    "韩语",
+    "德语",
+    "法语",
+    "俄语",
+    "葡萄牙语",
+    "西班牙语",
+    "意大利语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base"
+    },
+    "code": null,
+    "trainingDisclosure": "官方说明该系列以超过500万小时语音数据训练；未公开完整训练语料清单与数据许可明细。"
+  },
+  "summary": "基于参考音频做快速声音克隆的多语种流式语音合成模型。",
+  "features": [
+    "0.6B档Base检查点，官方称支持3秒参考音频快速克隆",
+    "覆盖中文、英语等10种语言",
+    "基于Qwen3-TTS-Tokenizer-12Hz的离散多码本语言模型架构",
+    "官方称端到端合成延迟可低至97ms，支持流式与非流式生成"
+  ],
+  "limitations": [
+    "Base检查点需要参考音频及其文本才能克隆音色，不是开箱即用的固定音色模型。",
+    "官方提示音色与语言的搭配会影响效果，建议使用音色的母语；本站未做听测。",
+    "LLM式token上下文不适用；不提供未经核实的输入长度上限。",
+    "官方成绩来自自建测试集与自定推理配置，不能直接代表目标文本与音色的自然度。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+  "checkedAt": "2026-10-10",
+  "deployments": [
+    {
+      "id": "official-qwen-tts",
+      "runtime": "qwen-tts",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base#quickstart",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "qwen-tts",
+        "torch",
+        "soundfile",
+        "flash-attn（官方标注为可选优化项）"
+      ],
+      "steps": [
+        {
+          "title": "安装 Python 依赖",
+          "description": "官方模型卡Quickstart给出的安装命令；flash-attn为可选优化项，需按官方说明单独安装。本站未执行该命令。",
+          "command": "python -m pip install -U qwen-tts"
+        },
+        {
+          "title": "加载指定模型并克隆音色",
+          "description": "按同页示例用Qwen3TTSModel加载此模型，并调用generate_voice_clone传入参考音频与参考文本。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、参考音频长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "seed-tts-test-zh-wer",
+      "benchmark": "Seed-TTS test set",
+      "dataset": "SEEDtest-zh",
+      "language": "中文",
+      "metric": "WER",
+      "value": 0.92,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-TTS官方仓库零样本语音生成基准表",
+      "settings": "官方说明评测时全部模型使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。同表列出CosyVoice 3、MiniMax-Speech等对照模型。未披露参考音频来源与说话人划分细节；本站未复现。",
+      "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
+      "date": "2026-01-22",
+      "checkedAt": "2026-10-10",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": "language=\"auto\"",
+        "outputTokens": 2048
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的模型revision、参考音频条件与完整解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://github.com/QwenLM/Qwen3-TTS",
+        "notes": "仅记录官方仓库中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-tts-repo-benchmark",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "seed-tts-test-en-wer",
+      "benchmark": "Seed-TTS test set",
+      "dataset": "SEEDtest-en",
+      "language": "英语",
+      "metric": "WER",
+      "value": 1.32,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-TTS官方仓库零样本语音生成基准表",
+      "settings": "与中文项同一批次：官方说明使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点默认值，测试集设置language=\"auto\"。未披露参考音频来源与说话人划分细节；本站未复现。",
+      "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
+      "date": "2026-01-22",
+      "checkedAt": "2026-10-10",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": "language=\"auto\"",
+        "outputTokens": 2048
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的模型revision、参考音频条件与完整解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://github.com/QwenLM/Qwen3-TTS",
+        "notes": "仅记录官方仓库中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-tts-repo-benchmark",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "official-only",
+      "summary": "可作为中英文声音克隆候选：官方仓库报告该检查点在Seed-TTS测试集的中文WER为0.92%、英文WER为1.32%，同表中文分数低于CosyVoice 3的0.71%之外的多数对照项。WER只衡量内容一致性，不代表音色相似度或听感自然度。",
+      "strengths": [
+        "官方按型号逐行列出12Hz-0.6B-Base结果，未借用1.7B档或25Hz档成绩。",
+        "同一批次的评测配置在表格前统一说明，包括精度、输出长度上限与语言设置。",
+        "仓库另提供多语言与跨语言测试集结果，可按语种进一步核对。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "WER只反映合成内容与文本的一致性，音色相似度与自然度需要SIM或听测数据，官方表中对应项未在本页引用。",
+        "参考音频来源、说话人划分与长文本表现未完整披露，不同参考音频可能改变结果。",
+        "本站未做听测，也未验证流式生成的延迟表现。"
+      ],
+      "evidenceIds": [
+        "seed-tts-test-zh-wer",
+        "seed-tts-test-en-wer"
+      ]
+    }
+  ]
+}

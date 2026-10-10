@@ -1,0 +1,156 @@
+{
+  "id": "bge-reranker-v2-m3",
+  "name": "BGE-reranker-v2-m3",
+  "family": "BGE",
+  "version": "v2-m3",
+  "variant": "specialized",
+  "tasks": [
+    "reranking"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "score"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.568,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡未单列参数量；HF权重元数据safetensors张量参数和为567,755,777（约0.568B），上线台账原记约0.6B。未另列有效或激活参数口径。",
+    "sourceUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方模型列表标注Multilingual，未列具体语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/BAAI/bge-reranker-v2-m3"
+    },
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE"
+    },
+    "trainingDisclosure": "官方模型卡与FlagEmbedding文档介绍模型定位、用法与评测图，未提供训练数据清单。"
+  },
+  "summary": "对查询与候选段落成对打分的多语交叉编码器重排模型，用于调整已召回结果的次序。",
+  "features": [
+    "交叉编码器直接输出相关性分数",
+    "官方定位为轻量、易部署且多语能力较强的重排基线",
+    "基于bge-m3骨干",
+    "可将原始分数经sigmoid映射到0–1区间"
+  ],
+  "limitations": [
+    "只对已召回候选重排，不负责召回，也不输出文本向量。",
+    "官方模型卡未声明最大输入长度；官方Transformers示例以max_length=512截断，长段落需自行确认并验证。",
+    "原始logit分数与归一化概率不可混用，阈值需按目标语料重新标定。",
+    "官方评测以图片图表形式给出，未提供可复制的数值表，本页不引用无法核对的数字。"
+  ],
+  "officialUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+  "checkedAt": "2026-10-10",
+  "deployments": [
+    {
+      "id": "official-flagembedding",
+      "runtime": "FlagEmbedding",
+      "systems": [],
+      "format": "PyTorch checkpoint",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3#using-flagembedding",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "FlagEmbedding",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 FlagEmbedding",
+          "description": "按官方模型卡 Usage 章节安装 FlagEmbedding，官方同时提供从源码安装的写法。",
+          "command": "python -m pip install -U FlagEmbedding"
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页示例用 FlagReranker 加载此模型并对查询-段落对打分；需要0–1区间时显式设置 normalize=True。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3#using-huggingface-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "打开部署来源链接，按官方安装章节配置依赖；依赖与模型版本需保持匹配。",
+          "command": null
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页示例用 AutoModelForSequenceClassification 加载并读取logits；官方示例以max_length=512截断，长输入需自行调整并验证。本站未执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的BGE-reranker-v2-m3重排成绩，暂不据官方图表或社区汇总判断其重排效果高低。",
+      "strengths": [
+        "官方模型列表明确该型号面向多语言场景，并把它列为兼顾效果与效率的推荐项。",
+        "官方给出FlagEmbedding与Transformers两条可核对的使用路线。"
+      ],
+      "limitations": [
+        "官方模型卡以图片形式给出BEIR、CMTEB-retrieval与miracl评测图，未提供可复制的数值表与评测条件，本页不引用无法核对的数字。",
+        "重排效果依赖召回候选集、切分与阈值标定；官方示例的512截断也会影响长段落结果。",
+        "未找到许可明确且确认为独立方的同型号同条件复测。",
+        "本站未在自有语料上运行该模型。"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}
