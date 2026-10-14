@@ -56,7 +56,7 @@
     "论文成绩是发布方在固定基准上的运行结果，本站未在自有语料复现检索效果。"
   ],
   "officialUrl": "https://huggingface.co/BAAI/bge-m3",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-14",
   "deployments": [
     {
       "id": "official-flagembedding",
@@ -103,14 +103,14 @@
       "dataset": "MIRACL dev set（18种语言）",
       "language": "多语言（18种语言）",
       "metric": "nDCG@10",
-      "value": 70.0,
+      "value": 71.5,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "M3-Embedding论文Table 11（M3.All行）",
-      "settings": "论文报告值，对应M3.All，即稠密、稀疏与多向量三类表示融合后的结果，不是单一稠密表示成绩；同论文Table 6的稠密消融为67.8。评测按官方基准使用Pyserini，逐语言结果见同论文Table 2；本站未复现。",
-      "sourceUrl": "https://arxiv.org/abs/2402.03216",
-      "date": "2024-01-30",
-      "checkedAt": "2026-10-10",
+      "version": "M3-Embedding论文v5 Table 1（M3.All行）",
+      "settings": "v5论文报告值，对应M3.All，即稠密、稀疏与多向量三类表示融合后的结果，不是单一稠密表示成绩；同表M3.Dense为69.2。BAAI于2024-07-01公告修正MIRACL评测；该日期是修正公告日期，论文未披露本次评测运行日。评测按官方基准使用Pyserini，逐语言结果见Table 1；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.03216v5",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -133,12 +133,12 @@
       "rights": {
         "status": "citation",
         "license": null,
-        "url": "https://arxiv.org/abs/2402.03216",
+        "url": "https://arxiv.org/html/2402.03216v5",
         "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
       },
       "provenance": {
         "sourceId": "baai",
-        "runId": "baai-m3-paper-table11",
+        "runId": "baai-m3-paper-v5",
         "independence": "first-party"
       }
     },
@@ -151,11 +151,11 @@
       "value": 75.5,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "M3-Embedding论文Table 11（M3.All行），逐语言结果见同论文Table 3",
-      "settings": "论文报告值，对应M3.All融合结果；评测语料使用BEIR提供的英文维基处理版本。论文未在该表披露模型revision、编码精度与硬件条件；本站未复现。",
-      "sourceUrl": "https://arxiv.org/abs/2402.03216",
-      "date": "2024-01-30",
-      "checkedAt": "2026-10-10",
+      "version": "M3-Embedding论文v5 Table 2（M3.All行），逐语言结果见Table 2",
+      "settings": "v5论文报告值，对应M3.All融合结果；评测语料使用BEIR提供的英文维基处理版本。BAAI于2024-07-01公告MIRACL修正，MKQA结果未受该修正影响；该日期是公告日期，论文未披露本项评测运行日。论文未在该表披露模型revision、编码精度与硬件条件；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.03216v5",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -178,12 +178,12 @@
       "rights": {
         "status": "citation",
         "license": null,
-        "url": "https://arxiv.org/abs/2402.03216",
+        "url": "https://arxiv.org/html/2402.03216v5",
         "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
       },
       "provenance": {
         "sourceId": "baai",
-        "runId": "baai-m3-paper-table11",
+        "runId": "baai-m3-paper-v5",
         "independence": "first-party"
       }
     },
@@ -196,11 +196,11 @@
       "value": 65.0,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "M3-Embedding论文Table 11（M3.All行），逐语言结果见同论文Table 4",
-      "settings": "论文报告值，对应M3.All融合结果。MLDR为论文作者自行构建并开源的文档检索数据集，且其训练集用于增强长文档检索能力，论文提示与未使用长文档数据微调的基线比较需注意该差异；本站未复现。",
-      "sourceUrl": "https://arxiv.org/abs/2402.03216",
-      "date": "2024-01-30",
-      "checkedAt": "2026-10-10",
+      "version": "M3-Embedding论文v5 Table 3（M3.All行），逐语言结果见Table 3",
+      "settings": "v5论文报告值，对应M3.All融合结果。BAAI于2024-07-01公告MIRACL修正，MLDR结果未受该修正影响；该日期是公告日期，论文未披露本项评测运行日。MLDR为论文作者自行构建并开源的文档检索数据集，且其训练集用于增强长文档检索能力，论文提示与未使用长文档数据微调的基线比较需注意该差异；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.03216v5",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -223,12 +223,12 @@
       "rights": {
         "status": "citation",
         "license": null,
-        "url": "https://arxiv.org/abs/2402.03216",
+        "url": "https://arxiv.org/html/2402.03216v5",
         "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
       },
       "provenance": {
         "sourceId": "baai",
-        "runId": "baai-m3-paper-table11",
+        "runId": "baai-m3-paper-v5",
         "independence": "first-party"
       }
     }
@@ -237,14 +237,14 @@
     {
       "task": "embedding",
       "status": "official-only",
-      "summary": "可作为多语言与跨语言检索候选：论文报告M3.All在MIRACL nDCG@10为70.0、MKQA Recall@100为75.5、MLDR nDCG@10为65.0。三项均为稠密、稀疏与多向量融合后的结果，只部署稠密向量时不能引用这些数值。",
+      "summary": "可作为多语言与跨语言检索候选：论文v5报告M3.All在MIRACL nDCG@10为71.5、MKQA Recall@100为75.5、MLDR nDCG@10为65.0。三项均为稠密、稀疏与多向量融合后的结果，只部署稠密向量时不能引用这些数值。",
       "strengths": [
         "论文在同一张表内并列BM25、M3.Sparse与M3.All，融合表示与单一表示的差异可查。",
         "覆盖多语言检索、跨语言检索与长文档检索三类场景，指标口径写在表标题中。"
       ],
       "limitations": [
         "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
-        "70.0等数值是三类表示融合结果，不是稠密向量单独成绩；论文Table 6的稠密消融为67.8。",
+        "71.5等数值是三类表示融合结果，不是稠密向量单独成绩；论文v5 Table 1的M3.Dense为69.2。论文未披露这些成绩的实际运行日期。",
         "MLDR由论文作者构建且其训练集参与训练增强，与其他基线对比时存在该差异。",
         "长文档与跨语言表现依赖切分与检索系统实现，本站未在自有语料验证。"
       ],

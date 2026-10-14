@@ -9,17 +9,18 @@
   ],
   "modalities": {
     "input": [
-      "text"
+      "text",
+      "audio"
     ],
     "output": [
       "audio"
     ]
   },
   "parameters": {
-    "totalB": 0.6,
+    "totalB": 0.915,
     "activeB": null,
     "effectiveB": null,
-    "notes": "官方型号档位为0.6B；HF权重元数据safetensors张量参数和为914,643,008（约0.91B），包含语音分词器等配套组件，官方未按整模单列参数总量。此处保留官方型号档位。",
+    "notes": "官方型号名称为0.6B档；Hugging Face模型卡标注该检查点约0.9B参数，主model.safetensors参数和为914,643,008（约0.915B），不含仓库单独列出的speech_tokenizer/model.safetensors。官方未给出包含独立语音分词器在内的整套运行参数总量，active/effective口径也未披露。",
     "sourceUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base"
   },
   "context": {
@@ -57,13 +58,13 @@
     "官方称端到端合成延迟可低至97ms，支持流式与非流式生成"
   ],
   "limitations": [
-    "Base检查点需要参考音频及其文本才能克隆音色，不是开箱即用的固定音色模型。",
+    "Base检查点用于参考音频声音克隆，不是开箱即用的固定音色模型。官方示例提供参考文本；接口也支持x_vector_only_mode=True时不传ref_text，但音色效果可能下降。",
     "官方提示音色与语言的搭配会影响效果，建议使用音色的母语；本站未做听测。",
     "LLM式token上下文不适用；不提供未经核实的输入长度上限。",
-    "官方成绩来自自建测试集与自定推理配置，不能直接代表目标文本与音色的自然度。"
+    "官方Seed-TTS公开测试集成绩来自发布方评测，不能直接代表目标文本与音色的自然度。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-14",
   "deployments": [
     {
       "id": "official-qwen-tts",
@@ -83,7 +84,7 @@
       "steps": [
         {
           "title": "安装 Python 依赖",
-          "description": "官方模型卡Quickstart给出的安装命令；flash-attn为可选优化项，需按官方说明单独安装。本站未执行该命令。",
+          "description": "官方模型卡Quickstart给出的安装命令；官方示例使用CUDA设备、bfloat16和FlashAttention 2。若按该示例设置attn_implementation=\"flash_attention_2\"，需另行安装兼容的flash-attn；也可按目标环境选择不启用该优化。本站未执行。",
           "command": "python -m pip install -U qwen-tts"
         },
         {
@@ -109,17 +110,17 @@
     {
       "id": "seed-tts-test-zh-wer",
       "benchmark": "Seed-TTS test set",
-      "dataset": "SEEDtest-zh",
+      "dataset": "Seed-TTS test set（中文）",
       "language": "中文",
       "metric": "WER",
       "value": 0.92,
       "unit": "%",
       "direction": "lower",
       "version": "Qwen3-TTS官方仓库零样本语音生成基准表",
-      "settings": "官方说明评测时全部模型使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。同表列出CosyVoice 3、MiniMax-Speech等对照模型。未披露参考音频来源与说话人划分细节；本站未复现。",
+      "settings": "Qwen仓库报告的zero-shot speech generation结果。官方说明评测时使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。官方仓库于2026-01-22发布，不是已知的评测运行日期；来源未披露模型revision、参考音频/说话人划分、WER识别器及文本归一化细节；本站未复现。",
       "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
-      "date": "2026-01-22",
-      "checkedAt": "2026-10-10",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "text-to-speech",
@@ -154,17 +155,17 @@
     {
       "id": "seed-tts-test-en-wer",
       "benchmark": "Seed-TTS test set",
-      "dataset": "SEEDtest-en",
+      "dataset": "Seed-TTS test set（英语）",
       "language": "英语",
       "metric": "WER",
       "value": 1.32,
       "unit": "%",
       "direction": "lower",
       "version": "Qwen3-TTS官方仓库零样本语音生成基准表",
-      "settings": "与中文项同一批次：官方说明使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点默认值，测试集设置language=\"auto\"。未披露参考音频来源与说话人划分细节；本站未复现。",
+      "settings": "Qwen仓库报告的zero-shot speech generation结果。官方说明评测时使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。官方仓库于2026-01-22发布，不是已知的评测运行日期；来源未披露模型revision、参考音频/说话人划分、WER识别器及文本归一化细节；本站未复现。",
       "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
-      "date": "2026-01-22",
-      "checkedAt": "2026-10-10",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "text-to-speech",
@@ -201,7 +202,7 @@
     {
       "task": "text-to-speech",
       "status": "official-only",
-      "summary": "可作为中英文声音克隆候选：官方仓库报告该检查点在Seed-TTS测试集的中文WER为0.92%、英文WER为1.32%，同表中文分数低于CosyVoice 3的0.71%之外的多数对照项。WER只衡量内容一致性，不代表音色相似度或听感自然度。",
+      "summary": "可作为中英文声音克隆候选：官方仓库报告该检查点在Seed-TTS公开测试集的中文WER为0.92%、英文WER为1.32%。WER只衡量合成语音与目标文本的内容一致性，不代表音色相似度或听感自然度。",
       "strengths": [
         "官方按型号逐行列出12Hz-0.6B-Base结果，未借用1.7B档或25Hz档成绩。",
         "同一批次的评测配置在表格前统一说明，包括精度、输出长度上限与语言设置。",
@@ -209,8 +210,8 @@
       ],
       "limitations": [
         "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
-        "WER只反映合成内容与文本的一致性，音色相似度与自然度需要SIM或听测数据，官方表中对应项未在本页引用。",
-        "参考音频来源、说话人划分与长文本表现未完整披露，不同参考音频可能改变结果。",
+        "WER只反映合成内容与文本的一致性，音色相似度与自然度需要SIM或听测数据，本站未新增未经核验的音质成绩。",
+        "来源未完整披露模型revision、参考音频与说话人划分、WER识别器及文本归一化方式；不同参考音频可能改变结果。",
         "本站未做听测，也未验证流式生成的延迟表现。"
       ],
       "evidenceIds": [

@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次核对日期：2026-10-10。目录共29个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订。目录共29个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -105,15 +105,15 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 
 | 模型 | 官方来源 | 已录字段与重要口径 |
 | --- | --- | --- |
-| BGE-M3 | [模型卡](https://huggingface.co/BAAI/bge-m3) · [论文](https://arxiv.org/abs/2402.03216) · [代码许可](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE) | 1024维稠密向量、8192 tokens、MIT，官方声明100多种语言。模型卡未单列参数量，568M按其XLM-RoBERTa-large骨干与三类表示头的公开部署口径记录，未从权重文件大小反推。论文MIRACL/MKQA/MLDR三项成绩对应M3.All融合表示，不是稠密单独成绩；MLDR由论文作者构建且其训练集参与训练增强。 |
-| Qwen3-Embedding-4B | [模型卡](https://huggingface.co/Qwen/Qwen3-Embedding-4B) | 4B、32K上下文、最高2560维并支持32–2560自定义输出；Apache-2.0。MTEB多语言、英文v2与C-MTEB三项任务均值均为发布方引用leaderboard的结果，多语言与英文两表注明快照日期2025-05-24，中文表未注明。 |
+| BGE-M3 | [模型卡](https://huggingface.co/BAAI/bge-m3) · [论文v5](https://arxiv.org/html/2402.03216v5) · [代码许可](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE) | 1024维稠密向量、8192 tokens、MIT，官方声明100多种语言。模型卡未单列参数量，568M按其XLM-RoBERTa-large骨干与三类表示头的公开部署口径记录，未从权重文件大小反推。论文v5的MIRACL/MKQA/MLDR为71.5/75.5/65.0，对应M3.All融合表示，不是稠密单独成绩；旧MIRACL 70.0已由作者修正，不再作为当前结果。评测运行日未披露；MLDR由论文作者构建且其训练集参与训练增强。 |
+| Qwen3-Embedding-4B | [模型卡](https://huggingface.co/Qwen/Qwen3-Embedding-4B) | 4B、32K上下文、最高2560维并支持32–2560自定义输出；Apache-2.0。MTEB多语言、英文v2与C-MTEB三项任务均值由发布方按型号报告。2025-05-24仅为对照模型榜单分数采集日期，不是Qwen自身评测日期；本型号运行日保留未知。 |
 | BGE-reranker-v2-m3 | [模型卡](https://huggingface.co/BAAI/bge-reranker-v2-m3) · [代码许可](https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE) | 基于bge-m3的多语cross-encoder；权重Apache-2.0、代码MIT。模型卡未声明最大输入长度，按未披露记录，不把官方示例的max_length=512当作模型上限。参数量按HF权重元数据张量参数和567,755,777（约0.568B）记录。官方评测为图片，未引用其数值。 |
-| DeepSeek-OCR | [模型卡](https://huggingface.co/deepseek-ai/DeepSeek-OCR) · [论文](https://arxiv.org/abs/2510.18234) | MIT；权重元数据张量参数和约3.34B，论文说明解码器为DeepSeek3B-MoE-A570M并另有DeepEncoder组件。论文Fox基准压缩解码精度98.5%（6.7×压缩比）按原表记录；OmniDocBench对比为图，未引用其分数。模型卡未披露文本上下文长度，官方vLLM示例的max_tokens不作为上下文声明。 |
+| DeepSeek-OCR | [模型卡](https://huggingface.co/deepseek-ai/DeepSeek-OCR) · [论文](https://arxiv.org/abs/2510.18234) | MIT；权重元数据张量参数和约3.34B，论文说明解码器为DeepSeek3B-MoE-A570M并另有DeepEncoder组件。论文Fox基准98.5%对应600–700 GT tokens分箱的7页、100个视觉tokens与6.7×压缩比，不是全部Fox样本或普通OCR字符准确率。vLLM按[当前官方recipe](https://docs.vllm.ai/projects/recipes/en/latest/DeepSeek/DeepSeek-OCR.html)安装稳定版；OmniDocBench成绩本轮暂未转录核实。模型卡未披露文本上下文长度，官方vLLM示例的max_tokens不作为上下文声明。 |
 | Whisper large-v3-turbo | [模型卡](https://huggingface.co/openai/whisper-large-v3-turbo) · [发布讨论](https://github.com/openai/whisper/discussions/2363) · [MIT许可](https://github.com/openai/whisper/blob/main/LICENSE) | 官方参数表列809M，解码层由large-v3的32层减至4层；HF模型卡列出99种语言标识。30秒为音频窗口不是token上下文。模型卡未单独报告该型号WER/CER，未借用large-v3论文数值。 |
-| Qwen3-VL-4B-Instruct | [模型卡](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct) · [Qwen3-VL仓库](https://github.com/QwenLM/Qwen3-VL) | 4B为官方语言骨干档位，权重元数据张量参数和约4.44B含视觉组件；原生262,144、YaRN扩展至1,000,000（官方提示factor取2或3而非4）；Apache-2.0。官方视觉与文本性能表为图片，未引用其分数；仓库说明评测使用vLLM与VLMEvalKit、lmms-eval，部分提示词有修改、部分基准为内部构建。 |
-| Qwen3-TTS-12Hz-0.6B-Base | [模型卡](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base) · [官方仓库](https://github.com/QwenLM/Qwen3-TTS) | 0.6B为官方型号档位，权重元数据张量参数和约0.91B含语音分词器等组件；覆盖10种语言、Apache-2.0。Seed-TTS测试集中文WER 0.92%、英文1.32%取自官方仓库基准表，同批评测配置在表前统一说明；WER只表示内容一致性，不代表音色相似度或听感。 |
+| Qwen3-VL-4B-Instruct | [模型卡](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct) · [Qwen3-VL仓库](https://github.com/QwenLM/Qwen3-VL) | 4B为官方语言骨干档位，权重元数据张量参数和约4.44B含视觉组件；原生262,144、YaRN扩展至1,000,000（官方提示factor取2或3而非4）；Apache-2.0。支持文本、图像和视频输入；Transformers稳定版自4.57.0集成。官方视觉与文本性能表为图片，本轮尚未逐项转录复核，暂不登记分数；仓库说明评测使用vLLM与VLMEvalKit、lmms-eval，部分提示词有修改、部分基准为内部构建。 |
+| Qwen3-TTS-12Hz-0.6B-Base | [模型卡](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base) · [官方仓库](https://github.com/QwenLM/Qwen3-TTS) | 0.6B为官方型号档位，主检查点914,643,008参数（约0.915B），不含独立speech_tokenizer权重；包含该组件的整套参数总量未核实。覆盖10种语言、Apache-2.0；声音克隆接收参考音频，x_vector_only_mode=True可省略参考文本但质量可能下降。Seed-TTS测试集中文WER 0.92%、英文1.32%取自官方仓库基准表，同批评测配置在表前统一说明；WER只表示内容一致性，不代表音色相似度或听感。 |
 | Phi-4-mini-instruct | [模型卡](https://huggingface.co/microsoft/Phi-4-mini-instruct) · [论文](https://huggingface.co/papers/2503.01743) | 3.8B稠密解码器、128K上下文、MIT；官方列出23种语言，训练约5万亿token、公开数据截止2024年6月。模型卡七项成绩来自其内部基准平台，未完整披露提示模板与解码参数；卡内无代码基准行，代码用途保留证据不足。 |
 
-本批 8 个型号的成绩全部为发布方自报或论文报告，本轮未找到许可明确且确认为独立方的同条件复测，因此没有新增第三方记录，也未建立可比组。BGE-reranker-v2-m3、Whisper large-v3-turbo 与 Qwen3-VL-4B-Instruct 的用途结论为证据不足，原因是官方以图片形式发布成绩或未单列该型号数值，本页不引用无法核对的数字。
+本批 8 个型号的成绩全部为发布方自报或论文报告，本轮未找到许可明确且确认为独立方的同条件复测，因此没有新增第三方记录，也未建立可比组。BGE-reranker-v2-m3、Whisper large-v3-turbo 与 Qwen3-VL-4B-Instruct 的用途结论为证据不足，原因是本轮尚未逐项转录复核图片中的成绩，或未找到明确单列的该型号结果；图片形式本身不代表无法核对。
 
 许可准入及核验范围见 [评测来源规范](EVIDENCE_SOURCES.md)、[通用/代码/视觉覆盖表](EVIDENCE_GENERAL_COVERAGE.md)、[检索/语音/OCR覆盖表](EVIDENCE_SPECIAL_COVERAGE.md)。AA仅链接；未核实完整快照或具体结果许可的平台不宣称已完成数据接入。

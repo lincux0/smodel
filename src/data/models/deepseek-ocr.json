@@ -37,7 +37,10 @@
       "name": "MIT",
       "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR"
     },
-    "code": null,
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/deepseek-ai/DeepSeek-OCR/blob/main/LICENSE"
+    },
     "trainingDisclosure": "论文介绍其数据引擎按OCR 1.0、OCR 2.0与通用视觉数据分阶段构造，并说明生产环境可用单张A100-40G每天生成20万页以上训练数据；未公开完整训练语料清单。"
   },
   "summary": "以视觉编码和文本压缩为核心的端到端文档解析模型，把整页图像直接解码为文本。",
@@ -54,7 +57,7 @@
     "本站未复现论文的压缩精度实验，也未在自有文档上测试版面解析效果。"
   ],
   "officialUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-14",
   "deployments": [
     {
       "id": "official-transformers",
@@ -105,21 +108,27 @@
       "format": "Safetensors",
       "quantization": null,
       "downloadUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR",
-      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR#vllm",
+      "sourceUrl": "https://docs.vllm.ai/projects/recipes/en/latest/DeepSeek/DeepSeek-OCR.html",
       "guideId": "official-quickstart",
       "dependencies": [
-        "vllm（官方注明v0.11.1发布前需用nightly构建）",
+        "uv（需预先安装，用于环境和包管理）",
+        "vllm（官方当前recipe使用稳定版安装方式）",
         "Pillow"
       ],
       "steps": [
         {
+          "title": "创建并激活虚拟环境",
+          "description": "先准备uv，再按官方recipe创建环境。示例使用Linux shell，以source .venv/bin/activate激活环境；其他平台需先核对vLLM支持与安装方式。本站未执行该流程。",
+          "command": "uv venv"
+        },
+        {
           "title": "安装 vLLM",
-          "description": "官方模型卡说明在v0.11.1发布前需安装nightly构建，命令取自同页示例；本站未执行该命令。",
-          "command": "uv pip install -U vllm --pre --extra-index-url https://wheels.vllm.ai/nightly"
+          "description": "确认已进入虚拟环境后，按官方当前recipe安装稳定版vLLM；不再需要旧模型卡所述的nightly预发布轮子。本站未执行该命令。",
+          "command": "uv pip install -U vllm --torch-backend auto"
         },
         {
           "title": "按官方示例推理",
-          "description": "官方示例要求关闭prefix caching与多模态处理器缓存，并传入NGramPerReqLogitsProcessor；具体参数以官方上游recipe为准。本站未执行模型。",
+          "description": "官方recipe要求关闭prefix caching与多模态处理器缓存，并传入NGramPerReqLogitsProcessor；具体采样参数以官方recipe为准。本站未执行模型。",
           "command": null
         }
       ],
@@ -140,17 +149,17 @@
     {
       "id": "fox-compression-precision",
       "benchmark": "Fox（视觉-文本压缩评测）",
-      "dataset": "Fox benchmark 英文文档（600–1300 tokens区间）",
+      "dataset": "Fox benchmark英文文档（600–700个DeepSeek tokenizer真值文本token，共7页）",
       "language": "英语",
-      "metric": "解码精度（Precision）",
+      "metric": "视觉压缩解码精度（非普通OCR准确率）",
       "value": 98.5,
       "unit": "%",
       "direction": "higher",
       "version": "DeepSeek-OCR论文Table 2",
-      "settings": "论文报告值：600–700文本token配100个视觉token（图像缩放至640×640）时解码精度98.5%、压缩比6.7×；同表显示精度随压缩比升高而下降，1200–1300 token配64个视觉token时降至59.1%。论文说明输出格式无法完全匹配Fox评测脚本，实际表现可能略高于该测试值。未披露模型revision与完整推理配置。",
+      "settings": "论文Table 2中600–700个真值文本token的7页英文文档子组：100个视觉token、输入缩放至640×640时，视觉压缩解码精度98.5%、压缩比6.7×。这是该长度分箱的小样本条件结果，不是全部100页Fox子集的平均分，也不是常规字符级OCR准确率。论文说明输出格式无法完全匹配Fox评测脚本，数值可能受格式差异影响；未披露模型revision与完整推理配置。模型发布日为2025-10-20，非已知评测运行日期。",
       "sourceUrl": "https://arxiv.org/abs/2510.18234",
-      "date": "2025-10-20",
-      "checkedAt": "2026-10-10",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -187,16 +196,16 @@
     {
       "task": "ocr",
       "status": "official-only",
-      "summary": "可作为整页文档解析候选：论文报告在Fox基准上，600–700文本token配100个视觉token时解码精度98.5%（压缩比6.7×），并称在OmniDocBench上用少于GOT-OCR2.0和MinerU2.0的视觉token量取得更好表现。这些是发布方在自有实验条件下的结果，不代表目标文档的版面还原质量。",
+      "summary": "可作为整页文档解析候选：论文在Fox英文文档的600–700真值文本token子组（7页）中报告，100个视觉token条件下视觉压缩解码精度为98.5%（压缩比6.7×）。这是压缩解码实验的小样本分箱结果，不等同于常规OCR字符准确率或所有文档上的表现。",
       "strengths": [
-        "论文按文本token区间与视觉token档位逐行给出精度与压缩比，条件可对照。",
+        "论文按真值文本token区间与视觉token档位逐行给出压缩解码精度与压缩比，当前记录明确对应7页子组。",
         "同页同时给出不同分辨率档位与Gundam裁剪模式的使用方式，便于按文档复杂度选择。",
         "官方上游vLLM已支持该模型，部署路线明确。"
       ],
       "limitations": [
         "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
         "压缩比超过10倍后精度明显下降，长文档或低视觉token配置需按实际效果取舍。",
-        "论文说明输出格式无法完全匹配Fox评测脚本，表格数值不是可直接横比的标准榜单分数。",
+        "600–700-token分箱只有7页，98.5%不是Fox全子集平均值；论文说明输出格式无法完全匹配评测脚本，不能将其当作常规OCR准确率或直接横比的标准榜单分数。",
         "OmniDocBench对比在论文中以图形式给出，未提供可复制的数值表，本页不引用其具体分数。",
         "本站未在真实票据、表格或扫描件上验证版面与表格结构还原。"
       ],

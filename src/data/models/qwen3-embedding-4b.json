@@ -53,7 +53,7 @@
     "不能把8B型号的榜单成绩转移到此4B型号，也不能把0.6B型号的成绩当作本型号结果。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-14",
   "deployments": [
     {
       "id": "official-sentence-transformers",
@@ -104,11 +104,11 @@
       "value": 69.45,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "MTEB leaderboard snapshot 2025-05-24（按模型卡注记）",
-      "settings": "Qwen模型卡逐型号列出4B结果；此项为基准任务均值。对照模型分数取自MTEB在线榜单。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
+      "version": "Qwen模型卡 MTEB (Multilingual) 表（4B行）",
+      "settings": "Qwen模型卡逐型号列出4B结果；此项为基准任务均值。模型卡注记中的2025-05-24仅指对照模型分数取自MTEB在线榜单的收集日期，不是Qwen3-Embedding-4B的评测运行日期；本型号运行日未披露。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
-      "date": "2025-05-24",
-      "checkedAt": "2026-10-10",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -136,7 +136,7 @@
       },
       "provenance": {
         "sourceId": "qwen-team",
-        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "runId": "qwen-team-embedding-model-card",
         "independence": "first-party"
       }
     },
@@ -149,11 +149,11 @@
       "value": 74.6,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "MTEB leaderboard snapshot 2025-05-24（按模型卡注记）",
-      "settings": "Qwen模型卡逐型号列出4B结果；此项为英文基准任务均值。模型卡未在该表披露模型revision、任务提示与推理配置；不是本站复测。",
+      "version": "Qwen模型卡 MTEB English v2 表（4B行）",
+      "settings": "Qwen模型卡逐型号列出4B结果；此项为英文基准任务均值。模型卡未披露该表中本型号的评测运行日期、模型revision、任务提示与推理配置；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
-      "date": "2025-05-24",
-      "checkedAt": "2026-10-10",
+      "date": null,
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -181,7 +181,7 @@
       },
       "provenance": {
         "sourceId": "qwen-team",
-        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "runId": "qwen-team-embedding-model-card",
         "independence": "first-party"
       }
     },
@@ -194,11 +194,11 @@
       "value": 72.27,
       "unit": "分（0–100）",
       "direction": "higher",
-      "version": "模型卡C-MTEB表（未注明榜单快照日期）",
-      "settings": "Qwen模型卡逐型号列出4B中文基准任务均值；同表含bge-multilingual-gemma2、gte-Qwen2等对照。模型revision、任务提示与推理配置未披露；不是本站复测。",
+      "version": "Qwen模型卡 C-MTEB 表（4B行）",
+      "settings": "Qwen模型卡逐型号列出4B中文基准任务均值；同表含bge-multilingual-gemma2、gte-Qwen2等对照。模型卡未注明本型号评测运行日期；模型revision、任务提示与推理配置未披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
       "date": null,
-      "checkedAt": "2026-10-10",
+      "checkedAt": "2026-10-14",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -226,7 +226,7 @@
       },
       "provenance": {
         "sourceId": "qwen-team",
-        "runId": "qwen-team-embedding-mteb-2025-05-24",
+        "runId": "qwen-team-embedding-model-card",
         "independence": "first-party"
       }
     }
@@ -241,7 +241,7 @@
         "覆盖多语言、英文与中文三类汇总口径，并说明支持32至2560维可调输出。"
       ],
       "limitations": [
-        "这些是Qwen发布方引用MTEB leaderboard的结果，不是本站复测；多语言与英文两表注明数据日期为2025-05-24，中文表未注明快照日期。",
+        "这些是Qwen发布方列出的结果，不是本站复测；模型卡仅注明多语言表的对照模型成绩取自2025-05-24的MTEB榜单，本型号评测运行日期未披露；英文及中文表也未注明本型号运行日。",
         "模型卡未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。",
         "官方提示指令写法会影响效果，且多语言场景建议使用英文指令，实际部署需按任务调整。",
         "本站未在自有语料或中文检索场景验证召回质量。"

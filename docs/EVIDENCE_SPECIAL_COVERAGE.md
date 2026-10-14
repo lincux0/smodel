@@ -1,6 +1,6 @@
 # 专项模型评测来源覆盖
 
-核对日期：2026-10-10。本表追踪 Embedding、Reranker、ASR、TTS 与 OCR 模型的准确权重匹配、可用结果和数据使用依据。评测工具代码、结果数据、基准数据集、模型权重分别处理；某仓库的代码许可不自动覆盖它托管或引用的结果及数据集。
+核对日期：2026-10-14。本表追踪 Embedding、Reranker、ASR、TTS 与 OCR 模型的准确权重匹配、可用结果和数据使用依据。评测工具代码、结果数据、基准数据集、模型权重分别处理；某仓库的代码许可不自动覆盖它托管或引用的结果及数据集。
 
 | 模型 | 来源及准确型号覆盖 | 本站处理 | 使用依据与限制 |
 | --- | --- | --- | --- |
@@ -10,12 +10,12 @@
 | Whisper tiny、base、small、medium（均为多语言版） | Open ASR Leaderboard 仓库示例主要列 `tiny.en`、`base.en`、`small.en`、`medium.en`，不匹配本站多语言权重 | 保留原论文精确尺寸的官方结果；未导入榜单成绩 | [榜单代码 Apache-2.0](https://github.com/huggingface/open_asr_leaderboard/blob/main/LICENSE) 仅说明代码许可；没有由此确认公开结果文件或各评测语料许可。WER/CER、硬件速度及语言配置不可跨变体移用 |
 | PP-OCRv5_mobile_rec | 官方模型卡结果对应准确文字行识别组件；OCRBench 面向多模态 OCR 理解，OmniDocBench 面向文档解析流水线 | 保留官方四项文字行成绩；没有移植整页、问答或完整流水线分数 | [PaddleOCR 代码 Apache-2.0](https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE) 不改变官方模型卡/测试数据许可；仅对模型卡少量事实引用 |
 | Kokoro-82M | TTS Arena 页面未确认该模型的可追溯榜单记录或结果再使用许可；SeedTTS-Eval 的零样本声音克隆 SIM 协议不匹配预置音色 Kokoro | 保留“证据不足”；不新增数值，AA 仅提供链接 | Arena 可作为外部入口；未确认结果数据许可前不复制成绩。SeedTTS 使用的 Common Voice、DiDiSpeech 等数据各有各的许可，不能凭评测脚本许可转载结果/数据。UTMOS 是自动预测器，不能代替真人 MOS |
-| BGE-M3 | [论文](https://arxiv.org/abs/2402.03216) Table 11 含 M3.All 在 MIRACL、MKQA、MLDR 的汇总值，Table 2–4 给出逐语言结果 | 保留三项论文成绩并标为 `first-party`；未建立可比组 | 指标口径按原表标题记录（MIRACL/MLDR 为 nDCG@10、MKQA 为 Recall@100）。成绩对应稠密、稀疏与多向量融合表示，不是稠密单独成绩；MLDR 由论文作者构建且其训练集参与训练增强 |
-| Qwen3-Embedding-4B | 官方模型卡含 MTEB 多语言、英文 v2 与 C-MTEB 三张汇总表，按型号逐行列出 | 保留三项任务均值并标为 `first-party`；本轮未找到独立第三方记录 | 多语言与英文表注明 leaderboard 快照日期 2025-05-24，中文表未注明；未披露模型 revision 与任务级推理配置，汇总分不参与跨型号排序 |
-| BGE-reranker-v2-m3 | 官方模型卡评测以图片形式给出（BEIR、CMTEB-retrieval、miracl），无可复制数值表 | 维持证据不足，不导入图片中无法核对的数值 | 未找到许可明确且确认为独立方的同型号同条件结果；重排效果依赖召回候选集、切分与阈值标定，官方示例的 512 截断也影响长段落 |
+| BGE-M3 | [论文v5](https://arxiv.org/html/2402.03216v5) Table 1–3 分别含 M3.All 在 MIRACL、MKQA、MLDR 的汇总值及逐语言结果 | 保留三项论文成绩并标为 `first-party`；MIRACL 按 v5 更正为 71.5（M3.Dense 69.2）；未建立可比组 | 指标口径按原表标题记录（MIRACL/MLDR 为 nDCG@10、MKQA 为 Recall@100）。成绩对应稠密、稀疏与多向量融合表示，不是稠密单独成绩；BAAI 于 2024-07-01 公告修正 MIRACL，实际评测运行日期未披露；MLDR 由论文作者构建且其训练集参与训练增强 |
+| Qwen3-Embedding-4B | 官方模型卡含 MTEB 多语言、英文 v2 与 C-MTEB 三张汇总表，按型号逐行列出 | 保留三项任务均值并标为 `first-party`；本轮未找到独立第三方记录 | 模型卡仅注明多语言表对照模型的 MTEB 榜单成绩取自 2025-05-24；这不是 Qwen3-Embedding-4B 的评测日期。模型自身评测运行日期未披露，英文与中文表也未注明；未披露模型 revision 与任务级推理配置，汇总分不参与跨型号排序 |
+| BGE-reranker-v2-m3 | 官方模型卡评测以图片形式给出（BEIR、CMTEB-retrieval、miracl），无可复制数值表 | 维持证据不足，本轮暂未逐项转录复核图片成绩 | 未找到许可明确且确认为独立方的同型号同条件结果；重排效果依赖召回候选集、切分与阈值标定，官方示例的 512 截断也影响长段落 |
 | Whisper large-v3-turbo（多语言） | Open ASR Leaderboard 等来源未确认该精确型号的可追溯结果与对应语料许可 | 维持证据不足，不借用 large-v3 论文数值 | 该型号由 large-v3 剪减解码层微调，能力不等同 large-v3；30 秒为音频窗口，不是 token 上下文 |
 | Qwen3-TTS-12Hz-0.6B-Base | [官方仓库](https://github.com/QwenLM/Qwen3-TTS)基准表含 Seed-TTS 零样本中英文 WER，按型号逐行列出 | 保留两项官方成绩并标为 `first-party` | 表前统一说明精度、输出长度上限与语言设置；参考音频来源与说话人划分未披露。WER 只表示内容一致性，不代表音色相似度或听感自然度 |
-| DeepSeek-OCR | [论文](https://arxiv.org/abs/2510.18234) Table 2 含 Fox 基准按文本 token 区间的压缩解码精度；OmniDocBench 对比为图 | 保留一项论文成绩并标为 `first-party` | 该指标是特定压缩比下的解码精度，不是标准 OCR 榜单分数；论文说明输出格式无法完全匹配 Fox 评测脚本，实际可能略高于测试值 |
+| DeepSeek-OCR | [论文](https://arxiv.org/abs/2510.18234) Table 2 含 Fox 基准按文本 token 区间的压缩解码精度；OmniDocBench 结果本轮暂未逐项转录 | 保留600–700 GT tokens分箱7页的一项论文成绩并标为 `first-party` | 98.5%只对应7页分箱而非全部Fox样本；该指标是特定压缩比下的解码精度，不是普通OCR字符准确率或通用榜单分数；论文说明输出格式无法完全匹配 Fox 评测脚本，实际可能略高于测试值 |
 
 ## 新增的 MTEB 分项
 
