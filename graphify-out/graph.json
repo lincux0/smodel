@@ -1084,7 +1084,7 @@
       "label": "目录职责",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L30",
+      "source_location": "L32",
       "_origin": "ast"
     },
     {
@@ -1092,7 +1092,7 @@
       "label": "页面",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L51",
+      "source_location": "L53",
       "_origin": "ast"
     },
     {
@@ -1100,7 +1100,7 @@
       "label": "目录与对比状态",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L63",
+      "source_location": "L65",
       "_origin": "ast"
     },
     {
@@ -1108,7 +1108,7 @@
       "label": "本地开发与产物",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "_origin": "ast"
     },
     {
@@ -1116,7 +1116,7 @@
       "label": "Vercel 部署",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L79",
+      "source_location": "L81",
       "_origin": "ast"
     },
     {
@@ -1124,7 +1124,7 @@
       "label": "Graphify",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L108",
+      "source_location": "L110",
       "_origin": "ast"
     },
     {
@@ -1132,7 +1132,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L128",
+      "source_location": "L132",
       "_origin": "ast"
     },
     {
@@ -1172,7 +1172,7 @@
       "label": "数据与展示",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L23",
+      "source_location": "L25",
       "_origin": "ast"
     },
     {
@@ -1180,7 +1180,7 @@
       "label": "可比性与单位",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L29",
+      "source_location": "L33",
       "_origin": "ast"
     },
     {
@@ -1188,7 +1188,7 @@
       "label": "来源与使用条件",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L35",
+      "source_location": "L41",
       "_origin": "ast"
     },
     {
@@ -1196,7 +1196,7 @@
       "label": "Artificial Analysis",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L41",
+      "source_location": "L47",
       "_origin": "ast"
     },
     {
@@ -1204,7 +1204,7 @@
       "label": "开放结果与独立性",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L53",
       "_origin": "ast"
     },
     {
@@ -1212,7 +1212,7 @@
       "label": "维护与验收",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L59",
       "_origin": "ast"
     },
     {
@@ -1276,7 +1276,7 @@
       "label": "计划型号的筛选与来源",
       "file_type": "document",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L125",
+      "source_location": "L127",
       "_origin": "ast"
     },
     {
@@ -1540,7 +1540,7 @@
       "label": "阶段五：维护效率与内容迭代",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L218",
+      "source_location": "L220",
       "_origin": "ast"
     },
     {
@@ -1548,7 +1548,7 @@
       "label": "阶段六：自动采集候选与人工审核",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L236",
+      "source_location": "L238",
       "_origin": "ast"
     },
     {
@@ -1556,7 +1556,7 @@
       "label": "6. 实施与验收约定",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L258",
       "_origin": "ast"
     },
     {
@@ -1564,7 +1564,7 @@
       "label": "7. 约束与后续决策",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "_origin": "ast"
     },
     {
@@ -1572,7 +1572,7 @@
       "label": "7.1 Vercel Hobby",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L270",
+      "source_location": "L272",
       "_origin": "ast"
     },
     {
@@ -1580,7 +1580,7 @@
       "label": "7.2 后续决策触发条件",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L278",
+      "source_location": "L280",
       "_origin": "ast"
     },
     {
@@ -1588,7 +1588,7 @@
       "label": "8. 调研依据",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L290",
+      "source_location": "L292",
       "_origin": "ast"
     },
     {
@@ -1596,7 +1596,7 @@
       "label": "9. 能力依据扩展",
       "file_type": "document",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L312",
+      "source_location": "L314",
       "_origin": "ast"
     },
     {
@@ -1636,7 +1636,7 @@
       "label": "Arena 快照核验范围",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L36",
+      "source_location": "L38",
       "_origin": "ast"
     },
     {
@@ -1644,7 +1644,7 @@
       "label": "后续准入条件",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L40",
+      "source_location": "L42",
       "_origin": "ast"
     },
     {
@@ -1708,7 +1708,7 @@
       "label": "新增的 MTEB 分项",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L14",
+      "source_location": "L20",
       "_origin": "ast"
     },
     {
@@ -1716,7 +1716,7 @@
       "label": "来源入口",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L24",
+      "source_location": "L30",
       "_origin": "ast"
     },
     {
@@ -1813,6 +1813,14 @@
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
       "source_location": "L98",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_2026_10_10_上线批次",
+      "label": "2026-10-10 上线批次",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L102",
       "_origin": "ast"
     },
     {
@@ -3904,7 +3912,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L30",
+      "source_location": "L32",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3914,7 +3922,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L51",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3924,7 +3932,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L63",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3934,7 +3942,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L73",
+      "source_location": "L75",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3944,7 +3952,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L79",
+      "source_location": "L81",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3954,7 +3962,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L108",
+      "source_location": "L110",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3964,7 +3972,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L126",
+      "source_location": "L130",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3974,7 +3982,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L128",
+      "source_location": "L132",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3984,7 +3992,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L130",
+      "source_location": "L134",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4034,7 +4042,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L23",
+      "source_location": "L25",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4044,7 +4052,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L29",
+      "source_location": "L33",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4054,7 +4062,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L35",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4064,7 +4072,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L37",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4074,7 +4082,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L37",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4084,7 +4092,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L37",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4094,7 +4102,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L41",
+      "source_location": "L47",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4104,7 +4112,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4114,7 +4122,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4124,7 +4132,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L57",
+      "source_location": "L63",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4244,7 +4252,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L125",
+      "source_location": "L127",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4254,7 +4262,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CONTENT_GUIDE.md",
-      "source_location": "L137",
+      "source_location": "L139",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4589,12 +4597,22 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_development_plan",
+      "target": "docs_sources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/DEVELOPMENT_PLAN.md",
+      "source_location": "L218",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_development_plan_5_分阶段实施计划",
       "target": "docs_development_plan_阶段五_维护效率与内容迭代",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L218",
+      "source_location": "L220",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4604,7 +4622,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L236",
+      "source_location": "L238",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4614,7 +4632,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L256",
+      "source_location": "L258",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4624,7 +4642,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L268",
+      "source_location": "L270",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4634,7 +4652,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L270",
+      "source_location": "L272",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4644,7 +4662,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L278",
+      "source_location": "L280",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4654,7 +4672,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L290",
+      "source_location": "L292",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4664,7 +4682,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L312",
+      "source_location": "L314",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4674,7 +4692,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L321",
+      "source_location": "L324",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4724,7 +4742,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L36",
+      "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4734,7 +4752,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4814,7 +4832,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L14",
+      "source_location": "L20",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4824,7 +4842,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L24",
+      "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4939,12 +4957,22 @@
       "_origin": "ast"
     },
     {
+      "source": "docs_sources_模型来源与字段口径",
+      "target": "docs_sources_2026_10_10_上线批次",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
       "source": "docs_sources",
       "target": "docs_evidence_sources",
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L102",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4954,7 +4982,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L102",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4964,7 +4992,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
-      "source_location": "L102",
+      "source_location": "L119",
       "weight": 1.0,
       "_origin": "ast"
     },

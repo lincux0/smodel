@@ -22,6 +22,11 @@ test('真实目录保留未知值，并拒绝重复身份、无效关联和错�
   const unsafeUrl = structuredClone(sample);
   unsafeUrl.officialUrl = 'javascript:alert(1)';
   assert.throws(() => validateCatalog([unsafeUrl], guideIds));
+  const videoModel = structuredClone(models.find(({ id }) => id === 'qwen3-vl-4b-instruct'));
+  assert.ok(videoModel.modalities.input.includes('video'));
+  assert.doesNotThrow(() => validateCatalog([videoModel], guideIds));
+  videoModel.modalities.input.push('invalid-modality');
+  assert.throws(() => validateCatalog([videoModel], guideIds), /modalities/);
   const unsupportedMemory = structuredClone(sample);
   unsupportedMemory.deployments[0].hardware.ramGb = 8;
   assert.throws(() => validateCatalog([unsupportedMemory], guideIds));

@@ -108,7 +108,7 @@ export const modelSchema = z.object({
   variant: z.enum(['base', 'instruct', 'specialized']),
   tasks: z.array(z.enum(Object.keys(taskLabels) as [keyof typeof taskLabels, ...Array<keyof typeof taskLabels>])).min(1),
   modalities: z.object({
-    input: z.array(z.enum(['text', 'image', 'audio'])).min(1),
+    input: z.array(z.enum(['text', 'image', 'audio', 'video'])).min(1),
     output: z.array(z.enum(['text', 'audio', 'vector', 'score'])).min(1),
   }).strict(),
   parameters: z.object({ totalB: size, activeB: size, effectiveB: size, notes: text, sourceUrl: url }).strict(),

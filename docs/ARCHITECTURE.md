@@ -27,6 +27,8 @@ src/data/guides/*.md
 
 内容使用转义后的文本和 Markdown 渲染。来源字段只接受 HTTPS 链接；模型简介与特征不作为原始 HTML 插入页面。
 
+输入模态允许文本、图像、音频和视频，输出仍允许文本、音频、向量和相关性分数。详情与对比将模态值显示为中文；Qwen3-VL的输入包含视频，Qwen3-TTS Base的输入包含声音克隆参考音频。新增输入模态需同步schema、条目、展示映射和校验测试，不能仅修改简介。
+
 ## 目录职责
 
 | 路径 | 职责 |
@@ -106,6 +108,8 @@ npx vercel --prod
 参考：[Astro Vercel 部署](https://docs.astro.build/en/guides/deploy/vercel/)、[Vercel CLI 部署](https://vercel.com/docs/cli/deploy)。
 
 ## Graphify
+
+2026-10-14审查修订执行 `graphify update . --no-cluster`，仅更新AST：230节点、311条原始边、22条悬空端点边。12个Astro文件的解析限制和29个模型JSON未生成节点的限制仍在；成绩事实、输入模态与展示依据以源码、原始来源、内容校验及浏览器验证为准。
 
 2026-10-06多来源更新已执行 `graphify update . --no-cluster`，仅更新代码AST，不执行语义提取。当前图包含229节点、309条原始边和22条悬空端点边；仍有12个Astro文件的语法提取限制，29个模型JSON未生成节点，成绩与条件以原始来源、内容校验和浏览器验证为准。
 

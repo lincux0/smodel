@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 interface Props { model: CollectionEntry<'models'>; }
 const { data: model } = Astro.props.model;
-const modalityLabels = { text: '文本', image: '图像', audio: '音频', vector: '向量', score: '相关性分数' };
+const modalityLabels = { text: '文本', image: '图像', audio: '音频', video: '视频', vector: '向量', score: '相关性分数' };
 ---
 <Base title={model.name} description={model.summary}>
   <article class="detail">
