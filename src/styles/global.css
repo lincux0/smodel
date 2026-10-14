@@ -262,7 +262,7 @@ body.has-compare-tray { padding-bottom: 170px; }
 .notice, .empty-state { color: #465653; }
 .deployment-step { margin-block: 8px; border: 1px solid #d7ddd8; background: rgb(255 255 255 / 55%); }
 .deployment-step summary { padding: 12px 15px; cursor: pointer; font-size: 13px; font-weight: 600; }
-.step-body { padding: 0 15px 15px; color: var(--ink-soft); font-size: 13px; }
+.step-body { padding: 0 15px 15px; color: var(--ink-soft); font-size: 13px; overflow-wrap: anywhere; }
 .step-body p { margin-bottom: 10px; }
 .deployment-step[open] .step-body { animation: step-reveal var(--duration-fast) var(--ease); }
 .copy-status:not(:empty) { animation: step-reveal var(--duration-fast) var(--ease); }

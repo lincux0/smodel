@@ -128,6 +128,8 @@
 
 ## 指针局部高光
 
+部署步骤的说明文字允许长参数名在任意字符处换行，避免320px窄屏被标识符撑宽；命令框仍保留原始文本与自身横向滚动，复制内容不变。
+
 首页用途卡片与模型卡片使用220px半径的白色径向渐变（透明度由中心85%向外42%、12%、0%递减），随鼠标局部坐标移动，180ms淡入淡出。光层位于文字下方，继承圆角且pointer-events:none，不模糊正文或遮挡链接、复选框。共享布局通过事件委托处理pointermove，用requestAnimationFrame合并同帧更新；离开卡片、窗口失焦和设备/动态偏好变化时清除。无新增依赖。
 
 仅hover:hover且pointer:fine的鼠标启用；触屏、笔输入与prefers-reduced-motion:reduce不启用追随。原有键盘焦点、筛选动效与卡片悬停保持各自职责。参考[MDN径向渐变](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/gradient/radial-gradient)、[requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/Window/requestAnimationFrame)及[Astro客户端脚本](https://docs.astro.build/en/guides/client-side-scripts/)。
