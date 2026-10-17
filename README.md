@@ -36,6 +36,7 @@ git clone https://github.com/lincux0/smodel.git
 ## 文档
 
 - [分阶段开发方案](docs/DEVELOPMENT_PLAN.md)
+- [计划型号分阶段上线方案](docs/LAUNCH_PLAN.md)
 - [内容维护指南](docs/CONTENT_GUIDE.md)
 - [能力依据与评测整理](docs/CAPABILITY_EVIDENCE.md)
 - [模型来源与字段口径](docs/SOURCES.md)
