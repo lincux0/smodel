@@ -1,0 +1,406 @@
+{
+  "id": "qwen3-5-9b",
+  "name": "Qwen3.5-9B",
+  "family": "Qwen",
+  "version": "3.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image",
+      "video"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 9,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡Language Model节标注参数量9B（语言模型口径），并给出Gated DeltaNet与Gated Attention混合布局等结构信息；模型同时包含视觉编码器，卡中未单列其参数量，不把整模张量统计当作官方参数总量。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B"
+  },
+  "context": {
+    "nativeTokens": 262144,
+    "extendedTokens": 1010000,
+    "extension": "YaRN；官方示例在config.json的rope_parameters中设置rope_type=yarn、factor=4.0，并通过vLLM/SGLang命令行参数覆盖以支持1,010,000 token；官方提示静态YaRN可能影响短文本，仅在需要长上下文时启用。",
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B"
+  },
+  "languages": [
+    "多语言（官方称支持201种语言和方言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡提供架构、评测与部署说明并链接Qwen3.5博客；未公开完整训练数据清单。"
+  },
+  "summary": "9B级后训练多模态模型（含视觉编码器），支持文本、图像与视频输入；原生262,144 token上下文，官方称可扩展至1,010,000 token。",
+  "features": [
+    "原生262,144 token上下文，官方示例可用YaRN扩展至1,010,000 token",
+    "默认思考模式，可通过API参数关闭（官方不支持/think与/nothink软切换）",
+    "官方给出Transformers、vLLM、SGLang与KTransformers部署命令",
+    "官方语言与视觉评测表覆盖知识、编码、长上下文、视觉与代理任务"
+  ],
+  "limitations": [
+    "9B是官方语言模型口径档位，不代表多模态整模参数的精确总数。",
+    "官方评测表未标注各分数的思考模式等完整条件，不能与其他记录直接排名。",
+    "扩展上下文需要运行时参数与高级环境变量；静态YaRN可能影响短文本表现。",
+    "本站未复现评测或设备表现。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求最新版，serving组件从GitHub主分支安装）",
+        "torchvision",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "安装Transformers serving环境",
+          "description": "官方要求最新版transformers并请确保安装torchvision与pillow；官方安装命令从GitHub主分支安装serving组件。本站未执行。",
+          "command": "pip install \"transformers[serving] @ git+https://github.com/huggingface/transformers.git@main\""
+        },
+        {
+          "title": "启动轻量推理服务",
+          "description": "官方说明该命令会提供OpenAI兼容端点并尽可能将模型放置在加速器上，适用于快速测试与中等负载。本站未执行。",
+          "command": "transformers serve --force-model Qwen/Qwen3.5-9B --port 8000 --continuous-batching"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm（官方要求主分支新版，按nightly索引安装）"
+      ],
+      "steps": [
+        {
+          "title": "安装支持Qwen3.5的vLLM",
+          "description": "官方要求vLLM主分支新版并给出nightly索引安装命令。本站未执行。",
+          "command": "uv pip install vllm --torch-backend=auto --extra-index-url https://wheels.vllm.ai/nightly"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方给出的标准启动命令，最大上下文262,144 token，并使用qwen3推理解析器；另有工具调用、MTP与纯文本模式等变体见官方卡。本站未执行。",
+          "command": "vllm serve Qwen/Qwen3.5-9B --port 8000 --tensor-parallel-size 1 --max-model-len 262144 --reasoning-parser qwen3"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于并行配置、上下文长度与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sglang",
+      "runtime": "SGLang",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sglang（官方要求主分支版本，按官方git安装命令）"
+      ],
+      "steps": [
+        {
+          "title": "安装主分支SGLang",
+          "description": "官方要求SGLang主分支版本，并给出以下安装命令。本站未执行。",
+          "command": "uv pip install 'git+https://github.com/sgl-project/sglang.git#subdirectory=python&egg=sglang[all]'"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方给出的标准启动命令，最大上下文262,144 token，并使用qwen3推理解析器；工具调用与MTP变体见官方卡。本站未执行。",
+          "command": "python -m sglang.launch_server --model-path Qwen/Qwen3.5-9B --port 8000 --tp-size 1 --mem-fraction-static 0.8 --context-length 262144 --reasoning-parser qwen3"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于并行配置、上下文长度与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 82.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡报告（未标独立评测版本）",
+      "settings": "官方卡语言基准表Knowledge & STEM列表中Qwen3.5-9B列为82.5。该项未完整披露prompt、shot数、采样、推理模式或生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-9B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-9b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "c-eval",
+      "benchmark": "C-Eval",
+      "dataset": "C-Eval",
+      "language": "zh",
+      "metric": "accuracy",
+      "value": 88.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡语言基准表Knowledge & STEM列表中Qwen3.5-9B列为88.2。该项未完整披露prompt、shot数、采样、推理模式或生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-9B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-9b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 65.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6（官方卡未注明数据时间范围）",
+      "settings": "官方卡语言基准表Reasoning & Coding列表中Qwen3.5-9B列为65.6，并仅注明LiveCodeBench v6。模型卡未披露该项的few-shot、提示模板、采样、推理模式和输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-9B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、推理模式及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-9b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmmu-pro",
+      "benchmark": "MMMU-Pro",
+      "dataset": "MMMU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 70.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡视觉语言基准表STEM and Puzzle列表中Qwen3.5-9B列为70.1。该项未完整披露prompt、shot数、采样、图像预处理、推理模式或生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-9B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-9B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、图像处理与推理配置及完整评测条件，不能纳入统一条件比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-9B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-9b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可将其列入中英文知识问答候选：官方卡列英文MMLU-Pro 82.5%、中文C-Eval 88.2%。两项考试成绩不能直接说明中文写作或日常对话表现。",
+      "strengths": [
+        "官方成绩覆盖英文知识问答与中文考试基准，同表另有GPQA Diamond 81.7%、IFEval 91.5%等维度。"
+      ],
+      "limitations": [
+        "考试结果不能替代中文写作和自然对话验证。",
+        "评测条件未完整披露，不能与其他记录横向排名。",
+        "本站未复现这两项评测。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "c-eval"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可作为需执行测试核验的代码生成候选：官方卡报告LiveCodeBench v6为65.6%，但未注明数据时间范围。该单项成绩不能保证复杂项目修改正确。",
+      "strengths": [
+        "官方语言基准表含该型号代码基准结果，同表另有OJBench 29.2%。"
+      ],
+      "limitations": [
+        "复杂项目修改仍需在目标仓库运行测试验证。",
+        "模型卡未披露足够完整的生成配置，不能横向排名。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为图文问答候选：官方视觉语言表列出MMMU-Pro 70.1%。该单项基准不能保证OCR准确或细节图像识别效果。",
+      "strengths": [
+        "官方表格报告该型号的图文推理成绩，同表另有MMMU 78.4%、OCRBench 89.2%等维度。"
+      ],
+      "limitations": [
+        "OCR与细节图像识别需要按目标输入另行验证。",
+        "图像预处理和提示等条件没有完整披露。",
+        "本站未使用本地图片输入验证。"
+      ],
+      "evidenceIds": [
+        "mmmu-pro"
+      ]
+    }
+  ]
+}

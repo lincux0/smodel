@@ -1,0 +1,348 @@
+{
+  "id": "lfm2-5-vl-3b",
+  "name": "LFM2.5-VL-3B",
+  "family": "LFM",
+  "version": "2.5-VL",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方benchmark表将该checkpoint标注为3.1B；语言骨干为LFM2.5-2.6B，视觉编码器为SigLIP2 NaFlex shape优化400M，官方未按整模单列精确参数总量，按型号档位记录为3B。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B"
+  },
+  "languages": [
+    "英语、阿拉伯语、中文、法语、德语、意大利语、日语、韩语、葡萄牙语、西班牙语、越南语、泰语、印尼语、印地语、俄语、波兰语（官方模型卡列明16种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡与发布博客说明来源与改进方向（基于LFM2-VL-3B继续mid/post-training、骨干LFM2.5-2.6B、SigLIP2 NaFlex视觉编码器）；未公开完整训练数据清单。"
+  },
+  "summary": "Liquid AI面向端侧的多模态模型：LFM2.5-2.6B语言骨干加SigLIP2 NaFlex视觉编码器，支持文本与图像输入，原生32,768 token上下文。",
+  "features": [
+    "官方称在低于3.3GB内存占用下运行；Apple M5 Max约228 tok/s、Ryzen AI Max+ 395约116 tok/s、Galaxy S26 Ultra约20 tok/s（官方数值）",
+    "支持自然语言查询的grounding与目标检测，OCR支持整页版面标注（官方说明该标注格式仍为实验性）",
+    "本体为原生checkpoint，另提供GGUF、ONNX、MLX等导出",
+    "官方建议用于单轮、高吞吐、低延迟任务（如批量扫描件OCR、端侧翻译）"
+  ],
+  "limitations": [
+    "权重采用自定义LFM Open License v1.0（许可正文含商业使用条件与1000万美元年收入门槛定义），不等同Apache/MIT；使用前须阅读许可原文。",
+    "官方不建议用于长上下文、重推理任务（如视觉网页设计、蓝图技术问答）。",
+    "官方benchmark中MMMU Pro为30.5，高难度多模态推理有限。",
+    "本轮未核实该型号的代码仓库许可与官方部署命令；本站未实测端侧或GPU推理表现。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.0.0",
+        "torch",
+        "torchvision"
+      ],
+      "steps": [
+        {
+          "title": "准备环境",
+          "description": "官方说明Quick start兼容transformers>=5.0.0，需要torch、transformers与torchvision；卡中未给出安装命令，本站未执行。",
+          "command": null
+        },
+        {
+          "title": "按官方示例加载模型",
+          "description": "官方示例使用AutoModelForImageTextToText与AutoProcessor（bfloat16），采样temperature=0.2、top_k=50、repetition_penalty=1.0；图像经processor的NaFlex预处理。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方虽给出端侧内存与吞吐数值，但未在本站设备复现，不将其视为保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B-GGUF",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化并本地推理",
+          "description": "官方提供GGUF导出（LFM2.5-VL-3B-GGUF），定位为面向llama.cpp的CPU推理与更低内存占用；模型卡未列出本型号的具体命令，本站未下载或执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；端侧内存取决于量化格式、图像分辨率与上下文长度。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "screenspot-v2",
+      "benchmark": "ScreenSpot-v2",
+      "dataset": "ScreenSpot-v2 (avg)",
+      "language": "en",
+      "metric": "score",
+      "value": 80.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表（对比LFM2-VL-3B、Gemma4、InternVL3.5、Qwen3.5等）列出LFM2.5-VL-3B列ScreenSpot-v2 (avg)为80.7；表头标注该checkpoint为3.1B；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板、划分与生成配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-3b-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "refcoco",
+      "benchmark": "RefCOCO",
+      "dataset": "RefCOCO",
+      "language": "en",
+      "metric": "Macro Precision@1",
+      "value": 87.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-3B列RefCOCO (Macro Prec@1)为87.9，并给出相对LFM2-VL-3B提升（57.1，-30.8）；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板、划分与生成配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-3b-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ocrbenchv2-en",
+      "benchmark": "OCRBenchv2",
+      "dataset": "OCRBenchv2（English-only子集，卡注）",
+      "language": "en",
+      "metric": "score",
+      "value": 47.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-3B列OCRBenchv2为47.5，卡注[2]说明该列为English-only子集；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板、划分与生成配置，且为英文子集；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-3b-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmmu-pro",
+      "benchmark": "MMMU Pro",
+      "dataset": "MMMU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 30.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-3B列MMMU Pro为30.5；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-3B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板、划分与生成配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-3B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-3b-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未找到该型号的纯文本官方基准：模型卡的benchmark表只覆盖视觉、grounding、工具调用与多图任务，且官方明确建议用于单轮、高吞吐、低延迟场景、不推荐长上下文重推理任务。因此不做文本生成质量结论。",
+      "strengths": [
+        "官方给出端侧吞吐与内存的声明数值（如低于3.3GB内存、Apple M5 Max约228 tok/s）。",
+        "官方提供Transformers、vLLM、SGLang、llama.cpp等多条推理路线。"
+      ],
+      "limitations": [
+        "缺少可引用的纯文本基准与生成条件。",
+        "官方定位不覆盖长上下文与重推理场景。",
+        "本站未复现官方吞吐数值。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为端侧图文与文档解析候选：官方表列出ScreenSpot-v2 80.7%、RefCOCO 87.9%、OCRBenchv2（英文子集）47.5%、MMMU Pro 30.5%。定位偏单轮感知与OCR，而非高难度多模态推理。",
+      "strengths": [
+        "官方benchmark覆盖界面定位、grounding、OCR与多图/视频等不同维度。",
+        "官方称相对LFM2-VL-3B在screen understanding、grounding与工具使用上显著提升（表内给出对照数值）。"
+      ],
+      "limitations": [
+        "MMMU Pro仅30.5%，高难度多模态推理有限。",
+        "版面标注格式官方标注为实验性，可能变化且不易解析。",
+        "评测条件与提示模板未完整披露；本站未复现。"
+      ],
+      "evidenceIds": [
+        "screenspot-v2",
+        "refcoco",
+        "ocrbenchv2-en",
+        "mmmu-pro"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核于2026-10-17执行（见文末章节）。目录共29个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核与批次1–2扩充于2026-10-17执行（见文末章节）。目录共51个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -147,3 +147,30 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 - Whisper tiny/base/small/medium：english_short_latest.csv（65 行）中无该四个尺寸的公开行，维持原论文成绩。
 
 其余型号（Qwen3 系、Qwen2.5-Coder 系、Gemma 3/4、SmolLM3、Kokoro、PP-OCRv5、Qwen3-Reranker、Qwen3-TTS 等）的官方页面与既有记录逐项核对一致；部分官方卡表还含更多成绩，本轮按"少量事实引用"原则未扩大搬运。AA 仍仅链接，未导入任何数据。
+
+## 2026-10-17 批次1-2上线
+
+按[计划型号分阶段上线方案](LAUNCH_PLAN.md)第 1–2 批上线 22 个型号：视觉理解（Qwen3-VL-8B-Instruct、Gemma 4 E4B、Ministral 3 3B/8B Instruct、LFM2.5-VL-3B、Qwen3.5-9B/2B）、语音识别（Qwen3-ASR-0.6B/1.7B、Granite Speech 5.0 470M TurboCTC）、语音合成（Qwen3-TTS-12Hz-1.7B-Base、Fun-CosyVoice3-0.5B-2512）、文字识别（PaddleOCR-VL、PaddleOCR-VL-1.5）与通用文本/代码（Qwen3-4B-Instruct-2507、MiniCPM5 1B/2B、Granite 4.2 3B/8B、LFM2.5-1.2B-Instruct/2.6B、NVIDIA Nemotron Nano 9B v2）。目录增至 51 型号、86 用途摘要、208 条成绩（178 官方、30 第三方）。
+
+字段均取自发布方模型卡、许可文件、技术报告与官方仓库，经本轮逐项查阅获取；本站未下载权重或运行模型。新增 80 条成绩全部为发布方自报（`first-party`）并标注不可比。主要口径如下：
+
+| 型号 | 官方出处与已录口径 |
+| --- | --- |
+| Qwen3-VL-8B-Instruct | [模型卡](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct) · [技术报告](https://arxiv.org/html/2511.21631v2) · [仓库许可](https://github.com/QwenLM/Qwen3-VL/blob/main/LICENSE) | 8B 语言骨干档位；原生 262,144、YaRN 扩展至 1,000,000（官方提示 factor 取 2 或 3）；权重与代码 Apache-2.0。文本成绩取 Table 6 的 8B 列（MMLU-Pro 71.6、GPQA 61.9、LiveCodeBench v6 39.3）；视觉表为图片未转录，视觉用途证据不足。 |
+| Gemma 4 E4B IT | [模型卡](https://huggingface.co/google/gemma-4-E4B-it) · [Gemma 4 许可](https://ai.google.dev/gemma/docs/gemma_4_license) | 官方口径 E4B 为 4.5B 有效参数（含嵌入约 8B）；128K 上下文；支持文本、图像与音频输入。成绩取模型卡 E4B 列（MMLU-Pro 69.4、LiveCodeBench v6 52.0、MMMU-Pro 52.6、MATH-Vision 59.5）；Apache-2.0。 |
+| Ministral 3 3B/8B Instruct 2512 | [3B 卡](https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512) · [8B 卡](https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512) | 官方组件口径：3B 为 3.4B 语言模型＋0.4B 视觉编码器、8B 为 8.4B＋0.4B；256K 上下文；README 明确 Apache-2.0。成绩取 Instruct 表（Arena Hard、WildBench、MATH Maj@1、MM MTBench）；8B 代码用途证据不足（LiveCodeBench 仅出现在 Reasoning 检查点表格）。 |
+| LFM2.5-VL-3B | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-VL-3B) | LM 骨干 2.6B＋SigLIP2 400M 视觉编码器；32,768 上下文。LFM Open License v1.0（商用门槛：年收入 1000 万美元，非营利与研究不受限，已在条目限制中写明）。成绩：ScreenSpot-v2 80.7、RefCOCO 87.9、OCRBenchv2 英文子集 47.5、MMMU Pro 30.5。 |
+| Qwen3-TTS-12Hz-1.7B-Base | [HF 卡](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base) · [官方仓库](https://github.com/QwenLM/Qwen3-TTS) | 1.7B-Base 独立 HF 仓库已确认（Apache-2.0；同系列另有 CustomVoice/VoiceDesign，本轮未建条目）。Seed-TTS 测试集中文 WER 0.77、英文 1.24；多语言表 12Hz-1.7B-Base 中文 WER 0.928、SIM 0.799（已逐列核对列头）。 |
+| Fun-CosyVoice3-0.5B-2512 | [权重仓库](https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512) · [代码仓库](https://github.com/FunAudioLLM/CosyVoice) | 权重许可经 HF 元数据核实为 Apache-2.0；权重仓库无独立 LICENSE 文件，该限制已写入条目。成绩取 Seed-TTS 测试载体 Base 行（test-zh CER 1.21、SS 78.0、test-en WER 2.24、test-hard CER 6.71）；RL 行属另一权重未混用。 |
+| Qwen3-ASR-0.6B/1.7B | [0.6B 卡](https://huggingface.co/Qwen/Qwen3-ASR-0.6B) · [1.7B 卡](https://huggingface.co/Qwen/Qwen3-ASR-1.7B) | 模型卡覆盖 30 种语言与 22 种中文方言（逐项计数核实）；GigaSpeech 8.88/8.45、AISHELL-2 3.15/2.71、KeSpeech 7.08/5.10、Fleurs 十二语平均 7.57/4.90；官方说明 greedy 解码、max_new_tokens=1024。 |
+| Granite Speech 5.0 470M TurboCTC | [模型卡](https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc) · [官方文章](https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc) | 英语专用非自回归 CTC；Apache-2.0（NC 变体 CC-BY-NC-SA-4.0 另行存在，未建条目）。聚合平均 WER 5.00%、RTFx 超 12,600（1×H200 测量，"in excess of"按下限照录）；分测试集数值为图片未转录。 |
+| PaddleOCR-VL | [模型卡](https://huggingface.co/PaddlePaddle/PaddleOCR-VL) · [技术报告](https://arxiv.org/html/2510.14528v1) | 0.959B VLM＋PP-DocLayoutV2；报告 OmniDocBench v1.5 总分 92.56、Text-Edit 0.035、Formula-CDM 91.43；模型卡成绩表为图片未转录；1.5 报告将其写作 92.86 的差异已注明。 |
+| PaddleOCR-VL-1.5 | [模型卡](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5) · [发布说明](https://github.com/PaddlePaddle/PaddleOCR) | 1.5 为版本号、规模仍 0.9B；新增印章识别与文本检测，改进复杂拍摄文档鲁棒性。成绩：OmniDocBench v1.5 94.5%、Real5-OmniDocBench 总体 92.05%、Skewing 91.66%、Formula-CDM 94.21%；语言扩展 111 种取自 GitHub 发布说明。 |
+| Qwen3.5-9B/2B | [9B 卡](https://huggingface.co/Qwen/Qwen3.5-9B) · [2B 卡](https://huggingface.co/Qwen/Qwen3.5-2B) | 9B/2B 为型号档位；原生 262,144（9B 可扩展至 1,010,000）。成绩逐列核对：MMLU-Pro 82.5/66.5、C-Eval 88.2/73.2、LiveCodeBench v6 65.6（9B）、MMMU-Pro 70.1/50.3；2B 默认非思考模式且官方提示更易进入思考循环（已写入限制）。 |
+| MiniCPM5 1B/2B | [1B 卡](https://huggingface.co/openbmb/MiniCPM5-1B) · [2B 卡](https://huggingface.co/openbmb/MiniCPM5-2B) | 131,072 上下文；官方参数量 1.08B/2.52B（档位记 1B/2B，notes 保留精确值）。1B 评测排行榜为图片未录入，两个用途维持证据不足；2B 收录 MMLU-Pro 70.8、IFEval 86.7、LiveCodeBench v6 69.1、SWE-bench Verified 46.4，卡内带 † 的 AA 发布行未导入。 |
+| Granite 4.2 3B/8B | [3B 卡](https://huggingface.co/ibm-granite/granite-4.2-3b) · [8B 卡](https://huggingface.co/ibm-granite/granite-4.2-8b) | 原生 128K（可扩展至 512K）；Apache-2.0；官方 GGUF 仓库存在。成绩（NeMo Evaluator 框架）：3B MMLU-Pro 67.84、AIME25 78.33、BFCL v4 52.41、LiveCodeBench v6 69.71；8B MMLU-Pro 74.04、AIME25 86.67、LiveCodeBench v6 73.24、SWE-bench Verified 47.67；思考模式未逐项说明。 |
+| LFM2.5-1.2B-Instruct/2.6B | [1.2B 卡](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct) · [2.6B 卡](https://huggingface.co/LiquidAI/LFM2.5-2.6B) | LFM Open License v1.0（商用门槛同 VL 条目）。1.2B：MMLU-Pro 44.35、IFEval 86.23、Multi-IF 60.98、BFCLv3 49.12；2.6B：AIME25 51.87、IFBench 59.17、Multi-IF 80.07、BFCLv4 56.88；官方"不推荐编程/知识密集任务"已写入限制；2.6B 卡内 AA-Omni 行未导入。 |
+| Qwen3-4B-Instruct-2507 | [模型卡](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) | 4.0B 总参数、3.6B 非嵌入；262,144 原生；仅非思考模式。成绩：MMLU-Pro 69.6、GPQA 62.0、LiveCodeBench v6（25.02–25.05）35.1、MultiPL-E 76.8；SGLang/vLLM 启动命令照录。独立于已上线 Qwen3-4B，未合并任何旧版成绩。 |
+| NVIDIA Nemotron Nano 9B v2 | [模型卡](https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2) | Mamba2/Transformer 混合架构（仅 4 层注意力）；NVIDIA Open Model License。成绩：AIME25 72.1、GPQA 64.0、LiveCodeBench 71.1（Reasoning-On）、RULER 128K 78.9（Reasoning-Off，卡注明确）；NeMo-Skills 评测；vLLM 需 Mamba cache 参数。 |
+
+本轮新增记录全部不可比，未建立比较组，未导入AA数据；非商业与自定义许可（LFM、NVIDIA、Gemma 条款）在各条目许可字段标明名称与条款链接。批次完成情况与后续批次安排见[计划型号分阶段上线方案](LAUNCH_PLAN.md)。

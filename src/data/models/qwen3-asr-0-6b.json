@@ -1,0 +1,377 @@
+{
+  "id": "qwen3-asr-0-6b",
+  "name": "Qwen3-ASR-0.6B",
+  "family": "Qwen",
+  "version": "3-ASR",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.938,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方型号名称为0.6B档；Hugging Face仓库元数据（safetensors）标注该检查点参数为938,008,576（约0.938B），为包含音频编码器与Qwen3-Omni系语言模型骨干的完整检查点；官方未给出分组件参数口径。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "中文",
+    "英语",
+    "粤语",
+    "阿拉伯语",
+    "德语",
+    "法语",
+    "西班牙语",
+    "葡萄牙语",
+    "印尼语",
+    "意大利语",
+    "韩语",
+    "俄语",
+    "泰语",
+    "越南语",
+    "日语",
+    "土耳其语",
+    "印地语",
+    "马来语",
+    "荷兰语",
+    "瑞典语",
+    "丹麦语",
+    "芬兰语",
+    "波兰语",
+    "捷克语",
+    "菲律宾语",
+    "波斯语",
+    "希腊语",
+    "匈牙利语",
+    "马其顿语",
+    "罗马尼亚语",
+    "22种中文方言（官方列举安徽、东北、福建、甘肃、贵州、河北、河南、湖北、湖南、江西、宁夏、山东、陕西、山西、四川、天津、云南、浙江、香港粤语口音、广东粤语口音、吴语、闽南语）",
+    "多国英语口音（官方称覆盖不同国家与地区的英语口音）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B"
+    },
+    "code": null,
+    "trainingDisclosure": "官方说明两个ASR模型均基于大规模语音训练数据与Qwen3-Omni基座的音频理解能力训练；未公开具体语料清单与数据许可明细。"
+  },
+  "summary": "支持30种语言与22种中文方言的语音识别模型，覆盖多国英语口音与粤语等场景，支持语言识别、流式/离线统一推理，官方称可转写长音频。",
+  "features": [
+    "支持30种语言与22种中文方言，官方另称覆盖多国英语口音与粤语",
+    "同一模型支持离线与流式推理，官方称可转写长音频，音频类型覆盖语音、歌声与带BGM歌曲",
+    "官方0.6B档定位为准确率与效率的折中，称并发128时达到2000倍吞吐",
+    "官方提供qwen-asr包（transformers与vLLM两种后端）、Docker镜像与语言识别输出",
+    "可配合Qwen3-ForcedAligner-0.6B输出词/字级时间戳（另需安装强制对齐模型）"
+  ],
+  "limitations": [
+    "官方评测表同时列出公开数据集与内部数据集结果，本条目只收录公开数据集口径；歌声/带BGM与内部集成绩未收录。",
+    "官方模型卡未披露LLM token上下文长度；音频时长上限与max_new_tokens属生成/输入配置口径，不能换算为token上下文，本条不填写数值。",
+    "官方称支持22种中文方言与多国英语口音，但未给出逐方言、逐口音的公开成绩，目标方言需自行验证。",
+    "官方称0.6B档并发128时约2000倍吞吐，但未附机器与运行时细节，本条未收录该速度数值。",
+    "本站未实测识别准确率与流式延迟。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-qwen-asr",
+      "runtime": "qwen-asr（Transformers 后端）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B#quickstart",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "Python 3.12（官方建议的新环境）",
+        "qwen-asr",
+        "torch",
+        "flash-attn（官方标注为可选优化项）"
+      ],
+      "steps": [
+        {
+          "title": "安装 Transformers 后端依赖",
+          "description": "官方Quickstart给出的最小安装命令，提供transformers后端支持；官方建议使用独立的Python 3.12环境。本站未执行。",
+          "command": "pip install -U qwen-asr"
+        },
+        {
+          "title": "加载指定模型并转写",
+          "description": "按官方示例用Qwen3ASRModel.from_pretrained加载此模型并调用transcribe；language=None为自动语言识别，也可显式指定语种。需要时间戳时另传forced_aligner参数。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、音频长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-qwen-asr-vllm",
+      "runtime": "qwen-asr（vLLM 后端）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B#deployment-with-vllm",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "Python 3.12（官方建议的新环境）",
+        "qwen-asr[vllm]",
+        "vllm（官方说明可用nightly wheel或Docker镜像）",
+        "flash-attn（官方建议用于强制对齐加速，可选）"
+      ],
+      "steps": [
+        {
+          "title": "安装 vLLM 后端依赖",
+          "description": "官方Quickstart给出的vLLM后端安装命令；官方说明vLLM后端用于更快的推理与流式支持，流式推理目前仅vLLM后端可用。本站未执行。",
+          "command": "pip install -U qwen-asr[vllm]"
+        },
+        {
+          "title": "启动兼容 OpenAI 接口的服务",
+          "description": "官方给出vllm serve命令与qwen-asr-serve封装；模型卡另提供OpenAI SDK、cURL与离线推理示例。本站未启动服务。",
+          "command": "vllm serve Qwen/Qwen3-ASR-0.6B"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用与吞吐取决于GPU、批大小与vLLM版本，官方未给出该型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "gigaspeech-wer",
+      "benchmark": "Qwen3-ASR模型卡公开数据集评测（WER）",
+      "dataset": "GigaSpeech",
+      "language": "英语",
+      "metric": "WER",
+      "value": 8.88,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-ASR模型卡ASR Benchmarks on Public Datasets表",
+      "settings": "官方评测说明：使用dtype=torch.bfloat16、max_new_tokens=1024、vLLM后端推理，全部贪婪解码，且所有测试均未指定language参数。本行为Qwen3-ASR-0.6B列GigaSpeech单元格。来源未披露模型revision、音频分段方式、文本标准化与评分脚本细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-ASR-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频分段与文本标准化等足以复现和统一对齐的评测条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-asr-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "aishell-2-test-wer",
+      "benchmark": "Qwen3-ASR模型卡公开数据集评测（WER）",
+      "dataset": "AISHELL-2-test",
+      "language": "中文",
+      "metric": "WER",
+      "value": 3.15,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-ASR模型卡ASR Benchmarks on Public Datasets表",
+      "settings": "官方评测说明：使用dtype=torch.bfloat16、max_new_tokens=1024、vLLM后端推理，全部贪婪解码，且所有测试均未指定language参数。本行为Qwen3-ASR-0.6B列AISHELL-2-test单元格。来源未披露模型revision、音频分段方式、文本标准化与评分脚本细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-ASR-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频分段与文本标准化等足以复现和统一对齐的评测条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-asr-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "kespeech-wer",
+      "benchmark": "Qwen3-ASR模型卡公开数据集评测（WER）",
+      "dataset": "KeSpeech",
+      "language": "中文（官方表归入Chinese Dialect组）",
+      "metric": "WER",
+      "value": 7.08,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-ASR模型卡ASR Benchmarks on Public Datasets表",
+      "settings": "官方评测说明：使用dtype=torch.bfloat16、max_new_tokens=1024、vLLM后端推理，全部贪婪解码，且所有测试均未指定language参数。本行为Qwen3-ASR-0.6B列KeSpeech单元格。来源未披露模型revision、音频分段方式、文本标准化与评分脚本细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-ASR-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频分段与文本标准化等足以复现和统一对齐的评测条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-asr-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "fleurs-multilingual-wer",
+      "benchmark": "Qwen3-ASR模型卡多语言评测（WER）",
+      "dataset": "Fleurs（官方附注列明12种语言的汇总）",
+      "language": "多语言（12种语言的官方汇总）",
+      "metric": "WER",
+      "value": 7.57,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Qwen3-ASR模型卡Multilingual ASR Benchmarks表",
+      "settings": "官方评测说明：使用dtype=torch.bfloat16、max_new_tokens=1024、vLLM后端推理，全部贪婪解码，且所有测试均未指定language参数。本行为Qwen3-ASR-0.6B列Fleurs单元格；官方附注说明Fleurs包含12种语言（en、zh、yue、ar、de、es、fr、it、ja、ko、pt、ru）。来源未披露各语种分项、模型revision与文本标准化细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-ASR-0.6B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露各语种分项、模型revision与文本标准化等足以复现和统一对齐的评测条件；该汇总值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-ASR-0.6B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-qwen3-asr-report",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为多语种转写候选：官方模型卡报告0.6B档在GigaSpeech英语WER 8.88%、AISHELL-2-test中文WER 3.15%、KeSpeech（方言方向）WER 7.08%、Fleurs十二语汇总WER 7.57%。成绩为发布方在同一评测配置下的自测。",
+      "strengths": [
+        "官方按型号逐列列出Qwen3-ASR-0.6B结果，未借用1.7B档或其他系列成绩。",
+        "同一批次评测的精度、输出上限与解码方式在表格前统一说明（bfloat16、max_new_tokens=1024、贪婪解码、未指定language）。",
+        "公开数据集覆盖英文、中文与中文方言方向，并有十二语种汇总值可参考。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "公开表中没有逐方言、逐英语口音的细分成绩，官方宣传的22种方言与多国口音覆盖面缺乏公开数字支撑。",
+        "来源未披露模型revision、音频分段与文本标准化细节；内部数据集与歌声/带BGM结果未收录。",
+        "本站未实测识别质量、流式延迟或长音频表现。"
+      ],
+      "evidenceIds": [
+        "gigaspeech-wer",
+        "aishell-2-test-wer",
+        "kespeech-wer",
+        "fleurs-multilingual-wer"
+      ]
+    }
+  ]
+}

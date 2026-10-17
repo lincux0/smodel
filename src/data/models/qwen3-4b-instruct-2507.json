@@ -1,0 +1,380 @@
+{
+  "id": "qwen3-4b-instruct-2507",
+  "name": "Qwen3-4B-Instruct-2507",
+  "family": "Qwen",
+  "version": "3-2507",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 4,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方卡标注4.0B总参数、3.6B非嵌入参数。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
+  },
+  "context": {
+    "nativeTokens": 262144,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
+  },
+  "languages": [
+    "多语言（模型卡称改进多语言长尾知识覆盖，未列明具体语种数）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡提供训练阶段与能力改进概述并引用Qwen3技术报告；未公开完整训练数据清单。"
+  },
+  "summary": "Qwen3-4B非思考指令更新版，仅支持非思考模式；原生262,144 token上下文，官方称在多语言长尾与开放任务对齐上有明显改进。",
+  "features": [
+    "官方标注4.0B总参数、3.6B非嵌入参数",
+    "原生262,144 token上下文",
+    "仅支持非思考模式（官方说明不再需要enable_thinking=False）",
+    "卡中给出SGLang与vLLM的最低版本与启动命令"
+  ],
+  "limitations": [
+    "仅非思考模式；不能与旧版Qwen3-4B的思考模式成绩混用比较。",
+    "官方卡未逐项披露基准的提示、采样与输出预算。",
+    "长上下文在显存不足时需要按官方建议下调（例如32,768）。",
+    "本站未复现评测或设备表现。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方建议最新版；低于4.51.0会报KeyError: 'qwen3'）",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装最新版Transformers",
+          "description": "官方说明需使用最新版transformers，低于4.51.0会出现KeyError: 'qwen3'；卡中未给出安装命令，本站未执行。",
+          "command": null
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按官方模型卡示例用AutoModelForCausalLM与AutoTokenizer加载此模型并生成；官方建议采样temperature=0.7、top_p=0.8、top_k=20、min_p=0，多数查询输出长度16,384。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于精度、输入长度、运行时与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm>=0.8.5"
+      ],
+      "steps": [
+        {
+          "title": "用vLLM启动OpenAI兼容服务",
+          "description": "官方卡给出的vLLM启动命令（需vllm>=0.8.5）；显存不足时可降低上下文（官方示例32,768）。本站未执行。",
+          "command": "vllm serve Qwen/Qwen3-4B-Instruct-2507 --max-model-len 262144"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于上下文长度、并发与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sglang",
+      "runtime": "SGLang",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sglang>=0.4.6.post1"
+      ],
+      "steps": [
+        {
+          "title": "用SGLang启动OpenAI兼容服务",
+          "description": "官方卡给出的SGLang启动命令（需sglang>=0.4.6.post1）。本站未执行。",
+          "command": "python -m sglang.launch_server --model-path Qwen/Qwen3-4B-Instruct-2507 --context-length 262144"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于上下文长度、并发与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 69.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡性能表（未注明数据版本）",
+      "settings": "官方卡性能表Qwen3-4B-Instruct-2507列MMLU-Pro为69.6（对照列含旧版Qwen3-4B Non-Thinking 58.0与GPT-4.1-nano等）。该表未逐项披露shot数、提示模板、采样与输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B-Instruct-2507",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方性能表未逐项标注该成绩对应的模型revision、shot数、提示模板与输出预算；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-4b-instruct-2507-qwen-model-card-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gpqa",
+      "benchmark": "GPQA",
+      "dataset": "GPQA",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 62,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡性能表（未注明数据版本）",
+      "settings": "官方卡性能表Qwen3-4B-Instruct-2507列GPQA为62.0（对照列含旧版Qwen3-4B Non-Thinking 41.7）。该表未逐项披露shot数、提示模板、采样与输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B-Instruct-2507",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方性能表未逐项标注该成绩对应的模型revision、shot数、提示模板与输出预算；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-4b-instruct-2507-qwen-model-card-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench v6（25.02-25.05）",
+      "language": "code",
+      "metric": "score",
+      "value": 35.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6（题目期25.02-25.05，官方卡标注）",
+      "settings": "官方卡性能表Coding区列出Qwen3-4B-Instruct-2507的LiveCodeBench v6（25.02-25.05）为35.1（对照列含旧版Qwen3-4B Non-Thinking 26.4）。该表未逐项披露提示模板、采样与输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B-Instruct-2507",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方性能表未逐项标注该成绩对应的模型revision、提示模板与采样配置；原样记录，不与不同版本或配置的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-4b-instruct-2507-qwen-model-card-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "multipl-e",
+      "benchmark": "MultiPL-E",
+      "dataset": "MultiPL-E",
+      "language": "code",
+      "metric": "score",
+      "value": 76.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡性能表（未注明数据版本）",
+      "settings": "官方卡性能表Coding区列出Qwen3-4B-Instruct-2507的MultiPL-E为76.8（对照列含旧版Qwen3-4B Non-Thinking 66.6）。该表未逐项披露语言子集、提示模板、采样与输出长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-4B-Instruct-2507",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方性能表未逐项标注该成绩对应的模型revision、语言子集、提示模板与采样配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-4b-instruct-2507-qwen-model-card-2025",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方性能表给出该更新版MMLU-Pro 69.6%与GPQA 62.0%，均明显高于同表旧版Qwen3-4B Non-Thinking（58.0/41.7）；两列口径同表但未披露完整评测配置，不能宣布严格同条件提升幅度。",
+      "strengths": [
+        "官方表直接对照旧版Qwen3-4B，便于识别更新版差异。",
+        "同表另有AIME25、ZebraLogic、IFEval、WritingBench等维度。"
+      ],
+      "limitations": [
+        "仅非思考模式，不能与思考模式成绩混合比较。",
+        "考试结果不能替代中文写作和开放式对话验证。",
+        "评测条件未完整披露，本站未复现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "gpqa"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方表报告LiveCodeBench v6（题目期25.02-25.05）35.1%与MultiPL-E 76.8%，均高于旧版Qwen3-4B Non-Thinking对照值；单项基准不能保证仓库级工程任务正确。",
+      "strengths": [
+        "官方表同时给出竞赛题（LiveCodeBench）与多语言代码（MultiPL-E）两类指标。",
+        "对照列包含旧版同尺寸模型，便于了解更新方向。"
+      ],
+      "limitations": [
+        "Aider-Polyglot等仓库级指标数值与训练数据/提示强相关，需按目标仓库验证。",
+        "提示、采样与输出长度未在表内披露。",
+        "本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6",
+        "multipl-e"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "id": "minicpm5-1b",
+  "name": "MiniCPM5-1B",
+  "family": "MiniCPM",
+  "version": "5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型信息标注参数1,080,632,832（约1.08B），非嵌入参数679,552,512；按官方1B档位记录。",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM5-1B"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM5-1B"
+  },
+  "languages": [
+    "英语",
+    "中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/openbmb/MiniCPM5-1B"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开训练路线（base训练、mid-training、SFT、RL、OPD）与部分数据集名称（Ultra-FineWeb、Ultra-FineWeb-L3、UltraData-Math、UltraData-SFT-2605），并说明SFT规模为200B deep-thinking与200B hybrid-thinking token；未给出完整逐样本数据清单。"
+  },
+  "summary": "面向端侧与本地部署的稠密1B因果语言模型；同一检查点支持Think与No Think模式，原生131,072 token上下文。",
+  "features": [
+    "官方标注1,080,632,832总参数、679,552,512非嵌入参数",
+    "标准LlamaForCausalLM架构，官方称主流推理引擎可直接加载、无需自定义kernel",
+    "同一检查点通过enable_thinking切换Think/No Think",
+    "SGLang内置minicpm5工具调用解析器，官方推荐用于工具调用"
+  ],
+  "limitations": [
+    "官方评测结果以排行榜图片形式发布，本轮无法逐项转录数值，暂未收录成绩。",
+    "厂商自测的1B级SOTA结论限于其列出的对比集合（LFM2.5-1.2B-Thinking、Qwen3-0.6B/think、Qwen3.5-0.8B/think）。",
+    "本站未实测本地部署或端侧表现。"
+  ],
+  "officialUrl": "https://huggingface.co/openbmb/MiniCPM5-1B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM5-1B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM5-1B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.6",
+        "accelerate",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例安装依赖",
+          "description": "官方Quickstart的Transformers安装命令（transformers>=5.6）。本站未执行。",
+          "command": "pip install -U \"transformers>=5.6\" accelerate torch"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "官方示例用AutoModelForCausalLM与AutoTokenizer加载此模型；enable_thinking=False获得直接回答，Think模式推荐temperature=0.9、top_p=0.95，No Think推荐temperature=0.7、top_p=0.95。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM5-1B-GGUF",
+      "sourceUrl": "https://github.com/OpenBMB/MiniCPM/blob/main/docs/deployment/llama_cpp.md",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化并本地推理",
+          "description": "官方提供GGUF导出（MiniCPM5-1B-GGUF）用于llama.cpp / Ollama / LM Studio等本地推理，并给出部署Cookbook；模型卡未在本型号列出具体命令，本站未下载或执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；端侧内存取决于量化格式与上下文长度，不将文件体积换算为运行内存保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-mlx",
+      "runtime": "MLX",
+      "systems": [
+        "macOS（Apple Silicon）"
+      ],
+      "format": "MLX / 4bit",
+      "quantization": "4bit（官方MLX导出）",
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM5-1B-MLX",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM5-1B-MLX",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取MLX量化用于Apple Silicon",
+          "description": "官方提供MLX / 4bit导出（MiniCPM5-1B-MLX）用于Apple Silicon本地推理；模型卡未列出具体命令，本站未下载或执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；Apple Silicon统一内存占用取决于量化与上下文长度。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未收录该型号的官方基准数值：MiniCPM5-1B模型卡的评测结果以排行榜图片（public_leaderboard_en.png）发布，无法在不转录图片的前提下取得可追溯数值。因此不做文本能力结论，可参考官方文字描述的定位（本地助手、工具助理与推理助手）。",
+      "strengths": [
+        "官方说明同一检查点可作快速助手与深思推理，并给出两套推荐采样参数。",
+        "官方公开训练路线与部分数据集名称，并有RL+OPD阶段的文字性收益描述（未给出分项数值）。"
+      ],
+      "limitations": [
+        "官方评测表为图片，本轮未能逐项转录并复核评测框架、提示与模型revision。",
+        "厂商自测的1B级SOTA结论限于其列出的对比集合。",
+        "本站未复现任何官方数值。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "coding",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、可追溯的该型号代码基准数值：官方只以文字说明优势集中在工具调用、代码生成与困难推理，未在模型卡文本中提供可引用的具体代码基准成绩。",
+      "strengths": [
+        "官方将代码生成与工具调用列为该型号重点能力方向。",
+        "SGLang提供官方标注的minicpm5工具调用解析器。"
+      ],
+      "limitations": [
+        "缺少可引用的代码基准数值与评测条件。",
+        "本地编码代理效果需按目标仓库实测验证。",
+        "本站未运行代码生成测试。"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

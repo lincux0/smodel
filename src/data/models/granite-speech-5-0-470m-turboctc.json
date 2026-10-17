@@ -1,0 +1,252 @@
+{
+  "id": "granite-speech-5-0-470m-turboctc",
+  "name": "Granite Speech 5.0 470M TurboCTC",
+  "family": "Granite Speech",
+  "version": "5.0",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.473,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡称其为470M参数的英语ASR模型（16层conformer声学编码器与16,384 BPE的CTC输出层）；Hugging Face仓库元数据（safetensors）标注F32 65,536与BF16 472,928,256，合计472,993,792（约0.473B），未按组件拆分口径。",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方披露训练数据约60,000小时英语音频：公开语料CommonVoice-17（2500小时）、MLS（44600）、Librispeech（960）、VoxPopuli（500）、YODAS（8900）、AMI（150）、Earnings-22（100），另有约2000小时多说话人合成数据、500小时Earnings-22合成数据与240小时由gpt-oss-120b/20b生成、StyleTTS2合成的数字与地址类数据；训练在IBM Blue Vela集群的8张H100上完成、用时10天。"
+  },
+  "summary": "英语专用的非自回归CTC语音识别模型：conformer声学编码器加16,384 BPE输出层，逐帧贪心解码，面向边缘设备与低延迟/高吞吐转写。",
+  "features": [
+    "官方称470M参数、英语专用，采用块自注意力conformer编码器与CTC输出层，推理为非自回归贪心解码",
+    "官方博客称其聚合吞吐超过12,600 RTFx（NVIDIA H200），可批处理高速转写",
+    "原生支持transformers>=5.16.0的AutoModelForCTC；官方另列mlx-audio（Apple Silicon）与transcribe.cpp（GGUF）路线",
+    "模型卡公开训练数据清单与编码器配置参数表（16层、隐层1024、注意力头8等）",
+    "官方同时发布NC变体granite-speech-5.0-470m-turboctc-nc（CC-BY-NC-SA-4.0，使用额外训练数据），本条只覆盖Apache-2.0版"
+  ],
+  "limitations": [
+    "英语专用，官方明确不支持其他语言。",
+    "官方模型卡与博客的分测试集WER与RTFx图表为图片，正文只给出聚合数值；本条目因此只收录聚合WER与吞吐数值，缺少逐测试集分项。",
+    "官方称NC变体使用额外数据且聚合WER更低（4.85%对5.00%），选用时需同时区分许可与训练数据。",
+    "CTC非自回归架构不适用LLM式token上下文口径；单次音频长度上限官方未量化，本条不填写数值。",
+    "官方模型卡中的FFASR名次为榜单快照（2026-08-25），本条未收录名次类信息；本站未实测速度与准确率。"
+  ],
+  "officialUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers AutoModelForCTC（PyTorch）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc#usage-with-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.16.0",
+        "torch",
+        "datasets（官方示例用于加载音频）"
+      ],
+      "steps": [
+        {
+          "title": "安装依赖",
+          "description": "官方模型卡Usage给出的安装命令；模型在transformers>=5.16.0中原生支持AutoModelForCTC与AutoProcessor。本站未执行。",
+          "command": "pip install transformers>=5.16.0 datasets"
+        },
+        {
+          "title": "加载模型并转写",
+          "description": "按官方示例用AutoProcessor与AutoModelForCTC加载此模型，调用model.generate后batch_decode；官方说明将log-mel前端放在模型设备上计算可减少数据传输。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于运行时、精度、批大小与硬件，官方未给出内存或显存需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-mlx-audio",
+      "runtime": "mlx-audio",
+      "systems": [
+        "macOS（Apple Silicon M 系芯片）"
+      ],
+      "format": "Safetensors（MLX推理）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc#usage-with-mlx-audio-for-apple-silicon-m-series-chips",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "mlx-audio>=0.5.1（官方要求较新版本）"
+      ],
+      "steps": [
+        {
+          "title": "安装 mlx-audio",
+          "description": "官方模型卡Apple Silicon章节给出的安装命令，要求mlx-audio 0.5.1或更新版本。本站未执行。",
+          "command": "pip install -U mlx-audio"
+        },
+        {
+          "title": "运行转写示例",
+          "description": "官方给出的mlx_audio.stt.generate示例命令（--audio与--output-path需替换为本地路径）。本站未执行。",
+          "command": "python -m mlx_audio.stt.generate --model ibm-granite/granite-speech-5.0-470m-turboctc --verbose --audio \"audio.wav\" --output-path \"transcript\""
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；Apple Silicon设备上的内存占用与速度取决于芯片与运行时版本，官方未给出数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "official-openasr-public-english-avg-wer",
+      "benchmark": "OpenASR Leaderboard公开英语短音频测试集（聚合平均）",
+      "dataset": "OpenASR Leaderboard公开英语短音频测试集（官方聚合平均）",
+      "language": "英语",
+      "metric": "平均WER（聚合）",
+      "value": 5.0,
+      "unit": "%",
+      "direction": "lower",
+      "version": "IBM Granite Speech官方博客与模型卡（模型卡称官方结果截至2026-10-02，博客图表截至2026-08-25）",
+      "settings": "官方博客自报：Apache-2.0版在OpenASR Leaderboard公开英语短音频测试集上的聚合平均WER为5.00%（NC变体为4.85%）。来源只提供分测试集图表图片，未列出各集数值，也未披露解码参数与模型revision；该模型为CTC贪心解码。本站未复现。",
+      "sourceUrl": "https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "IBM Granite Speech Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-speech-5.0-470m-turboctc",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源只给出聚合平均值与图表，未披露分测试集数值、模型revision与解码参数等足以复现和对齐的条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc",
+        "notes": "仅记录官方博客中的少量聚合成绩并保留发布方署名与来源链接；不复制整表、图表或底层测试数据，引用不更改原博客及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "ibm-granite-granite-speech-5-0-blog",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "official-rtfx",
+      "benchmark": "官方吞吐报告（Granite Speech 5.0博客与模型卡）",
+      "dataset": "官方聚合吞吐测试（未列出具体测试集）",
+      "language": "英语",
+      "metric": "RTFx（实时倍速，聚合吞吐）",
+      "value": 12600,
+      "unit": "RTFx",
+      "direction": "higher",
+      "version": "IBM Granite Speech官方博客（2026-08-25发布）；模型卡称RTFx在1张NVIDIA H200上测得",
+      "settings": "官方博客原文为聚合吞吐“超过12,600 RTFx”（aggregate throughput in excess of 12,600 RTFx），本条按原文下限值照录；模型卡称RTFx在单张NVIDIA H200上测量。来源未披露批大小、精度与运行时版本；本站未复现。",
+      "sourceUrl": "https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "IBM Granite Speech Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-speech-5.0-470m-turboctc",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源只给出聚合吞吐的“超过”表述与实测机型，未披露批大小、精度与运行时版本等足以复现和对齐的条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc",
+        "notes": "仅记录官方博客中的少量吞吐成绩并保留发布方署名与来源链接；不复制整表、图表或底层测试数据，引用不更改原博客及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "ibm-granite-granite-speech-5-0-blog",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为英语实时/边缘转写候选：官方报告其OpenASR公开英语短音频测试集的聚合平均WER为5.00%，聚合吞吐超过12,600 RTFx（NVIDIA H200）。聚合值来自发布方自测且缺少分测试集数值，不能替代目标场景的实测。",
+      "strengths": [
+        "成绩明确对应Apache-2.0版granite-speech-5.0-470m-turboctc，未与NC变体（4.85%）混用，且同时给出聚合WER与吞吐条件（H200）。",
+        "模型卡公开了训练数据清单、编码器配置与推理方式（CTC非自回归贪心解码），条件披露较完整。",
+        "官方提供transformers、mlx-audio与transcribe.cpp三条可核对的使用路线。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "分测试集WER与RTFx只以图表图片给出，正文仅有聚合值；本条无法提供各数据集分项，也无法与其他型号逐集对齐。",
+        "RTFx为“超过12,600”的下限表述，且未披露批大小与精度，速度数值不可直接与其他运行时比较。",
+        "英语专用；中文或其他语言场景不适用。本站未实测。"
+      ],
+      "evidenceIds": [
+        "official-openasr-public-english-avg-wer",
+        "official-rtfx"
+      ]
+    }
+  ]
+}

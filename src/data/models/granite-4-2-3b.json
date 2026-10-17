@@ -1,0 +1,433 @@
+{
+  "id": "granite-4-2-3b",
+  "name": "Granite 4.2 3B",
+  "family": "Granite",
+  "version": "4.2",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型摘要标注3B；HF权重元数据safetensors张量参数合计3,659,737,600（约3.66B）。官方未给出更精确的公开口径。",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": 524288,
+    "extension": "官方称长上下文可扩展至512K；未披露扩展方法细节。",
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b"
+  },
+  "languages": [
+    "英语",
+    "德语",
+    "西班牙语",
+    "法语",
+    "日语",
+    "葡萄牙语",
+    "阿拉伯语",
+    "捷克语",
+    "意大利语",
+    "韩语",
+    "荷兰语",
+    "中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开后训练流程（SFT四类语料、GRPO多环境强化学习与RLHF偏好对齐）并说明完整训练数据集清单在Granite 4.2 GitHub仓库；预训练细节引用Granite 4.1技术博客。"
+  },
+  "summary": "Granite 4.2 家族3B级稠密推理模型，内置思考链并支持三种思考模式，官方定位推理、代码生成、工具调用与代理工作流。",
+  "features": [
+    "内置思考链（默认思考，另有非思考与低耗模式）",
+    "原生128K上下文，官方称可扩展至512K",
+    "推理增强的工具调用与结构化输出",
+    "官方在模型卡给出vLLM与SGLang的完整启动命令",
+    "2026年8月25日发布，Apache-2.0"
+  ],
+  "limitations": [
+    "官方评测表未披露各成绩使用的思考模式等评测条件，分数不能与外部统一条件横比。",
+    "官方在评测表中将该型号的SWE-bench相关行与部分代理基准标为NA，这些方面没有官方成绩。",
+    "本站未复现评测或部署。"
+  ],
+  "officialUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm v0.20+（官方要求，用于granite_thinking_parser）"
+      ],
+      "steps": [
+        {
+          "title": "准备推理解析器",
+          "description": "官方要求使用仓库内的granite_thinking_parser.py（需vLLM v0.20+），命令中./granite_thinking_parser.py为仓库文件路径；工具调用解析器使用qwen3_coder。本站未下载或部署。",
+          "command": null
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方给出的vLLM启动命令（原文为反斜杠续行的多行写法，此处合并为单行）；官方推荐generation参数为temperature 1.0、top_p 0.95、思考模式max_new_tokens 8192。本站未启动服务。",
+          "command": "vllm serve ibm-granite/granite-4.2-3b --served-model-name granite-4.2-3b --dtype bfloat16 --max-model-len 131072 --reasoning-parser granite_thinking_parser --reasoning-parser-plugin ./granite_thinking_parser.py --tool-call-parser qwen3_coder --enable-auto-tool-choice"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出该型号的内存或显存需求，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch torchvision torchaudio",
+        "accelerate",
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "安装基础依赖",
+          "description": "官方模型卡安装章节给出的第一条命令；本站未执行安装。",
+          "command": "pip install torch torchvision torchaudio"
+        },
+        {
+          "title": "安装推理依赖",
+          "description": "官方模型卡安装章节给出的第二条命令。",
+          "command": "pip install accelerate transformers"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用AutoModelForCausalLM与AutoTokenizer加载，apply_chat_template支持enable_thinking与low_effort参数；官方推荐temperature 1.0、top_p 0.95、do_sample=True。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出资源需求，且官方示例使用device_map=\"cuda\"，不代表本站验证过GPU部署。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sglang",
+      "runtime": "SGLang",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "SGLang v0.5.18+"
+      ],
+      "steps": [
+        {
+          "title": "启动服务",
+          "description": "官方给出的SGLang启动命令（原文为反斜杠续行的多行写法，此处合并为单行）；推理解析器与工具调用解析器使用auto。本站未启动服务。",
+          "command": "python3 -m sglang.launch_server --model-path ibm-granite/granite-4.2-3b --dtype bfloat16 --context-length 131072 --reasoning-parser auto --tool-call-parser auto"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出该型号的内存或显存需求，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-gguf",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "Q2_K、Q3_K、Q4_0/Q4_1/Q4_K、Q5_0/Q5_1/Q5_K、Q6_K、Q8_0、bf16（仓库所列）",
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b-GGUF",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b-GGUF",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取官方GGUF文件",
+          "description": "IBM官方GGUF仓库提供多种量化等级的GGUF文件，可用于llama.cpp等GGUF兼容工具；本站未下载或运行。",
+          "command": null
+        },
+        {
+          "title": "按所选工具加载",
+          "description": "官方GGUF仓库未给出具体加载命令，命令留空；量化等级、内存占用与速度需按所选工具与设备核对。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存占用取决于量化等级与运行时，不将文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 67.84,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "IBM官方评测表（基于NeMo Evaluator SDK的评测框架运行）列Granite 4.2 3B的MMLU-Pro为67.84。未披露该成绩使用的思考模式、few-shot与提示配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.2-3b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、思考模式与具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-2-3b-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "aime25",
+      "benchmark": "AIME25",
+      "dataset": "AIME 2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 78.33,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "IBM官方评测表列Granite 4.2 3B的AIME25为78.33。未披露该成绩使用的思考模式与评测配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.2-3b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、思考模式与评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-2-3b-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "bfcl-v4",
+      "benchmark": "BFCL v4",
+      "dataset": "BFCL",
+      "language": "en",
+      "metric": "score",
+      "value": 52.41,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v4",
+      "settings": "IBM官方评测表的Agentic（General）分组列Granite 4.2 3B的BFCL (v4)为52.41。未披露该成绩使用的思考模式与运行配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.2-3b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、思考模式与运行配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-2-3b-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 69.71,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6",
+      "settings": "IBM官方评测表的Reasoning分组列Granite 4.2 3B的LiveCodeBench v6为69.71。未披露该成绩使用的思考模式与评测配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.2-3b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、思考模式与评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.2-3b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-2-3b-eval-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为推理与工具调用候选：官方评测表报告MMLU-Pro 67.84、AIME25 78.33、BFCL v4 52.41。这些成绩来自发布方评测框架，未披露使用的思考模式。",
+      "strengths": [
+        "官方表在同一列并列3B、8B与30B三个尺寸，档位定位可直接查看。",
+        "覆盖知识、数学与工具调用三类指标，并说明评测基于NeMo Evaluator SDK框架。"
+      ],
+      "limitations": [
+        "未披露各成绩使用的思考模式（思考/非思考/低耗）与提示配置，不能与外部榜单直接横比。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "aime25",
+        "bfcl-v4"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可作为代码生成候选：官方LiveCodeBench v6为69.71%。官方表将该型号的SWE-bench与Terminal-Bench行标为NA，仓库级代理编码缺少成绩。",
+      "strengths": [
+        "官方报告了该型号的编程竞赛式代码生成基准成绩。"
+      ],
+      "limitations": [
+        "官方评测表将该型号的SWE-bench相关行标为NA，代理式编码能力无官方成绩。",
+        "未披露思考模式与评测配置；本站未复现。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6"
+      ]
+    }
+  ]
+}

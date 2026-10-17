@@ -1,0 +1,351 @@
+{
+  "id": "paddleocr-vl-1-5",
+  "name": "PaddleOCR-VL-1.5",
+  "family": "PaddleOCR",
+  "version": "1.5",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.959,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方称其为0.9B参数的多任务VLM修订版（1.5为版本号）；Hugging Face仓库元数据（safetensors）标注该VLM检查点为958,588,736（约0.959B）。该数值不含整页解析流水线中的版面分析等组件（1.5的版面定位由随PaddleOCR流水线提供的PP-DocLayoutV3算法承担），完整流水线参数总量官方未给出。",
+    "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方发布说明称1.5将语言覆盖扩展至111种，新增中国藏文与孟加拉文；上一代官方口径为109种）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5/blob/main/LICENSE"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "所查模型卡未提供训练数据清单；官方技术报告含数据集与配方说明（训练配方、数据整理与标注流程），但未给出语料许可明细与完整清单。"
+  },
+  "summary": "PaddleOCR-VL的0.9B多任务VLM修订版：官方称OmniDocBench v1.5整页解析准确率94.5%，新增印章识别与文本检测/识别（Text Spotting），并提升扫描、倾斜、弯折、屏摄与光照等真实拍摄条件下的鲁棒性。",
+  "features": [
+    "官方称0.9B参数下OmniDocBench v1.5准确率94.5%，超过上一代PaddleOCR-VL",
+    "新增印章识别与文本检测/识别（Text Spotting）任务，官方称相关指标达到SOTA",
+    "官方提出Real5-OmniDocBench（扫描、弯折、屏摄、光照、倾斜五种真实条件），总体准确率92.05%，倾斜场景91.66%",
+    "支持不规则形状版面定位（PP-DocLayoutV3算法，随PaddleOCR/PaddleX流水线提供）、跨页表格合并与跨页标题识别",
+    "官方发布说明称语言覆盖扩展至111种（新增中国藏文与孟加拉文）；官方另提供GGUF版本供llama.cpp推理"
+  ],
+  "limitations": [
+    "HF仓库只含0.9B VLM组件；PP-DocLayoutV3等流水线组件随PaddleOCR/PaddleX提供，参数总量官方未给出。",
+    "Real5-OmniDocBench由发布方自行构建并自评，分场景数值来自其技术报告与HF评测结果文件，尚无独立复测。",
+    "官方HF模型卡的性能表为图片；本条正文数值来自官方模型卡、GitHub发布说明与 arXiv:2601.21957 技术报告。",
+    "官方未披露LLM token上下文长度；本条不填写上下文数值。",
+    "本站未实测整页解析、文本检测或印章识别效果。"
+  ],
+  "officialUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-paddleocr",
+      "runtime": "PaddleOCR/PaddleX 文档解析流水线",
+      "systems": [],
+      "format": "Paddle inference 与 Safetensors（随流水线下载）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5#basic-usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "paddlepaddle-gpu==3.2.1（官方示例按CUDA 12.6；CPU或其他CUDA版本见官方安装页）",
+        "paddleocr[doc-parser]>=3.4.0"
+      ],
+      "steps": [
+        {
+          "title": "安装PaddlePaddle",
+          "description": "官方模型卡Install Dependencies给出的安装命令（按CUDA 12.6示例）；其他CUDA版本与CPU版本需参考官方安装页。本站未执行。",
+          "command": "python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/"
+        },
+        {
+          "title": "安装PaddleOCR文档解析组件",
+          "description": "官方给出的paddleocr[doc-parser]安装命令。",
+          "command": "python -m pip install -U \"paddleocr[doc-parser]>=3.4.0\""
+        },
+        {
+          "title": "运行整页解析示例（pipeline v1.5）",
+          "description": "官方CLI示例，pipeline_version指定为v1.5；模型卡另提供PaddleOCRVL Python API与vLLM服务端用法。示例输入为官方演示图片。本站未执行，需在目标设备验证。",
+          "command": "paddleocr doc_parser -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/paddleocr_vl_demo.png --pipeline_version v1.5"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与速度取决于运行时、精度、页面分辨率与批量，官方未给出该型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers（元素级与Text Spotting/印章识别，AutoModelForImageTextToText）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.0.0（官方要求transformers v5）",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "安装transformers v5",
+          "description": "官方模型卡transformers用法章节给出的安装命令。",
+          "command": "python -m pip install \"transformers>=5.0.0\""
+        },
+        {
+          "title": "按官方示例加载VLM组件",
+          "description": "官方模型卡给出AutoProcessor与AutoModelForImageTextToText用法，支持ocr/table/chart/formula/spotting/seal任务提示（spotting建议将小图放大至阈值以上）。官方注明该路线只支持元素级识别与文本检测，整页解析建议使用流水线。本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与速度取决于运行时、精度与输入分辨率，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "omnidocbench-v15-overall",
+      "benchmark": "OmniDocBench v1.5（整页文档解析）",
+      "dataset": "OmniDocBench v1.5",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "整页解析准确率（Overall）",
+      "value": 94.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "PaddleOCR-VL-1.5模型卡与GitHub发布说明（arXiv:2601.21957）",
+      "settings": "官方在模型卡、GitHub发布说明与技术报告中均报告94.5%（报告称由上一代92.86%提升至94.50%）。来源未披露推理参数与模型revision细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL-1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该总分为官方自评的整页解析组合口径，来源未披露推理参数与模型revision等足以复现和对齐的条件；仅记录原报告数值，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5",
+        "notes": "仅记录官方模型卡与发布说明中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改原仓库及基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-1-5-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "real5-omnidocbench-overall",
+      "benchmark": "Real5-OmniDocBench（扫描、弯折、屏摄、光照、倾斜五场景）",
+      "dataset": "Real5-OmniDocBench（基于OmniDocBench v1.5改造）",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "五场景总体准确率（Overall）",
+      "value": 92.05,
+      "unit": "%",
+      "direction": "higher",
+      "version": "PaddleOCR-VL-1.5技术报告arXiv:2601.21957v2 Table 3",
+      "settings": "官方技术报告与摘要报告Real5-OmniDocBench总体准确率92.05%（五场景平均；同表分场景为扫描93.43、弯折91.25、屏摄91.76、光照92.16、倾斜91.66）。该基准由发布方基于OmniDocBench v1.5构建并自评；来源未披露推理参数与模型revision；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2601.21957",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL-1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "基准由发布方自行构建且为自评，来源未披露推理参数与模型revision等足以复现和对齐的条件；仅记录原报告数值，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2601.21957",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-1-5-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "real5-omnidocbench-skew",
+      "benchmark": "Real5-OmniDocBench（扫描、弯折、屏摄、光照、倾斜五场景）",
+      "dataset": "Real5-OmniDocBench倾斜（Skew）场景子集",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "倾斜场景准确率",
+      "value": 91.66,
+      "unit": "%",
+      "direction": "higher",
+      "version": "PaddleOCR-VL-1.5技术报告arXiv:2601.21957v2 Table 3",
+      "settings": "官方技术报告报告倾斜场景准确率91.66%，并称较上一代PaddleOCR-VL提升14.19个百分点。该基准由发布方构建并自评；来源未披露推理参数与模型revision；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2601.21957v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL-1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "基准由发布方自行构建且为自评，来源未披露推理参数与模型revision等足以复现和对齐的条件；仅记录原报告数值，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2601.21957v2",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-1-5-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-v15-formula-cdm",
+      "benchmark": "OmniDocBench v1.5（整页文档解析）",
+      "dataset": "OmniDocBench v1.5（公式分项）",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "公式识别CDM（Formula-CDM）",
+      "value": 94.21,
+      "unit": "%",
+      "direction": "higher",
+      "version": "PaddleOCR-VL-1.5技术报告arXiv:2601.21957v2",
+      "settings": "官方技术报告正文报告公式识别CDM 94.21%（同段另述Table-TEDS 92.76%、文本编辑距离0.035与阅读顺序0.042，本条目不逐一收录）。来源未披露推理参数与模型revision；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2601.21957v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL-1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露推理参数与模型revision等足以复现和对齐的条件；该分项值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2601.21957v2",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-1-5-report",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "可作为复杂拍摄条件下的多语种文档解析候选：官方报告OmniDocBench v1.5准确率94.5%、Real5-OmniDocBench五场景总体92.05%（倾斜场景91.66%）与公式CDM 94.21%，并新增印章识别与文本检测/识别任务。成绩为发布方自评，Real5基准亦由发布方构建，目标版面仍需自行验证。",
+      "strengths": [
+        "结果对应PaddleOCR-VL-1.5的0.9B VLM组件，未混用上一代PaddleOCR-VL或PP-OCRv5系列成绩。",
+        "官方同时给出整页总评、真实拍摄五场景与公式分项，覆盖原版未包含的印章与文本检测能力。",
+        "模型卡公开了PP-DocLayoutV3不规则形状定位、跨页表格合并等能力边界，便于核对流水线配置。"
+      ],
+      "limitations": [
+        "成绩由模型发布方自评；Real5-OmniDocBench由发布方基于OmniDocBench v1.5构建，尚无独立复测。",
+        "官方HF模型卡的性能表为图片，正文数值分散在模型卡、GitHub发布说明与技术报告中，使用时需按具体来源核对。",
+        "官方称语言覆盖扩展至111种（新增藏文与孟加拉文），但未给出逐语言公开成绩。",
+        "来源未披露推理参数与模型revision；本站未实测整页解析、文本检测与印章识别。"
+      ],
+      "evidenceIds": [
+        "omnidocbench-v15-overall",
+        "real5-omnidocbench-overall",
+        "real5-omnidocbench-skew",
+        "omnidocbench-v15-formula-cdm"
+      ]
+    }
+  ]
+}

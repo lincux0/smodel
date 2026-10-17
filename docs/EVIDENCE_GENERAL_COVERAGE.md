@@ -34,6 +34,21 @@
 | SmolLM3-3B | 暂无精确外部通用结果 | 官方卡含 LCB v4；本轮未确认另一独立来源 | 不适用 | 保留发布方成绩 |
 | Phi-4-mini-instruct | 官方卡内部基准平台七项已有；Epoch 精确条目待查 | 官方卡能力表无代码基准行；EvalPlus 与 LiveCodeBench 待查 | 不适用 | 保留官方记录；代码用途维持证据不足 |
 | Qwen3-VL-4B-Instruct | 技术报告 HTML 版 Table 6 为可转录的纯文本对比表，已登记 MMLU-Pro 67.1；Epoch 精确条目待查 | LiveCodeBench v6 37.9 已登记；EvalPlus 当前公开 JSON 无精确条目 | 官方视觉性能表为图片，未转录；Arena / OpenCompass 待查 | 文本与代码用途改为仅官方；视觉用途维持证据不足 |
+| Qwen3-VL-8B-Instruct | 技术报告 Table 6 的 8B 列已登记 MMLU-Pro 71.6、GPQA 61.9；Epoch 待查 | LiveCodeBench v6 39.3 已登记；EvalPlus 无精确条目 | 视觉评测表为图片，未转录；Arena / OpenCompass 待查 | 文本与代码仅官方；视觉证据不足 |
+| Gemma 4 E4B IT | 模型卡 E4B 列已登记 MMLU-Pro 69.4；Epoch 待查 | LiveCodeBench v6 52.0 已登记 | MMMU Pro 52.6、MATH-Vision 59.5 已登记；Arena / OpenCompass 待查 | 保留官方记录 |
+| Ministral 3 3B Instruct | 官方 Instruct 表已登记（Arena Hard 0.305、WildBench 56.8、MATH 0.830） | 本站未收录此用途 | MM MTBench 7.83 已登记 | 仅官方 |
+| Ministral 3 8B Instruct | 官方 Instruct 表已登记（Arena Hard 0.509、WildBench 66.8、MATH 0.876） | 代码基准仅见 Reasoning 检查点表（0.616），未借用 | MM MTBench 8.08 已登记 | 文本与视觉仅官方；代码证据不足 |
+| LFM2.5-VL-3B | 无纯文本基准（官方未提供） | 本站未收录此用途 | ScreenSpot-v2 80.7、RefCOCO 87.9、OCRBenchv2 47.5、MMMU Pro 30.5 已登记 | 视觉仅官方；文本证据不足 |
+| Qwen3.5-9B | 模型卡已登记 MMLU-Pro 82.5、C-Eval 88.2；Epoch 待查 | LiveCodeBench v6 65.6 已登记 | MMMU-Pro 70.1 已登记；Arena / OpenCompass 待查 | 仅官方；列序逐格核对 |
+| Qwen3.5-2B | 模型卡 Thinking 列已登记 MMLU-Pro 66.5、C-Eval 73.2 | 未找到该档位代码成绩 | MMMU-Pro 50.3 已登记 | 文本与视觉仅官方；代码证据不足 |
+| MiniCPM5 1B | 官方排行榜为图片，未转录 | 同 | 不适用 | 两个用途维持证据不足 |
+| MiniCPM5 2B | 模型卡已登记 MMLU-Pro 70.8、IFEval 86.7 | LiveCodeBench v6 69.1、SWE-bench Verified 46.4 已登记 | 不适用 | 仅官方；卡内 †（AA 发布）行未导入 |
+| Granite 4.2 3B | 评测表已登记 MMLU-Pro 67.84、AIME25 78.33、BFCL v4 52.41 | LiveCodeBench v6 69.71 已登记 | 不适用 | 仅官方（NeMo Evaluator 框架）；思考模式未逐项说明 |
+| Granite 4.2 8B | 评测表已登记 MMLU-Pro 74.04、AIME25 86.67 | LiveCodeBench v6 73.24、SWE-bench Verified 47.67 已登记 | 不适用 | 仅官方 |
+| LFM2.5-1.2B-Instruct | 评测表已登记 MMLU-Pro 44.35、IFEval 86.23 | 本站未收录此用途 | 不适用 | 仅官方 |
+| LFM2.5-2.6B | 评测表已登记 AIME25 51.87、IFBench 59.17 | 本站未收录此用途 | 不适用 | 仅官方；卡内 AA-Omni 行未导入 |
+| Qwen3-4B-Instruct-2507 | 模型卡已登记 MMLU-Pro 69.6、GPQA 62.0 | LiveCodeBench v6 35.1、MultiPL-E 76.8 已登记 | 不适用 | 仅官方；独立于已上线 Qwen3-4B，未合并旧版成绩 |
+| NVIDIA Nemotron Nano 9B v2 | 模型卡已登记 AIME25 72.1、GPQA 64.0、RULER 128K 78.9 | LiveCodeBench 71.1 已登记 | 不适用 | 仅官方（NeMo-Skills）；AIME/GPQA/LCB 为 Reasoning-On、RULER 为 Reasoning-Off |
 
 ### Arena 快照核验范围
 

@@ -20,6 +20,8 @@
 
 ## 上线验证
 
+2026-10-17批次1–2上线：按[计划型号分阶段上线方案](LAUNCH_PLAN.md)上线22个型号：视觉理解（Qwen3-VL-8B-Instruct、Gemma 4 E4B、Ministral 3 3B/8B Instruct、LFM2.5-VL-3B、Qwen3.5-9B/2B）、语音识别（Qwen3-ASR-0.6B/1.7B、Granite Speech 5.0 470M TurboCTC）、语音合成（Qwen3-TTS-12Hz-1.7B-Base、Fun-CosyVoice3-0.5B-2512）、文字识别（PaddleOCR-VL、PaddleOCR-VL-1.5）与通用文本/代码（Qwen3-4B-Instruct-2507、MiniCPM5 1B/2B、Granite 4.2 3B/8B、LFM2.5-1.2B-Instruct/2.6B、NVIDIA Nemotron Nano 9B v2）。目录51型号、86用途摘要、208条成绩（178官方、30第三方）；新增80条成绩全部为发布方自报并标注不可比，Qwen3-VL-8B视觉等6个用途维持证据不足，AA数据未导入；关键数值经抽查与官方页面核对。8项Node测试通过，Astro检查0错误/警告/提示，生产构建58页；Playwright验证22个新详情页均200且关键成绩存在、目录筛选（视觉11、代码23、语音识别9、语音合成4、文字识别4、向量检索4、结果重排2）、三模型视觉对比与搜索，控制台无错误；测试浏览器与预览进程已关闭。台账已更新（已上线51、计划页88）。源码下载包仍为0.1.0历史快照。
+
 2026-10-17全目录数据复核：29型号逐条重查官方模型卡、仓库与论文，基础数据核对一致并刷新核实日期；新增6型号15条成绩（BGE-M3与Qwen3-Embedding-4B的MTEB Results/RTEB分项、BGE-reranker-v2-m3的ViDoRe v3.1分项、DeepSeek-OCR论文Table 3的OmniDocBench编辑距离、Whisper large-v3-turbo的Open ASR平均WER、Qwen3-VL-4B-Instruct技术报告Table 6纯文本成绩），目录合计128条成绩（98官方、30第三方）；更正Qwen3-Embedding-0.6B的PR提交者记录与Phi-4-mini许可链接。Qwen3-VL视觉成绩因官方图表仍为图片未转录，维持证据不足。8项Node测试通过，Astro检查0错误/警告/提示，生产构建36页；Playwright验证6个受影响详情页的关键数值与证据标签、目录29条及控制台无错误；测试页面与预览进程已关闭。台账状态日期更新为2026-10-17，成绩数量与证据覆盖同步。源码下载包仍为0.1.0历史快照。
 
 2026-10-14审查修订：保留2026-10-10新增的8个型号。BGE-M3使用固定v5出处的MIRACL 71.5，其他已登记数值保留；清除没有来源依据的运行日期，纠正Qwen TTS主权重约0.915B与独立tokenizer的口径、Fox 7页分箱条件，更新vLLM/Transformers稳定安装路线和声音克隆限制。Qwen3-VL的视频输入在详情和对比中以中文显示，TTS参考音频列入输入；部署说明长参数名可在窄屏换行。目录仍29型号/46用途摘要/113成绩，未填充未核实图片分数，AA仅链接。台账状态日期更新为2026-10-14，已上线29/计划110，核对未改无关数据、公式、验证与表结构。8项Node测试通过，Astro检查0错误/警告/提示，构建36页；Playwright检查8个新详情在1440/390/320px的24组内容与溢出、视频对比、检索筛选4项、站点地图34个URL和无JavaScript键盘展开，控制台无错误。测试页面与预览进程已关闭；未下载权重或执行模型推理。源码下载包仍为0.1.0历史快照。

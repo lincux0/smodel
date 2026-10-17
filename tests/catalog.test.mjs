@@ -5,7 +5,8 @@ import { parameterBand, parseCatalogQuery, writeCatalogQuery } from '../src/lib/
 
 test('真实目录保留未知值，并拒绝重复身份、无效关联和错误字段', () => {
   const { models, guideIds } = loadCatalog();
-  assert.ok(models.length >= 20 && models.length <= 30);
+  // 目录按批次扩充（2026-10-17 起为 51 个）；下限确保目录被完整读取
+  assert.ok(models.length >= 20);
   assert.ok(models.some((model) => model.parameters.totalB === null));
   assert.ok(models.some((model) => model.evaluations.length === 0));
   const sample = models[0];

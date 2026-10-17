@@ -1,0 +1,337 @@
+{
+  "id": "gemma-4-e4b-it",
+  "name": "Gemma 4 E4B IT",
+  "family": "Gemma",
+  "version": "4",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image",
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8,
+    "activeB": null,
+    "effectiveB": 4.5,
+    "notes": "官方E4B表格口径：4.5B effective，含嵌入表为8B；PLE逐层嵌入按查表使用，有效参数不等于MoE激活参数。视觉编码器约150M、音频编码器约300M在官方表中另列，不计入8B，8B不被当作全部多模态组件合计；HF权重元数据张量参数合计约8.0B，与含嵌入口径一致。",
+    "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it"
+  },
+  "languages": [
+    "多语言（预训练覆盖140余种；官方称开箱支持35余种）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://ai.google.dev/gemma/docs/gemma_4_license"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡公开预训练数据类型（网页文档、代码、数学文本与图像）、数据截止2025年1月、覆盖140余种语言以及CSAM与敏感信息过滤流程，并附技术报告；未公开完整数据清单。"
+  },
+  "summary": "Gemma 4 家族面向本地设备的多模态指令模型，接受文本、图像与音频输入，支持可配置思考模式；官方表格口径为4.5B有效参数（含嵌入约8B）。",
+  "features": [
+    "PLE逐层嵌入，官方称其面向手机、笔记本等边缘设备",
+    "原生128K上下文（家族中12B及以上为256K）",
+    "文本、图像与音频输入，图像支持可变宽高比与token预算",
+    "可配置思考模式，原生支持system角色",
+    "原生函数调用支持"
+  ],
+  "limitations": [
+    "E4B命名代表有效参数口径，实际权重规模不等同于4.5B稠密模型。",
+    "官方评测表未披露模型revision、few-shot与提示模板等条件，成绩不能与外部统一条件横比。",
+    "输出仅有文本，音频与视频能力限于输入侧。",
+    "不同语言与任务的实际效果需要在目标场景验证；本站未复现任何基准或设备表现。"
+  ],
+  "officialUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求最新版）",
+        "torch",
+        "accelerate",
+        "torchvision（图像输入）",
+        "librosa（音频输入）"
+      ],
+      "steps": [
+        {
+          "title": "安装依赖",
+          "description": "官方Getting Started给出的安装命令，要求使用最新版Transformers；本站未执行安装。",
+          "command": "pip install -U transformers torch accelerate"
+        },
+        {
+          "title": "加载指定模型并生成",
+          "description": "按官方示例用AutoProcessor与AutoModelForMultimodalLM加载google/gemma-4-E4B-it；图像与音频输入需另装torchvision、librosa，思考模式由enable_thinking控制。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方称E4B面向边缘设备，但未给出可核对的显存或内存需求，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU Pro",
+      "dataset": "MMLU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 69.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Google官方卡的instruction-tuned表列Gemma 4 E4B为69.4%。未披露该行的few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E4B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E4B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e4b-it-gemma4-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-v6",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 52.0,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v6",
+      "settings": "Google官方卡的instruction-tuned表列Gemma 4 E4B为52.0%。未披露该行的few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E4B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E4B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e4b-it-gemma4-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmmu-pro",
+      "benchmark": "MMMU Pro",
+      "dataset": "MMMU Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 52.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Google官方卡的视觉表列Gemma 4 E4B为52.6%。未披露该行的few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E4B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E4B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e4b-it-gemma4-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math-vision",
+      "benchmark": "MATH-Vision",
+      "dataset": "MATH-Vision",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 59.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Google官方卡的视觉表列Gemma 4 E4B为59.5%。未披露该行的few-shot、提示模板、输出长度和推理模式；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/gemma-4-E4B-it",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E4B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision、推理模式及具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/gemma-4-E4B-it",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e4b-it-gemma4-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为英语知识与推理候选：官方instruction-tuned表报告MMLU Pro为69.4%。该分数不说明中文长文写作或事实回答可靠性。",
+      "strengths": [
+        "官方报告了该型号的英语知识与推理基准成绩。"
+      ],
+      "limitations": [
+        "单一基准考试成绩不能替代目标场景验证。",
+        "未披露评测条件，不能与外部榜单直接横比。",
+        "本站未运行模型验证实际对话表现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "可作为需执行测试核验的代码生成候选：官方LiveCodeBench v6成绩为52.0%。单一基准不能保证复杂项目修改正确。",
+      "strengths": [
+        "官方报告包含该型号的代码生成基准成绩。"
+      ],
+      "limitations": [
+        "复杂项目修改仍需在目标仓库运行测试验证。",
+        "提示、采样和生成长度等条件未完整披露。",
+        "本站未复现该基准。"
+      ],
+      "evidenceIds": [
+        "livecodebench-v6"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为图文问答候选：官方MMMU Pro为52.6%、MATH-Vision为59.5%。这些单项视觉结果不能保证OCR或细节图像识别效果。",
+      "strengths": [
+        "官方报告提供两项视觉推理基准数据，并说明支持可变分辨率与图文交错输入。"
+      ],
+      "limitations": [
+        "OCR与细节识别需要按目标图像另行验证。",
+        "本站未使用本地图片输入验证识图效果。"
+      ],
+      "evidenceIds": [
+        "mmmu-pro",
+        "math-vision"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "id": "ministral-3-3b-instruct-2512",
+  "name": "Ministral 3 3B Instruct 2512",
+  "family": "Ministral",
+  "version": "3",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方卡的组件口径：3.4B语言模型＋0.4B视觉编码器；HF权重元数据safetensors张量参数合计3,849,090,048（约3.85B）。官方未给出单一合计数值，此处按组件口径合计并保留原始数据。",
+    "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512"
+  },
+  "context": {
+    "nativeTokens": 262144,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512"
+  },
+  "languages": [
+    "多语言（官方列出英语、法语、西班牙语、德语、意大利语、葡萄牙语、荷兰语、中文、日语、韩语、阿拉伯语）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt"
+    },
+    "code": null,
+    "trainingDisclosure": "官方未披露训练数据组成；卡片仅说明该检查点为指点（instruct）后训练版本，并以FP8精度发布。"
+  },
+  "summary": "Ministral 3 家族最小型号的指令版本，具备视觉理解能力，面向边缘与低资源部署，支持256K上下文与原生函数调用。",
+  "features": [
+    "官方口径：3.4B语言模型＋0.4B视觉编码器，FP8权重",
+    "官方称FP8可在8GB显存内本地部署，进一步量化后更低",
+    "原生函数调用与JSON输出",
+    "256K上下文窗口（官方vLLM示例默认max-model-len为262144）",
+    "支持system提示，官方建议temperature低于0.1"
+  ],
+  "limitations": [
+    "官方基准表未披露评测条件与模型revision，成绩不能与外部统一条件横比。",
+    "视觉输入官方建议图像宽高比接近1:1，过窄或过宽的图像应裁剪。",
+    "本站未复现评测，也未在设备上实测部署。"
+  ],
+  "officialUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors（FP8）",
+      "quantization": "FP8（官方权重精度）",
+      "downloadUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm>=0.12.0",
+        "mistral_common>=1.8.6（随vllm安装）"
+      ],
+      "steps": [
+        {
+          "title": "安装或升级vLLM",
+          "description": "官方推荐使用vLLM，并给出该安装命令；安装会自动带上mistral_common。本站未执行安装。",
+          "command": "pip install vllm --upgrade"
+        },
+        {
+          "title": "核对mistral_common版本",
+          "description": "官方给出的版本检查命令，确认mistral_common>=1.8.6。",
+          "command": "python -c \"import mistral_common; print(mistral_common.__version__)\""
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方启动命令（原文为反斜杠续行的多行写法，此处合并为单行）；默认max-model-len为262144，可按需下调以节省内存。本站未下载权重或启动服务。",
+          "command": "vllm serve mistralai/Ministral-3-3B-Instruct-2512 --tokenizer_mode mistral --config_format mistral --load_format mistral --enable-auto-tool-choice --tool-call-parser mistral"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方称该系列FP8检查点可运行于单张H200、3B可在8GB显存内本地部署，属于官方说明而非本站测量，也不构成最低配置要求。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（FP8）",
+      "quantization": "FP8（官方权重精度；可用FineGrainedFP8Config反量化为BF16）",
+      "downloadUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求从main安装以支持FP8）",
+        "mistral-common>=1.8.6"
+      ],
+      "steps": [
+        {
+          "title": "安装支持FP8的Transformers",
+          "description": "官方要求从main分支安装Transformers以使用FP8支持；命令使用uv。本站未执行安装。",
+          "command": "uv pip install git+https://github.com/huggingface/transformers"
+        },
+        {
+          "title": "安装或升级mistral-common",
+          "description": "官方要求mistral-common>=1.8.6以使用其tokenizer。",
+          "command": "pip install mistral-common --upgrade"
+        },
+        {
+          "title": "加载模型",
+          "description": "按官方示例用Mistral3ForConditionalGeneration与MistralCommonBackend加载；如需BF16可配FineGrainedFP8Config(dequantize=True)。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方提示默认使用FP8 triton kernel加速，显存与速度取决于精度、批大小和运行时版本，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "arena-hard",
+      "benchmark": "Arena Hard",
+      "dataset": "Arena Hard",
+      "language": "en",
+      "metric": "win rate",
+      "value": 0.305,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Mistral官方卡的Instruct对比表列Ministral 3 3B为0.305，同表并列Qwen3-VL-4B-Instruct、Gemma3-4B-Instruct等对照值。未披露数据集划分、裁判模型与提示配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Mistral AI（模型发布方自报）",
+      "externalModelId": "mistralai/Ministral-3-3B-Instruct-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的数据版本、模型revision与裁判配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "mistralai",
+        "runId": "ministral-3-3b-instruct-2512-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "wildbench",
+      "benchmark": "WildBench",
+      "dataset": "WildBench",
+      "language": "en",
+      "metric": "score",
+      "value": 56.8,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Mistral官方卡的Instruct对比表列Ministral 3 3B为56.8。未披露评分量纲、评判模型与提示配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Mistral AI（模型发布方自报）",
+      "externalModelId": "mistralai/Ministral-3-3B-Instruct-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的数据版本、模型revision与评判配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "mistralai",
+        "runId": "ministral-3-3b-instruct-2512-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math-maj-1",
+      "benchmark": "MATH",
+      "dataset": "MATH",
+      "language": "en",
+      "metric": "Maj@1 accuracy",
+      "value": 0.83,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Mistral官方卡的Instruct对比表列Ministral 3 3B的MATH Maj@1为0.830。未披露采样次数、提示模板与评测配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Mistral AI（模型发布方自报）",
+      "externalModelId": "mistralai/Ministral-3-3B-Instruct-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的数据版本、模型revision与采样配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "mistralai",
+        "runId": "ministral-3-3b-instruct-2512-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mm-mtbench",
+      "benchmark": "MM MTBench",
+      "dataset": "MM MTBench",
+      "language": "en",
+      "metric": "score",
+      "value": 7.83,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "Mistral官方卡的Instruct对比表列Ministral 3 3B的多模态多轮评测MM MTBench为7.83，同表并列Qwen3-VL-4B-Instruct、Gemma3-4B-Instruct等对照值。未披露评分量纲、评判模型与图像条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "Mistral AI（模型发布方自报）",
+      "externalModelId": "mistralai/Ministral-3-3B-Instruct-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的数据版本、模型revision与评判配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "mistralai",
+        "runId": "ministral-3-3b-instruct-2512-instruct-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为英文对话与数学推理候选：官方Instruct对比表报告Arena Hard 0.305、WildBench 56.8、MATH Maj@1 0.830。这些分数来自发布方对比表，不代表目标场景表现。",
+      "strengths": [
+        "同一官方表内并列多个同规模对照模型，档位定位可直接查看。",
+        "覆盖对话偏好、指令跟随与数学三类指标，未合并为单一总分。"
+      ],
+      "limitations": [
+        "未披露数据集版本、评判模型与提示配置，不能与外部榜单直接横比。",
+        "中文等多语言表现未在该表中分语言列出。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "arena-hard",
+        "wildbench",
+        "math-maj-1"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为图文对话候选：官方Instruct对比表列多模态多轮评测MM MTBench为7.83（官方报告口径）。单一分数不能保证OCR、细节识别或文档解析效果。",
+      "strengths": [
+        "官方表提供了多模态多轮评测的分项结果。"
+      ],
+      "limitations": [
+        "未披露图像分辨率、评判模型与提示配置。",
+        "本站未用本地图片验证识图效果。"
+      ],
+      "evidenceIds": [
+        "mm-mtbench"
+      ]
+    }
+  ]
+}

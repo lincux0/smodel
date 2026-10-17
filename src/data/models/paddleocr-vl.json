@@ -1,0 +1,300 @@
+{
+  "id": "paddleocr-vl",
+  "name": "PaddleOCR-VL",
+  "family": "PaddleOCR",
+  "version": "首版（0.9B）",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.959,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方称核心VLM组件为0.9B（PaddleOCR-VL-0.9B：NaViT式动态分辨率视觉编码器加ERNIE-4.5-0.3B语言模型）；Hugging Face仓库元数据（safetensors）标注该VLM检查点为958,588,736（约0.959B）。该数值不含整页解析流水线中的PP-DocLayoutV2版面检测等组件，完整流水线参数总量官方未给出。",
+    "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称109种，涵盖中文、英语、日语、韩语、拉丁语系、俄语（西里尔字母）、阿拉伯语、印地语（天城文）、泰语等）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL/blob/main/LICENSE"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/PaddlePaddle/PaddleOCR/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "所查模型卡未提供训练数据清单；官方技术报告设有数据集章节（数据整理、自动标注与难例挖掘流程），但未给出语料许可明细与完整清单。"
+  },
+  "summary": "0.9B参数的文档解析视觉语言模型（VLM）组件：NaViT式动态分辨率视觉编码器加ERNIE-4.5-0.3B语言模型，官方称支持109种语言与文本、表格、公式、图表等元素识别；整页解析需配合PP-DocLayoutV2版面分析等流水线组件（随PaddleOCR/PaddleX提供）。",
+  "features": [
+    "核心VLM组件PaddleOCR-VL-0.9B支持文本、表格、公式、图表元素识别，官方称覆盖109种语言与手写、历史文档等场景",
+    "官方技术报告称OmniDocBench v1.5整页解析总评92.56分，超过同表对照MinerU2.5-1.2B（90.67）",
+    "官方提供两条使用路线：PaddleOCR/PaddleX整页文档解析流水线（含版面检测）与transformers元素级识别",
+    "官方提供vLLM服务端加速路线与paddleocr-genai-vllm-server Docker镜像",
+    "仓库文件同时包含PP-DocLayoutV2版面分析组件（Paddle inference格式）"
+  ],
+  "limitations": [
+    "核心VLM组件与整页文档解析流水线是两个口径：本条目参数与成绩只覆盖0.9B VLM组件，流水线中的PP-DocLayoutV2等组件参数官方未给出。",
+    "官方HF模型卡的OmniDocBench成绩表为图片，正文数值来自官方技术报告arXiv:2510.14528v1；后续1.5报告对PaddleOCR-VL的重跑总分为92.86，与本条记录的92.56存在报告间差异。",
+    "官方称支持109种语言，但未给出逐语言公开成绩，目标语言与版面需自行验证。",
+    "官方未披露LLM token上下文长度；本条不填写上下文数值。",
+    "本站未实测整页解析或元素识别效果。"
+  ],
+  "officialUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-paddleocr",
+      "runtime": "PaddleOCR/PaddleX 文档解析流水线",
+      "systems": [],
+      "format": "Paddle inference 与 Safetensors（随流水线下载）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL#basic-usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "paddlepaddle-gpu==3.2.1（官方示例按CUDA 12.6；CPU或其他CUDA版本见官方安装页）",
+        "paddleocr[doc-parser]>=3.4.0"
+      ],
+      "steps": [
+        {
+          "title": "安装PaddlePaddle",
+          "description": "官方模型卡Install Dependencies给出的安装命令（按CUDA 12.6示例）；其他CUDA版本与CPU版本需参考官方安装页。本站未执行。",
+          "command": "python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/"
+        },
+        {
+          "title": "安装PaddleOCR文档解析组件",
+          "description": "官方给出的paddleocr[doc-parser]安装命令。",
+          "command": "python -m pip install -U \"paddleocr[doc-parser]>=3.4.0\""
+        },
+        {
+          "title": "运行整页解析示例",
+          "description": "官方CLI示例（含版面分析与VLM识别）；模型卡另提供PaddleOCRVL Python API与vLLM服务端用法。示例输入为官方演示图片。本站未执行，需在目标设备验证。",
+          "command": "paddleocr doc_parser -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/paddleocr_vl_demo.png --pipeline_version v1"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与速度取决于运行时、精度、页面分辨率与批量，官方未给出该型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers（元素级识别，AutoModelForCausalLM）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL",
+      "sourceUrl": "https://huggingface.co/PaddlePaddle/PaddleOCR-VL",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例加载VLM组件",
+          "description": "官方模型卡给出transformers用法：AutoModelForCausalLM.from_pretrained(..., trust_remote_code=True, torch_dtype=torch.bfloat16)与AutoProcessor，支持ocr/table/chart/formula任务提示。官方注明该路线只支持元素级识别，整页解析建议使用流水线；卡片未给出独立安装命令。本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与速度取决于运行时、精度与输入分辨率，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "omnidocbench-v15-overall",
+      "benchmark": "OmniDocBench v1.5（整页文档解析）",
+      "dataset": "OmniDocBench v1.5",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "整页解析总分（Overall）",
+      "value": 92.56,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "PaddleOCR-VL技术报告arXiv:2510.14528v1 Table 2",
+      "settings": "官方技术报告整页解析总评（Table 2，OmniDocBench v1.5）；报告注明除自身数据外的对照结果由OmniDocBench官方榜单提供，本方数值为自评。来源未披露推理参数与模型revision；同表对照最高为MinerU2.5-1.2B（90.67）。本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2510.14528v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该总分为官方自评的整页解析组合口径，来源未披露推理参数与模型revision等足以复现和对齐的条件；仅记录原报告数值，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2510.14528v1",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-v15-text-edit",
+      "benchmark": "OmniDocBench v1.5（整页文档解析）",
+      "dataset": "OmniDocBench v1.5（文本分项）",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "文本编辑距离（Text-Edit）",
+      "value": 0.035,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "PaddleOCR-VL技术报告arXiv:2510.14528v1 Table 2",
+      "settings": "官方技术报告整页解析表格的文本编辑距离（越低越好），报告称其为同表最低值。来源未披露推理参数与模型revision；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2510.14528v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露推理参数、文本规范化与模型revision等足以复现和对齐的条件；该分项值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2510.14528v1",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-report",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-v15-formula-cdm",
+      "benchmark": "OmniDocBench v1.5（整页文档解析）",
+      "dataset": "OmniDocBench v1.5（公式分项）",
+      "language": "中英等多语言（官方未按语言细分）",
+      "metric": "公式识别CDM（Formula-CDM）",
+      "value": 91.43,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "PaddleOCR-VL技术报告arXiv:2510.14528v1 Table 2",
+      "settings": "官方技术报告整页解析表格的公式CDM得分，报告称其为同表最高值。来源未披露推理参数与模型revision；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2510.14528v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "PaddleOCR团队（模型发布方自报）",
+      "externalModelId": "PaddlePaddle/PaddleOCR-VL",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露推理参数与模型revision等足以复现和对齐的条件；该分项值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2510.14528v1",
+        "notes": "仅记录官方技术报告中的少量型号成绩并链接论文；不复制论文表格或底层基准数据，引用不更改论文与基准数据许可。"
+      },
+      "provenance": {
+        "sourceId": "paddlepaddle",
+        "runId": "paddlepaddle-paddleocr-vl-report",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "可作为中英等多语种整页文档解析候选：官方技术报告报告OmniDocBench v1.5整页总评92.56分、文本编辑距离0.035（同表最低）与公式CDM 91.43（同表最高）。成绩为0.9B VLM组件范围内的发布方自评，与含版面分析的完整流水线仍有配置差异，不能替代目标版面的实测。",
+      "strengths": [
+        "结果对应PaddleOCR-VL-0.9B组件，未混用文本行识别型号或PP-OCRv5系列成绩。",
+        "官方提供整页解析总评与文本、公式等分项，可分别核对。",
+        "同一报告公开了数据整理与自动标注流程章节，便于评估方法背景。"
+      ],
+      "limitations": [
+        "成绩由模型发布方自评，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "后续官方1.5报告对PaddleOCR-VL的重跑总分为92.86，与本条92.56存在报告间差异，说明不同报告快照的口径会有变化。",
+        "官方HF模型卡中的同名成绩表为图片且未给出数值，正文数值需以技术报告为准。",
+        "来源未披露推理参数与模型revision；109种语言覆盖没有逐语言公开成绩支撑。本站未实测。"
+      ],
+      "evidenceIds": [
+        "omnidocbench-v15-overall",
+        "omnidocbench-v15-text-edit",
+        "omnidocbench-v15-formula-cdm"
+      ]
+    }
+  ]
+}

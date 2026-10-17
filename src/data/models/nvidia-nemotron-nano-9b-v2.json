@@ -1,0 +1,380 @@
+{
+  "id": "nvidia-nemotron-nano-9b-v2",
+  "name": "NVIDIA-Nemotron-Nano-9B-v2",
+  "family": "Nemotron",
+  "version": "Nano-9B-v2",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 9,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方型号名称为9B档位；HF模型页元数据显示Model size 9B params（仓库张量统计口径），模型卡正文未单列精确总参数与非嵌入参数；官方技术报告摘要说明先预训练12B参数基座（Nemotron-Nano-12B-v2-Base）。不据此推断更细参数组成。",
+    "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2"
+  },
+  "languages": [
+    "英语、德语、西班牙语、法语、意大利语、日语（模型卡Use Case与元数据列明）",
+    "模型卡Input节另提及韩语、葡萄牙语、俄语与中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "NVIDIA Open Model License",
+      "url": "https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡元数据列出使用的NVIDIA自建数据集族（Nemotron-Pretraining/Post-Training/CC/Math/SFT等），并注明预训练数据截止2024年9月；未提供完整逐样本清单。"
+  },
+  "summary": "NVIDIA训练的Mamba2-Transformer混合推理模型；支持运行时思考预算控制，官方称128K上下文，面向英语与代码场景。",
+  "features": [
+    "Mamba-2与MLP为主的混合架构，仅含4层Attention（Nemotron-H结构）",
+    "支持运行时思考预算控制（max_thinking_tokens，经聊天接口）",
+    "官方给出Transformers、TRT-LLM、vLLM、NeMo与Docker等多条部署路线",
+    "技术报告摘要称可在单张A10G（22GiB、bfloat16）上处理至128K token"
+  ],
+  "limitations": [
+    "模型卡评测均为NVIDIA使用NeMo-Skills自测，本轮未找到独立第三方复测。",
+    "vLLM部署须加--mamba_ssm_cache_dtype float32，官方称否则精度可能下降。",
+    "思考（Reasoning On）与非思考模式成绩不同；RULER为Reasoning-Off，其余基准为Reasoning-On。",
+    "本站未部署或复现评测。"
+  ],
+  "officialUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方示例测试于4.48.3）",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例加载模型",
+          "description": "官方示例用AutoModelForCausalLM加载并设置torch_dtype=bfloat16、trust_remote_code=True；系统提示使用/think或/no_think控制推理，官方建议reasoning开启时temperature=0.6、top_p=0.95，关闭时使用贪心搜索。本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于精度、上下文与并发；官方标注支持硬件为A10G/H100-80GB/A100/Jetson AGX Thor，操作系统为Linux。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm>=0.10.1"
+      ],
+      "steps": [
+        {
+          "title": "安装vLLM",
+          "description": "官方给出的vLLM安装命令（vllm>=0.10.1）。本站未执行。",
+          "command": "pip install -U \"vllm>=0.10.1\""
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方启动命令；必须保留--mamba_ssm_cache_dtype float32以保证精度，遇到CUDA OOM时可降低--max-num-seqs（官方示例64）。本站未执行。",
+          "command": "vllm serve nvidia/NVIDIA-Nemotron-Nano-9B-v2 --trust-remote-code --max-num-seqs 64 --mamba_ssm_cache_dtype float32"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于上下文、并发与Mamba cache dtype，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-nemo",
+      "runtime": "NeMo",
+      "systems": [
+        "Linux"
+      ],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "使用官方NeMo运行时",
+          "description": "模型卡Software Integration标注Runtime Engine为NeMo 25.07.nemotron-nano-v2；官方支持硬件含A10G/H100-80GB/A100/Jetson AGX Thor，未给出具体命令，本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出NeMo路线的统一资源数值，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "aime25",
+      "benchmark": "AIME25",
+      "dataset": "AIME 2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 72.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmark Results（NeMo-Skills）",
+      "settings": "官方模型卡Benchmark Results（Reasoning On）列出NVIDIA-Nemotron-Nano-9B-v2的AIME25为72.1%（对照列Qwen3-8B 69.3%）；全部评测使用NeMo-Skills并公开复现教程。卡中未披露该行的提示模板、采样与输出预算；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "NVIDIA",
+      "externalModelId": "nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未逐项标注该成绩的模型revision、提示模板、采样与输出预算；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或NeMo-Skills工具许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nvidia-nemotron-nano-9b-v2-model-card-nemo-skills-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gpqa",
+      "benchmark": "GPQA",
+      "dataset": "GPQA",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 64,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmark Results（NeMo-Skills）",
+      "settings": "官方模型卡Benchmark Results（Reasoning On）列出NVIDIA-Nemotron-Nano-9B-v2的GPQA为64.0%（对照列Qwen3-8B 59.6%）。卡中未披露该行的提示模板、采样与输出预算；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "NVIDIA",
+      "externalModelId": "nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未逐项标注该成绩的模型revision、提示模板、采样与输出预算；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或NeMo-Skills工具许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nvidia-nemotron-nano-9b-v2-model-card-nemo-skills-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ruler-128k",
+      "benchmark": "RULER",
+      "dataset": "RULER (128K)",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 78.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmark Results（NeMo-Skills）",
+      "settings": "官方模型卡Benchmark Results列出NVIDIA-Nemotron-Nano-9B-v2的RULER (128K)为78.9%（对照列Qwen3-8B 74.1%）；模型卡明确RULER在Reasoning-Off模式评测，其余基准为Reasoning-On。卡中未披露该行的提示模板与采样；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "NVIDIA",
+      "externalModelId": "nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未逐项标注该成绩的模型revision、提示模板与采样，且该行使用Reasoning-Off模式；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或NeMo-Skills工具许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nvidia-nemotron-nano-9b-v2-model-card-nemo-skills-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "lcb",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LCB（官方卡缩写）",
+      "language": "code",
+      "metric": "score",
+      "value": 71.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmark Results（NeMo-Skills）",
+      "settings": "官方模型卡Benchmark Results（Reasoning On）列出NVIDIA-Nemotron-Nano-9B-v2的LCB为71.1%（对照列Qwen3-8B 59.5%）；卡中仅列百分比，未注明LiveCodeBench版本、题目窗口与指标定义；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "NVIDIA",
+      "externalModelId": "nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未注明该成绩的LiveCodeBench版本、题目窗口与指标定义，也未披露模型revision与提示配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或NeMo-Skills工具许可。"
+      },
+      "task": "coding",
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nvidia-nemotron-nano-9b-v2-model-card-nemo-skills-2025",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方卡（Reasoning On）列出AIME25 72.1%、GPQA 64.0%，并单列RULER (128K) 78.9%（Reasoning-Off），另有MATH500 97.8%、IFEval 90.3%等维度；全部为NVIDIA用NeMo-Skills自测，本轮未找到独立复测。",
+      "strengths": [
+        "官方评测使用NeMo-Skills并公开可复现教程链接。",
+        "同时报告长上下文（RULER 128K）与推理/知识基准。"
+      ],
+      "limitations": [
+        "厂商自测；无独立第三方复测可交叉核实。",
+        "各基准的提示、采样与输出预算未完整披露。",
+        "本站未复现。"
+      ],
+      "evidenceIds": [
+        "aime25",
+        "gpqa",
+        "ruler-128k"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方卡（Reasoning On）列出LCB 71.1%（对照Qwen3-8B 59.5%）。卡中未注明LiveCodeBench版本、题目窗口与指标定义，不能保证真实仓库任务表现。",
+      "strengths": [
+        "官方给出该型号的代码生成基准成绩并通过NeMo-Skills复现教程公开。"
+      ],
+      "limitations": [
+        "LiveCodeBench版本、题目窗口与指标定义未注明。",
+        "竞赛题成绩不能替代仓库级工程验证。",
+        "本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "lcb"
+      ]
+    }
+  ]
+}
