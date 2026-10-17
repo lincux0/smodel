@@ -55,7 +55,7 @@
     "本条采用OpenAI原始权重的MIT许可；Hugging Face转换仓库元数据另标Apache-2.0，应分别核对所用工件。"
   ],
   "officialUrl": "https://github.com/openai/whisper",
-  "checkedAt": "2026-10-02",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-openai-whisper",

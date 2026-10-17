@@ -1132,7 +1132,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L132",
+      "source_location": "L134",
       "_origin": "ast"
     },
     {
@@ -1180,7 +1180,7 @@
       "label": "可比性与单位",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L33",
+      "source_location": "L35",
       "_origin": "ast"
     },
     {
@@ -1188,7 +1188,7 @@
       "label": "来源与使用条件",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L41",
+      "source_location": "L43",
       "_origin": "ast"
     },
     {
@@ -1196,7 +1196,7 @@
       "label": "Artificial Analysis",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L49",
       "_origin": "ast"
     },
     {
@@ -1204,7 +1204,7 @@
       "label": "开放结果与独立性",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L55",
       "_origin": "ast"
     },
     {
@@ -1212,7 +1212,7 @@
       "label": "维护与验收",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "_origin": "ast"
     },
     {
@@ -1821,6 +1821,38 @@
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
       "source_location": "L102",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_2026_10_17_全目录复核",
+      "label": "2026-10-17 全目录复核",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L121",
+      "_origin": "ast"
+    },
+    {
+      "id": "graphify_out_converted_模型上线台账_30ca5c79",
+      "label": "模型上线台账_30ca5c79.md",
+      "file_type": "document",
+      "source_file": "graphify-out/converted/模型上线台账_30ca5c79.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "graphify_out_converted_模型上线台账_30ca5c79_sheet_已上线模型",
+      "label": "Sheet: 已上线模型",
+      "file_type": "document",
+      "source_file": "graphify-out/converted/模型上线台账_30ca5c79.md",
+      "source_location": "L3",
+      "_origin": "ast"
+    },
+    {
+      "id": "graphify_out_converted_模型上线台账_30ca5c79_sheet_计划上线",
+      "label": "Sheet: 计划上线",
+      "file_type": "document",
+      "source_file": "graphify-out/converted/模型上线台账_30ca5c79.md",
+      "source_location": "L37",
       "_origin": "ast"
     },
     {
@@ -3972,7 +4004,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L130",
+      "source_location": "L132",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3982,7 +4014,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L132",
+      "source_location": "L134",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -3992,7 +4024,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L134",
+      "source_location": "L136",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4052,7 +4084,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L33",
+      "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4062,7 +4094,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L41",
+      "source_location": "L43",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4072,7 +4104,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4082,7 +4114,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4092,7 +4124,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L43",
+      "source_location": "L45",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4102,7 +4134,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4112,7 +4144,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4122,7 +4154,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4132,7 +4164,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L63",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4692,7 +4724,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L324",
+      "source_location": "L325",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4993,6 +5025,36 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
       "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources_模型来源与字段口径",
+      "target": "docs_sources_2026_10_17_全目录复核",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "graphify_out_converted_模型上线台账_30ca5c79",
+      "target": "graphify_out_converted_模型上线台账_30ca5c79_sheet_已上线模型",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "graphify-out/converted/模型上线台账_30ca5c79.md",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "graphify_out_converted_模型上线台账_30ca5c79",
+      "target": "graphify_out_converted_模型上线台账_30ca5c79_sheet_计划上线",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "graphify-out/converted/模型上线台账_30ca5c79.md",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast"
     },

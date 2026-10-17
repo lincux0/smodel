@@ -47,17 +47,18 @@
   "features": [
     "约809M参数",
     "解码层由large-v3的32层减至4层",
-    "多语言转写，并可设置task=\"translate\"执行翻译到英语",
+    "多语言语音转写（官方说明该型号未针对翻译任务训练）",
     "支持时间戳预测与长音频分块处理"
   ],
   "limitations": [
     "30秒音频窗口不是token上下文，长音频需按官方分块流程处理。",
     "剪层带来速度提升，官方说明存在少量质量损失；不能把large-v3的成绩套用到此型号。",
+    "OpenAI官方仓库明确说明turbo未针对翻译任务训练；指定task=\"translate\"仍可能返回原语言，翻译到英语应改用tiny、base、small、medium或large。",
     "官方模型卡未单独报告该型号的WER或CER数值，本页不引用无法核对的数字。",
     "弱监督训练使模型可能输出音频中未出现的文本，并可能出现重复输出，低资源语言更明显。"
   ],
   "officialUrl": "https://huggingface.co/openai/whisper-large-v3-turbo",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",
@@ -99,23 +100,71 @@
       }
     }
   ],
-  "evaluations": [],
+  "evaluations": [
+    {
+      "id": "open-asr-leaderboard-en-short-avg-wer",
+      "benchmark": "Open ASR Leaderboard（英文短音频平均）",
+      "dataset": "AMI-Cleaned、Earnings22-Cleaned-AA-chunked、GigaSpeech-Cleaned、LibriSpeech clean/other、SPGISpeech、URGENT24、Voice Arena Monsoon、VoxPopuli-AA-Cleaned 等默认集",
+      "language": "en",
+      "metric": "WER（平均值）",
+      "value": 8.39,
+      "unit": "%",
+      "direction": "lower",
+      "version": "Open ASR Leaderboard english_short_latest.csv（2026-10-17核对，文件版本3f2c58c1）",
+      "settings": "榜单维护方发布的英文短音频平均WER（english_short_latest.csv）；CSV原值8.387142857142857，本记录按两位小数记为8.39，本站未重新计算。公开行未列出私测分项，无法据公开列复算该平均值。评测对象为openai/whisper-large-v3-turbo多语言权重，不是.en变体；该行未披露具体硬件、解码参数与模型revision。",
+      "sourceUrl": "https://huggingface.co/spaces/hf-audio/open_asr_leaderboard",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "publisher": "Hugging Face（Open ASR Leaderboard 维护团队）",
+      "externalModelId": "openai/whisper-large-v3-turbo",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "test（各数据集测试集）",
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该行未披露模型revision、解码配置与具体硬件，数据集版本也与其他论文或榜单不同；不加入比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/spaces/hf-audio/open_asr_leaderboard",
+        "notes": "仅引用榜单公开的少量汇总成绩并保留链接；仓库代码为 Apache-2.0，但结果数据与评测语料的许可未单独确认，不视为已获开放数据再分发授权。"
+      },
+      "task": "speech-recognition",
+      "provenance": {
+        "sourceId": "hf-audio-open-asr-leaderboard",
+        "runId": "open-asr-leaderboard-2026-10-15-en-short",
+        "independence": "unknown"
+      }
+    }
+  ],
   "assessments": [
     {
       "task": "speech-recognition",
-      "status": "insufficient",
-      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Whisper large-v3-turbo转写成绩，暂不据large-v3的论文数值或社区汇总推断该型号的识别效果。",
+      "status": "independence-unverified",
+      "summary": "Open ASR Leaderboard的english_short_latest.csv列出该多语言turbo型号英文短音频平均WER 8.39%，提供了第三方榜单转写准确率记录；但私测分项与评测条件未完整公开，评测者与OpenAI的关系也未核实，不能视作独立复现。",
       "strengths": [
-        "官方模型卡给出参数量、剪层结构与Transformers使用流程，型号身份与部署路线明确。",
-        "官方说明该型号由large-v3剪减解码层后微调，速度与质量的取舍关系在来源中有交代。"
+        "榜单由Hugging Face audio维护，公开结果CSV并在数据集中保留文件版本。",
+        "该行明确对应多语言openai/whisper-large-v3-turbo权重，不是英语专用的.en变体。"
       ],
       "limitations": [
-        "模型卡未单独报告该型号的WER或CER，OpenAI论文的数据对应其他Whisper档位，不能直接套用。",
-        "剪层后翻译与转写能力与large-v3并不等同，官方未给出可对齐的对照数值。",
-        "未找到许可明确且确认为独立方的同型号同条件复测。",
+        "该行未披露模型revision、解码参数与硬件，且公开CSV未列出私测分项。",
+        "无法确认评测者与模型发布方的独立性。",
+        "平均值随榜单数据集版本变化，不能与论文或其他榜单的WER直接比较。",
         "本站未在自有音频上验证识别准确率、时间戳或长音频分块效果。"
       ],
-      "evidenceIds": []
+      "evidenceIds": [
+        "open-asr-leaderboard-en-short-avg-wer"
+      ]
     }
   ]
 }

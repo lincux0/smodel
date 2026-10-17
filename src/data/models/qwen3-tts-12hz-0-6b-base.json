@@ -64,7 +64,7 @@
     "官方Seed-TTS公开测试集成绩来自发布方评测，不能直接代表目标文本与音色的自然度。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base",
-  "checkedAt": "2026-10-14",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-qwen-tts",
@@ -120,7 +120,7 @@
       "settings": "Qwen仓库报告的zero-shot speech generation结果。官方说明评测时使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。官方仓库于2026-01-22发布，不是已知的评测运行日期；来源未披露模型revision、参考音频/说话人划分、WER识别器及文本归一化细节；本站未复现。",
       "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "text-to-speech",
@@ -165,7 +165,7 @@
       "settings": "Qwen仓库报告的zero-shot speech generation结果。官方说明评测时使用dtype=torch.bfloat16、max_new_tokens=2048，其余采样参数取检查点generate_config.json默认值；Seed-TTS测试集设置language=\"auto\"。官方仓库于2026-01-22发布，不是已知的评测运行日期；来源未披露模型revision、参考音频/说话人划分、WER识别器及文本归一化细节；本站未复现。",
       "sourceUrl": "https://github.com/QwenLM/Qwen3-TTS",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "text-to-speech",

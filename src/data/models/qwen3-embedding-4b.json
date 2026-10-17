@@ -53,7 +53,7 @@
     "不能把8B型号的榜单成绩转移到此4B型号，也不能把0.6B型号的成绩当作本型号结果。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
-  "checkedAt": "2026-10-14",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-sentence-transformers",
@@ -108,7 +108,7 @@
       "settings": "Qwen模型卡逐型号列出4B结果；此项为基准任务均值。模型卡注记中的2025-05-24仅指对照模型分数取自MTEB在线榜单的收集日期，不是Qwen3-Embedding-4B的评测运行日期；本型号运行日未披露。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -153,7 +153,7 @@
       "settings": "Qwen模型卡逐型号列出4B结果；此项为英文基准任务均值。模型卡未披露该表中本型号的评测运行日期、模型revision、任务提示与推理配置；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -198,7 +198,7 @@
       "settings": "Qwen模型卡逐型号列出4B中文基准任务均值；同表含bge-multilingual-gemma2、gte-Qwen2等对照。模型卡未注明本型号评测运行日期；模型revision、任务提示与推理配置未披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-4B",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -229,27 +229,167 @@
         "runId": "qwen-team-embedding-model-card",
         "independence": "first-party"
       }
+    },
+    {
+      "id": "mteb-cqadupstack-retrieval-ndcg10",
+      "benchmark": "MTEB（Retrieval 类任务）",
+      "dataset": "CQADupstackRetrieval（default 子集，test 拆分；dataset revision 1）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.502843,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.9（结果仓库 PR #214）",
+      "settings": "afalf 在 MTEB Results PR #214（2025-06-06 合并）提交的结果文件，位于模型revision目录 636cd9bf…；任务主指标 ndcg_at_10，test/default。PR 未附 run_settings，完整提示与推理配置未披露；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-4B/636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff/CQADupstackRetrieval.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "afalf（MTEB Results 社区提交；与模型发布方的关系未核实）",
+      "externalModelId": "Qwen/Qwen3-Embedding-4B",
+      "modelConfig": {
+        "revision": "636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 1.38.9"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；各基准数据集自身许可不因结果仓库许可而改变，本记录不复制基准样本。"
+      },
+      "provenance": {
+        "sourceId": "afalf",
+        "runId": "afalf-qwen3-embedding-pr-214",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "mteb-sts12-spearman",
+      "benchmark": "MTEB（STS 类任务）",
+      "dataset": "STS12（default 子集，test 拆分；dataset revision a0d554a64d88156834ff5ae9920b964011b16384）",
+      "language": "英语",
+      "metric": "Spearman 相关系数",
+      "value": 0.866139,
+      "unit": "相关系数（−1–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.9（结果仓库 PR #214）",
+      "settings": "afalf 在 MTEB Results PR #214（2025-06-06 合并）提交的结果文件，位于模型revision目录 636cd9bf…；任务主指标为 Spearman 相关（main_score 与 cosine_spearman 同值），test/default。PR 未附 run_settings，完整提示与推理配置未披露；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-4B/636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff/STS12.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "afalf（MTEB Results 社区提交；与模型发布方的关系未核实）",
+      "externalModelId": "Qwen/Qwen3-Embedding-4B",
+      "modelConfig": {
+        "revision": "636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 1.38.9"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；各基准数据集自身许可不因结果仓库许可而改变，本记录不复制基准样本。"
+      },
+      "provenance": {
+        "sourceId": "afalf",
+        "runId": "afalf-qwen3-embedding-pr-214",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "mteb-atec-spearman",
+      "benchmark": "MTEB（C-MTEB STS 类任务）",
+      "dataset": "ATEC（中文金融句对，default 子集，test 拆分；dataset revision 0f319b1142f28d00e055a6770f3f726ae9b7d865）",
+      "language": "中文",
+      "metric": "Spearman 相关系数",
+      "value": 0.532428,
+      "unit": "相关系数（−1–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.9（结果仓库 PR #214）",
+      "settings": "afalf 在 MTEB Results PR #214（2025-06-06 合并）提交的结果文件，位于模型revision目录 636cd9bf…；任务主指标为 Spearman 相关（main_score 与 cosine_spearman 同值），test/default，语言 cmn-Hans。PR 未附 run_settings，完整提示与推理配置未披露；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-4B/636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff/ATEC.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "afalf（MTEB Results 社区提交；与模型发布方的关系未核实）",
+      "externalModelId": "Qwen/Qwen3-Embedding-4B",
+      "modelConfig": {
+        "revision": "636cd9bf47d976946cdbb2b0c3ca0cb2f8eea5ff",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 1.38.9"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；各基准数据集自身许可不因结果仓库许可而改变，本记录不复制基准样本。"
+      },
+      "provenance": {
+        "sourceId": "afalf",
+        "runId": "afalf-qwen3-embedding-pr-214",
+        "independence": "unknown"
+      }
     }
   ],
   "assessments": [
     {
       "task": "embedding",
-      "status": "official-only",
-      "summary": "可作为中英文及多语言语义检索候选：发布方报告MTEB多语言任务均值69.45、MTEB英文v2任务均值74.60、C-MTEB任务均值72.27。三个汇总分用于了解档位水平，目标语料仍需单独评测。",
+      "status": "independence-unverified",
+      "summary": "可作为中英文及多语言语义检索候选：发布方报告MTEB多语言任务均值69.45、MTEB英文v2任务均值74.60、C-MTEB任务均值72.27；MTEB结果库另有该型号在英文检索、英文STS与中文金融句对任务上的社区提交分项（提交者afalf，独立性待确认）。目标语料仍需单独评测。",
       "strengths": [
         "同一基准汇总表按型号明确列出Qwen3-Embedding-4B，未借用0.6B或8B成绩。",
-        "覆盖多语言、英文与中文三类汇总口径，并说明支持32至2560维可调输出。"
+        "覆盖多语言、英文与中文三类汇总口径，并说明支持32至2560维可调输出。",
+        "MTEB结果库记录了同一模型revision（636cd9bf）的CQADupstackRetrieval、STS12与ATEC原始指标。"
       ],
       "limitations": [
-        "这些是Qwen发布方列出的结果，不是本站复测；模型卡仅注明多语言表的对照模型成绩取自2025-05-24的MTEB榜单，本型号评测运行日期未披露；英文及中文表也未注明本型号运行日。",
+        "这些官方数值是Qwen发布方列出的结果，不是本站复测；模型卡仅注明多语言表的对照模型成绩取自2025-05-24的MTEB榜单，本型号评测运行日期未披露；英文及中文表也未注明本型号运行日。",
         "模型卡未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。",
+        "MTEB结果库的社区提交由afalf提交，PR未附run_settings，执行者与模型发布方的关系未核实，不构成独立交叉佐证。",
         "官方提示指令写法会影响效果，且多语言场景建议使用英文指令，实际部署需按任务调整。",
         "本站未在自有语料或中文检索场景验证召回质量。"
       ],
       "evidenceIds": [
         "mteb-multilingual-mean-task",
         "mteb-eng-v2-mean-task",
-        "c-mteb-mean-task"
+        "c-mteb-mean-task",
+        "mteb-cqadupstack-retrieval-ndcg10",
+        "mteb-sts12-spearman",
+        "mteb-atec-spearman"
       ]
     }
   ]

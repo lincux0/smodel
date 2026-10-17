@@ -52,7 +52,7 @@
     "本站未复现评测，也未验证设备表现。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-0.6B",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-runtime",

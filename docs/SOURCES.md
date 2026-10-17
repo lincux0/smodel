@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订。目录共29个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核于2026-10-17执行（见文末章节）。目录共29个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -117,3 +117,33 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 本批 8 个型号的成绩全部为发布方自报或论文报告，本轮未找到许可明确且确认为独立方的同条件复测，因此没有新增第三方记录，也未建立可比组。BGE-reranker-v2-m3、Whisper large-v3-turbo 与 Qwen3-VL-4B-Instruct 的用途结论为证据不足，原因是本轮尚未逐项转录复核图片中的成绩，或未找到明确单列的该型号结果；图片形式本身不代表无法核对。
 
 许可准入及核验范围见 [评测来源规范](EVIDENCE_SOURCES.md)、[通用/代码/视觉覆盖表](EVIDENCE_GENERAL_COVERAGE.md)、[检索/语音/OCR覆盖表](EVIDENCE_SPECIAL_COVERAGE.md)。AA仅链接；未核实完整快照或具体结果许可的平台不宣称已完成数据接入。
+
+## 2026-10-17 全目录复核
+
+对 29 个型号逐条重查官方模型卡、仓库与论文，核对身份、参数、上下文、许可与部署链接，并复核可引用成绩；基础数据未发现需修正的数值，`checkedAt` 全部刷新为 2026-10-17。目录合计 128 条成绩（98 官方、30 第三方）、46 个用途摘要；独立性待确认的用途由 1 项增至 6 项。
+
+更正与补充：
+
+- Qwen3-Embedding-0.6B：三条 HUME 结果位于 [MTEB Results PR #281](https://github.com/embeddings-benchmark/results/pull/281)（提交者 Samoed，AdnanElAssadi 共同提交），此前记录的 afalf 归属有误；已更正 `publisher` 与 `provenance.sourceId`，独立性仍为未确认。
+- Phi-4-mini-instruct：权重许可链接改为 [LICENSE 原文](https://huggingface.co/microsoft/Phi-4-mini-instruct/blob/main/LICENSE)。
+- Qwen3-VL-4B-Instruct：补充[代码许可](https://github.com/QwenLM/Qwen3-VL/blob/main/LICENSE)（Apache-2.0）；视觉成绩缺口说明见下。
+
+新增成绩（6 个型号、15 条，全部不可比、均未确认独立）：
+
+| 型号 | 来源 | 新增内容 |
+| --- | --- | --- |
+| BGE-M3 | [MTEB Results PR #264](https://github.com/embeddings-benchmark/results/pull/264)（fzoll 提交） | RTEB 三项 nDCG@10：ChatDoctorRetrieval 0.57973、DS1000Retrieval 0.41902、MBPPRetrieval 0.69972；结果目录对应 revision 5617a9f6 |
+| Qwen3-Embedding-4B | [MTEB Results PR #214](https://github.com/embeddings-benchmark/results/pull/214)（afalf 提交） | CQADupstackRetrieval nDCG@10 0.502843、STS12 Spearman 0.866139、ATEC Spearman 0.532428；结果目录对应 revision 636cd9bf |
+| BGE-reranker-v2-m3 | [MTEB Results PR #768](https://github.com/embeddings-benchmark/results/pull/768)（KennethEnevoldsen 发起，gabrielspmoreira 参与提交，标注 beta） | ViDoRe v3.1 三项 english 子集 nDCG@10：ComputerScience 0.6929、FinanceEn 0.49652、Industrial 0.48268；结果目录对应 revision 953dc6f6 |
+| DeepSeek-OCR | [论文](https://arxiv.org/abs/2510.18234) Table 3（HTML 版为可转录文本表） | OmniDocBench Overall 编辑距离（越低越好）：Gundam 档 English 0.127 / Chinese 0.181，Small 档 English 0.221；2026-10-10 记录称"OmniDocBench 仅有图"不准确 |
+| Whisper large-v3-turbo | [Open ASR Leaderboard](https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results) english_short_latest.csv | 英文短音频平均 WER 8.39%（CSV 原值 8.387142857142857），对应多语言 turbo 权重 |
+| Qwen3-VL-4B-Instruct | [技术报告](https://arxiv.org/html/2511.21631v2) Table 6（HTML 版 2B/4B/8B Instruct 对比表） | 纯文本成绩 MMLU-Pro 67.1、LiveCodeBench v6 37.9（4B Instruct 非思考列） |
+
+保留证据缺口：
+
+- Qwen3-VL-4B-Instruct 视觉用途：模型卡与技术报告的视觉性能表以图片形式发布，本轮无法在页面文本中核对数值，未转录、维持证据不足。
+- Kokoro-82M 音质：TTS Arena 相关页面仍未确认结果再使用许可，维持证据不足。
+- Phi-4-mini-instruct 代码用途：论文 Table 7/8 的代码成绩未标明对应 Base 还是 Instruct 权重，未导入。
+- Whisper tiny/base/small/medium：english_short_latest.csv（65 行）中无该四个尺寸的公开行，维持原论文成绩。
+
+其余型号（Qwen3 系、Qwen2.5-Coder 系、Gemma 3/4、SmolLM3、Kokoro、PP-OCRv5、Qwen3-Reranker、Qwen3-TTS 等）的官方页面与既有记录逐项核对一致；部分官方卡表还含更多成绩，本轮按"少量事实引用"原则未扩大搬运。AA 仍仅链接，未导入任何数据。

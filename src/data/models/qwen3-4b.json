@@ -52,7 +52,7 @@
     "本站未复现评测或设备表现。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-4B",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-runtime",

@@ -41,7 +41,10 @@
       "name": "Apache-2.0",
       "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct"
     },
-    "code": null,
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/QwenLM/Qwen3-VL/blob/main/LICENSE"
+    },
     "trainingDisclosure": "官方提供模型卡与系列仓库说明，介绍架构改动与能力方向；未公开完整训练数据清单。"
   },
   "summary": "支持文本、图像与视频输入的 4B 级视觉语言模型，侧重界面操作、空间感知与文档识别。",
@@ -53,12 +56,12 @@
   ],
   "limitations": [
     "4B是官方语言骨干档位，不能直接视为整个多模态系统的全部参数。",
-    "官方性能表以图片形式发布；本轮尚未逐项转录并复核其中的分数与测试条件，因此暂未录入。",
+    "技术报告的文本对比表（Table 6）可逐项转录；视觉性能表在模型卡与报告中以图片形式发布，本轮未逐项转录复核，暂不录入视觉分数。",
     "模型卡发布时要求从Transformers源码安装；当前官方Qwen3-VL仓库已提供Transformers 4.57.0及以上版本路线。",
     "扩展上下文需要运行时支持与额外配置；本站未验证图像、视频与OCR的实际效果。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",
@@ -100,49 +103,143 @@
       }
     }
   ],
-  "evaluations": [],
+  "evaluations": [
+    {
+      "id": "mmlu-pro-qwen3vl-report",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 67.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Qwen3-VL Technical Report（arXiv 2511.21631v2）Table 6（Qwen3-VL-2B/4B/8B Instruct 对比表）",
+      "settings": "技术报告Table 6（Qwen3-VL-2B/4B/8B Instruct对比表）列出Qwen3-VL-4B Instruct（非思考模式）MMLU-Pro 67.1。该对比表未逐项标注split、shot、提示模板与输出预算，完整配置以报告正文为准；本站未复现。",
+      "sourceUrl": "https://arxiv.org/pdf/2511.21631v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-VL-4B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方对比表未逐项标注该成绩对应的模型revision、split、提示模板与输出预算；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/pdf/2511.21631v2",
+        "notes": "仅引用Qwen3-VL官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-vl-4b-instruct-qwen3vl-report-2025",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-v6-qwen3vl-report",
+      "benchmark": "LiveCodeBench v6",
+      "dataset": "LiveCodeBench v6",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 37.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Qwen3-VL Technical Report（arXiv 2511.21631v2）Table 6（Qwen3-VL-2B/4B/8B Instruct 对比表）",
+      "settings": "技术报告Table 6（Qwen3-VL-2B/4B/8B Instruct对比表）列出该型号非思考模式LiveCodeBench v6 Pass@1 37.9。该对比表未逐项标注题目时间窗口、提示与采样配置，完整配置以报告正文为准；本站未复现。",
+      "sourceUrl": "https://arxiv.org/pdf/2511.21631v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3-VL-4B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方对比表未逐项标注该成绩对应的模型revision、题目时间窗口、提示与采样配置；原样记录，不与不同版本或配置的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/pdf/2511.21631v2",
+        "notes": "仅引用Qwen3-VL官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "task": "coding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-vl-4b-instruct-qwen3vl-report-2025",
+        "independence": "first-party"
+      }
+    }
+  ],
   "assessments": [
     {
       "task": "text-generation",
-      "status": "insufficient",
-      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct文本成绩。官方纯文本性能表以图片形式发布，本轮尚未逐项转录并复核分数与测试条件，因此暂未录入。",
+      "status": "official-only",
+      "summary": "Qwen3-VL技术报告PDF Table 9列出该精确Instruct型号MMLU-Pro 67.1%。这提供了纯文本知识问答的直接基准证据，但不能外推为中文写作、开放式对话或事实可靠性。",
       "strengths": [
-        "官方明确该型号与8B同批发布，并提供Instruct版本的推荐生成参数。",
-        "官方说明该系列在文本理解上与同规模纯文本模型对齐。"
+        "官方技术报告直接给出该型号的纯文本基准成绩，无需借用其他尺寸。",
+        "报告同时提供IFEval、GPQA等文本指标，可用于了解不同能力维度。"
       ],
       "limitations": [
-        "官方纯文本性能表为图片；本轮尚未逐项转录并复核数值、评测条件与模型revision，因此暂未录入成绩。",
-        "官方提示部分基准使用内部构建数据集，复现资产当时尚未发布。",
-        "未找到许可明确且确认为独立方的同型号文本评测。",
-        "本站未运行该模型验证中文写作或长文本表现。"
+        "MMLU-Pro为英文知识问答，不能代表中文或开放式生成质量。",
+        "报告未逐项披露提示、划分与生成预算，部分基准提示词经过修改。",
+        "本站未复现文本成绩。"
       ],
-      "evidenceIds": []
+      "evidenceIds": [
+        "mmlu-pro-qwen3vl-report"
+      ]
     },
     {
       "task": "coding",
-      "status": "insufficient",
-      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct代码成绩。官方强调从图像或视频生成前端代码，但未给出可核对的代码基准数值表。",
+      "status": "official-only",
+      "summary": "Qwen3-VL技术报告PDF Table 9列出该精确Instruct型号LiveCodeBench v6 Pass@1 37.9%。这是竞赛题代码生成成绩；官方视觉代码生成能力没有对应的标准化基准分数。",
       "strengths": [
-        "官方将视觉代码生成列为该代重点能力，说明可用于Draw.io、HTML、CSS与JS生成。"
+        "官方技术报告给出该型号的通用代码生成基准成绩。",
+        "官方将图像或视频生成Draw.io、HTML、CSS与JS列为该代重点能力。"
       ],
       "limitations": [
-        "视觉代码生成没有公开的标准化基准，官方也未在模型卡给出对应分数。",
-        "通用代码能力不能由同系列其他规模型号的成绩推断。",
-        "未找到许可明确且确认为独立方的同型号代码评测。",
+        "LiveCodeBench只覆盖竞赛题，不能替代真实仓库任务或视觉代码生成。",
+        "报告未逐项披露题目窗口、提示与采样配置。",
         "本站未用真实仓库或界面截图验证生成代码的正确性。"
       ],
-      "evidenceIds": []
+      "evidenceIds": [
+        "livecodebench-v6-qwen3vl-report"
+      ]
     },
     {
       "task": "image-understanding",
       "status": "insufficient",
-      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct视觉成绩。官方视觉性能表以图片形式发布，本轮尚未逐项转录并复核分数与测试条件，因此暂未录入。",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的Qwen3-VL-4B-Instruct视觉成绩。官方模型卡与技术报告的视觉性能表以图片形式发布，报告的可转录对比表只覆盖纯文本基准，视觉部分未能逐项转录复核，因此暂未录入分数。",
       "strengths": [
         "官方说明OCR语言数由上一代扩展到32种，并改善低光、模糊、倾斜与长文档结构解析。",
         "官方给出空间感知、2D/3D定位与界面操作等能力方向，并列出Instruct版本的推荐参数。"
       ],
       "limitations": [
-        "官方视觉性能表为图片；本轮尚未逐项转录并复核数值、评测框架版本与模型revision，因此暂未录入成绩。",
+        "官方模型卡与技术报告的视觉性能表为图片；本轮未能逐项转录并复核数值、评测框架版本与模型revision，因此暂未录入成绩。",
         "官方评测设置说明使用vLLM与VLMEvalKit、lmms-eval，并提到部分提示词经过修改、部分基准为内部构建，条件未完全公开。",
         "OCR语言数属于功能说明，不是准确率证据。",
         "本站未使用本地图片或文档验证识别与定位效果。"

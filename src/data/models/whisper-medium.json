@@ -54,7 +54,7 @@
     "识别表现需按目标语言和音频验证；本站未复现WER。"
   ],
   "officialUrl": "https://github.com/openai/whisper",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-runtime",

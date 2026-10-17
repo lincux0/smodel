@@ -55,7 +55,7 @@
     "官方基准结果未在本站复现，不能作为设备速度或质量保证。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",

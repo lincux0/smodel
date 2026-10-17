@@ -52,7 +52,7 @@
     "生成代码需审查与测试；本站未执行模型。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen2.5-Coder-1.5B-Instruct",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",

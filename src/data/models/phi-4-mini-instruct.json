@@ -58,7 +58,7 @@
   "licenses": {
     "weights": {
       "name": "MIT",
-      "url": "https://huggingface.co/microsoft/Phi-4-mini-instruct"
+      "url": "https://huggingface.co/microsoft/Phi-4-mini-instruct/blob/main/LICENSE"
     },
     "code": null,
     "trainingDisclosure": "官方模型卡说明训练数据由筛选后的公开文档、教育数据、代码，以及合成的教科书式数据与高质量对话监督数据组成，合计约5万亿token，训练于2024年11月至12月完成，公开数据截止到2024年6月；未公开完整语料清单。"
@@ -78,7 +78,7 @@
     "本站未复现官方基准。"
   ],
   "officialUrl": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",

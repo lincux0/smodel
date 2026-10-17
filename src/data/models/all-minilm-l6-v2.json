@@ -52,7 +52,7 @@
     "自写Transformers推理时须按卡片执行mean pooling与归一化。"
   ],
   "officialUrl": "https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-runtime",
@@ -102,7 +102,7 @@
       "unit": "分（0–1）",
       "direction": "higher",
       "version": "MTEB Results PR #264（2025-08）",
-      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。结果文件位于模型revision 8b3219a9…目录（model_meta.json记录apache-2.0与256 max_tokens），但完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
       "date": null,
       "kind": "third-party",
@@ -110,7 +110,7 @@
       "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
       "task": "embedding",
       "modelConfig": {
-        "revision": null,
+        "revision": "8b3219a92973c328a8e22fadcfa821b5dc75636a",
         "thinking": "not-applicable",
         "quantization": null,
         "runtime": "MTEB reference implementation"
@@ -127,10 +127,10 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整提示与推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
       "provenance": {
         "sourceId": "fzoll",
         "runId": "fzoll-rteb-pr-264",
@@ -147,7 +147,7 @@
       "unit": "分（0–1）",
       "direction": "higher",
       "version": "MTEB Results PR #264（2025-08）",
-      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。结果文件位于模型revision 8b3219a9…目录（model_meta.json记录apache-2.0与256 max_tokens），但完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
       "date": null,
       "kind": "third-party",
@@ -155,7 +155,7 @@
       "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
       "task": "embedding",
       "modelConfig": {
-        "revision": null,
+        "revision": "8b3219a92973c328a8e22fadcfa821b5dc75636a",
         "thinking": "not-applicable",
         "quantization": null,
         "runtime": "MTEB reference implementation"
@@ -172,10 +172,10 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整提示与推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
       "provenance": {
         "sourceId": "fzoll",
         "runId": "fzoll-rteb-pr-264",
@@ -192,7 +192,7 @@
       "unit": "分（0–1）",
       "direction": "higher",
       "version": "MTEB Results PR #264（2025-08）",
-      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。PR未列模型revision及完整提示配置，且不能据提交用户名确认其与模型发布方的关系。",
+      "settings": "fzoll提交的RTEB结果；MTEB任务主指标 ndcg_at_10，测试集。MTEB Results声明使用其评测包；PR作者勾选结果来自reference implementation。结果文件位于模型revision 8b3219a9…目录（model_meta.json记录apache-2.0与256 max_tokens），但完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/pull/264",
       "date": null,
       "kind": "third-party",
@@ -200,7 +200,7 @@
       "externalModelId": "sentence-transformers/all-MiniLM-L6-v2",
       "task": "embedding",
       "modelConfig": {
-        "revision": null,
+        "revision": "8b3219a92973c328a8e22fadcfa821b5dc75636a",
         "thinking": "not-applicable",
         "quantization": null,
         "runtime": "MTEB reference implementation"
@@ -217,10 +217,10 @@
         "url": "https://github.com/embeddings-benchmark/results",
         "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
       },
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "comparable": false,
       "comparisonGroup": null,
-      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision及推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整提示与推理配置；该结果仅记录原报告口径，不加入跨型号比较组。",
       "provenance": {
         "sourceId": "fzoll",
         "runId": "fzoll-rteb-pr-264",
@@ -231,15 +231,15 @@
   "assessments": [
     {
       "task": "embedding",
-      "status": "insufficient",
-      "summary": "社区提交的MTEB/RTEB结果提供了英语医疗问答、数据科学和Python代码检索测试集上的参考分数（nDCG@10分别为0.5295、0.3451、0.7460），与模型卡的英语句向量定位相符；但提交者与模型发布方的关系未核实，不能据此视为独立复测或充分交叉验证。",
+      "status": "independence-unverified",
+      "summary": "社区提交的MTEB/RTEB结果提供了英语医疗问答、数据科学和Python代码检索测试集上的参考分数（nDCG@10分别为0.5295、0.3451、0.7460），与模型卡的英语句向量定位相符；但提交者fzoll与模型发布方的关系未核实，不能据此视为独立复测或充分交叉验证。",
       "strengths": [
-        "MTEB结果库以CC0发布成绩数据，并提供准确型号对应的社区任务记录。",
+        "MTEB结果库以CC0发布成绩数据，并提供准确型号与模型revision（8b3219a9）对应的社区任务记录。",
         "三项结果对应明确的测试集，分别覆盖医疗问答、数据科学和基础Python代码检索。"
       ],
       "limitations": [
-        "目前只有单个社区提交；其与模型发布方的关系未核实，因此证据状态不足以确认独立性。",
-        "结果未列模型revision和完整提示配置；不同任务分数不可相互排名。",
+        "目前只有单个社区提交（fzoll的RTEB批次）；其与模型发布方的关系未核实，独立性待确认。",
+        "结果未列完整提示与推理配置；不同任务分数不可相互排名。",
         "模型卡定位英语句子/短段落，结果不能证明中文表现或任意领域检索质量。"
       ],
       "evidenceIds": [

@@ -62,7 +62,7 @@
     "LLM式文本上下文长度不适用；不提供未经核实的token上限。"
   ],
   "officialUrl": "https://huggingface.co/hexgrad/Kokoro-82M",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-kokoro",

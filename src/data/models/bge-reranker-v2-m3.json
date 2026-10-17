@@ -54,10 +54,10 @@
     "只对已召回候选重排，不负责召回，也不输出文本向量。",
     "官方模型卡未声明最大输入长度；官方Transformers示例以max_length=512截断，长段落需自行确认并验证。",
     "原始logit分数与归一化概率不可混用，阈值需按目标语料重新标定。",
-    "官方评测以图片图表形式给出，本轮尚未逐项转录并复核其中的数值，暂不登记成绩。"
+    "官方评测以图片图表形式给出，仍无可逐项复制的数值表；本页登记的是MTEB Results的ViDoRe v3.1重排批次分项，其执行者身份未核实。"
   ],
   "officialUrl": "https://huggingface.co/BAAI/bge-reranker-v2-m3",
-  "checkedAt": "2026-10-10",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-flagembedding",
@@ -134,23 +134,164 @@
       }
     }
   ],
-  "evaluations": [],
+  "evaluations": [
+    {
+      "id": "vidore-v3-cs-bgem3-reranking-ndcg10",
+      "benchmark": "ViDoRe v3.1（Reranking）",
+      "dataset": "ViDoRe v3 ComputerScience（english 子集，test 拆分；dataset revision 16e4156dc05941dc98b48de38a5ab68732a963c5）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.6929,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.24.7（结果仓库 ViDoRe v3.1 reranking 批次，PR #768，2026-10-15 合并）",
+      "settings": "结果文件 Vidore3ComputerScienceBGEm3Reranking.v2.json：任务名标注候选链路为BGEm3，english 子集，main_score=ndcg_at_10；run_settings 记录 mteb 2.24.7、torch 2.14.1、sentence-transformers 5.7.0、transformers 4.51.3、batch_size=32；模型revision 953dc6f6…（model_meta 记录 fp_options float16）；批次标注 beta；评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-reranker-v2-m3/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e/Vidore3ComputerScienceBGEm3Reranking.v2.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "gabrielspmoreira（ViDoRe v3.1 评测提交，经 MTEB Results PR #768 合并；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-reranker-v2-m3",
+      "modelConfig": {
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 2.24.7（sentence-transformers 5.7.0 / transformers 4.51.3 / torch 2.14.1）"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "ViDoRe v3.1重排任务、english子集与指标明确，但执行者身份、提示与推理细节未披露，且批次标注beta；独立性未确认，不与官方图表或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；ViDoRe数据集自身许可不因结果仓库许可而改变，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "gabrielspmoreira",
+        "runId": "gabrielspmoreira-vidore-v31-reranking",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "vidore-v3-financeen-bgem3-reranking-ndcg10",
+      "benchmark": "ViDoRe v3.1（Reranking）",
+      "dataset": "ViDoRe v3 FinanceEn（english 子集，test 拆分；dataset revision cbfb6aa95395765d61dced7ec061b7f5ffb0ca10）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.49652,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.24.7（结果仓库 ViDoRe v3.1 reranking 批次，PR #768，2026-10-15 合并）",
+      "settings": "结果文件 Vidore3FinanceEnBGEm3Reranking.v2.json：任务名标注候选链路为BGEm3，english 子集，main_score=ndcg_at_10；run_settings 记录 mteb 2.24.7、torch 2.14.1、sentence-transformers 5.7.0、transformers 4.51.3、batch_size=32；模型revision 953dc6f6…（model_meta 记录 fp_options float16）；批次标注 beta；评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-reranker-v2-m3/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e/Vidore3FinanceEnBGEm3Reranking.v2.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "gabrielspmoreira（ViDoRe v3.1 评测提交，经 MTEB Results PR #768 合并；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-reranker-v2-m3",
+      "modelConfig": {
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 2.24.7（sentence-transformers 5.7.0 / transformers 4.51.3 / torch 2.14.1）"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "ViDoRe v3.1重排任务、english子集与指标明确，但执行者身份、提示与推理细节未披露，且批次标注beta；独立性未确认，不与官方图表或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；ViDoRe数据集自身许可不因结果仓库许可而改变，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "gabrielspmoreira",
+        "runId": "gabrielspmoreira-vidore-v31-reranking",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "vidore-v3-industrial-bgem3-reranking-ndcg10",
+      "benchmark": "ViDoRe v3.1（Reranking）",
+      "dataset": "ViDoRe v3 Industrial（english 子集，test 拆分；dataset revision becf4ff4dd02c70c774730aed26be956171a7ad8）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.48268,
+      "unit": "比例（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.24.7（结果仓库 ViDoRe v3.1 reranking 批次，PR #768，2026-10-15 合并）",
+      "settings": "结果文件 Vidore3IndustrialBGEm3Reranking.v2.json：任务名标注候选链路为BGEm3，english 子集，main_score=ndcg_at_10；run_settings 记录 mteb 2.24.7、torch 2.14.1、sentence-transformers 5.7.0、transformers 4.51.3、batch_size=32；模型revision 953dc6f6…（model_meta 记录 fp_options float16）；批次标注 beta；评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-reranker-v2-m3/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e/Vidore3IndustrialBGEm3Reranking.v2.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "gabrielspmoreira（ViDoRe v3.1 评测提交，经 MTEB Results PR #768 合并；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-reranker-v2-m3",
+      "modelConfig": {
+        "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB 2.24.7（sentence-transformers 5.7.0 / transformers 4.51.3 / torch 2.14.1）"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "ViDoRe v3.1重排任务、english子集与指标明确，但执行者身份、提示与推理细节未披露，且批次标注beta；独立性未确认，不与官方图表或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；ViDoRe数据集自身许可不因结果仓库许可而改变，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "gabrielspmoreira",
+        "runId": "gabrielspmoreira-vidore-v31-reranking",
+        "independence": "unknown"
+      }
+    }
+  ],
   "assessments": [
     {
       "task": "reranking",
-      "status": "insufficient",
-      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的BGE-reranker-v2-m3重排成绩，暂不据官方图表或社区汇总判断其重排效果高低。",
+      "status": "independence-unverified",
+      "summary": "官方模型卡仍未给出可复制的数值表；MTEB Results的ViDoRe v3.1重排批次记录了该型号在计算机科学、英文金融与工业三个领域english子集的nDCG@10（0.6929、0.49652、0.48268）。提交者gabrielspmoreira与发布方的关系未核实，不构成独立复测；重排效果依赖召回候选集与阈值标定，目标语料仍需验证。",
       "strengths": [
         "官方模型列表明确该型号面向多语言场景，并把它列为兼顾效果与效率的推荐项。",
-        "官方给出FlagEmbedding与Transformers两条可核对的使用路线。"
+        "官方给出FlagEmbedding与Transformers两条可核对的使用路线。",
+        "MTEB结果库的ViDoRe v3.1批次提供了可追溯的模型revision、run_settings与测试拆分。"
       ],
       "limitations": [
-        "官方模型卡以图片形式给出BEIR、CMTEB-retrieval与miracl评测图，未提供可复制的数值表与评测条件，本页不引用无法核对的数字。",
-        "重排效果依赖召回候选集、切分与阈值标定；官方示例的512截断也会影响长段落结果。",
-        "未找到许可明确且确认为独立方的同型号同条件复测。",
+        "官方模型卡以图片形式给出BEIR、CMTEB-retrieval与miracl评测图，未提供可复制的数值表与评测条件，本页不引用无法核对的官方数字。",
+        "ViDoRe v3.1批次由gabrielspmoreira提交、标注beta，执行者身份与发布方关系未核实，不构成独立交叉佐证。",
+        "重排效果依赖召回候选集、切分与阈值标定；官方Transformers示例的512截断也会影响长段落结果。",
         "本站未在自有语料上运行该模型。"
       ],
-      "evidenceIds": []
+      "evidenceIds": [
+        "vidore-v3-cs-bgem3-reranking-ndcg10",
+        "vidore-v3-financeen-bgem3-reranking-ndcg10",
+        "vidore-v3-industrial-bgem3-reranking-ndcg10"
+      ]
     }
   ]
 }

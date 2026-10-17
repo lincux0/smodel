@@ -52,7 +52,7 @@
     "不能把8B型号的榜单成绩转移到此0.6B型号。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
-  "checkedAt": "2026-10-02",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-sentence-transformers",
@@ -107,7 +107,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为基准任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -152,7 +152,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为检索类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -197,7 +197,7 @@
       "settings": "Qwen模型卡逐型号列出0.6B结果；此项为语义文本相似度类任务均值。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
       "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B",
       "date": "2025-05-24",
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -242,13 +242,13 @@
       "settings": "结果仓库记录指标 v_measure，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMEArxivClusteringP2P.json",
       "date": null,
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "third-party",
       "comparable": false,
       "task": "embedding",
-      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "publisher": "MTEB Results PR #281（提交者 Samoed；具体评测执行者未逐项披露）",
       "provenance": {
-        "sourceId": "mteb-pr-281-unverified",
+        "sourceId": "samoed-mteb",
         "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
         "independence": "unknown"
       },
@@ -287,13 +287,13 @@
       "settings": "结果仓库记录指标 map，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMECore17InstructionReranking.json",
       "date": null,
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "third-party",
       "comparable": false,
       "task": "embedding",
-      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "publisher": "MTEB Results PR #281（提交者 Samoed；具体评测执行者未逐项披露）",
       "provenance": {
-        "sourceId": "mteb-pr-281-unverified",
+        "sourceId": "samoed-mteb",
         "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
         "independence": "unknown"
       },
@@ -332,13 +332,13 @@
       "settings": "结果仓库记录指标 spearman，split=test，模型revision=b22da495047858cce924d27d76261e96be6febc0；dataset revision 已记录。评测日期、运行时、提示模板及完整推理配置未披露。",
       "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/Qwen__Qwen3-Embedding-0.6B/b22da495047858cce924d27d76261e96be6febc0/HUMESICK-R.json",
       "date": null,
-      "checkedAt": "2026-10-06",
+      "checkedAt": "2026-10-17",
       "kind": "third-party",
       "comparable": false,
       "task": "embedding",
-      "publisher": "MTEB Results 社区提交（PR #281；实际评测者未披露）",
+      "publisher": "MTEB Results PR #281（提交者 Samoed；具体评测执行者未逐项披露）",
       "provenance": {
-        "sourceId": "mteb-pr-281-unverified",
+        "sourceId": "samoed-mteb",
         "runId": "mteb-hume-pr-281-qwen3-embedding-06b",
         "independence": "unknown"
       },
@@ -376,7 +376,7 @@
       ],
       "limitations": [
         "这些是Qwen发布方引用MTEB leaderboard的结果，不是本站复测；模型卡注明leaderboard数据日期为2025-05-24。",
-        "MTEB结果数据集为CC0且存在该型号记录，但添加记录的PR提交者afalf与模型发布方的关系未核实，因此不把该记录表述为独立复测或交叉印证。",
+        "MTEB结果数据集为CC0且存在该型号记录；PR #281由MTEB维护者Samoed提交，但具体评测执行者、运行配置与模型发布方的关系未核实，因此不把该记录表述为独立复测或交叉印证。",
         "该表未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。",
         "MTEB Results PR #281 的三个任务级结果标记为独立性待确认，不构成与官方报告的独立交叉佐证。"
       ],

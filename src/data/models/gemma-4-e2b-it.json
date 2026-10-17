@@ -58,7 +58,7 @@
     "不同语言与任务效果需要目标场景验证。"
   ],
   "officialUrl": "https://huggingface.co/google/gemma-4-E2B-it",
-  "checkedAt": "2026-10-01",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",

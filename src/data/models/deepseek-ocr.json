@@ -57,7 +57,7 @@
     "本站未复现论文的压缩精度实验，也未在自有文档上测试版面解析效果。"
   ],
   "officialUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR",
-  "checkedAt": "2026-10-14",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-transformers",
@@ -159,7 +159,7 @@
       "settings": "论文Table 2中600–700个真值文本token的7页英文文档子组：100个视觉token、输入缩放至640×640时，视觉压缩解码精度98.5%、压缩比6.7×。这是该长度分箱的小样本条件结果，不是全部100页Fox子集的平均分，也不是常规字符级OCR准确率。论文说明输出格式无法完全匹配Fox评测脚本，数值可能受格式差异影响；未披露模型revision与完整推理配置。模型发布日为2025-10-20，非已知评测运行日期。",
       "sourceUrl": "https://arxiv.org/abs/2510.18234",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "ocr",
@@ -190,15 +190,151 @@
         "runId": "deepseek-ocr-paper-table2",
         "independence": "first-party"
       }
+    },
+    {
+      "id": "omnidocbench-gundam-en-overall",
+      "benchmark": "OmniDocBench",
+      "dataset": "OmniDocBench真实文档解析（English overall，Gundam档；论文Table 3）",
+      "language": "英语",
+      "metric": "Overall 编辑距离（edit distance，越低越好）",
+      "value": 0.127,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "DeepSeek-OCR论文Table 3（OmniDocBench）",
+      "settings": "论文Table 3按End-to-end Models分组；DeepSeek-OCR使用Gundam档分辨率，平均795个视觉token/页。表说明所有指标均为编辑距离（越小越好），Tokens列为每页平均视觉token数。OmniDocBench版本、模型revision与完整推理配置未披露；论文发布日2025-10-20不是已知评测运行日；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2510.18234",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页文档解析的编辑距离（论文End-to-end分组口径），来源未披露OmniDocBench版本、模型revision与完整推理配置，不能与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2510.18234",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr-paper-table3",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-gundam-zh-overall",
+      "benchmark": "OmniDocBench",
+      "dataset": "OmniDocBench真实文档解析（Chinese overall，Gundam档；论文Table 3）",
+      "language": "中文",
+      "metric": "Overall 编辑距离（edit distance，越低越好）",
+      "value": 0.181,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "DeepSeek-OCR论文Table 3（OmniDocBench）",
+      "settings": "论文Table 3按End-to-end Models分组；DeepSeek-OCR使用Gundam档分辨率，平均795个视觉token/页。表说明所有指标均为编辑距离（越小越好），Tokens列为每页平均视觉token数。OmniDocBench版本、模型revision与完整推理配置未披露；论文发布日2025-10-20不是已知评测运行日；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2510.18234",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页文档解析的编辑距离（论文End-to-end分组口径），来源未披露OmniDocBench版本、模型revision与完整推理配置，不能与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2510.18234",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr-paper-table3",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-small-en-overall",
+      "benchmark": "OmniDocBench",
+      "dataset": "OmniDocBench真实文档解析（English overall，Small档；论文Table 3）",
+      "language": "英语",
+      "metric": "Overall 编辑距离（edit distance，越低越好）",
+      "value": 0.221,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "DeepSeek-OCR论文Table 3（OmniDocBench）",
+      "settings": "论文Table 3按End-to-end Models分组；DeepSeek-OCR使用Small档分辨率，100个视觉token/页。表说明所有指标均为编辑距离（越小越好），Tokens列为每页平均视觉token数。OmniDocBench版本、模型revision与完整推理配置未披露；论文发布日2025-10-20不是已知评测运行日；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2510.18234",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页文档解析的编辑距离（论文End-to-end分组口径），来源未披露OmniDocBench版本、模型revision与完整推理配置，不能与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2510.18234",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr-paper-table3",
+        "independence": "first-party"
+      }
     }
   ],
   "assessments": [
     {
       "task": "ocr",
       "status": "official-only",
-      "summary": "可作为整页文档解析候选：论文在Fox英文文档的600–700真值文本token子组（7页）中报告，100个视觉token条件下视觉压缩解码精度为98.5%（压缩比6.7×）。这是压缩解码实验的小样本分箱结果，不等同于常规OCR字符准确率或所有文档上的表现。",
+      "summary": "可作为整页文档解析候选：论文在Fox英文文档的600–700真值文本token子组（7页）中报告，100个视觉token条件下视觉压缩解码精度为98.5%（压缩比6.7×）；OmniDocBench真实文档解析中，Gundam档（平均795视觉token/页）English/Chinese overall编辑距离为0.127/0.181，Small档（100视觉token/页）English overall为0.221。均为发布方自测，编辑距离与常规OCR字符准确率口径不同。",
       "strengths": [
         "论文按真值文本token区间与视觉token档位逐行给出压缩解码精度与压缩比，当前记录明确对应7页子组。",
+        "OmniDocBench表按End-to-end Models与流水线分组，并给出每页视觉token数，可核对原表口径与档位。",
         "同页同时给出不同分辨率档位与Gundam裁剪模式的使用方式，便于按文档复杂度选择。",
         "官方上游vLLM已支持该模型，部署路线明确。"
       ],
@@ -206,11 +342,14 @@
         "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
         "压缩比超过10倍后精度明显下降，长文档或低视觉token配置需按实际效果取舍。",
         "600–700-token分箱只有7页，98.5%不是Fox全子集平均值；论文说明输出格式无法完全匹配评测脚本，不能将其当作常规OCR准确率或直接横比的标准榜单分数。",
-        "OmniDocBench对比在论文中以图形式给出，未提供可复制的数值表，本页不引用其具体分数。",
+        "OmniDocBench结果为论文Table 3的编辑距离口径（越小越好），论文未披露该基准版本、模型revision与完整推理配置，也未提供独立复测。",
         "本站未在真实票据、表格或扫描件上验证版面与表格结构还原。"
       ],
       "evidenceIds": [
-        "fox-compression-precision"
+        "fox-compression-precision",
+        "omnidocbench-gundam-en-overall",
+        "omnidocbench-gundam-zh-overall",
+        "omnidocbench-small-en-overall"
       ]
     }
   ]

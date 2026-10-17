@@ -56,7 +56,7 @@
     "论文成绩是发布方在固定基准上的运行结果，本站未在自有语料复现检索效果。"
   ],
   "officialUrl": "https://huggingface.co/BAAI/bge-m3",
-  "checkedAt": "2026-10-14",
+  "checkedAt": "2026-10-17",
   "deployments": [
     {
       "id": "official-flagembedding",
@@ -110,7 +110,7 @@
       "settings": "v5论文报告值，对应M3.All，即稠密、稀疏与多向量三类表示融合后的结果，不是单一稠密表示成绩；同表M3.Dense为69.2。BAAI于2024-07-01公告修正MIRACL评测；该日期是修正公告日期，论文未披露本次评测运行日。评测按官方基准使用Pyserini，逐语言结果见Table 1；本站未复现。",
       "sourceUrl": "https://arxiv.org/html/2402.03216v5",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -155,7 +155,7 @@
       "settings": "v5论文报告值，对应M3.All融合结果；评测语料使用BEIR提供的英文维基处理版本。BAAI于2024-07-01公告MIRACL修正，MKQA结果未受该修正影响；该日期是公告日期，论文未披露本项评测运行日。论文未在该表披露模型revision、编码精度与硬件条件；本站未复现。",
       "sourceUrl": "https://arxiv.org/html/2402.03216v5",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -200,7 +200,7 @@
       "settings": "v5论文报告值，对应M3.All融合结果。BAAI于2024-07-01公告MIRACL修正，MLDR结果未受该修正影响；该日期是公告日期，论文未披露本项评测运行日。MLDR为论文作者自行构建并开源的文档检索数据集，且其训练集用于增强长文档检索能力，论文提示与未使用长文档数据微调的基线比较需注意该差异；本站未复现。",
       "sourceUrl": "https://arxiv.org/html/2402.03216v5",
       "date": null,
-      "checkedAt": "2026-10-14",
+      "checkedAt": "2026-10-17",
       "kind": "official-report",
       "comparable": false,
       "task": "embedding",
@@ -231,19 +231,155 @@
         "runId": "baai-m3-paper-v5",
         "independence": "first-party"
       }
+    },
+    {
+      "id": "rteb-chatdoctor-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "医疗问答检索（test 拆分；dataset revision 50c2986fedffa33b38afd5c1752026f8e9e5ed1d）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.57973,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.43（结果仓库 PR #264，2025-09-01 合并）",
+      "settings": "fzoll 提交的RTEB结果，位于模型revision目录 5617a9f6…；MTEB任务主指标 ndcg_at_10，test 拆分。PR 未附 run_settings，完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-m3/5617a9f61b028005a4858fdac845db406aefb181/ChatDoctorRetrieval.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-m3",
+      "modelConfig": {
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方论文汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "rteb-ds1000-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "DS-1000 数据科学代码检索（test 拆分；dataset revision 25cd4dc8172e799235d83c66439b6b7b8e6583ec）",
+      "language": "英语、Python代码",
+      "metric": "nDCG@10",
+      "value": 0.41902,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.43（结果仓库 PR #264，2025-09-01 合并）",
+      "settings": "fzoll 提交的RTEB结果，位于模型revision目录 5617a9f6…；MTEB任务主指标 ndcg_at_10，test 拆分。PR 未附 run_settings，完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-m3/5617a9f61b028005a4858fdac845db406aefb181/DS1000Retrieval.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-m3",
+      "modelConfig": {
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方论文汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "rteb-mbpp-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "MBPP Python代码检索（test 拆分；dataset revision 586a1fd6a0c63fdeda3b49c0293559a81c79cdec）",
+      "language": "英语、Python代码",
+      "metric": "nDCG@10",
+      "value": 0.69972,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.43（结果仓库 PR #264，2025-09-01 合并）",
+      "settings": "fzoll 提交的RTEB结果，位于模型revision目录 5617a9f6…；MTEB任务主指标 ndcg_at_10，test 拆分。PR 未附 run_settings，完整提示与推理配置未披露，且不能据提交用户名确认其与模型发布方的关系；评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-m3/5617a9f61b028005a4858fdac845db406aefb181/MBPPRetrieval.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "fzoll（社区结果提交者；与模型发布方的关系未核实）",
+      "externalModelId": "BAAI/bge-m3",
+      "modelConfig": {
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者、提示与完整推理配置未披露；独立性未确认，不与官方论文汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "fzoll",
+        "runId": "fzoll-rteb-pr-264",
+        "independence": "unknown"
+      }
     }
   ],
   "assessments": [
     {
       "task": "embedding",
-      "status": "official-only",
-      "summary": "可作为多语言与跨语言检索候选：论文v5报告M3.All在MIRACL nDCG@10为71.5、MKQA Recall@100为75.5、MLDR nDCG@10为65.0。三项均为稠密、稀疏与多向量融合后的结果，只部署稠密向量时不能引用这些数值。",
+      "status": "independence-unverified",
+      "summary": "可作为多语言与跨语言检索候选：论文v5报告M3.All在MIRACL nDCG@10为71.5、MKQA Recall@100为75.5、MLDR nDCG@10为65.0。三项均为稠密、稀疏与多向量融合后的结果，只部署稠密向量时不能引用这些数值。MTEB结果库另有该型号的三个RTEB分项（英语医疗问答、DS-1000与MBPP代码检索），执行者独立性待确认。",
       "strengths": [
         "论文在同一张表内并列BM25、M3.Sparse与M3.All，融合表示与单一表示的差异可查。",
-        "覆盖多语言检索、跨语言检索与长文档检索三类场景，指标口径写在表标题中。"
+        "覆盖多语言检索、跨语言检索与长文档检索三类场景，指标口径写在表标题中。",
+        "MTEB结果库记录了同一模型revision（5617a9f6）的三项RTEB结果，批次与拆分可追溯。"
       ],
       "limitations": [
-        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "官方三项成绩由模型发布方运行；另找到的MTEB结果库RTEB记录由fzoll提交，执行者与发布方关系未核实、PR未附run_settings，不构成独立交叉佐证。",
         "71.5等数值是三类表示融合结果，不是稠密向量单独成绩；论文v5 Table 1的M3.Dense为69.2。论文未披露这些成绩的实际运行日期。",
         "MLDR由论文作者构建且其训练集参与训练增强，与其他基线对比时存在该差异。",
         "长文档与跨语言表现依赖切分与检索系统实现，本站未在自有语料验证。"
@@ -251,7 +387,10 @@
       "evidenceIds": [
         "miracl-ndcg10",
         "mkqa-recall100",
-        "mldr-ndcg10"
+        "mldr-ndcg10",
+        "rteb-chatdoctor-ndcg10",
+        "rteb-ds1000-ndcg10",
+        "rteb-mbpp-ndcg10"
       ]
     }
   ]

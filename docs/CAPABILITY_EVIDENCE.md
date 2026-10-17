@@ -26,6 +26,8 @@
 
 2026-10-14复核修订：BGE-M3固定使用论文v5，MIRACL融合成绩为71.5（Dense对照69.2），不将已被作者纠正的70.0继续作为当前结果；MKQA与MLDR仍为75.5与65.0。Qwen3-Embedding-4B的69.45/74.60/72.27保留，2025-05-24仅解释对照模型榜单采集时间，自身运行日未披露。BGE、Qwen Embedding、Qwen TTS与DeepSeek论文结果的实际评测运行日没有可靠依据时保持null，发布日只作来源背景。Fox 98.5%明确对应600–700 GT tokens分箱的7页，不是整个测试集或普通OCR准确率。目录仍为29型号、46用途摘要、113条成绩，全部不可比；未增加未核实的图表成绩或AA数据。
 
+2026-10-17全目录复核：29型号逐一重查官方来源并刷新核实日期，新增6个型号15条成绩（5官方、10第三方），合计128条（98官方、30第三方）；46个用途摘要中7项独立多来源佐证、29项仅官方、6项独立性待确认、4项证据不足。新增为BGE-M3与Qwen3-Embedding-4B的MTEB Results/RTEB分项、BGE-reranker-v2-m3的ViDoRe v3.1分项（三者提交者关系未核实）、DeepSeek-OCR论文Table 3的OmniDocBench编辑距离、Whisper large-v3-turbo的Open ASR Leaderboard平均WER，以及Qwen3-VL-4B-Instruct技术报告Table 6的纯文本成绩；Qwen3-VL视觉成绩因官方图表仍为图片未转录，维持证据不足。全部新增记录不可比，未导入AA数据。轮次明细见[来源记录](SOURCES.md#2026-10-17-全目录复核)。
+
 结构以 [catalog.ts](../src/lib/catalog.ts) 为准。原有评测字段保留，记录身份 `id`、任务 `task`、评测者 `publisher` 和 `externalModelId`；`provenance` 记录实际评测者的稳定 `sourceId`、报告/运行批次 `runId` 与 `independence`。同一批次多个指标允许共存，同一批次同一口径的转载拒绝重复导入；不同发布网页不自动算不同评测者。`modelConfig` 记录权重 revision、思考模式、量化和运行时；`conditions` 记录划分、shot 数、提示模板和输出预算；`comparisonGroup` 与 `nonComparableReason` 明确比较资格；`rights` 记录使用口径、许可链接和说明。
 
 模型顶层 `assessments` 按用途记录结论、优势、限制和关联 `evidenceIds`，缺省为空数组。详情与对比复用 `CapabilityEvidence.astro`，每个用途以原生 `details/summary` 卡片展示，默认折叠。摘要保留维护顺序首项，其余优先覆盖独立评测者、不同来源及指标，最多显示三项成绩；来源数按 `sourceId` 去重，未知关系来源另提示，不因多指标或多个转载 URL 增加来源数。摘要显示数据集、语言及已知思考开关，不表示排名；具体发布者、证据状态、独立性标签和来源统计只在展开内容中展示。展开显示编辑结论、优势、限制及全部成绩；相同基准、数据集、语言、指标、单位、方向和版本归组，组内分别显示各来源分数与配置，不求平均。每项成绩仍可展开条件、日期、批次与许可。没有记录时说明证据不足，不显示虚构的 0 分。详情阅读和证据展开不依赖 JavaScript；对比沿用已有 URL 选择。
