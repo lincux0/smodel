@@ -1,0 +1,256 @@
+{
+  "id": "embeddinggemma-300m",
+  "name": "EmbeddingGemma",
+  "family": "Gemma",
+  "version": "EmbeddingGemma",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.308,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "技术报告称该型号为308M参数（正文“novel, 308M parameter embedding model”并与Table 6对照表中的308M一致）；HF模型卡与Google文档按“300M parameter”口径介绍。本记录采用论文数值并保留两种官方口径。",
+    "sourceUrl": "https://arxiv.org/abs/2509.20354"
+  },
+  "context": {
+    "nativeTokens": 2048,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/google/embeddinggemma-300m"
+  },
+  "languages": [
+    "多语言（模型卡：训练数据覆盖100+种口语语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Gemma Terms of Use",
+      "url": "https://ai.google.dev/gemma/terms"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡披露训练数据约3200亿tokens，覆盖100多种语言的网页文本、代码与技术文档以及合成/任务特定数据，并说明CSAM过滤、敏感数据过滤与内容质量安全过滤；未公开完整数据清单。"
+  },
+  "summary": "Google发布的轻量级Gemma系文本嵌入模型，面向端侧与多语言场景，支持Matryoshka维度截断。",
+  "features": [
+    "308M参数（论文口径；模型卡按300M介绍），基于Gemma 3骨干（T5Gemma初始化）",
+    "输出768维向量，可按MRL截断到512/256/128维",
+    "最大输入2048 tokens",
+    "官方称支持100+种口语语言",
+    "模型卡另给出QAT量化检查点（Q4_0/Q8_0等）的官方成绩"
+  ],
+  "limitations": [
+    "模型卡注明EmbeddingGemma激活不支持float16，需使用float32或bfloat16。",
+    "权重按Gemma Terms of Use授权（非Apache/MIT）；HF仓库为手动审核门控，再分发需满足条款条件（如向第三方提供时附带协议与Notice文本）。",
+    "2048 tokens输入上限短于长文档检索场景；官方成绩为发布方自评，本站未复现。"
+  ],
+  "officialUrl": "https://huggingface.co/google/embeddinggemma-300m",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/google/embeddinggemma-300m",
+      "sourceUrl": "https://huggingface.co/google/embeddinggemma-300m#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "transformers（Gemma 3实现）"
+      ],
+      "steps": [
+        {
+          "title": "安装 Sentence Transformers",
+          "description": "按模型卡Usage章节安装依赖；模型卡指定使用Hugging Face Transformers的Gemma 3实现作为骨干。",
+          "command": "pip install -U sentence-transformers"
+        },
+        {
+          "title": "在Hugging Face接受条款并加载模型",
+          "description": "该仓库为手动审核门控（gated: manual），下载前需在HF页面接受Gemma Terms of Use；随后按官方示例用SentenceTransformer(\"google/embeddinggemma-300m\")加载并分别encode_query与encode_document；本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度（官方提示勿用float16）、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mteb-multilingual-v2-768d",
+      "benchmark": "MTEB (Multilingual, v2)",
+      "dataset": "MTEB Multilingual v2 任务集",
+      "language": "多语言",
+      "metric": "Mean (Task)",
+      "value": 61.15,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "EmbeddingGemma模型卡 Benchmark Results（Full Precision Checkpoint，768d）",
+      "settings": "模型卡Full Precision Checkpoint表报告768维时Mean (Task)为61.15、Mean (TaskType)为54.31；同表另给出512d/256d/128d截断与QAT量化结果，本记录只取768d全精度。表未披露评测运行日期、模型revision与硬件条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/embeddinggemma-300m",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Google DeepMind（模型发布方）",
+      "externalModelId": "google/embeddinggemma-300m",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/embeddinggemma-300m",
+        "notes": "仅引用Google官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，MTEB与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "google-embeddinggemma-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-english-v2-768d",
+      "benchmark": "MTEB (English, v2)",
+      "dataset": "MTEB English v2 任务集",
+      "language": "英语",
+      "metric": "Mean (Task)",
+      "value": 69.67,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "EmbeddingGemma模型卡 Benchmark Results（Full Precision Checkpoint，768d）",
+      "settings": "模型卡Full Precision Checkpoint表报告768维时Mean (Task)为69.67、Mean (TaskType)为65.11；同表另给出512d/256d/128d截断与QAT量化结果，本记录只取768d全精度。表未披露评测运行日期、模型revision与硬件条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/embeddinggemma-300m",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Google DeepMind（模型发布方）",
+      "externalModelId": "google/embeddinggemma-300m",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/embeddinggemma-300m",
+        "notes": "仅引用Google官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，MTEB与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "google-embeddinggemma-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-code-v1-768d",
+      "benchmark": "MTEB (Code, v1)",
+      "dataset": "MTEB Code v1 任务集",
+      "language": "代码",
+      "metric": "Mean (Task)",
+      "value": 68.76,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "EmbeddingGemma模型卡 Benchmark Results（Full Precision Checkpoint，768d）",
+      "settings": "模型卡Full Precision Checkpoint表报告768维时Mean (Task)为68.76（同列Mean (TaskType)同为68.76）；同表另给出512d/256d/128d截断与QAT量化结果，本记录只取768d全精度。表未披露评测运行日期、模型revision与硬件条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/google/embeddinggemma-300m",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Google DeepMind（模型发布方）",
+      "externalModelId": "google/embeddinggemma-300m",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/google/embeddinggemma-300m",
+        "notes": "仅引用Google官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，MTEB与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "google-embeddinggemma-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方模型卡报告全精度768维成绩：MTEB Multilingual v2 Mean (Task) 61.15、MTEB English v2 69.67、MTEB Code v1 68.76，并给出维度截断与QAT量化后的对照数值。三项为发布方自评，本站未复现；检索与端侧部署还需考虑2048 tokens上限、Gemma条款门控与float16限制。",
+      "strengths": [
+        "同一张表给出768d/512d/256d/128d的MRL截断与QAT量化结果，便于评估端侧取舍。",
+        "覆盖多语言、英语与代码三类MTEB任务集。",
+        "模型卡披露训练数据规模、语言覆盖与数据过滤流程。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行；MTEB结果仓库另有该型号的社区提交记录（revision 57c266a7），执行者与运行配置未核实，本页未导入。",
+        "模型卡提示使用按任务设计的提示模板（task: ... | query: / title: ... | text:），未按官方提示使用可能低于表列分数。",
+        "评测运行日期、模型revision与硬件未披露；本站未复现。"
+      ],
+      "evidenceIds": [
+        "mteb-multilingual-v2-768d",
+        "mteb-english-v2-768d",
+        "mteb-code-v1-768d"
+      ]
+    }
+  ]
+}

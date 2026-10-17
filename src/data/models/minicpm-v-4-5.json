@@ -1,0 +1,413 @@
+{
+  "id": "minicpm-v-4-5",
+  "name": "MiniCPM-V 4.5",
+  "family": "MiniCPM",
+  "version": "V-4.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image",
+      "video"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.7,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "模型卡正文称基于Qwen3-8B与SigLIP2-400M、总参数8B；同页Inference Efficiency表与技术报告Table 2按8.7B列该型号；HF权重元数据safetensors张量参数和为8,695,895,280（约8.70B）。本条采用官方表格的8.7B口径，正文的8B为约数表述。",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5"
+  },
+  "context": {
+    "nativeTokens": 40960,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5/blob/main/config.json"
+  },
+  "languages": [
+    "多语言（官方称支持30多种语言，未列完整语种清单）",
+    "中文",
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/openbmb/MiniCPM-V-4_5"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/OpenBMB/MiniCPM-V/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "技术报告披露训练配方：基于Qwen3-8B与SigLIP2-400M构建，采用统一3D-Resampler、文档文本破坏与重建的统一OCR/知识学习，以及快/慢思考混合强化学习后训练（结合RLPR与RLAIF-V）；未公开完整训练语料清单与数据许可明细。"
+  },
+  "summary": "8B级视觉语言模型，支持文本、图像与视频输入，官方强调高分辨率图像（最高约180万像素）、OCR与PDF文档解析、高帧率视频理解以及可切换的快/慢思考模式。",
+  "features": [
+    "官方更新日志记录2025-08-26开源发布，2025-09-18发布技术报告（arXiv 2509.18154）",
+    "官方称OpenCompass 8项基准平均77.0分，并在Inference Efficiency表中与GLM-4.1V-9B-Thinking、MiMo-VL-7B-RL并列给出推理时间",
+    "统一3D-Resampler对图像、多图与视频统一编码，官方称6个448×448视频帧压缩为64个视频token（96倍压缩）",
+    "支持任意长宽比、最高约180万像素（如1344×1344）图像输入，官方称视觉token用量约为多数MLLM的四分之一",
+    "支持快思考与深思考模式切换（chat调用传enable_thinking=True），官方称两模式经混合强化学习联合优化",
+    "官方模型卡列出llama.cpp、Ollama、vLLM、SGLang、LLaMA-Factory与int4/GGUF/AWQ量化等支持状态"
+  ],
+  "limitations": [
+    "官方模型卡与模型指南未以文字声明上下文长度；本条40960取自官方权重仓库config.json的max_position_embeddings，实际可用长度还受视觉token数量与显存限制，本站未验证。",
+    "官方评测表在技术报告与模型卡中部分以图片形式发布，本条目数值转录自技术报告Table 1；报告未披露评测框架版本、提示模板、模型revision与完整推理配置。",
+    "技术报告Table 1将对照模型标注为non-thinking或thinking模式，而本型号标为hybrid，跨模式比较需注意口径差异。",
+    "官方视频基准成绩（Video-MME、LVBench、MLVU等）本条未逐项收录；高帧率与长视频能力依赖抽帧与显存条件。",
+    "官方称支持30多种语言，但未给出逐语种成绩；本站未在自有图片、PDF与视频上验证识别与解析效果。",
+    "官方在Statement中声明生成内容不代表开发者立场，且不承担使用模型产生的数据安全等风险。"
+  ],
+  "officialUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（仓库含自定义代码，需trust_remote_code）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方模型卡未固定版本）",
+        "torch",
+        "torchvision",
+        "Pillow",
+        "decord（官方视频示例使用，属可选依赖）"
+      ],
+      "steps": [
+        {
+          "title": "准备 Python 环境",
+          "description": "官方模型卡未给出固定的依赖版本或安装命令；按Usage示例需具备transformers、torch与图像处理库，视频示例另需decord。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "按官方示例加载模型并对话",
+          "description": "官方示例用AutoModel.from_pretrained加载此模型并设置trust_remote_code=True、torch_dtype=torch.bfloat16、attn_implementation='sdpa'（或flash_attention_2，官方说明不支持eager），再经chat方法处理图像、多图与视频输入；启用深思考需传enable_thinking=True。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方称OpenCompass与Video-MME评测使用8×A100，Video-MME推理显存28G，该数值是官方评测环境口径，不构成最低配置要求。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors（含自定义代码，需trust-remote-code）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5",
+      "sourceUrl": "https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/vllm/minicpm-v4_5_vllm.md",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm==0.10.2（官方模型卡列出的首个支持发行版；Cookbook指定该版本）",
+        "vllm[video]（Cookbook说明视频推理需安装）"
+      ],
+      "steps": [
+        {
+          "title": "安装 vLLM",
+          "description": "官方模型卡标注vLLM自v0.10.2起支持该型号；官方链接的Cookbook给出对应安装命令。本站未执行。",
+          "command": "pip install vllm==0.10.2"
+        },
+        {
+          "title": "启动兼容 OpenAI 接口的服务",
+          "description": "Cookbook示例用vllm serve启动服务，包含--trust-remote-code与--max-model-len等参数（示例值2048，需按显存与场景调整）；模型路径替换为本地目录或HF ID。本站未启动服务。",
+          "command": "vllm serve <model_path> --dtype auto --max-model-len 2048 --api-key token-abc123 --gpu_memory_utilization 0.9 --trust-remote-code --max-num-batched-tokens 2048"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于max-model-len、图像分辨率与批大小，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp（GGUF）",
+      "systems": [],
+      "format": "GGUF（官方提供转换权重）",
+      "quantization": "官方GGUF仓库提供含Q4_K_M在内的多种量化尺寸",
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM-V-4_5-gguf",
+      "sourceUrl": "https://github.com/OpenSQZ/MiniCPM-V-CookBook/blob/main/deployment/llama.cpp/minicpm-v4_5_llamacpp.md",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "llama.cpp（官方模型卡称自b6282起支持）",
+        "ggml-model-Q4_K_M.gguf与mmproj-model-f16.gguf（Cookbook示例文件）"
+      ],
+      "steps": [
+        {
+          "title": "配置构建（CUDA 示例）",
+          "description": "Cookbook给出CPU/Metal与CUDA两种CMake配置；此处为CUDA配置命令，需先克隆llama.cpp并安装构建依赖。本站未执行。",
+          "command": "cmake -B build -DGGML_CUDA=ON"
+        },
+        {
+          "title": "编译 llama.cpp",
+          "description": "Cookbook给出的Release编译命令，编译后在build/bin下得到llama-mtmd-cli等可执行文件。本站未执行。",
+          "command": "cmake --build build --config Release"
+        },
+        {
+          "title": "用 llama-mtmd-cli 推理",
+          "description": "Cookbook示例用llama-mtmd-cli加载量化语言模型文件与mmproj视觉投影文件，指定上下文长度4096与采样参数后对图片提问。本站未获取GGUF权重或执行推理。",
+          "command": "./llama-mtmd-cli -m ../MiniCPM-V-4_5/model/ggml-model-Q4_K_M.gguf --mmproj ../MiniCPM-V-4_5/mmproj-model-f16.gguf -c 4096 --temp 0.7 --top-p 0.8 --top-k 100 --repeat-penalty 1.05 --image xx.jpg -p \"What is in the image?\""
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；CPU/边缘推理速度取决于量化档位与设备，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "opencompass-avg-report",
+      "benchmark": "OpenCompass（8项基准平均分）",
+      "dataset": "OpenCompass综合评测（8项流行基准的平均分）",
+      "language": "多语言（评测覆盖中英文等多语种基准）",
+      "metric": "average score",
+      "value": 77.0,
+      "unit": "分",
+      "direction": "higher",
+      "version": "MiniCPM-V 4.5技术报告（arXiv 2509.18154）Table 1（Comprehensive Multimodal）",
+      "settings": "技术报告Table 1列出MiniCPM-V 4.5的OpenCompass平均77.0，并标注该型号Mode为hybrid，同表对照模型标为non-thinking或thinking模式；模型卡Inference Efficiency表同样列出77.0，并说明OpenCompass与Video-MME使用8×A100 GPU推理，Video-MME推理时间含模型侧计算但不含抽帧。报告未披露评测框架版本、提示模板、模型revision与采样配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2509.18154",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenBMB与ModelBest（模型发布方及技术报告作者）",
+      "externalModelId": "openbmb/MiniCPM-V-4_5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测框架版本、提示模板、模型revision与推理配置，且该型号为hybrid模式而对照模型分属non-thinking与thinking模式；原样记录，不与不同模式的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2509.18154",
+        "notes": "仅引用MiniCPM-V 4.5官方技术报告与模型卡中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "openbmb-minicpm-v-45-report-v1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmmu-report",
+      "benchmark": "MMMU",
+      "dataset": "MMMU（技术报告未注明拆分）",
+      "language": "英语",
+      "metric": "accuracy",
+      "value": 67.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM-V 4.5技术报告（arXiv 2509.18154）Table 1（STEM分组）",
+      "settings": "技术报告Table 1的STEM分组列出MiniCPM-V 4.5的MMMU 67.7，同组另有MathVista 79.9、AI2D 86.5、MathVerse MINI 58.8、LogicVista 57.0与EMMA 34.8；表头标注该型号Mode为hybrid。报告未披露split、few-shot、提示模板、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2509.18154",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenBMB与ModelBest（模型发布方及技术报告作者）",
+      "externalModelId": "openbmb/MiniCPM-V-4_5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露该成绩对应的split、提示模板、模型revision与推理配置，也未说明该hybrid模式成绩在快思考或深思考下取得；原样记录，不与不同配置的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2509.18154",
+        "notes": "仅引用MiniCPM-V 4.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "openbmb-minicpm-v-45-report-v1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ocrbench-report",
+      "benchmark": "OCRBench",
+      "dataset": "OCRBench（技术报告未注明拆分）",
+      "language": "英语（OCRBench以英文场景为主）",
+      "metric": "OCRBench综合得分",
+      "value": 89.0,
+      "unit": "分（0–1000）",
+      "direction": "higher",
+      "version": "MiniCPM-V 4.5技术报告（arXiv 2509.18154）Table 1（Document, OCR & Chart分组）",
+      "settings": "技术报告Table 1的Document, OCR & Chart分组列出MiniCPM-V 4.5的OCRBench 89.0，同组另有ChartQA 87.4、TextVQA 82.2、DocVQA 94.7、OmniDocBench (EN) 0.175与OmniDocBench (ZH) 0.253；模型卡称该型号在OCRBench上超过GPT-4o-latest与Gemini 2.5等闭源模型。报告未披露模型revision、提示模板与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2509.18154",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenBMB与ModelBest（模型发布方及技术报告作者）",
+      "externalModelId": "openbmb/MiniCPM-V-4_5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该分数为OCR Bench综合分（0–1000口径），与整页文档解析的编辑距离口径不同；来源未披露模型revision、提示模板与推理配置，原样记录，不与其他OCR记录或流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2509.18154",
+        "notes": "仅引用MiniCPM-V 4.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "openbmb-minicpm-v-45-report-v1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-en-report",
+      "benchmark": "OmniDocBench",
+      "dataset": "OmniDocBench（English，报告未注明基准版本）",
+      "language": "英语",
+      "metric": "Overall Edit Distance（越低越好）",
+      "value": 0.175,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "MiniCPM-V 4.5技术报告（arXiv 2509.18154）Table 1（Document, OCR & Chart分组）",
+      "settings": "技术报告Table 1列出MiniCPM-V 4.5的OmniDocBench (EN) 0.175与(ZH) 0.253，指标为编辑距离（越低越好）；模型卡称该型号在OmniDocBench的PDF文档解析上取得通用MLLM中的领先成绩。报告未注明OmniDocBench版本、模型revision、提示模板与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2509.18154",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenBMB与ModelBest（模型发布方及技术报告作者）",
+      "externalModelId": "openbmb/MiniCPM-V-4_5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "unknown",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页文档解析的编辑距离，来源未注明OmniDocBench版本、模型revision与推理配置，也未说明是否与官方OmniDocBench评测协议完全一致；原样记录，不与其他OCR记录或流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2509.18154",
+        "notes": "仅引用MiniCPM-V 4.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "openbmb-minicpm-v-45-report-v1",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未找到许可明确、评测协议公开且可确认评测者独立的MiniCPM-V 4.5纯文本生成成绩。官方技术报告与模型卡聚焦多模态基准（OpenCompass、OCR、文档解析、视频），未给出MMLU等纯文本基准的该型号数值，因此该用途暂不录入分数。",
+      "strengths": [
+        "官方技术报告说明后训练采用快/慢思考混合强化学习，并对两模式做消融对比（Table 4）。",
+        "模型卡给出MM-IFEval等指令跟随类多模态成绩，可作为生成质量的间接参考。"
+      ],
+      "limitations": [
+        "官方未提供该型号的纯文本知识或写作类基准成绩，无法评估纯文本场景。",
+        "MM-IFEval等指标为多模态指令跟随口径，不能替代文本生成质量评测。",
+        "本站未复现任何生成质量测试。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为高分辨率图像、OCR与文档解析候选：官方技术报告Table 1报告OpenCompass 8项平均77.0分、MMMU 67.7%、OCRBench 89.0分、OmniDocBench (EN)编辑距离0.175，同表另有DocVQA 94.7%、ChartQA 87.4%等分项与视频基准结果。成绩为发布方在同一报告中的自测，且该型号标注为hybrid模式。",
+      "strengths": [
+        "同一张表并列多个对照模型（Qwen2.5-VL、InternVL3、GLM-4.1V、GPT-4o），并标注各对照的模式差异。",
+        "OCR与文档解析给出OCRBench、DocVQA、OmniDocBench中英双栏等多项分项，覆盖不同口径。",
+        "模型卡给出OpenCompass与Video-MME的推理时间与显存对照，可用于效率参考。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "报告未披露评测框架版本、提示模板、模型revision与采样配置，部分结果在模型卡中以图片形式发布。",
+        "该型号标注为hybrid模式，而对照模型分属non-thinking或thinking模式，跨模式数值不直接可比。",
+        "官方未披露逐语种成绩，30多种语言的说法缺乏细分数据支撑。",
+        "本站未在真实图片、PDF或视频上验证识别、版面解析与视频理解效果。"
+      ],
+      "evidenceIds": [
+        "opencompass-avg-report",
+        "mmmu-report",
+        "ocrbench-report",
+        "omnidocbench-en-report"
+      ]
+    }
+  ]
+}

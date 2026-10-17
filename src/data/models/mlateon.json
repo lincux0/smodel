@@ -1,0 +1,337 @@
+{
+  "id": "mlateon",
+  "name": "LightOn mLateOn",
+  "family": "LateOn",
+  "version": "mLateOn",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.307,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡称该型号为307M参数的ColBERT多向量检索模型，骨干为mmBERT-base（模型卡标注307M parameters）；未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/lightonai/mLateOn"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/lightonai/mLateOn"
+  },
+  "languages": [
+    "九种训练语言：英语、法语、德语、意大利语、西班牙语、葡萄牙语、瑞典语、挪威语、阿拉伯语",
+    "官方称可泛化到检索训练未出现的语言与字符集（如西里尔字母、日语），未给出完整语言清单"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/lightonai/mLateOn"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡披露训练数据构成：多语精编预训练数据2.16B文本对加英语665M对（合计2.8B对训练混合物，含220M跨语言对），微调混合物16.3M样本，采用NV-Retriever方法过滤并叠加mxbai-rerank-large-v2交叉编码器蒸馏，逐语言公开数据集链接；未公开可直接复核的完整原始语料。"
+  },
+  "summary": "面向多语言、长文档与代码检索的ColBERT多向量模型，训练九种语言并声称可泛化到未训练语言。",
+  "features": [
+    "307M参数的mmBERT-base骨干，输出128维多向量，按MaxSim相似度打分",
+    "查询与文档最大输入8192 tokens",
+    "官方模型卡Headline Results列出BEIR、MIRACL、MLDR与MTEB Code成绩，并称在BEIR得分高于同表全部对比模型",
+    "提供PyLate与Sentence Transformers两种官方用法，索引可用官方FastPlaid"
+  ],
+  "limitations": [
+    "多向量（ColBERT）表示的索引体积与检索算力通常高于单向量模型，需要MaxSim/PLAID类检索栈支持。",
+    "官方成绩为发布方模型卡自评，且MIRACL与MLDR使用目标语言子集口径；本站未复现。",
+    "训练脚本仓库位于GitHub，模型卡未声明其代码许可，本条目按未核实处理。"
+  ],
+  "officialUrl": "https://huggingface.co/lightonai/mLateOn",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-pylate",
+      "runtime": "PyLate",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/lightonai/mLateOn",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "pylate"
+      ],
+      "steps": [
+        {
+          "title": "安装 PyLate",
+          "description": "按官方模型卡 Usage 章节安装 PyLate 库。",
+          "command": "pip install -U pylate"
+        },
+        {
+          "title": "加载模型并建立检索流程",
+          "description": "按官方示例用 models.ColBERT 加载 lightonai/mLateOn，用 PLAID 建立索引并检索，或直接用 rank.rerank 对已有候选重排；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/lightonai/mLateOn",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn#sentence-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers>=6.0.0"
+      ],
+      "steps": [
+        {
+          "title": "安装支持多向量的 Sentence Transformers",
+          "description": "按官方示例安装带 MultiVectorEncoder 的版本。",
+          "command": "pip install \"sentence-transformers>=6.0.0\""
+        },
+        {
+          "title": "加载并编码",
+          "description": "按官方示例用 MultiVectorEncoder(\"lightonai/mLateOn\") 分别 encode_query 与 encode_document，再用 similarity 计算 MaxSim 分数；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；多向量编码的显存占用随输入长度与批大小增长，不在无来源估算时填写资源数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-ndcg10",
+      "benchmark": "BEIR",
+      "dataset": "BEIR（英语通用域检索；模型卡未列出逐数据集版本）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 57.56,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mLateOn模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡Headline Results表报告mLateOn的BEIR为57.56，同表列出LateOn（57.22）、BGE-M3（48.78）等对照；该表未说明BEIR包含的数据集版本、编码精度与硬件条件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mLateOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与基准子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mLateOn",
+        "notes": "仅引用LightOn官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mlateon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracol-tgt-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL（目标语言子集，仅含与训练目标语言重叠的语言；模型卡标注MIRACL tgt）",
+      "language": "多语言（目标语言子集）",
+      "metric": "nDCG@10",
+      "value": 65.61,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mLateOn模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡Headline Results表报告MIRACL tgt为65.61；表注说明MIRACL tgt与MLDR tgt只包含与训练目标语言重叠的语言，同表全语言MIRACL为67.04。表未披露模型revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mLateOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与语言子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mLateOn",
+        "notes": "仅引用LightOn官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mlateon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mldr-tgt-ndcg10",
+      "benchmark": "MLDR",
+      "dataset": "MLDR（目标语言子集；模型卡标注MLDR tgt）",
+      "language": "多语言（目标语言子集）",
+      "metric": "nDCG@10",
+      "value": 87.69,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mLateOn模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡Headline Results表报告MLDR tgt为87.69；表注说明MLDR tgt只包含与训练目标语言重叠的语言，同表全语言MLDR为77.92。官方称长文档优势来自晚交互的多语泛化与ColBERT对长上下文的适配。表未披露模型revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mLateOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与语言子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mLateOn",
+        "notes": "仅引用LightOn官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mlateon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-code-ndcg10",
+      "benchmark": "MTEB Code",
+      "dataset": "MTEB Code（代码检索）",
+      "language": "代码（官方未列具体语言）",
+      "metric": "nDCG@10",
+      "value": 73.48,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mLateOn模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡称该成绩仅使用微调阶段的代码数据（using only fine-tuning-stage code data）；同表列出 voyage-4-nano（76.43）、Qwen3-Embedding-0.6B（73.75）等对照。表未披露MTEB Code的具体任务子集、revision与运行条件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mLateOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mLateOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与代码基准子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mLateOn",
+        "notes": "仅引用LightOn官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mlateon-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方模型卡报告：BEIR nDCG@10 57.56、MIRACL目标语言子集65.61（全语言67.04）、MLDR目标语言子集87.69（全语言77.92）、MTEB Code 73.48，覆盖英语通用检索、多语检索、长文档与代码检索。全部为发布方自评且未披露运行条件，不能视为独立复测；多向量部署成本也高于单向量模型。",
+      "strengths": [
+        "同一张表并列BEIR、MIRACL、MLDR与MTEB Code，并给出对比模型的参数规模，便于定位成绩口径。",
+        "官方明确标注MIRACL tgt与MLDR tgt为目标语言子集口径，同时列出全语言数值。",
+        "模型卡披露训练数据构成、过滤方法与开源数据集链接。"
+      ],
+      "limitations": [
+        "所有成绩由模型发布方运行；MTEB结果仓库收录有该型号（revision 1a3f1d70）的检索分项文件，但执行者与运行配置未在本批次核实，未导入，不构成独立佐证。",
+        "成绩对应的模型revision、编码精度、硬件与评测运行日期未披露，本站未复现。",
+        "MIRACL tgt/MLDR tgt子集口径与全语言榜位不能混用；只部署部分表示会偏离这些数值。"
+      ],
+      "evidenceIds": [
+        "beir-ndcg10",
+        "miracol-tgt-ndcg10",
+        "mldr-tgt-ndcg10",
+        "mteb-code-ndcg10"
+      ]
+    }
+  ]
+}

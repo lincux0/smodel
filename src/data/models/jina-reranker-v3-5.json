@@ -1,0 +1,304 @@
+{
+  "id": "jina-reranker-v3-5",
+  "name": "Jina Reranker v3.5",
+  "family": "Jina Reranker",
+  "version": "3.5",
+  "variant": "specialized",
+  "tasks": [
+    "reranking"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "score"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡与技术报告摘要口径为 0.6B 参数，基于 Qwen/Qwen3-0.6B（28 层）并附加轻量 MLP 投影器（1024→512→512），文档向量投影到 512 维后按余弦相似度打分；官方未另列更精确的总量口径。",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5"
+  },
+  "languages": [
+    "多语言（模型卡 language 字段标注 multilingual，训练覆盖法律、医疗、金融等多语场景；未列出具体语言数量）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "CC BY-NC 4.0",
+      "url": "https://huggingface.co/jinaai/jina-reranker-v3.5#license"
+    },
+    "code": null,
+    "trainingDisclosure": "技术报告（arXiv:2607.18152）公开混合注意力设计（3L2G）、多领域训练数据构成方向与三阶段自蒸馏流程；未公开可完整复核的训练数据清单。"
+  },
+  "summary": "在 v3 的 listwise 联合编码基础上改用混合注意力与自蒸馏训练的轻量文本重排模型。",
+  "features": [
+    "沿用 last-but-not-late（LBNL）listwise 接口：查询与多篇候选在同一上下文窗口内编码，按余弦相似度出分并整体排序",
+    "混合 3L2G 注意力：每三个滑窗层（窗口 1024）接两个全局层，末端固定为全局层以满足 LBNL 读取；技术报告称可缩短 listwise 推理时延",
+    "三阶段自蒸馏：同尺寸全注意力教师 → 稀疏注意力适配 → 蒸馏到混合注意力学生",
+    "上下文上限按官方“131K tokens”表述记为 131072，与仓库 config 的 max_position_embeddings 一致",
+    "模型卡提供 GGUF 与 MLX 版本，并说明与 v3 共用同一 API 请求结构"
+  ],
+  "limitations": [
+    "权重为 CC BY-NC 4.0 非商业许可，模型卡写明商业用途需联系 Jina AI；个人研究用途之外的使用需先确认许可。",
+    "官方对比表为发布方自运行成绩，未披露评测运行日、模型 revision 与推理配置，本站未复测。",
+    "对比表使用统一 top-100 协议且以 jina-embeddings-v5-text-small 为第一阶段；该结果不能等同于更换第一阶段检索器后的表现，重排也不能提升召回覆盖。",
+    "Struct-IR 采用受控候选池协议（gold docs + hardest distractors），与常规全库检索不可直接比较；RTEB 分数已排除 MIRACL 平均值。"
+  ],
+  "officialUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（另有 GGUF 与 MLX 版本）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 transformers",
+          "description": "模型卡给出的安装命令为 `pip install transformers`，此处照录官方写法。本站未执行该命令。",
+          "command": "pip install transformers"
+        },
+        {
+          "title": "加载模型并重排",
+          "description": "按模型卡示例用 AutoModel.from_pretrained('jinaai/jina-reranker-v3.5', dtype=\"auto\", trust_remote_code=True) 加载并调用 model.rerank(query, documents)（可选 top_n 与 return_embeddings）。若已在使用 v3，官方说明只需把模型名替换为 v3.5，请求结构不变。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；技术报告给出的是 A100 上相对 v3 的时延对比（1.22×–1.56×，FlashAttention-2），本站未复现，也不将其换算为其他设备的资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-ndcg10",
+      "benchmark": "BEIR",
+      "dataset": "BEIR 平均（模型卡统一 top-100 协议）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 63.2,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3.5 模型卡对比表；技术报告 arXiv:2607.18152 摘要同值",
+      "settings": "模型卡对比表口径：统一 top-100 协议，第一阶段为 jina-embeddings-v5-text-small，第一阶段成绩不计入表内比较（First-stage excluded），全部列均为 nDCG@10（%）。模型卡称该成绩匹配 4B 量级模型且参数量约为其 1/7。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision 与推理配置，且成绩依赖指定的第一阶段检索器；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v35-card-unified-top100",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracl-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL 多语检索平均（模型卡统一 top-100 协议）",
+      "language": "多语言",
+      "metric": "nDCG@10",
+      "value": 74.11,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3.5 模型卡对比表",
+      "settings": "模型卡统一 top-100 协议（第一阶段 jina-embeddings-v5-text-small，第一阶段不计入比较），nDCG@10（%）。模型卡称相对 v3 在该项有提升（同表 v3 为 72.20）。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision 与推理配置，且成绩依赖指定的第一阶段检索器；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v35-card-unified-top100",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "rteb-ndcg10",
+      "benchmark": "RTEB",
+      "dataset": "RTEB 领域检索平均（模型卡口径，不含 MIRACL 平均值）",
+      "language": "未提供（模型卡未按语言拆分）",
+      "metric": "nDCG@10",
+      "value": 70.95,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3.5 模型卡对比表",
+      "settings": "模型卡统一 top-100 协议（第一阶段 jina-embeddings-v5-text-small），nDCG@10（%）；模型卡脚注注明 RTEB 分数不含 MIRACL 平均值。技术报告说明该基准用于反映法律、医疗、金融等领域的域外泛化。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露语言构成、评测运行日、模型 revision 与推理配置；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v35-card-unified-top100",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "struct-ir-ndcg10",
+      "benchmark": "Struct-IR",
+      "dataset": "半结构化数据检索（受控候选池协议）",
+      "language": "未提供（模型卡未按语言拆分；论文称基准面向商品目录与知识图谱）",
+      "metric": "nDCG@10",
+      "value": 48.3,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3.5 模型卡对比表（脚注约定）",
+      "settings": "模型卡脚注说明 Struct-IR 使用受控候选池协议（gold docs + hardest distractors），与常规全库检索设置不同；nDCG@10（%）。模型卡称相对 v3（38.7）提升约 9.6 分，为该型号的主要改进方向。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该成绩使用受控候选池协议（含金标文档与最难干扰项），与常规全库检索及其他表内基准的设置不一致；仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3.5",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v35-card-unified-top100",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "official-only",
+      "summary": "发布方在统一 top-100 协议下自报 BEIR 63.20、MIRACL 74.11、RTEB 70.95 与 Struct-IR 48.3（均为 nDCG@10），并以 v3 为直接对照；这些成绩说明该型号在英文、多语与半结构化检索上相对 v3 有提升，但缺少独立复测。",
+      "strengths": [
+        "模型卡在同一张表内并列 v3、v3.5 与大模型对照，并明确第一阶段检索器与协议（First-stage excluded），口径较清楚。",
+        "技术报告公开混合注意力与自蒸馏的训练设计，并给出时延对比的运行条件（A100、FlashAttention-2）。",
+        "与 v3 共用 API 请求结构，便于已有部署直接替换并按同一接口复测。"
+      ],
+      "limitations": [
+        "全部成绩由模型发布方自运行，未找到许可明确且已确认独立性的同型号重排结果。",
+        "成绩依赖指定的第一阶段检索器（jina-embeddings-v5-text-small），更换召回阶段后需重新测量。",
+        "Struct-IR 使用受控候选池协议、RTEB 排除 MIRACL 平均值，两者与其他基准的设置不同，不能直接横向比较。",
+        "非商业许可与 listwise 推理的显存/时延特征都会影响实际可用性，本站未实测资源占用。"
+      ],
+      "evidenceIds": [
+        "beir-ndcg10",
+        "miracl-ndcg10",
+        "rteb-ndcg10",
+        "struct-ir-ndcg10"
+      ]
+    }
+  ]
+}

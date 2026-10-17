@@ -1,0 +1,305 @@
+{
+  "id": "nomic-embed-text-v2-moe",
+  "name": "Nomic Embed Text v2 MoE",
+  "family": "Nomic Embed",
+  "version": "v2 MoE",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.475,
+    "activeB": 0.305,
+    "effectiveB": null,
+    "notes": "官方模型卡与博客披露：总参数475M，训练与推理时激活约305M（8专家、top-2路由）；模型卡对照表Params列的305为激活参数口径。",
+    "sourceUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe"
+  },
+  "languages": [
+    "约100种语言（模型卡概述“Supports ~100 languages”，语言标签列出90余种；架构章节表述为dozens of languages）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe"
+    },
+    "code": null,
+    "trainingDisclosure": "官方声明开源预训练数据、微调数据与训练代码（contrastors仓库），并披露训练语料来自经一致性过滤的mC4与多语言CC News，约16亿文本对，阶段包括弱监督对比预训练与监督微调；数据文件清单未在本轮逐项核实。"
+  },
+  "summary": "采用MoE架构（8专家、top-2路由）的多语言文本嵌入模型，总参数475M、推理激活约305M，支持Matryoshka维度截断。",
+  "features": [
+    "官方称为首个通用MoE文本嵌入模型（first general purpose MoE text embedding model）",
+    "768维向量，可按Matryoshka截断到256维（官方称存储成本降至三分之一）",
+    "最大输入512 tokens",
+    "查询与文档需加search_query:与search_document:前缀",
+    "Apache-2.0权重，官方开源训练代码与数据"
+  ],
+  "limitations": [
+    "自定义MoE实现需要trust_remote_code=True加载。",
+    "模型卡Limitations提示：不同语言表现不一致，MoE架构的资源需求可能高于传统稠密模型。",
+    "512 tokens输入上限短于长文档场景；前缀缺失或任务指令错误会降低效果。",
+    "官方成绩为发布方自评；MTEB结果仓库另有提交者身份未核实的记录，不能视为独立复测。"
+  ],
+  "officialUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+      "sourceUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe#sentencetransformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "torch",
+        "einops",
+        "megablocks（官方GPU最佳实践）"
+      ],
+      "steps": [
+        {
+          "title": "安装依赖",
+          "description": "官方Usage给出的GPU最佳实践安装命令（含megablocks自定义内核）；CPU或简化场景可只装sentence-transformers。",
+          "command": "pip install torch transformers einops git+https://github.com/nomic-ai/megablocks.git"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按官方示例以trust_remote_code=True加载nomic-ai/nomic-embed-text-v2-moe，并用prompt_name=\"query\"/\"passage\"（或手动加search_query:/search_document:前缀）编码；需要截断维度时按示例在归一化前取前256维；本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；MoE实现的显存与速度取决于运行时、megablocks支持、精度与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-official",
+      "benchmark": "BEIR",
+      "dataset": "BEIR（英语通用域检索；模型卡未列出逐数据集版本）",
+      "language": "英语",
+      "metric": "BEIR总分（模型卡对照表口径）",
+      "value": 52.86,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "模型卡 Model 对照表（BEIR列，Nomic Embed v2行）",
+      "settings": "模型卡对照表列出Nomic Embed v2（Params列305M为激活口径）BEIR为52.86、MIRACL为65.80；该表未说明BEIR包含的数据集版本、编码维度与配置，评测运行日期与硬件未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Nomic AI（模型发布方）",
+      "externalModelId": "nomic-ai/nomic-embed-text-v2-moe",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与基准子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+        "notes": "仅引用Nomic官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，BEIR等基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "nomic-ai",
+        "runId": "nomic-embed-v2-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracol-official",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL（多语言检索；模型卡未列出语言子集）",
+      "language": "多语言",
+      "metric": "MIRACL总分（模型卡对照表口径）",
+      "value": 65.8,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "模型卡 Model 对照表（MIRACL列，Nomic Embed v2行）",
+      "settings": "模型卡对照表列出Nomic Embed v2的MIRACL为65.80，同表mE5 Large为66.50、BGE-M3为69.20、mGTE Base为63.40；该表未说明MIRACL使用的语言子集、数据集版本与编码配置，评测运行日期与硬件未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Nomic AI（模型发布方）",
+      "externalModelId": "nomic-ai/nomic-embed-text-v2-moe",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与语言子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe",
+        "notes": "仅引用Nomic官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，MIRACL等基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "nomic-ai",
+        "runId": "nomic-embed-v2-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "rteb-ailacasedocs-ndcg10",
+      "benchmark": "RTEB / MTEB",
+      "dataset": "AILACasedocs（法律案例检索，test拆分；dataset revision 4106e6bcc72e0698d714ea8b101355e3e238431a）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.28781,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.18.12（结果仓库 PR #663，提交记录2026-08-06）",
+      "settings": "结果文件AILACasedocs.json记录main_score=ndcg_at_10=0.28781，test拆分、hf_subset=default；文件内时间戳2026-08-04（UTC）记为评测运行日。PR说明为补充nomic moe的RTEB、MMTEB与英语MTEB结果，未附run_settings，完整提示与推理配置未披露，且不能据提交者身份确认其与模型发布方的关系；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/nomic-ai__nomic-embed-text-v2-moe/1066b6599d099fbb93dfcb64f9c37a7c9e503e85/AILACasedocs.json",
+      "date": "2026-08-04",
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "KennethEnevoldsen（MTEB结果仓库提交者；与模型发布方关系未核实）",
+      "externalModelId": "nomic-ai/nomic-embed-text-v2-moe",
+      "modelConfig": {
+        "revision": "1066b6599d099fbb93dfcb64f9c37a7c9e503e85",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者身份与完整推理配置未披露；独立性未确认，不与官方模型卡汇总或其他模型的分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；RTEB任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "kenneth-enevoldsen",
+        "runId": "kenneth-enevoldsen-mteb-pr-663",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "appsretrieval-ndcg10",
+      "benchmark": "MTEB (Code)",
+      "dataset": "AppsRetrieval（应用代码检索，test拆分；dataset revision f22508f96b7a36c2415181ed8bb76f76e04ae2d5）",
+      "language": "英语、Python代码",
+      "metric": "nDCG@10",
+      "value": 0.04778,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.18.12（结果仓库 PR #663，提交记录2026-08-06）",
+      "settings": "结果文件AppsRetrieval.json记录main_score=ndcg_at_10=0.04778，test拆分、hf_subset=default；文件内时间戳2026-08-04（UTC）记为评测运行日。PR说明为补充nomic moe的RTEB、MMTEB与英语MTEB结果，未附run_settings，完整提示与推理配置未披露，且不能据提交者身份确认其与模型发布方的关系；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/nomic-ai__nomic-embed-text-v2-moe/1066b6599d099fbb93dfcb64f9c37a7c9e503e85/AppsRetrieval.json",
+      "date": "2026-08-04",
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "KennethEnevoldsen（MTEB结果仓库提交者；与模型发布方关系未核实）",
+      "externalModelId": "nomic-ai/nomic-embed-text-v2-moe",
+      "modelConfig": {
+        "revision": "1066b6599d099fbb93dfcb64f9c37a7c9e503e85",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者身份与完整推理配置未披露；独立性未确认，不与官方模型卡汇总或其他模型的分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；MTEB Code任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "kenneth-enevoldsen",
+        "runId": "kenneth-enevoldsen-mteb-pr-663",
+        "independence": "unknown"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "independence-unverified",
+      "summary": "官方模型卡报告BEIR 52.86、MIRACL 65.80（均为发布方自评，Params列305M为激活口径）；MTEB结果仓库另有2026-08-04提交的AILACasedocs nDCG@10 0.28781与AppsRetrieval nDCG@10 0.04778两条记录，提交者与发布方关系未核实。整体显示可用公开成绩，但独立性和运行配置均未确认。",
+      "strengths": [
+        "官方披露总参数475M/激活305M与8专家top-2架构，对照表给出同参数级模型成绩。",
+        "MTEB结果仓库记录了同一模型revision（1066b6599）下的RTEB与代码检索分项，批次与拆分可追溯。",
+        "训练代码与数据按官方声明开源（contrastive预训练与监督微调），便于复核训练流程。"
+      ],
+      "limitations": [
+        "官方两项成绩未披露评测运行日期、模型revision与编码配置；MTEB仓库两条记录由KennethEnevoldsen提交、未附run_settings，独立性未确认，不构成独立交叉佐证。",
+        "两张来源的指标口径不同（官方为汇总分，仓库为单任务nDCG@10），不能直接横向排名。",
+        "512 tokens截断、前缀使用与trust_remote_code加载方式会影响实际效果，本站未复现。"
+      ],
+      "evidenceIds": [
+        "beir-official",
+        "miracol-official",
+        "rteb-ailacasedocs-ndcg10",
+        "appsretrieval-ndcg10"
+      ]
+    }
+  ]
+}

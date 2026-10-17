@@ -49,6 +49,11 @@
 | LFM2.5-2.6B | 评测表已登记 AIME25 51.87、IFBench 59.17 | 本站未收录此用途 | 不适用 | 仅官方；卡内 AA-Omni 行未导入 |
 | Qwen3-4B-Instruct-2507 | 模型卡已登记 MMLU-Pro 69.6、GPQA 62.0 | LiveCodeBench v6 35.1、MultiPL-E 76.8 已登记 | 不适用 | 仅官方；独立于已上线 Qwen3-4B，未合并旧版成绩 |
 | NVIDIA Nemotron Nano 9B v2 | 模型卡已登记 AIME25 72.1、GPQA 64.0、RULER 128K 78.9 | LiveCodeBench 71.1 已登记 | 不适用 | 仅官方（NeMo-Skills）；AIME/GPQA/LCB 为 Reasoning-On、RULER 为 Reasoning-Off |
+| InternVL3.5-4B | 论文 Table 14 已登记 MMLU 73.8；Epoch 待查 | 本站未收录此用途 | MMMU 66.6、MathVista 77.1（Table 2/3）、OCRBench 822（Table 4）已登记 | 仅官方（发布版；OCR 对比值来源脚注已注明） |
+| InternVL3.5-8B | 论文 Table 14 已登记 MMLU 78.2 | 本站未收录此用途 | MMMU 73.4、MathVista 78.4、OCRBench 840 已登记 | 仅官方 |
+| MiniCPM-V 4.5 | 官方未发布纯文本基准 | 本站未收录此用途 | OpenCompass 77.0、MMMU 67.7、OCRBench 89.0、OmniDocBench(EN) 0.175 已登记 | 视觉仅官方；文本用途证据不足 |
+| DeepSeek-R1-Distill-Qwen-1.5B | 模型卡已登记 AIME 28.9、MATH-500 83.9、GPQA 33.8 | LiveCodeBench 16.9 已登记 | 不适用 | 仅官方；上下文未披露（not-provided）；采样协议已注明 |
+| DeepSeek-R1-Distill-Qwen-7B | 模型卡已登记 AIME 55.5、MATH-500 92.8、GPQA 49.1 | LiveCodeBench 37.6 已登记 | 不适用 | 仅官方；同上 |
 
 ### Arena 快照核验范围
 

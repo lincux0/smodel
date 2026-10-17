@@ -1,0 +1,318 @@
+{
+  "id": "deepseek-r1-distill-qwen-7b",
+  "name": "DeepSeek-R1-Distill-Qwen-7B",
+  "family": "DeepSeek-R1",
+  "version": "R1-Distill",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 7,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡下载表将该型号列为7B蒸馏版本，基座为Qwen2.5-Math-7B；模型卡未另列精确参数或激活参数口径，本记录按官方型号档位填写。",
+    "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE"
+    },
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "模型卡披露：该型号以DeepSeek-R1生成的推理数据蒸馏微调，使用80万条经DeepSeek-R1筛选的样本（基座Qwen2.5-Math-7B）；未公开完整数据清单与训练细节。"
+  },
+  "summary": "基于Qwen2.5-Math-7B、用DeepSeek-R1推理数据蒸馏的推理模型，适合数学与竞赛式代码生成。",
+  "features": [
+    "由DeepSeek-R1生成并筛选的80万条样本蒸馏微调（官方披露）",
+    "官方建议解码配置：temperature 0.5–0.7（推荐0.6）、避免system prompt",
+    "官方评测在AIME 2024 pass@1为55.5、MATH-500 pass@1为92.8（发布方数据）",
+    "权重与代码均为MIT许可"
+  ],
+  "limitations": [
+    "模型卡未披露上下文长度与支持语言，本条目按未提供处理。",
+    "官方观察到模型可能跳过思考过程（直接输出空think标签），建议强制以“<think>\\n”开头以保证推理质量。",
+    "评测数值为发布方自测且未披露运行配置；AIME等竞赛基准样本量小，官方也建议多次测试取平均。",
+    "本站未复现评测或设备运行表现。"
+  ],
+  "officialUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B#how-to-run-locally",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vLLM"
+      ],
+      "steps": [
+        {
+          "title": "按官方说明部署",
+          "description": "模型卡说明蒸馏模型可按Qwen或Llama模型同样方式使用，并分别给出vLLM与SGLang启动示例；官方示例命令以32B型号给出，需替换为本型号并调整并行与长度参数，本条目不转抄该命令。",
+          "command": null
+        },
+        {
+          "title": "按官方使用建议配置解码",
+          "description": "temperature设为0.5–0.7（推荐0.6），避免system prompt（指令写在用户消息中），必要时强制模型以“<think>\\n”开头以进入推理；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入与生成长度及硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "aime-2024-pass1",
+      "benchmark": "AIME 2024",
+      "dataset": "AIME 2024（竞赛数学）",
+      "language": "en",
+      "metric": "pass@1",
+      "value": 55.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "DeepSeek-R1模型卡 Distilled Model Evaluation 表",
+      "settings": "模型卡Distilled Model Evaluation表取DeepSeek-R1-Distill-Qwen-7B行，同表列出GPT-4o、Claude-3.5-Sonnet、o1-mini、QwQ-32B-Preview等对照；同型号AIME 2024 cons@64为83.3。模型卡说明所有模型最大生成长度32768 tokens，需要采样的基准使用temperature 0.6、top-p 0.95并每问生成64个回答估计pass@1；未披露模型revision、硬件与提示模板；本站未复现。",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "DeepSeek-AI（模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": 32768
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行环境；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "notes": "仅引用DeepSeek官方模型卡中的少量评测事实并标注来源；不复制整表或基准题目，模型卡内评测数据的再分发许可未单独声明。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ai-r1-distill-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math-500-pass1",
+      "benchmark": "MATH-500",
+      "dataset": "MATH-500（竞赛数学）",
+      "language": "en",
+      "metric": "pass@1",
+      "value": 92.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "DeepSeek-R1模型卡 Distilled Model Evaluation 表",
+      "settings": "模型卡Distilled Model Evaluation表取DeepSeek-R1-Distill-Qwen-7B行，同表列出GPT-4o、Claude-3.5-Sonnet、o1-mini、QwQ-32B-Preview等对照。模型卡说明所有模型最大生成长度32768 tokens，需要采样的基准使用temperature 0.6、top-p 0.95并每问生成64个回答估计pass@1；未披露模型revision、硬件与提示模板；本站未复现。",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "DeepSeek-AI（模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": 32768
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行环境；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "notes": "仅引用DeepSeek官方模型卡中的少量评测事实并标注来源；不复制整表或基准题目，模型卡内评测数据的再分发许可未单独声明。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ai-r1-distill-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gpqa-diamond-pass1",
+      "benchmark": "GPQA Diamond",
+      "dataset": "GPQA Diamond（研究生级知识问答）",
+      "language": "en",
+      "metric": "pass@1",
+      "value": 49.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "DeepSeek-R1模型卡 Distilled Model Evaluation 表",
+      "settings": "模型卡Distilled Model Evaluation表取DeepSeek-R1-Distill-Qwen-7B行，同表列出GPT-4o、Claude-3.5-Sonnet、o1-mini、QwQ-32B-Preview等对照。模型卡说明所有模型最大生成长度32768 tokens，需要采样的基准使用temperature 0.6、top-p 0.95并每问生成64个回答估计pass@1；未披露模型revision、硬件与提示模板；本站未复现。",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "DeepSeek-AI（模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": 32768
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、提示模板与运行环境；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "notes": "仅引用DeepSeek官方模型卡中的少量评测事实并标注来源；不复制整表或基准题目，模型卡内评测数据的再分发许可未单独声明。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ai-r1-distill-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench-pass1",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench（竞赛编程题）",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 37.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "DeepSeek-R1模型卡 Distilled Model Evaluation 表",
+      "settings": "模型卡Distilled Model Evaluation表取DeepSeek-R1-Distill-Qwen-7B行，同表另列CodeForces rating 1189（未逐项导入），并列出GPT-4o、Claude-3.5-Sonnet、o1-mini、QwQ-32B-Preview等对照。模型卡说明所有模型最大生成长度32768 tokens，需要采样的基准使用temperature 0.6、top-p 0.95并每问生成64个回答估计pass@1；未披露题目时间窗口、模型revision与硬件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "DeepSeek-AI（模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": 32768
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、题目版本与运行环境；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "notes": "仅引用DeepSeek官方模型卡中的少量评测事实并标注来源；不复制整表或基准题目，模型卡内评测数据的再分发许可未单独声明。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ai-r1-distill-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "发布方模型卡报告AIME 2024 pass@1 55.5（cons@64为83.3）、MATH-500 pass@1 92.8、GPQA Diamond pass@1 49.1，数学与研究生级问答成绩在同表对比中处于7B档位较高水平。这些是DeepSeek官方自测数据，未见独立复测，也不能代表中文写作或开放域对话能力。",
+      "strengths": [
+        "同一张表列出多个厂商模型对照，Metric与列名明确（pass@1、cons@64）。",
+        "模型卡披露采样协议（temperature 0.6、top-p 0.95、64次回答估计pass@1）与最大生成长度。",
+        "权重与代码均为MIT许可，蒸馏用于下游训练被官方明确允许。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号复测。",
+        "模型卡未披露模型revision、提示模板与硬件条件；本站未复现。",
+        "竞赛数学基准样本量小、方差大（官方建议多次测试取平均）；pass@1依赖64次采样估计，不能外推到日常文本生成质量。"
+      ],
+      "evidenceIds": [
+        "aime-2024-pass1",
+        "math-500-pass1",
+        "gpqa-diamond-pass1"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "发布方模型卡报告LiveCodeBench pass@1为37.6%，同表CodeForces rating为1189（本条目未逐项导入）。显示该7B蒸馏型号的竞赛式代码生成能力明显高于同系列1.5B，但仍不等价于仓库级工程任务。",
+      "strengths": [
+        "官方模型卡提供该精确型号的竞赛式代码生成成绩。",
+        "同表对照模型齐全，且与1.5B/14B/32B同批数据便于横向定位。"
+      ],
+      "limitations": [
+        "LiveCodeBench仅覆盖竞赛题，不等价于真实仓库级修改或测试。",
+        "成绩由发布方自测，题目时间窗口与完整配置未披露；本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "livecodebench-pass1"
+      ]
+    }
+  ]
+}

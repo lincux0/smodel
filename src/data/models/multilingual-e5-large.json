@@ -1,0 +1,254 @@
+{
+  "id": "multilingual-e5-large",
+  "name": "Multilingual-E5-Large",
+  "family": "E5",
+  "version": "Large",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.56,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注该型号24层、向量维度1024，由xlm-roberta-large初始化；模型卡与技术报告均未单列参数量，本记录沿用约560M的公开部署口径（与xlm-roberta-large同量级），未从权重文件大小反推。",
+    "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-large"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-large"
+  },
+  "languages": [
+    "多语言（官方声明支持xlm-roberta的100种语言；低资源语言可能出现性能下降）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-large"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡披露两阶段训练：弱监督对比预训练（Filtered mC4约1B对、CC News 400M、NLLB翻译对2.4B、Wikipedia 150M、Filtered Reddit 800M、S2ORC 100M、Stackexchange 50M、xP3 80M等）与监督微调（MS MARCO、NQ、Trivia QA、ELI5、DuReader、KILT、MIRACL 16语言、Mr. TyDi 11语言等，且只用各数据集的训练集）；未公开可直接复核的完整原始语料。"
+  },
+  "summary": "基于xlm-roberta-large的多语言通用文本嵌入模型，检索场景需使用query:与passage:前缀，输入超过512 tokens会被截断。",
+  "features": [
+    "1024维向量、24层编码器",
+    "官方声明支持xlm-roberta的100种语言",
+    "检索任务使用query:与passage:前缀（模型卡FAQ明确要求）",
+    "最大输入512 tokens"
+  ],
+  "limitations": [
+    "输入超过512 tokens会被截断，长文档检索需要自行切分。",
+    "前缀与训练方式不一致会带来检索性能下降；对称相似度任务官方建议也使用query:前缀。",
+    "官方成绩由发布方运行且未披露评测运行日期，本站未复现。"
+  ],
+  "officialUrl": "https://huggingface.co/intfloat/multilingual-e5-large",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors / PyTorch（官方仓库同时提供ONNX等导出格式）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/intfloat/multilingual-e5-large",
+      "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-large#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers"
+      ],
+      "steps": [
+        {
+          "title": "安装依赖",
+          "description": "模型卡Package requirements给出的安装命令（示例带旧版版本约束，实际版本需与目标环境匹配）。",
+          "command": "pip install sentence_transformers~=2.2.2"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡示例用SentenceTransformer加载intfloat/multilingual-e5-large；每条文本需按训练口径加query:或passage:前缀；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mr-tydi-mrr10",
+      "benchmark": "Mr. TyDi",
+      "dataset": "Mr. TyDi（11种语言的检索数据集）",
+      "language": "多语言（11种语言）",
+      "metric": "Avg MRR@10",
+      "value": 70.5,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "模型卡 Benchmark Results on Mr. TyDi 表",
+      "settings": "模型卡Mr. TyDi表列出multilingual-e5-large平均MRR@10为70.5，并给出逐语言结果（如ar 77.5、bn 73.2、ja 62.5、sw 72.7）；该表未标注模型revision、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-large",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "intfloat（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-large",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/intfloat/multilingual-e5-large",
+        "notes": "仅引用官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，Mr. TyDi等基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "intfloat",
+        "runId": "intfloat-multilingual-e5-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracol-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL dev set（16种语言的检索子集）",
+      "language": "多语言（16种语言）",
+      "metric": "nDCG@10",
+      "value": 66.5,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Multilingual E5技术报告 Table 6（arXiv v1）",
+      "settings": "技术报告Table 6报告mE5-large在MIRACL dev集上平均nDCG@10为66.5（同表R@100为94.3，Table 4为多模型对照）；报告未披露模型revision、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.05672v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Microsoft E5团队（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-large",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "dev",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型revision、编码配置与运行条件；该结果仅记录原技术报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2402.05672v1",
+        "notes": "仅引用技术报告中的少量评测事实并保留作者与来源链接；不复制报告表格或基准数据，MIRACL等基准继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft-e5-team",
+        "runId": "microsoft-e5-multilingual-report-2024",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-english-average",
+      "benchmark": "MTEB",
+      "dataset": "MTEB（英文部分任务集）",
+      "language": "英语",
+      "metric": "任务集平均分",
+      "value": 61.5,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Multilingual E5技术报告 Table 3（arXiv v1）",
+      "settings": "技术报告Table 3报告mE5-large在MTEB英文部分的平均分为61.5（同表LaBSE 45.2、BGE large-en-v1.5 64.2等）；报告说明该分数是所列任务集的平均，未披露使用的MTEB版本、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.05672v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Microsoft E5团队（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-large",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "任务集平均分口径且来源未披露完整模型revision、MTEB版本与运行条件；该结果仅记录原技术报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2402.05672v1",
+        "notes": "仅引用技术报告中的少量评测事实并保留作者与来源链接；不复制报告表格或基准数据，MTEB等基准继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft-e5-team",
+        "runId": "microsoft-e5-multilingual-report-2024",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方公开成绩：模型卡报告Mr. TyDi平均MRR@10为70.5；多语E5技术报告报告MIRACL dev集平均nDCG@10为66.5、MTEB英文部分平均分61.5。三项均为发布方运行；MTEB结果仓库存在该型号的结果目录（本批次未逐项导入）；512 tokens截断是部署时的主要限制。",
+      "strengths": [
+        "模型卡与同名技术报告分别给出检索（Mr. TyDi、MIRACL）与通用任务集（MTEB英文）成绩。",
+        "模型卡披露弱监督预训练与监督微调的数据集构成及规模。",
+        "官方FAQ明确说明query:/passage:前缀的使用规则。"
+      ],
+      "limitations": [
+        "所有数值由模型发布方运行，未找到许可明确且确认为独立方的同型号结果；MTEB结果仓库虽有该型号记录，但执行者与运行配置未在本批次核实。",
+        "来源未披露评测运行日期、模型revision与硬件条件，本站未复现。",
+        "512 tokens输入上限限制长文档与长查询场景；报告数值不覆盖中文等单语细分。"
+      ],
+      "evidenceIds": [
+        "mr-tydi-mrr10",
+        "miracol-ndcg10",
+        "mteb-english-average"
+      ]
+    }
+  ]
+}

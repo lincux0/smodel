@@ -1,0 +1,213 @@
+{
+  "id": "jina-embeddings-v3",
+  "name": "Jina Embeddings v3",
+  "family": "Jina Embeddings",
+  "version": "3",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.57,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方论文摘要与发布公告口径为 570M 参数；模型卡说明其含 5 个任务 LoRA 适配器，但未逐项拆分主体与适配器参数量。本记录按论文口径填写，不从权重文件大小反推。",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v3"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v3"
+  },
+  "languages": [
+    "多语言（发布方称支持 89 种语言，其中 30 种为调优重点；模型卡称基础模型本身支持 100 种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "CC BY-NC 4.0",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v3#license"
+    },
+    "code": null,
+    "trainingDisclosure": "论文公开基于 Jina-XLM-RoBERTa 的架构、RoPE 长上下文的处理方式与任务 LoRA 适配器的训练设计，并说明各适配器对应的任务；本站核对的公开材料中未见可完整复核的训练数据清单。"
+  },
+  "summary": "用同一主体权重加五个任务 LoRA 适配器覆盖检索、聚类、分类与文本匹配的多语嵌入模型。",
+  "features": [
+    "默认 1024 维向量，Matryoshka 可截断至 32/64/128/256/512/768 维",
+    "5 个任务适配器：retrieval.query、retrieval.passage、separation、classification、text-matching；不传 task 时不使用专用适配器",
+    "RoPE 支持最长 8192 tokens 输入，模型卡示例用 max_length=2048 演示截断",
+    "官方要求均值池化（mean pooling）并对向量做 L2 归一化",
+    "同时提供 Transformers、Sentence Transformers 与 ONNX 推理路径"
+  ],
+  "limitations": [
+    "权重为 CC BY-NC 4.0 非商业许可，模型卡写明超出 AWS/Azure 平台或在公司内部就地部署的商业用途需另行联系 Jina AI。",
+    "官方 MTEB 成绩为发布方自报的平均分，论文未披露评测运行日，模型卡也未提供任务级推理配置，本站未复测。",
+    "检索时必须按查询/文档选择 retrieval.query 与 retrieval.passage，切换任务需重新编码；Matryoshka 截断维度必须与索引一致。",
+    "模型卡提示早期代码的 Matryoshka 截断发生在归一化之后，导致截断向量未归一化；沿用旧向量时需按官方给出的 code_revision 加载以保持一致性。"
+  ],
+  "officialUrl": "https://huggingface.co/jinaai/jina-embeddings-v3",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（仓库同时提供 ONNX）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/jinaai/jina-embeddings-v3",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v3#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "einops"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "模型卡给出 Notebook 写法的安装行 `!pip install transformers torch einops`；此处按终端写法记录为 python -m pip install transformers torch einops（由官方 Notebook 写法转换，未增删包名）。官方同时提示在 CUDA 环境下可另行安装 flash-attn，并另有一行 numpy 版本约束的安装示例需按环境决定。本站未执行这些命令。",
+          "command": "python -m pip install transformers torch einops"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡示例用 AutoModel.from_pretrained(..., trust_remote_code=True) 加载，encode 时按用途传入 task（如 retrieval.query、retrieval.passage、text-matching），需要时用 max_length 控制输入长度、用 truncate_dim 控制截断维度。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mteb-english-average",
+      "benchmark": "MTEB (English)",
+      "dataset": "MTEB 英语任务平均分（论文 Table 4 口径）",
+      "language": "英语",
+      "metric": "任务平均分（Average，含 CF/CL/PC/RR/RT/STS/SM 分项）",
+      "value": 65.52,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v3 论文 Table 4（arXiv:2409.10173v3）",
+      "settings": "论文 Table 4 的英语行数值：Classification 82.58、Clustering 45.27、Pair Classification 84.01、Reranking 58.13、Retrieval 53.87、STS 85.80、Summarization 29.71，任务平均 65.52（表中为百分数）。评测使用任务 LoRA 适配器，论文未披露评测运行日与完整推理配置；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2409.10173v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（论文作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型 revision、评测运行日与任务级推理配置，且为发布方汇总口径；该平均分不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.10173v3",
+        "notes": "仅记录论文中的少量汇总成绩并保留作者与来源链接；不复制论文表格与底层基准数据，引用不更改论文及基准数据集的许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v3-paper-table4",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-multilingual-average",
+      "benchmark": "MTEB (Multilingual)",
+      "dataset": "MTEB 多语与跨语任务平均分（论文 Table 4 口径）",
+      "language": "多语言",
+      "metric": "任务平均分（Average，含 CF/CL/PC/RR/RT/STS 分项）",
+      "value": 64.44,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v3 论文 Table 4（arXiv:2409.10173v3）",
+      "settings": "论文 Table 4 多语行数值：Classification 71.46、Clustering 46.71、Pair Classification 76.91、Reranking 63.98、Retrieval 57.98、STS 69.83，任务平均 64.44（表中为百分数）。论文说明该部分为多语与跨语任务的加权平均，并列出各任务所用适配器；未披露评测运行日与完整推理配置；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2409.10173v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（论文作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型 revision、评测运行日与任务级推理配置，且为发布方汇总口径；该平均分不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2409.10173v3",
+        "notes": "仅记录论文中的少量汇总成绩并保留作者与来源链接；不复制论文表格与底层基准数据，引用不更改论文及基准数据集的许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v3-paper-table4",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方论文报告 MTEB 英语任务平均 65.52、多语任务平均 64.44，属于同一评测批次的两组汇总；模型以 89 种语言、8192 tokens 输入与任务适配器为主要卖点，但成绩缺少独立复测与运行配置细节。",
+      "strengths": [
+        "论文在同一表内并列英语与多语汇总及分项（分类、聚类、配对分类、重排、检索、STS、摘要），便于查看任务间的强弱分布。",
+        "模型卡说明了五个任务适配器的用途与编码方式，并给出 Transformers、Sentence Transformers 与 ONNX 三种可复现路径。",
+        "论文公开参与对比的模型与相对结论（如与同规模及更大参数模型对比），汇总值可回溯到论文表格。"
+      ],
+      "limitations": [
+        "两组汇总分均由模型发布方运行并报告，未找到许可明确且已确认独立性的同型号评测结果。",
+        "论文未披露评测运行日、模型 revision 与任务级推理配置，汇总分不参与跨型号直接排序。",
+        "多语成绩为跨语种任务的加权平均，与单一语料上的检索效果没有直接对应关系；本站未在自有语料验证。",
+        "发布方公告称 Matryoshka 截断到更低维度不显著影响效果，但截断维度、适配器与池化方式必须与索引一致，实际取舍需自行验证。"
+      ],
+      "evidenceIds": [
+        "mteb-english-average",
+        "mteb-multilingual-average"
+      ]
+    }
+  ]
+}

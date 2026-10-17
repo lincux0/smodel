@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核与批次1–2扩充于2026-10-17执行（见文末章节）。目录共51个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核与批次1–4扩充于2026-10-17执行（见文末章节）。目录共72个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -174,3 +174,43 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 | NVIDIA Nemotron Nano 9B v2 | [模型卡](https://huggingface.co/nvidia/NVIDIA-Nemotron-Nano-9B-v2) | Mamba2/Transformer 混合架构（仅 4 层注意力）；NVIDIA Open Model License。成绩：AIME25 72.1、GPQA 64.0、LiveCodeBench 71.1（Reasoning-On）、RULER 128K 78.9（Reasoning-Off，卡注明确）；NeMo-Skills 评测；vLLM 需 Mamba cache 参数。 |
 
 本轮新增记录全部不可比，未建立比较组，未导入AA数据；非商业与自定义许可（LFM、NVIDIA、Gemma 条款）在各条目许可字段标明名称与条款链接。批次完成情况与后续批次安排见[计划型号分阶段上线方案](LAUNCH_PLAN.md)。
+
+## 2026-10-17 批次3-4上线
+
+按[计划型号分阶段上线方案](LAUNCH_PLAN.md)第 3–4 批上线 21 个型号：检索与重排（Jina Embeddings v5 Text Small / v3 / v4、Jina Reranker v3 / v3.5、LightOn mLateOn、Multilingual-E5-Large、EmbeddingGemma、Snowflake Arctic Embed L/M v2.0、Qwen3-Reranker-4B、Nomic Embed Text v2 MoE、BGE-Large-ZH-v1.5）、视觉理解（InternVL3.5-4B/8B、MiniCPM-V 4.5）、语音识别（SenseVoiceSmall、GLM-ASR-Nano-2512）、文字识别（DeepSeek-OCR 2）与推理蒸馏模型（DeepSeek-R1-Distill-Qwen-1.5B/7B）。目录增至 72 型号、112 用途摘要、286 条成绩（251 官方、35 第三方）。
+
+字段均取自发布方模型卡、许可文件、技术报告与官方仓库；新增 78 条成绩（73 官方、5 第三方）全部标注不可比，未导入 AA 数据。台账"日期待核实"与本轮许可核实结论：
+
+- MiniCPM-V 4.5：权重发布 2025-08-26（官方 changelog）。
+- DeepSeek-OCR 2：权重 2026-01-27 首次随仓库提交上传（HF 提交历史，未采用仓库创建日）；论文 2026-01-28。
+- GLM-ASR-Nano-2512：权重上传 2025-12-09（HF 提交历史）。
+- BGE-Large-ZH-v1.5：2023-09-12（官方模型卡 News）。
+- Nomic Embed Text v2 MoE：权重首次提交 2025-02-07（HF 文件提交历史；官方博客页面已失效）。
+- Jina Embeddings v4 许可：模型卡声明此前 CC BY-NC 4.0 系发布错误，正确许可为 [Qwen Research License](https://huggingface.co/jinaai/jina-embeddings-v4/blob/main/LICENSE)（衍生自 Qwen2.5-VL-3B 的约束）；台账与页面均已按核实结果记录。
+- SenseVoiceSmall：[FunASR Model Open Source License v1.1](https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE)（官方在仓库 issue 中澄清 Section 3 为免责声明、非禁止商用；商用需注明出处与模型名）；代码 MIT 与权重许可分开记录。
+- GLM-ASR-Nano-2512：权重 MIT（HF 卡）、代码 Apache-2.0（GitHub），两者分别记录。
+
+主要口径：
+
+| 型号 | 官方出处与已录口径 |
+| --- | --- |
+| Jina Embeddings v5 Text Small | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v5-text-small) | 677M、119+ 语言、32K、1024 维（支持 Matryoshka）；MTEB English v2 71.7、MMTEB 67.7（卡自报）。CC BY-NC 4.0 非商业许可，商用需另行授权；HF 张量和口径差异已在 notes 说明。 |
+| Jina Embeddings v3 | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v3) · [论文](https://arxiv.org/html/2409.10173v3) | 官方 570M（台账原 0.572B 未获官方支持，按 570M 记录）、8192 tokens、100 语基础/30 语调优；MTEB 英语 65.52、多语 64.44（论文 Table 4）。CC BY-NC 4.0。 |
+| Jina Embeddings v4 | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v4) | 3.8B、32K、文本+图像输入、单向量与多向量；MMTEB 检索 66.49、MTEB(eng,v2) 55.97、ViDoRe 84.11（nDCG@5）、自建 JVDR 73.98。Qwen Research License（见上）。 |
+| Jina Reranker v3 | [模型卡](https://huggingface.co/jinaai/jina-reranker-v3) · [论文](https://arxiv.org/html/2509.25085v4) | 0.6B（基于 Qwen3-0.6B）、listwise、最多 64 候选、131K 上下文；BEIR 61.94（论文 61.85 的差异已注明）、MIRACL 66.83、CoIR 70.64、MKQA 67.92（top-100 协议）。CC BY-NC 4.0。 |
+| Jina Reranker v3.5 | [模型卡](https://huggingface.co/jinaai/jina-reranker-v3.5) | 0.6B、混合 3L2G 注意力、131K；BEIR 63.20、MIRACL 74.11、RTEB 70.95、Struct-IR 48.3（受控池协议）。CC BY-NC 4.0。 |
+| LightOn mLateOn | [模型卡](https://huggingface.co/lightonai/mLateOn) | 307M（基于 mmBERT-base）、8192、九语 late-interaction；BEIR 57.56、MIRACL 目标语言子集 65.61、MLDR 目标语言子集 87.69、MTEB Code 73.48。Apache-2.0；多向量存储成本另计。 |
+| Multilingual-E5-Large | [模型卡](https://huggingface.co/intfloat/multilingual-e5-large) · [论文](https://arxiv.org/html/2402.05672v1) | 约 560M、1024 维、512 截断、100 语、query/passage 前缀范式；Mr. TyDi 70.5、MIRACL dev 66.5（R@100 94.3）、MTEB 英文 61.5。MIT。 |
+| EmbeddingGemma | [模型卡](https://huggingface.co/google/embeddinggemma-300m) · [论文](https://arxiv.org/html/2509.20354v1) | 308M（论文）/300M（卡表述）；2048 输入、768 维 MRL 可降维；MTEB 多语 61.15、英文 69.67、代码 68.76（768d）。Gemma Terms of Use；不支持 fp16 激活（已注明）。 |
+| Snowflake Arctic Embed L/M v2.0 | [L 卡](https://huggingface.co/Snowflake/snowflake-arctic-embed-l-v2.0) · [M 卡](https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0) | L：568M（303M 非嵌入）、1024 维、8K、74 语，BEIR 55.6/MIRACL 55.8/CLEF 52.9/54.3（nDCG@10）；M：305M（113M 非嵌入）、768 维，BEIR 55.4/MIRACL 55.2/CLEF 51.7/53.9。Apache-2.0。 |
+| Qwen3-Reranker-4B | [模型卡](https://huggingface.co/Qwen/Qwen3-Reranker-4B) | 4B、32K；技术报告 Table 4（与已上线 0.6B 同批次）：MTEB-R 69.76、CMTEB-R 75.94、MMTEB-R 72.74、MTEB-Code 81.20。Apache-2.0；候选集为 Qwen3-Embedding-0.6B top-100 召回。 |
+| Nomic Embed Text v2 MoE | [模型卡](https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe) | 475M 总参数/305M 激活（8 expert top-2）、512 输入、768 维 Matryoshka；BEIR 52.86、MIRACL 65.80；另收录 MTEB 结果仓库两项记录（提交者身份未核实）。Apache-2.0；权重首传 2025-02-07。 |
+| InternVL3.5-4B/8B | [4B 卡](https://huggingface.co/OpenGVLab/InternVL3_5-4B) · [8B 卡](https://huggingface.co/OpenGVLab/InternVL3_5-8B) · [报告](https://arxiv.org/abs/2508.18265) | 4.7B/8.5B（含视觉塔）；4B：MMLU 73.8、MMMU 66.6、MathVista 77.1、OCRBench 822；8B：78.2、73.4、78.4、840（论文表格，对应发布版；OCR 部分对比值来自 OpenCompass 榜单的脚注已注明）。Apache-2.0。 |
+| MiniCPM-V 4.5 | [模型卡](https://huggingface.co/openbmb/MiniCPM-V-4_5) · [报告](https://arxiv.org/abs/2509.18154) | 8.7B（Qwen3-8B + SigLIP2-400M）；OpenCompass 77.0、MMMU 67.7、OCRBench 89.0、OmniDocBench(EN) 0.175；上下文按 config（40960）并注明依据限制；纯文本用途无官方基准，维持证据不足。Apache-2.0；2025-08-26 发布。 |
+| SenseVoiceSmall | [模型卡](https://huggingface.co/FunAudioLLM/SenseVoiceSmall) · [论文](https://arxiv.org/abs/2407.04051v3) | 234M 非自回归、zh/yue/en/ja/ko；AISHELL-1 2.96、AISHELL-2 3.80、LibriSpeech clean 3.15、CommonVoice yue 7.09（论文 Table 6）。FunASR Model Open Source License v1.1 已链接并注明商用署名条件。 |
+| GLM-ASR-Nano-2512 | [模型卡](https://huggingface.co/zai-org/GLM-ASR-Nano-2512) | 1.5B、17 语；官方基准图（GitHub resources/bench.png）转录：Aishell-1 1.81、Wenet Meeting 6.73、五项平均 4.10（图片读图经本站复核）；Open ASR 榜单 mean WER 7.03 与 LibriSpeech test-clean 2.15 为第三方记录（执行者身份未核实）。权重 MIT、代码 Apache-2.0。 |
+| DeepSeek-OCR 2 | [模型卡](https://huggingface.co/deepseek-ai/DeepSeek-OCR-2) | 3B MoE（约 500M 激活）；OmniDocBench v1.5 Overall 91.09、Text Edit 0.048、阅读顺序编辑距离 0.057、生产环境图片重复率 4.17%。Apache-2.0；权重 2026-01-27 首传。 |
+| DeepSeek-R1-Distill-Qwen-1.5B/7B | [1.5B 卡](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B) · [7B 卡](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B) | 1.5B/7B（底模 Qwen2.5-Math 系列，蒸馏 800k R1 样本）；AIME 2024 28.9/55.5、MATH-500 83.9/92.8、GPQA Diamond 33.8/49.1、LiveCodeBench 16.9/37.6（模型卡表，温度 0.6/top-p 0.95/64 采样）；上下文官方未披露，保留 not-provided。MIT。 |
+| BGE-Large-ZH-v1.5 | [模型卡](https://huggingface.co/BAAI/bge-large-zh-v1.5) · [C-Pack 论文](https://arxiv.org/abs/2309.07597) | 326M（C-Pack 论文口径；MTEB 元数据 1.34B 与结构不符未采用）、512、1024 维；C-MTEB 平均 64.53、检索 70.46、STS 56.25；另收录 MTEB 仓库 MIRACLHardNegatives 中文子集 0.37674（CC0，提交者身份未核实）。MIT；2023-09-12 发布。 |
+
+本轮非商业许可（Jina 系列 CC BY-NC 4.0、Jina v4 的 Qwen Research License、SenseVoice/GLM 的区分处理）均在条目许可字段写明名称与条款链接；批次完成情况与后续批次见[计划型号分阶段上线方案](LAUNCH_PLAN.md)。

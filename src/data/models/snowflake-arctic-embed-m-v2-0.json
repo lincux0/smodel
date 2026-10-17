@@ -1,0 +1,304 @@
+{
+  "id": "snowflake-arctic-embed-m-v2-0",
+  "name": "Snowflake Arctic Embed M v2.0",
+  "family": "Snowflake Arctic Embed",
+  "version": "2.0 (M)",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.305,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡质量基准表按 305M 总参数与 113M 非嵌入参数记录该型号，并在特性说明中以 113M 非嵌入参数描述其推理效率口径；本记录按官方口径填写，未从权重文件大小反推。",
+    "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0"
+  },
+  "languages": [
+    "多语言（模型卡 language 字段列出 74 项语言代码，含英语、中文、日语、韩语、阿拉伯语等）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0#license"
+    },
+    "code": null,
+    "trainingDisclosure": "官方技术报告《Arctic-Embed 2.0: Multilingual Retrieval Without Compromise》（arXiv:2412.04506）公开训练方法论、设计取舍与实验讨论；模型卡未提供可完整复核的训练数据清单。"
+  },
+  "summary": "L 版的较小规模同代模型，用 768 维向量在多语检索与压缩存储之间取平衡。",
+  "features": [
+    "768 维 CLS 池化向量；模型卡要求仅对查询加 'query: ' 前缀，文档不加前缀",
+    "支持 Matryoshka 表示学习（MRL）：模型卡称可截断至 256 维，并配合 4-bit 量化把每向量压缩到约 128 字节",
+    "基于 GTE-multilingual-base，模型卡称其在英语与多语检索上均优于该系列早期型号",
+    "RoPE 支持最长 8192 tokens 上下文；提供 Transformers、Sentence Transformers 与 transformers.js 用法",
+    "权重按 Apache-2.0 发布，模型卡写明可免费用于商业用途"
+  ],
+  "limitations": [
+    "官方成绩为发布方自报，模型卡未披露评测运行日、模型 revision 与推理精度，本站未在自有语料复现检索效果。",
+    "MRL 截断与量化存在精度损失：模型卡给出 768 维与 256 维的对照（如 BEIR 55.4 对 54.4），压缩后的实际表现需按自有语料验证。",
+    "查询前缀、CLS 池化与向量归一化必须与官方用法一致；模型卡的 Transformers 示例还要求 trust_remote_code=True，部署时需接受该自定义代码路径。",
+    "模型卡声明 8192 上下文由 RoPE 支持，官方示例以 max_length=8192 直接截断，更长文本需自行切分。"
+  ],
+  "officialUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors（仓库同时提供 ONNX）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+      "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0#using-sentence-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 Sentence Transformers",
+          "description": "模型卡示例以 `from sentence_transformers import SentenceTransformer` 起步，未给出可直接复制的安装命令；依赖安装需按目标环境确定。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡示例用 SentenceTransformer('Snowflake/snowflake-arctic-embed-m-v2.0', trust_remote_code=True) 加载；查询编码必须传 prompt_name=\"query\"，文档直接编码，随后用余弦相似度排序。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡未提供官方内存/显存估算，不将参数量或非嵌入参数数换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-15-ndcg10",
+      "benchmark": "BEIR",
+      "dataset": "BEIR（15 个数据集）平均（模型卡质量基准表口径）",
+      "language": "英语",
+      "metric": "nDCG@10（数据集平均）",
+      "value": 55.4,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Snowflake Arctic Embed 2.0 模型卡质量基准表（2024-12-04 发布）",
+      "settings": "模型卡说明该表所有数值为所讨论数据集的平均 nDCG@10，使用 768 维向量；同表 MRL 截断到 256 维的对照值为 54.4。模型卡未披露评测运行日、模型 revision 与推理精度；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Snowflake（模型发布方自报）",
+      "externalModelId": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision、查询提示与推理精度等可对齐条件；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+        "notes": "仅记录模型卡中的少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡与基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "snowflake",
+        "runId": "snowflake-arctic-embed-v2-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracl-4-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL（4 个数据集）平均（模型卡质量基准表口径）",
+      "language": "多语言",
+      "metric": "nDCG@10（数据集平均）",
+      "value": 55.2,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Snowflake Arctic Embed 2.0 模型卡质量基准表（2024-12-04 发布）",
+      "settings": "模型卡说明该表所有数值为平均 nDCG@10，MIRACL 列取 4 个数据集；同表 MRL 截断到 256 维的对照值为 54.0。模型卡未披露评测运行日、模型 revision 与推理精度；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Snowflake（模型发布方自报）",
+      "externalModelId": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision、查询提示与推理精度等可对齐条件；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+        "notes": "仅记录模型卡中的少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡与基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "snowflake",
+        "runId": "snowflake-arctic-embed-v2-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "clef-focused-ndcg10",
+      "benchmark": "CLEF (Focused)",
+      "dataset": "CLEF Focused 设置平均（模型卡质量基准表口径）",
+      "language": "多语言",
+      "metric": "nDCG@10（数据集平均）",
+      "value": 51.7,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Snowflake Arctic Embed 2.0 模型卡质量基准表（2024-12-04 发布）",
+      "settings": "模型卡说明该表所有数值为平均 nDCG@10，CLEF 分 Focused 与 Full 两种设置；同表 MRL 截断到 256 维的对照值为 50.6。模型卡未披露评测运行日、模型 revision 与推理精度；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Snowflake（模型发布方自报）",
+      "externalModelId": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露 Focused 设置的语料构成、评测运行日与模型 revision 等可对齐条件；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+        "notes": "仅记录模型卡中的少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡与基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "snowflake",
+        "runId": "snowflake-arctic-embed-v2-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "clef-full-ndcg10",
+      "benchmark": "CLEF (Full)",
+      "dataset": "CLEF Full 设置平均（模型卡质量基准表口径）",
+      "language": "多语言",
+      "metric": "nDCG@10（数据集平均）",
+      "value": 53.9,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Snowflake Arctic Embed 2.0 模型卡质量基准表（2024-12-04 发布）",
+      "settings": "模型卡说明该表所有数值为平均 nDCG@10，CLEF 分 Focused 与 Full 两种设置；同表 MRL 截断到 256 维的对照值为 52.3。模型卡未披露评测运行日、模型 revision 与推理精度；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Snowflake（模型发布方自报）",
+      "externalModelId": "Snowflake/snowflake-arctic-embed-m-v2.0",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露 Full 设置的语料构成、评测运行日与模型 revision 等可对齐条件；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0",
+        "notes": "仅记录模型卡中的少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡与基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "snowflake",
+        "runId": "snowflake-arctic-embed-v2-card-benchmarks",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方自报 768 维向量下 BEIR（15 个数据集）平均 55.4、MIRACL（4 个数据集）平均 55.2、CLEF Focused 51.7 与 CLEF Full 53.9（均为平均 nDCG@10），并按 Apache-2.0 允许商用；成绩为模型卡口径，未经独立复测。",
+      "strengths": [
+        "模型卡同一张表并列英语与多语基准，并给出 MRL 截断到 256 维的对照值，压缩取舍可查。",
+        "训练方法论由官方技术报告公开，模型卡说明了查询前缀、CLS 池化与小模型特有的 trust_remote_code 用法。",
+        "在与 L 版接近的多语成绩下提供更低维向量（768）与更小的非嵌入参数规模，适合资源受限场景。"
+      ],
+      "limitations": [
+        "四项成绩均由模型发布方自报，模型卡未披露评测运行日、模型 revision 与推理精度，本站未复现。",
+        "MIRACL 与 CLEF 为跨语种数据集集合，汇总平均分无法代表单一语言或领域的效果。",
+        "MRL 截断与 4-bit 量化会带来精度下降，模型卡仅给出该型号自有的对照数值，需按自有语料重新验证。",
+        "实际检索效果受切分、查询前缀与索引实现影响，本站未在自有语料测试。"
+      ],
+      "evidenceIds": [
+        "beir-15-ndcg10",
+        "miracl-4-ndcg10",
+        "clef-focused-ndcg10",
+        "clef-full-ndcg10"
+      ]
+    }
+  ]
+}

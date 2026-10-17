@@ -1,0 +1,213 @@
+{
+  "id": "jina-embeddings-v5-text-small",
+  "name": "Jina Embeddings v5 Text Small",
+  "family": "Jina Embeddings",
+  "version": "5 Text Small",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.677,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡概览表标注 Parameters 为 677M，并据此称其为参数量 1B 以下的多语嵌入模型中成绩最高者；同一模型卡未拆分该口径所覆盖的组件。核对当日 HF 仓库元数据中主权重张量合计 596,049,920，与 677M 口径的差异未在官方资料中说明，本记录按官方口径填写，不从文件大小反推。",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small"
+  },
+  "languages": [
+    "多语言（官方称支持 119 种以上语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "CC BY-NC 4.0",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small#license"
+    },
+    "code": null,
+    "trainingDisclosure": "官方技术报告（arXiv:2602.15547）公开以嵌入蒸馏结合任务对比损失的训练方法，模型卡说明权重基于 Qwen/Qwen3-0.6B-Base 并经嵌入蒸馏与任务特定对比损失训练；本站核对的公开材料中未见可完整复核的训练数据清单。"
+  },
+  "summary": "面向检索、文本相似度、聚类与分类的多语文本嵌入模型，用任务适配器在同一主体权重上切换任务行为。",
+  "features": [
+    "1024 维向量，支持 Matryoshka 截断至 32/64/128/256/512/768 维",
+    "支持 retrieval、text-matching、clustering、classification 四个任务，编码时通过 task 与 prompt_name 选择（如 retrieval 需区分 query/document）",
+    "最长输入 32768 tokens；采用 last-token pooling",
+    "官方提供按任务合并适配器的独立权重，便于 vLLM、Text Embeddings Inference 与 ONNX/Optimum 部署",
+    "发布方称在截断与二值量化下仍保持稳健"
+  ],
+  "limitations": [
+    "权重为 CC BY-NC 4.0 非商业许可，商业用途需另行联系 Jina AI 取得授权；不能当作可商用开源模型使用。",
+    "官方 MTEB English v2（71.7）与 MMTEB（67.7）成绩为发布方自报平均分，模型卡未披露模型 revision、评测运行日、提示模板与完整推理配置，本站未复测。",
+    "task、prompt_name、池化与截断维度必须与索引时一致；不同任务适配器产生的向量不可混用，切换任务需重新编码全部文档。",
+    "模型卡标称 677M 参数，仓库主权重张量合计约 596M，两者口径差异未被官方说明。"
+  ],
+  "officialUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.57.0",
+        "torch>=2.8.0",
+        "peft>=0.15.2"
+      ],
+      "steps": [
+        {
+          "title": "准备官方要求的依赖",
+          "description": "按模型卡 Requirements 安装 transformers>=4.57.0、torch>=2.8.0 与 peft>=0.15.2；flash-attention 为官方推荐但非必需，sentence-transformers 仅在需要该接口时安装。模型卡未给出可直接复制执行的安装命令，命令需按目标环境确定。",
+          "command": null
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡 Transformers 示例用 AutoModel.from_pretrained(..., trust_remote_code=True) 加载，并在 encode 时指定 task 与 prompt_name（如 task=\"retrieval\"、prompt_name=\"query\" 或 \"document\"），需要控制向量大小时设置 truncate_dim。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mteb-english-v2-average",
+      "benchmark": "MTEB (English, v2)",
+      "dataset": "MTEB (English, v2) 平均分（模型卡口径）",
+      "language": "英语",
+      "metric": "平均分（Average）",
+      "value": 71.7,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v5-text-small 模型卡发布说明（2026-02-18 发布）",
+      "settings": "模型卡概览称该模型在 MTEB English v2 平均 71.7、在 MMTEB 上 67.7，并称其为参数量 1B 以下多语嵌入模型中的最高分。模型卡未披露模型 revision、评测运行日、任务级配置与提示模板；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（模型发布方自报）",
+      "externalModelId": "jinaai/jina-embeddings-v5-text-small",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现与对齐的模型 revision、评测运行日与完整推理配置；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+        "notes": "仅记录模型卡中的少量评测事实并保留发布方署名与来源链接；不复制榜单数据，此引用不改变模型卡与基准各自的许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v5-text-card-mteb",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmteb-average",
+      "benchmark": "MMTEB",
+      "dataset": "MMTEB（多语基准）平均分（模型卡口径）",
+      "language": "多语言",
+      "metric": "平均分（Average）",
+      "value": 67.7,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v5-text-small 模型卡发布说明（2026-02-18 发布）",
+      "settings": "模型卡概览与 MTEB English v2 并列给出该数值；模型卡未披露任务级明细、模型 revision、评测运行日与推理配置；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（模型发布方自报）",
+      "externalModelId": "jinaai/jina-embeddings-v5-text-small",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现与对齐的模型 revision、评测运行日与完整推理配置；该平均分仅记录模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-embeddings-v5-text-small",
+        "notes": "仅记录模型卡中的少量评测事实并保留发布方署名与来源链接；不复制榜单数据，此引用不改变模型卡与基准各自的许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v5-text-card-mteb",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方自报 MTEB English v2 平均 71.7、MMTEB 平均 67.7，覆盖英语与多语文本检索与相似度场景，并支持 32K 输入与 Matryoshka 截断；两项均为模型卡层面的平均分，缺少任务级与运行配置细节，也未经独立复测。",
+      "strengths": [
+        "同一模型卡并列给出英语与多语两个平均分，可对照其多语与英语的相对水平。",
+        "模型卡明确披露任务集合（retrieval、text-matching、clustering、classification）、向量维度与 Matryoshka 档位、池化方式与基础模型。",
+        "官方提供按任务合并适配器的权重，便于在 vLLM、TEI 与 ONNX 上复现同一任务配置。"
+      ],
+      "limitations": [
+        "成绩由模型发布方自报，本站未找到许可明确且已确认独立性的同型号评测结果。",
+        "模型卡未披露模型 revision、评测运行日、提示模板与推理精度，平均分不能用于跨型号直接排序。",
+        "嵌入模型的实际效果依赖切分策略、任务适配器选择与向量维度，本站未在自有语料验证。",
+        "非商业许可限制商用，评测成绩的可用性不改变许可约束。"
+      ],
+      "evidenceIds": [
+        "mteb-english-v2-average",
+        "mmteb-average"
+      ]
+    }
+  ]
+}

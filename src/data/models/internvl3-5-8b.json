@@ -1,0 +1,364 @@
+{
+  "id": "internvl3-5-8b",
+  "name": "InternVL3.5-8B",
+  "family": "InternVL",
+  "version": "3.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方家族表按组件分列：InternViT-300M视觉编码器0.3B、Qwen3-8B语言骨干8.2B、合计8.5B，含视觉塔；HF权重元数据safetensors张量参数和为8,528,318,464（约8.53B）。此处采用官方合计口径8.5B。",
+    "sourceUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B"
+  },
+  "languages": [
+    "多语言（HF权重元数据标注multilingual，官方未列具体语种清单）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/OpenGVLab/InternVL3_5-8B"
+    },
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/OpenGVLab/InternVL/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "官方模型卡与技术报告披露训练流程：多模态持续预训练、SFT、MPO离线强化学习与GSPO在线强化学习组成Cascade RL；预训练语料约1.16亿样本、约2500亿tokens，纯文本与多模态数据比例约1:2.5。未公开完整语料清单与数据许可明细。"
+  },
+  "summary": "InternVL系列8B档多模态模型，按ViT-MLP-LLM结构以InternViT-300M视觉编码器搭配Qwen3-8B语言骨干，支持中英文文本生成与图文问答，官方技术报告给出的多模态推理、OCR与文本基准成绩高于同代4B档。",
+  "features": [
+    "官方家族表按视觉塔与语言骨干分列参数，8B档合计8.5B（0.3B视觉+8.2B语言）",
+    "官方模型卡给出16位加载、8位量化与多卡device_map等Transformers推理示例，并说明用transformers>=4.52.1",
+    "官方LMDeploy示例以session_len=32768部署；技术报告说明训练最大序列长度为32K tokens",
+    "官方说明评测使用VLMEvalKit进行，Thinking模式需设置R1_SYSTEM_PROMPT",
+    "技术报告同表给出OCR、图表与文档理解多项分项（DocVQA 92.3%、ChartQA 86.7%、InfoVQA 79.1%等）"
+  ],
+  "limitations": [
+    "模型卡的评测结果以图片形式发布，本条目数值来自技术报告arXiv 2508.18265v2的表格；官方未给出该型号的上下文长度专表，32K依据为训练最大序列长度说明与LMDeploy示例session_len。",
+    "技术报告OCR、图表与文档理解表脚注说明部分对照结果是采集自OpenCompass榜单与其他论文，未逐项标明每格是否由作者统一运行。",
+    "技术报告未逐项披露成绩对应的模型revision、提示模板、split与推理运行时；带Thinking或Parallel Thinking标注的行与默认行口径不同。",
+    "官方仅说明38B及以上型号需要多卡A100，未给出该型号的内存或显存数值；本站未实测。",
+    "本站未验证图像问答、文档解析与OCR的实际效果。"
+  ],
+  "officialUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（仓库含自定义代码，需trust_remote_code）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B",
+      "sourceUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B#quick-start",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.52.1（官方要求）",
+        "torch",
+        "torchvision",
+        "flash-attn（官方示例use_flash_attn=True）"
+      ],
+      "steps": [
+        {
+          "title": "安装指定版本以上的 Transformers",
+          "description": "官方模型卡说明需使用transformers>=4.52.1才能正常运行；此处按该说明转换为终端写法。本站未执行该命令。",
+          "command": "python -m pip install -U \"transformers>=4.52.1\""
+        },
+        {
+          "title": "按官方示例加载模型",
+          "description": "官方Quick Start用AutoModel.from_pretrained加载该仓库，设置trust_remote_code=True、torch_dtype=torch.bfloat16与use_flash_attn=True；同页另给出load_in_8bit量化与device_map=\"auto\"多卡写法。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方称30B及以下型号可在单张A100 GPU上部署、38B及以上需多卡，该说明不构成此型号的最低配置承诺。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-lmdeploy",
+      "runtime": "LMDeploy",
+      "systems": [],
+      "format": "Safetensors（仓库含自定义代码）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B",
+      "sourceUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-8B#lmdeploy",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "lmdeploy>=0.9.1（官方安装命令）"
+      ],
+      "steps": [
+        {
+          "title": "安装 LMDeploy",
+          "description": "官方Deployment章节给出的安装命令，LMDeploy用于压缩、部署与服务化视觉语言模型。本站未执行。",
+          "command": "pip install lmdeploy>=0.9.1"
+        },
+        {
+          "title": "按官方示例建立推理管线",
+          "description": "官方示例用pipeline加载模型并传入PytorchEngineConfig(session_len=32768, tp=1)；多图与批量推理示例见同页。本站未启动服务或执行推理。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于精度、图像数量与分辨率、session_len与LMDeploy版本，官方未给出该型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmmu-val-report",
+      "benchmark": "MMMU",
+      "dataset": "MMMU (val)",
+      "language": "英语",
+      "metric": "accuracy",
+      "value": 73.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "InternVL3.5技术报告（arXiv 2508.18265v2）Table 3（多模态推理与数学对比表）",
+      "settings": "技术报告Table 3逐行列出多模态推理与数学成绩，本行为InternVL3.5-8B的MMMU (val) 73.4，同一行另有MathVista、MathVision、MathVerse、DynaMath、WeMath、LogicVista分项；表中另设\"w/ Parallel Thinking\"对照行。模型卡说明评测使用VLMEvalKit，Thinking模式需设置R1_SYSTEM_PROMPT，报告结果未启用TTS。报告未逐项披露该行对应的split、提示模板、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2508.18265",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenGVLab（模型发布方及技术报告作者）",
+      "externalModelId": "OpenGVLab/InternVL3_5-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "val",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露该成绩对应的模型revision、提示模板、VLMEvalKit版本与推理运行时，且同表并存Thinking与Parallel Thinking对照行；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2508.18265",
+        "notes": "仅引用InternVL3.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "opengvlab",
+        "runId": "opengvlab-internvl3-5-report-v2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mathvista-mini-report",
+      "benchmark": "MathVista",
+      "dataset": "MathVista (mini)",
+      "language": "英语",
+      "metric": "accuracy",
+      "value": 78.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "InternVL3.5技术报告（arXiv 2508.18265v2）Table 3（多模态推理与数学对比表）",
+      "settings": "技术报告Table 3中InternVL3.5-8B行的MathVista (mini) 78.4；同表亦列出该型号在MMMU、MathVision、MathVerse、DynaMath、WeMath与LogicVista的结果，并另设Parallel Thinking对照行。模型卡说明评测使用VLMEvalKit进行，报告结果未启用TTS。报告未逐项披露提示模板、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2508.18265",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenGVLab（模型发布方及技术报告作者）",
+      "externalModelId": "OpenGVLab/InternVL3_5-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "mini",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露该成绩对应的模型revision、提示模板、评测框架版本与推理运行时，且同表并存Thinking与Parallel Thinking对照行；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2508.18265",
+        "notes": "仅引用InternVL3.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "opengvlab",
+        "runId": "opengvlab-internvl3-5-report-v2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ocrbench-report",
+      "benchmark": "OCRBench",
+      "dataset": "OCRBench（报告未注明拆分）",
+      "language": "英语（OCRBench以英文场景为主）",
+      "metric": "OCRBench综合得分",
+      "value": 840,
+      "unit": "分（0–1000）",
+      "direction": "higher",
+      "version": "InternVL3.5技术报告（arXiv 2508.18265v2）Table 4（OCR、图表与文档理解对比表）",
+      "settings": "技术报告Table 4按型号逐行给出OCR、图表与文档理解共9项基准，OCR Bench列按0–1000计分（表注说明计算Overall时归一化到0–100），本行为InternVL3.5-8B的840分；同一行另有AI2D (w/ wo M) 84.0/92.8、ChartQA 86.7、TextVQA 78.2、DocVQA 92.3、InfoVQA 79.1、SEED-2-Plus 70.8、CharXiv 44.4/72.2、VCR-EN-Easy 92.6/97.3。该表脚注说明部分对照结果采集自OpenCompass榜单与其他论文，未逐项标明来源；报告未披露模型revision、提示模板与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2508.18265",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "image-understanding",
+      "publisher": "OpenGVLab（模型发布方及技术报告作者）",
+      "externalModelId": "OpenGVLab/InternVL3_5-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该分数为OCR Bench综合分（0–1000口径），与整页文档解析的编辑距离或字符准确率口径不同；来源未披露模型revision、提示模板与推理配置，也不与同表采集自榜单的对照值直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2508.18265",
+        "notes": "仅引用InternVL3.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "opengvlab",
+        "runId": "opengvlab-internvl3-5-report-v2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmlu-opencmpass-report",
+      "benchmark": "MMLU",
+      "dataset": "MMLU（技术报告未注明版本；表格附version列4d595a）",
+      "language": "英语",
+      "metric": "accuracy",
+      "value": 78.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "InternVL3.5技术报告（arXiv 2508.18265v2）Table 14（文本能力对比表）",
+      "settings": "技术报告Table 14以OpenCompass工具评测文本能力，逐列并列Qwen3骨干与InternVL3.5型号，本行为InternVL3.5-8B的MMLU 78.2；同表附数据集版本标识4d595a与CMMLU、C-Eval、GAOKAO、GSM8K、MATH、AIME、HumanEval等结果。表注说明Qwen3系列分数可能与该系列官方报告不同，因OpenCompass评测统一使用了表内提示版本；报告未披露模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2508.18265",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "OpenGVLab（模型发布方及技术报告作者）",
+      "externalModelId": "OpenGVLab/InternVL3_5-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": "技术报告表注说明OpenCompass评测统一使用表内所列提示版本",
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露该成绩对应的模型revision、split、few-shot设置与推理运行时，且报告说明OpenCompass统一提示版本与各基准原始口径可能不同；原样记录，不与不同提示或框架的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2508.18265",
+        "notes": "仅引用InternVL3.5官方技术报告中的少量成绩事实并链接原文；不复制表格、图像或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "opengvlab",
+        "runId": "opengvlab-internvl3-5-report-v2",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方技术报告Table 14以OpenCompass口径列出该型号MMLU 78.2%。这是纯文本知识类基准成绩，可用于了解文本骨干水平，但不能外推为中文写作、开放式对话或事实可靠性。",
+      "strengths": [
+        "报告在同一张表中并列Qwen3骨干与InternVL3.5型号，便于查看多模态训练后的文本能力变化。",
+        "表格同时给出中文类（CMMLU、C-Eval、GAOKAO）与数学、代码分项，覆盖面可查。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "表注说明OpenCompass统一使用表内提示版本，各基准分数可能与其他官方报告口径不同。",
+        "MMLU为英文知识问答，不能代表中文生成质量；本站未复现文本成绩。"
+      ],
+      "evidenceIds": [
+        "mmlu-opencmpass-report"
+      ]
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "官方技术报告逐列给出该型号视觉成绩：MMMU (val) 73.4%、MathVista (mini) 78.4%、OCR Bench 840分，文档理解类分项为DocVQA 92.3%、ChartQA 86.7%、InfoVQA 79.1%。均为发布方在同一报告中的自测，且OCR、图表与文档表脚注说明部分对照值采集自OpenCompass榜单。",
+      "strengths": [
+        "报告按型号尺寸逐行给出结果，未借用其他尺寸或Flash版本成绩。",
+        "OCR、图表与文档表同时给出OCRBench、DocVQA、ChartQA、InfoVQA等分项，并说明OCR Bench为0–1000计分。",
+        "模型卡说明评测框架为VLMEvalKit，并给出Thinking模式的系统提示要求。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "报告未逐项披露模型revision、提示模板、split与推理运行时；OCR、图表与文档表脚注说明部分对照结果采集自OpenCompass榜单与其他论文。",
+        "同表并存未启用与Parallel Thinking两套口径，横向比较需区分。",
+        "本站未在真实图片、票据或扫描文档上验证识别、版面与定位效果。"
+      ],
+      "evidenceIds": [
+        "mmmu-val-report",
+        "mathvista-mini-report",
+        "ocrbench-report"
+      ]
+    }
+  ]
+}

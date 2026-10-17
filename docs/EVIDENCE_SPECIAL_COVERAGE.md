@@ -22,6 +22,22 @@
 | Granite Speech 5.0 470M TurboCTC | [模型卡](https://huggingface.co/ibm-granite/granite-speech-5.0-470m-turboctc)与[官方文章](https://huggingface.co/blog/ibm-granite/granite-speech-5-0-470m-turboctc)提供聚合平均 WER 与 RTFx | 保留两项官方成绩（平均 WER 5.00%、RTFx 超 12,600 按下限照录）并标为 `first-party`；NC 变体（CC-BY-NC-SA-4.0）另行存在、未建条目 | 分测试集数值为图片未转录；RTFx 为 1×H200 测量，不代表用户设备；英语专用模型 |
 | PaddleOCR-VL | [技术报告](https://arxiv.org/html/2510.14528v1)正文可确证 OmniDocBench v1.5 总分与分项 | 保留三项官方成绩（总分 92.56、Text-Edit 0.035、Formula-CDM 91.43）并标为 `first-party` | 模型卡成绩表为图片未转录；1.5 报告将其总分写作 92.86 的报告间差异已注明；完整页级流程需配套版面分析组件 |
 | PaddleOCR-VL-1.5 | [模型卡](https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.5)与[报告](https://arxiv.org/abs/2601.21957)可确证 OmniDocBench v1.5 与 Real5-OmniDocBench 数值 | 保留四项官方成绩（94.5%、Real5 总体 92.05%、Skewing 91.66%、Formula-CDM 94.21）并标为 `first-party` | 语言扩展 111 种取自 GitHub 发布说明；印章识别/文本检测具体数值为图片未转录；与首版共享 0.9B 规模 |
+| Jina Embeddings v5 Text Small | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v5-text-small)自报 MTEB English v2 71.7、MMTEB 67.7 | 保留两项并标为 `first-party` | CC BY-NC 4.0 非商业许可，商用需另行授权；HF 张量和与官方 677M 口径差异已注明 |
+| Jina Embeddings v3 | [论文](https://arxiv.org/html/2409.10173v3) Table 4 的 MTEB 英语 65.52、多语 64.44 | 保留两项并标为 `first-party` | 官方 570M（台账原 0.572B 未获官方支持）；CC BY-NC 4.0 |
+| Jina Embeddings v4 | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v4) Table 2 的 MMTEB/MTEB(eng,v2)/ViDoRe/JVDR | 保留四项（单向量口径）并标为 `first-party`；多向量结果写入 settings 未单列 | **Qwen Research License**（发布方更正原 CC BY-NC 声明，衍生自 Qwen2.5-VL-3B）；台账已同步 |
+| Jina Reranker v3 | [模型卡](https://huggingface.co/jinaai/jina-reranker-v3)与[论文](https://arxiv.org/html/2509.25085v4) | 保留四项（top-100 协议）；BEIR 61.94 与论文 61.85 的差异已双记 | CC BY-NC 4.0；listwise 输入（最多 64 候选）|
+| Jina Reranker v3.5 | [模型卡](https://huggingface.co/jinaai/jina-reranker-v3.5)对比表四项 | 保留四项；Struct-IR 为受控池协议、RTEB 不含 MIRACL 均值（表注已录） | CC BY-NC 4.0；131K 上下文 |
+| LightOn mLateOn | [模型卡](https://huggingface.co/lightonai/mLateOn) Headline Results 四项 | 保留四项（目标语言子集口径，全语言值写入 settings） | Apache-2.0；多向量存储成本不可按单向量估算 |
+| Multilingual-E5-Large | [模型卡](https://huggingface.co/intfloat/multilingual-e5-large)与[论文](https://arxiv.org/html/2402.05672v1) | 保留三项（Mr. TyDi 70.5、MIRACL dev 66.5、MTEB 英文 61.5） | MIT；官方未单列参数量（0.56B 为公开部署口径，notes 已说明）；query/passage 前缀为使用前提 |
+| EmbeddingGemma | [模型卡](https://huggingface.co/google/embeddinggemma-300m)与[论文](https://arxiv.org/html/2509.20354v1) Table 1 | 保留三项（768d：多语 61.15、英文 69.67、代码 68.76） | Gemma Terms of Use；不支持 fp16 激活（已注明）；512/256/128 维结果未单列 |
+| Snowflake Arctic Embed L v2.0 | [模型卡](https://huggingface.co/Snowflake/snowflake-arctic-embed-l-v2.0)质量基准表 | 保留四项（BEIR 55.6/MIRACL 55.8/CLEF 52.9/54.3，nDCG@10） | Apache-2.0 可商用；568M 中 303M 非嵌入 |
+| Snowflake Arctic Embed M v2.0 | [模型卡](https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0)同表 | 保留四项（BEIR 55.4/MIRACL 55.2/CLEF 51.7/53.9） | Apache-2.0；305M 中 113M 非嵌入 |
+| Qwen3-Reranker-4B | [模型卡](https://huggingface.co/Qwen/Qwen3-Reranker-4B)与技术报告 Table 4 | 保留四项（MTEB-R 69.76、CMTEB-R 75.94、MMTEB-R 72.74、MTEB-Code 81.20） | 与已上线 0.6B 同一报告批次（runId 一致）；候选集为 Qwen3-Embedding-0.6B top-100 召回 |
+| Nomic Embed Text v2 MoE | [模型卡](https://huggingface.co/nomic-ai/nomic-embed-text-v2-moe)两项 + MTEB 结果仓库两项（提交者身份未核实） | 官方两项标 `first-party`；MTEB 两项 `independence: unknown`，摘要为独立性待确认 | Apache-2.0；总参数 475M/激活 305M 分别记录；权重首传 2025-02-07 |
+| SenseVoiceSmall | [论文](https://arxiv.org/abs/2407.04051v3) Table 6 四项 | 保留四项并标为 `first-party`（AISHELL-1 2.96、AISHELL-2 3.80、LibriSpeech clean 3.15、CommonVoice yue 7.09） | [FunASR Model Open Source License v1.1](https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE)；官方澄清商用允许、需注明出处与模型名；代码 MIT 另记 |
+| GLM-ASR-Nano-2512 | 官方基准图（GitHub resources/bench.png）与 Open ASR 榜单文件 | 官方图四项转录（Aishell-1 1.81、Wenet 6.73 等，图片读图经复核）；榜单 mean WER 7.03 与 LibriSpeech 2.15 为 `unknown` 第三方记录 | 权重 MIT、代码 Apache-2.0 分记；权重 2025-12-09 上传；RTFx 未注明机器未收录 |
+| DeepSeek-OCR 2 | [模型卡](https://huggingface.co/deepseek-ai/DeepSeek-OCR-2)与报告 | 保留四项（OmniDocBench v1.5 Overall 91.09、Text Edit 0.048、阅读顺序 0.057、图片重复率 4.17%） | Apache-2.0；编辑距离口径；权重 2026-01-27 首传；文本上下文未披露 |
+| BGE-Large-ZH-v1.5 | [模型卡](https://huggingface.co/BAAI/bge-large-zh-v1.5) C-MTEB 三项 + MTEB 结果仓库一项（CC0） | 官方三项标 `first-party`；MTEB 记录 `independence: unknown`，摘要为独立性待确认 | MIT；326M 按 C-Pack 论文口径（MTEB 元数据 1.34B 未采用）；2023-09-12 发布 |
 
 ## 新增的 MTEB 分项
 

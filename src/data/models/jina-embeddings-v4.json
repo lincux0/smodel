@@ -1,0 +1,308 @@
+{
+  "id": "jina-embeddings-v4",
+  "name": "Jina Embeddings v4",
+  "family": "Jina Embeddings",
+  "version": "4",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡与技术报告摘要口径为 3.8B 参数，模型卡说明其基于 Qwen/Qwen2.5-VL-3B-Instruct；该公开规模覆盖含视觉编码器的整套模型，模型卡未逐组件拆分参数量。本记录按官方口径填写，不从权重文件大小反推。",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v4"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v4"
+  },
+  "languages": [
+    "多语言（模型卡称支持 30 种以上语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Qwen Research License",
+      "url": "https://huggingface.co/jinaai/jina-embeddings-v4/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "技术报告公开模型结构（Qwen2.5-VL-3B-Instruct 骨干、任务 LoRA 适配器）、训练阶段设计与多模态评测设置；本站核对的公开材料中未见可完整复核的训练数据清单。"
+  },
+  "summary": "统一编码文本、图像与视觉文档的多模态嵌入模型，同时支持单向量与后期交互多向量检索。",
+  "features": [
+    "单向量输出默认 2048 维，Matryoshka 可截断至 128/256/512/1024 维；多向量模式输出 128 维/token",
+    "支持文本与图像输入（encode_text 与 encode_image），并通过 return_multivector 切换多向量",
+    "提供 retrieval、text-matching、code 三个任务适配器，查询/文档用 prompt_name 区分",
+    "最长序列 32768 tokens；模型卡标注权重 dtype 为 BFloat16、注意力机制为 FlashAttention2",
+    "官方另发布按任务合并适配器的 vLLM 版本与 GGUF 版本"
+  ],
+  "limitations": [
+    "权重实际适用 Qwen Research License（非商业）：模型卡说明最初误标为 cc-by-nc-4.0，正确许可为继承自 Qwen2.5-VL-3B 的 Qwen Research License；协议仅授予非商业用途，商业使用需另行取得许可，并需遵守署名与“Built with Qwen”等条款。",
+    "模型卡未给出完整评测配置与硬件估算，本站未下载权重或在设备上验证，3.8B 规模的实际显存与吞吐需自行测量。",
+    "单向量与多向量输出需要不同的索引与打分方式（余弦相似度与后期交互），切换模式需重新编码；模型卡说明多向量编码需直接使用 Hugging Face 模型，Sentence Transformers 接口不提供该路径。",
+    "模型卡说明图像输入可由 encode 的 max_pixels 参数控制；不同图像分辨率与文本长度组合下的实际可用上下文本站未验证。"
+  ],
+  "officialUrl": "https://huggingface.co/jinaai/jina-embeddings-v4",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/jinaai/jina-embeddings-v4",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-embeddings-v4#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.52.0",
+        "torch>=2.6.0",
+        "peft>=0.15.2",
+        "torchvision",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "模型卡在示例中给出注释形式的安装行 `# !pip install transformers>=4.52.0 torch>=2.6.0 peft>=0.15.2 torchvision pillow`；此处按终端写法记录为 python -m pip install 后接同一组包与版本下界（由官方 Notebook 写法转换，未增删包名）。官方另推荐可选安装 flash-attention。本站未执行这些命令。",
+          "command": "python -m pip install \"transformers>=4.52.0\" \"torch>=2.6.0\" \"peft>=0.15.2\" torchvision pillow"
+        },
+        {
+          "title": "加载模型并编码文本或图像",
+          "description": "按模型卡示例用 AutoModel.from_pretrained(..., trust_remote_code=True) 加载并移动到目标设备，文本用 encode_text、图像用 encode_image，按用途传入 task（retrieval、text-matching、code）与 prompt_name；需要多向量时设置 return_multivector=True。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡未提供官方内存/显存估算，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmteb-retrieval",
+      "benchmark": "MTEB (Multilingual, v2)",
+      "dataset": "MMTEB 检索任务平均分（技术报告 Table 2 口径）",
+      "language": "多语言",
+      "metric": "nDCG@10",
+      "value": 66.49,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v4 技术报告 v3 Table 2（arXiv:2506.18902v3）",
+      "settings": "技术报告 Table 2 中 jina-embeddings-v4（单向量）行的 MMTEB 数值，口径为 MTEB(Multilingual, v2) 检索任务平均 nDCG@10；技术报告说明 JVDR/ViDoRe 先对多语任务取平均再计总分，其余列直接按任务平均。报告未披露评测运行日与推理配置；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2506.18902v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（技术报告作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v4",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型 revision、评测运行日与完整推理配置，且表内多语汇总已先做多语平均；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2506.18902v3",
+        "notes": "仅引用技术报告中的少量汇总成绩并保留作者与来源链接；不复制表格明细与基准数据，引用不更改论文及基准数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v4-report-table2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-english-v2-retrieval",
+      "benchmark": "MTEB (English, v2)",
+      "dataset": "MTEB(eng, v2) 检索任务平均分（技术报告 Table 2 口径）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 55.97,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v4 技术报告 v3 Table 2（arXiv:2506.18902v3）",
+      "settings": "技术报告 Table 2 中 jina-embeddings-v4（单向量）行的 MTEB-en 数值，口径为 MTEB(eng, v2) 检索任务平均 nDCG@10；报告同时给出同表 jina-embeddings-v3 的 54.33 作为对照。报告未披露评测运行日与推理配置；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2506.18902v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（技术报告作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v4",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型 revision、评测运行日与完整推理配置；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2506.18902v3",
+        "notes": "仅引用技术报告中的少量汇总成绩并保留作者与来源链接；不复制表格明细与基准数据，引用不更改论文及基准数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v4-report-table2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "vidore-ndcg5",
+      "benchmark": "ViDoRe",
+      "dataset": "ViDoRe 视觉文档检索平均分（技术报告 Table 2，单向量模式）",
+      "language": "英语、法语",
+      "metric": "nDCG@5",
+      "value": 84.11,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v4 技术报告 v3 Table 2（arXiv:2506.18902v3）",
+      "settings": "技术报告 Table 2 中 jina-embeddings-v4（单向量/dense）行的 ViDoRe 数值；报告说明 ViDoRe 为英文与法文的视觉文档问答检索基准，指标为 nDCG@5。同一行多向量模式（late）为 90.17，本记录只取单向量数值。报告未披露评测运行日；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2506.18902v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（技术报告作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v4",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型 revision、评测运行日与推理配置，且基准由第三方构建、报告为发布方自运行；该数值不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2506.18902v3",
+        "notes": "仅引用技术报告中的少量汇总成绩并保留作者与来源链接；不复制 ViDoRe 基准的题目、页面图像或数据，引用不更改基准自身许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v4-report-table2",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "jina-vdr-ndcg5",
+      "benchmark": "Jina-VDR（JVDR）",
+      "dataset": "JVDR 视觉文档检索平均分（技术报告 Table 2，单向量模式）",
+      "language": "多语言（技术报告称覆盖最多 20 种语言）",
+      "metric": "nDCG@5",
+      "value": 73.98,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-embeddings-v4 技术报告 v3 Table 2（arXiv:2506.18902v3）",
+      "settings": "技术报告 Table 2 中 jina-embeddings-v4（单向量/dense）行的 JVDR 数值；报告说明该基准由其自行构建，扩展 ViDoRe 并覆盖表格、图表、法律与历史文档等材料，报告口径为先对多语任务取平均再汇总，指标为 nDCG@5。同一行多向量模式为 80.55。报告未披露评测运行日；不是本站复测。",
+      "sourceUrl": "https://arxiv.org/html/2506.18902v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Jina AI（技术报告作者及模型发布方）",
+      "externalModelId": "jinaai/jina-embeddings-v4",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "基准由模型发布方自行构建并用于展示该型号，来源也未披露模型 revision 与评测运行日；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2506.18902v3",
+        "notes": "仅引用技术报告中的少量汇总成绩并保留作者与来源链接；不复制 JVDR 基准的数据与页面图像，引用不更改论文及基准自身许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-v4-report-table2",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方技术报告给出的平均分为：MMTEB 检索 66.49、MTEB(eng, v2) 检索 55.97（单向量，nDCG@10），ViDoRe 84.11 与自建 JVDR 73.98（单向量，nDCG@5）；多向量模式下 ViDoRe 为 90.17、JVDR 为 80.55。覆盖文本、图像与视觉文档检索，但均为发布方自运行成绩。",
+      "strengths": [
+        "同一张表并列单向量与多向量模式，可直接看出多向量在视觉文档检索上的增益。",
+        "技术报告披露基准构成、指标定义（nDCG@10 与 nDCG@5）与 JVDR/ViDoRe 的多语平均方式，便于判断口径。",
+        "同一表列出同厂 v3 与若干第三方模型的对照数值，便于定位 v4 在文本与视觉任务上的相对位置。"
+      ],
+      "limitations": [
+        "全部成绩由模型发布方运行并报告，未找到许可明确且已确认独立性的同型号评测结果；JVDR 由发布方自行构建。",
+        "报告未披露评测运行日、模型 revision 与完整推理配置，汇总平均分不能直接用于跨型号排序。",
+        "模型采用的许可为 Qwen Research License（非商业），商用需另行取得授权，评测成绩的可用性不改变许可约束。",
+        "视觉文档检索效果依赖页面渲染、图像分辨率与切分方式，本站未在自有文档上验证。"
+      ],
+      "evidenceIds": [
+        "mmteb-retrieval",
+        "mteb-english-v2-retrieval",
+        "vidore-ndcg5",
+        "jina-vdr-ndcg5"
+      ]
+    }
+  ]
+}

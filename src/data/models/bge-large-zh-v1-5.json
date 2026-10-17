@@ -1,0 +1,347 @@
+{
+  "id": "bge-large-zh-v1-5",
+  "name": "BGE-Large-ZH-v1.5",
+  "family": "BGE",
+  "version": "Large-ZH-v1.5",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.326,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "BGE技术报告（C-Pack）说明BGE系列large档为326M参数，v1.5沿用同结构（官方仓库config.json为BertModel、24层、hidden 1024、vocab 21128）；官方模型卡未单列该检查点参数量。第三方MTEB结果仓库的model_meta.json将n_parameters标为1.34B，与论文及仓库结构口径不一致，本条不采用。",
+    "sourceUrl": "https://arxiv.org/abs/2309.07597"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5/blob/main/sentence_bert_config.json"
+  },
+  "languages": [
+    "中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/BAAI/bge-large-zh-v1.5"
+    },
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/FlagOpen/FlagEmbedding/blob/master/LICENSE"
+    },
+    "trainingDisclosure": "BGE技术报告（C-Pack）披露三阶段训练与数据构成：C-MTP无标注语料约1亿文本对（Wudao、Zhihu、Baike、CSL、XLSUM-Zh、Amazon-Review-Zh、CMRC等），C-MTP有标注语料约100万对（T2-Ranking、mMARCO-Zh等）；官方未单独披露v1.5相对v1.0的增量数据与完整逐样本清单。"
+  },
+  "summary": "面向中文检索的稠密向量模型，官方称v1.5版本缓解了相似度分布问题并提升无指令检索能力，输出1024维向量、最大输入512 tokens。",
+  "features": [
+    "官方更新日志记录2023-09-12发布bge-*-v1.5系列，并说明v1.5用于缓解相似度分布问题、增强无指令检索能力",
+    "官方模型卡C-MTEB表列出该型号31个数据集6类任务平均64.53分，检索70.46分",
+    "输出1024维稠密向量，采用CLS池化（仓库1_Pooling/config.json）",
+    "官方给出FlagEmbedding与sentence-transformers两种用法，并提供中文检索指令“为这个句子生成表示以用于检索相关文章：”（建议仅用于短查询，文档侧不加指令）",
+    "官方说明v1.5在无指令情况下检索性能仅比带指令略有下降，可省略指令以简化流程"
+  ],
+  "limitations": [
+    "官方标注语言为中文，未声明多语言或跨语言能力；跨语言检索需另选型号（如官方推荐的bge-m3）。",
+    "最大输入512 tokens，长文档需要切分；官方模型卡未为中文型号单列上下文长度，本条数值来自官方仓库sentence_bert_config.json。",
+    "C-MTEB成绩为官方模型卡表格中的自报值，未披露评测脚本版本、指令使用方式与模型revision；本站未复现。",
+    "第三方MTEB结果仓库另有该型号的MIRACL硬负例与多语言/英文任务结果，执行者身份未核实，不构成独立交叉佐证。",
+    "官方模型卡未单列参数量，本条采用技术报告的large档口径；第三方元数据的1.34B与仓库结构不一致。",
+    "相似度阈值需按自有数据分布选择（官方FAQ说明v1.0分数多落在0.6–1区间，v1.5缓解该问题），本站未在自有中文语料验证。"
+  ],
+  "officialUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-flagembedding",
+      "runtime": "FlagEmbedding",
+      "systems": [],
+      "format": "PyTorch checkpoint（pytorch_model.bin）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5#usage-for-embedding-model",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "FlagEmbedding",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 FlagEmbedding",
+          "description": "官方模型卡Usage章节给出的安装命令；官方另提供从源码安装的方式。本站未执行。",
+          "command": "python -m pip install -U FlagEmbedding"
+        },
+        {
+          "title": "按官方示例编码",
+          "description": "官方示例用FlagModel加载此模型并设置query_instruction_for_retrieval与use_fp16；检索场景建议用encode_queries()自动为查询加指令，文档用encode()/encode_corpus()不加指令。官方提醒FlagModel默认使用全部可用GPU，可用CUDA_VISIBLE_DEVICES限制。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和吞吐取决于精度（如use_fp16）、批大小与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "sentence-transformers",
+      "systems": [],
+      "format": "PyTorch checkpoint（含sentence-transformers配置）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5#using-sentence-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 sentence-transformers",
+          "description": "官方模型卡给出的安装命令。本站未执行。",
+          "command": "python -m pip install -U sentence-transformers"
+        },
+        {
+          "title": "按官方示例编码",
+          "description": "官方示例用SentenceTransformer加载此模型并设置normalize_embeddings=True；检索时短查询前需自行拼接指令字符串，文档侧不加指令。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；资源占用取决于精度、批大小与输入长度，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "c-mteb-avg",
+      "benchmark": "C-MTEB（31个数据集、6类任务平均分）",
+      "dataset": "C-MTEB（官方模型卡汇总表）",
+      "language": "中文",
+      "metric": "平均分（Avg）",
+      "value": 64.53,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "BAAI/bge-large-zh-v1.5官方模型卡C-MTEB表",
+      "settings": "数值来自官方模型卡C-MTEB表，该表列出bge-large-zh-v1.5（1024维）的Avg 64.53，同表检索70.46、STS 56.25、PairClassification 81.6、Classification 69.13、Reranking 65.84、Clustering 48.99，并并列bge-large-zh（64.20）等对照；卡片说明C-MTEB由6类任务31个数据集构成。来源未披露评测脚本版本、是否使用查询指令、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "BAAI（模型发布方自报）",
+      "externalModelId": "BAAI/bge-large-zh-v1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": "官方模型卡推荐查询指令“为这个句子生成表示以用于检索相关文章：”，但该表未注明评测时是否使用指令",
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测脚本版本、指令使用方式、模型revision与推理配置；该汇总值仅记录原卡片口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "baai",
+        "runId": "baai-bge-large-zh-v15-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "c-mteb-retrieval",
+      "benchmark": "C-MTEB（Retrieval任务）",
+      "dataset": "C-MTEB检索类任务（官方模型卡汇总表）",
+      "language": "中文",
+      "metric": "Retrieval平均分",
+      "value": 70.46,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "BAAI/bge-large-zh-v1.5官方模型卡C-MTEB表",
+      "settings": "官方模型卡C-MTEB表中bge-large-zh-v1.5（1024维）的Retrieval列70.46，同表bge-large-zh为71.53；卡片说明检索类任务含查询指令用法。来源未披露检索任务清单、数据集划分、评测脚本版本与模型revision；本站未复现。",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "BAAI（模型发布方自报）",
+      "externalModelId": "BAAI/bge-large-zh-v1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": "官方模型卡推荐查询指令“为这个句子生成表示以用于检索相关文章：”，但该表未注明评测时是否使用指令",
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露检索任务清单、划分、评测脚本版本、指令使用方式与模型revision；该汇总值仅记录原卡片口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "baai",
+        "runId": "baai-bge-large-zh-v15-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "c-mteb-sts",
+      "benchmark": "C-MTEB（STS任务）",
+      "dataset": "C-MTEB语义文本相似度任务（官方模型卡汇总表）",
+      "language": "中文",
+      "metric": "STS平均分",
+      "value": 56.25,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "BAAI/bge-large-zh-v1.5官方模型卡C-MTEB表",
+      "settings": "官方模型卡C-MTEB表中bge-large-zh-v1.5（1024维）的STS列56.25，同表bge-large-zh为54.98、bge-base-zh-v1.5为53.72；卡片称v1.5缓解相似度分布问题，该列可用于观察相似度类任务表现。来源未披露STS数据集清单、划分与评测脚本版本；本站未复现。",
+      "sourceUrl": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "BAAI（模型发布方自报）",
+      "externalModelId": "BAAI/bge-large-zh-v1.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露STS数据集清单、划分、评测脚本版本与模型revision；该汇总值仅记录原卡片口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/BAAI/bge-large-zh-v1.5",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "baai",
+        "runId": "baai-bge-large-zh-v15-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracl-hard-negatives-zh-ndcg10",
+      "benchmark": "MIRACLRetrievalHardNegatives（MTEB任务）",
+      "dataset": "MIRACL硬负例检索中文子集（zho-Hans，dev；dataset revision 95c8db7d4a6e9c1d8a60601afd63d553ae20a2eb）",
+      "language": "中文",
+      "metric": "nDCG@10",
+      "value": 0.37674,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 1.38.43（结果仓库，模型revision 79e7739b6ab944e86d6171e44d24c997fc1e0116）",
+      "settings": "结果文件位于MTEB结果仓库BAAI__bge-large-zh-v1.5目录的模型revision 79e7739b下，任务主指标ndcg_at_10、dev拆分、hf_subset=zh（zho-Hans），同文件其他语种子集分数显著更低（如en 0.24727、ja 0.19855、de 0.0668），可反映该中文单语模型的语言范围。结果仓库未在文件中记录提交者与运行设置，且不能据提交用户名确认其与模型发布方的关系；评测运行日未披露；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/BAAI__bge-large-zh-v1.5/79e7739b6ab944e86d6171e44d24c997fc1e0116/MIRACLRetrievalHardNegatives.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "MTEB结果仓库社区提交（提交者身份未核实）",
+      "externalModelId": "BAAI/bge-large-zh-v1.5",
+      "modelConfig": {
+        "revision": "79e7739b6ab944e86d6171e44d24c997fc1e0116",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "dev",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但提交者、提示与完整推理配置未披露；独立性未确认，不与官方C-MTEB汇总或其他模型分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按CC0发布的少量成绩；该任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "mteb-results-community",
+        "runId": "mteb-results-bge-large-zh-v15-79e7739b",
+        "independence": "unknown"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "independence-unverified",
+      "summary": "可作为中文检索的稠密向量候选：官方模型卡报告C-MTEB平均64.53分、检索70.46分、STS 56.25分，并称v1.5缓解相似度分布问题、提升无指令检索能力；MTEB结果仓库另有该型号在MIRACL硬负例中文子集的nDCG@10 0.37674，提交者与运行配置未核实。",
+      "strengths": [
+        "官方C-MTEB表并列v1.5与前代bge-large-zh的同类分数，版本差异可对照。",
+        "官方明确给出查询指令用法与无指令表现的差异说明，便于按场景取舍。",
+        "MTEB结果仓库记录了该型号精确revision下的多项任务结果，批次与拆分可追溯。"
+      ],
+      "limitations": [
+        "C-MTEB成绩由模型发布方在卡片中自报，未披露评测脚本版本、指令使用方式与模型revision，本站未复现。",
+        "MTEB结果仓库的MIRACL记录由社区提交，提交者身份与运行配置未核实，不构成独立交叉佐证。",
+        "该型号为中文单语，其他语种子集分数明显偏低；跨语言场景应改用多语言型号。",
+        "最大输入512 tokens，长文档检索需要切分策略配合。",
+        "本站未在自有中文语料验证检索质量与相似度阈值。"
+      ],
+      "evidenceIds": [
+        "c-mteb-avg",
+        "c-mteb-retrieval",
+        "c-mteb-sts",
+        "miracl-hard-negatives-zh-ndcg10"
+      ]
+    }
+  ]
+}

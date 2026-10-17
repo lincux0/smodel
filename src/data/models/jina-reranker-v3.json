@@ -1,0 +1,303 @@
+{
+  "id": "jina-reranker-v3",
+  "name": "Jina Reranker v3",
+  "family": "Jina Reranker",
+  "version": "3",
+  "variant": "specialized",
+  "tasks": [
+    "reranking"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "score"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡与技术报告摘要口径为 0.6B 参数，基于 Qwen/Qwen3-0.6B（28 层）并附加轻量 MLP 投影器（1024→512→256）；官方未另列更精确的参数总量或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3"
+  },
+  "languages": [
+    "多语言（技术报告称 MIRACL 覆盖 18 种语言、MKQA 覆盖 26 种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "CC BY-NC 4.0",
+      "url": "https://huggingface.co/jinaai/jina-reranker-v3#license"
+    },
+    "code": null,
+    "trainingDisclosure": "技术报告披露三阶段训练流程、损失设计（InfoNCE 与辅助损失）与部分训练数据来源（BGE-M3、Cornstack、MLDR、MS-MARCO、mMARCO 等）；未公开可完整复核的训练数据清单。"
+  },
+  "summary": "在同一上下文窗口内对查询与多篇候选文档做联合编码的 listwise 文本重排模型。",
+  "features": [
+    "listwise 重排：一次前向处理查询与多篇候选文档，模型卡称单次最多 64 篇",
+    "“last but not late”交互：查询与文档在同一上下文窗口内做因果自注意力，取每篇文档末位标记的上下文化向量，经 MLP 投影后按余弦相似度打分",
+    "上下文上限按官方“131K tokens”表述记为 131072，与仓库 config 的 max_position_embeddings 一致；超出上限时按官方说明分批处理",
+    "模型卡提供 GGUF 量化版本与 MLX 版本，并说明 v3.5 为可直接替换的后续版本"
+  ],
+  "limitations": [
+    "权重为 CC BY-NC 4.0 非商业许可，模型卡写明超出 AWS/Azure 平台或在公司内部就地部署的商业用途需另行联系 Jina AI。",
+    "模型卡对比表记录 BEIR 61.94，而技术报告 arXiv:2509.25085v4 摘要与 Table 2 为 61.85；两处口径差异未由发布方说明，本记录照录模型卡数值且不做换算。",
+    "重排只能调整已召回候选的次序：官方成绩全部基于第一阶段 jina-embeddings-v3 的 top-100 候选，召回覆盖不足时重排无法补救。",
+    "候选数量与文档长度共享上下文预算（官方表述为 131K tokens、单批最多 64 篇），长文档场景需自行分批并核对打分一致性。"
+  ],
+  "officialUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（另有 GGUF 与 MLX 版本）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "安装 transformers",
+          "description": "模型卡给出的安装命令为 `pip install transformers`，此处照录官方写法。本站未执行该命令。",
+          "command": "pip install transformers"
+        },
+        {
+          "title": "加载模型并重排",
+          "description": "按模型卡示例用 AutoModel.from_pretrained('jinaai/jina-reranker-v3', dtype=\"auto\", trust_remote_code=True) 加载并调用 model.rerank(query, documents)（可选 top_n 与 return_embeddings）；返回按 relevance_score 降序的列表。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡未提供官方内存/显存估算，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-ndcg10",
+      "benchmark": "BEIR",
+      "dataset": "BEIR 13 个英文检索任务平均（模型卡对比表口径）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 61.94,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3 模型卡对比表（2025-10 发布）；技术报告 arXiv:2509.25085v4 Table 2 同项为 61.85",
+      "settings": "模型卡对比表数值；技术报告 Table 2 说明所有成绩均为发布方自运行，输入为第一阶段检索器 jina-embeddings-v3 的 top-100 候选，BEIR 按 nDCG@10 报告。模型卡对比表给出的同批 jina-reranker-v2、bge-reranker-v2-m3 等对照值见该表。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision 与推理配置，且模型卡（61.94）与技术报告（61.85）数值口径存在版本差异；该记录不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v3-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracl-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL 多语检索（18 种语言）平均",
+      "language": "多语言（18 种语言）",
+      "metric": "nDCG@10",
+      "value": 66.83,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3 模型卡对比表；技术报告 arXiv:2509.25085v4 Table 2",
+      "settings": "发布方自运行成绩，输入为 jina-embeddings-v3 的 top-100 候选，按 nDCG@10 报告；技术报告说明 MIRACL 覆盖 18 种语言，并给出同批 bge-reranker-v2-m3（69.32）等对照值。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision 与推理配置；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v3-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mkqa-recall10",
+      "benchmark": "MKQA",
+      "dataset": "MKQA 跨语问答检索（26 种语言）平均",
+      "language": "多语言（26 种语言）",
+      "metric": "Recall@10",
+      "value": 67.92,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3 模型卡对比表；技术报告 arXiv:2509.25085v4 Table 2",
+      "settings": "发布方自运行成绩，输入为 jina-embeddings-v3 的 top-100 候选；技术报告说明 MKQA 在本表中使用 Recall@10（其余基准为 nDCG@10），并覆盖 26 种语言。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "本项指标为 Recall@10，与同表其他基准的 nDCG@10 不同且来源未披露运行条件；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v3-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "coir-ndcg10",
+      "benchmark": "CoIR",
+      "dataset": "CoIR 代码检索平均",
+      "language": "英语、编程语言",
+      "metric": "nDCG@10",
+      "value": 70.64,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "jina-reranker-v3 模型卡对比表；技术报告 arXiv:2509.25085v4 Table 2",
+      "settings": "发布方自运行成绩，输入为 jina-embeddings-v3 的 top-100 候选，按 nDCG@10 报告；模型卡对比表中同厂 jina-code-embeddings-0.5b 第一阶段的 CoIR 为 73.94，说明该表区分嵌入与重排两个阶段。评测运行日期未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/jinaai/jina-reranker-v3",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "Jina AI（模型发布方自运行）",
+      "externalModelId": "jinaai/jina-reranker-v3",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露评测运行日、模型 revision 与推理配置；该数值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/jinaai/jina-reranker-v3",
+        "notes": "仅记录模型卡与报告中少量汇总成绩并保留发布方署名与来源链接；不复制表格明细与基准数据，引用不更改模型卡、论文及基准各自许可。"
+      },
+      "provenance": {
+        "sourceId": "jinaai",
+        "runId": "jinaai-reranker-v3-card-benchmarks",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "official-only",
+      "summary": "发布方自报 BEIR 61.94（nDCG@10）、MIRACL 66.83（nDCG@10）、MKQA 67.92（Recall@10）与 CoIR 70.64（nDCG@10），均以 jina-embeddings-v3 的 top-100 候选为输入。该模型把 0.6B 的编码器用于 listwise 联合重排，在官方对比中与更大模型的 BEIR 成绩接近，但缺少独立复测。",
+      "strengths": [
+        "官方同时给出英文（BEIR）、多语（MIRACL）、跨语问答（MKQA）与代码（CoIR）四类基准，覆盖面在同类轻量重排模型中较全。",
+        "技术报告说明评测流程（第一阶段检索器、top-100 候选、各基准指标定义），条件可回溯。",
+        "架构与推理接口（model.rerank、按相关性降序返回）在模型卡中有明确示例，便于按同一配置复现。"
+      ],
+      "limitations": [
+        "全部成绩由模型发布方自运行，未找到许可明确且已确认独立性的同型号重排结果。",
+        "模型卡（BEIR 61.94）与技术报告 v4（61.85）的同一指标存在版本差异，比较时需固定出处。",
+        "重排不提升召回：成绩建立在 jina-embeddings-v3 的 top-100 候选之上，更换第一阶段检索器后需重新测量。",
+        "候选数量、文档长度与批量切分会显著影响 listwise 重排的时延与效果，本站未实测资源占用。"
+      ],
+      "evidenceIds": [
+        "beir-ndcg10",
+        "miracl-ndcg10",
+        "mkqa-recall10",
+        "coir-ndcg10"
+      ]
+    }
+  ]
+}

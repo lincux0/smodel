@@ -1,0 +1,374 @@
+{
+  "id": "glm-asr-nano-2512",
+  "name": "GLM-ASR-Nano-2512",
+  "family": "GLM",
+  "version": "ASR-Nano-2512",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡与GitHub仓库均称该型号为1.5B参数；HF权重元数据safetensors张量参数和为2,257,843,200（约2.26B），仓库config.json包含glmasr_encoder音频编码器（32层、hidden 1280）与llama式文本解码器（28层、hidden 2048、vocab 59264）；官方未按组件分列参数口径。",
+    "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "意大利语",
+    "英语",
+    "加泰罗尼亚语",
+    "乌克兰语",
+    "荷兰语",
+    "西班牙语",
+    "德语",
+    "中文（普通话）",
+    "日语",
+    "法语",
+    "俄语",
+    "葡萄牙语",
+    "马来语",
+    "印尼语",
+    "挪威语",
+    "立陶宛语",
+    "斯洛文尼亚语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/zai-org/GLM-ASR/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "官方称该模型面向真实复杂场景训练，强调方言与低音量语音能力，并给出基于FLEURS基准的语言可用性分级（Native-like WER<10%、Proficient WER≤20%）；未公开训练语料规模、清单与数据许可明细。"
+  },
+  "summary": "1.5B级语音识别模型，官方定位为面向真实声学环境的中英及多语种转写，强调低音量语音与方言场景，并给出FLEURS语言分级与自测基准表。",
+  "features": [
+    "官方模型卡与GitHub仓库均标注1.5B参数，官方称在多个基准上优于OpenAI Whisper V3",
+    "官方基于FLEURS基准给出17种语言可用性分级：Native-like（WER<10%）8种、Proficient（WER≤20%）9种",
+    "官方基准图列出Wenet Meeting、Aishell-1、Libri Clean、Libri Other、Fleurs EN五项数值，并称在可比开源模型中平均错误率最低（4.10）",
+    "官方提供transformers（需从源码安装5.x）与SGLang两条推理路线，并称后续支持vLLM等框架",
+    "HF权重仓库附带Open ASR Leaderboard评测结果文件（8个英文数据集WER与RTFx），由hf-audio执行并标注评测日期2025-12-09"
+  ],
+  "limitations": [
+    "官方未发布单独的发布日期公告；本条以官方仓库提交核实：HF权重仓库首个包含权重文件的提交时间为2025-12-09T17:58:59Z（仓库创建于同日09:07:41Z），GitHub仓库同期开始提交，Open ASR Leaderboard结果文件标注日期同为2025-12-09。",
+    "模型卡称对粤语等方言做了优化，但基于FLEURS的17种语言清单不含粤语，也没有对应的公开方言成绩；方言效果需自行验证。",
+    "官方基准表以图片形式发布，本条目数值转录自该图；表注只说明数值为CER/WER（越低越好），未披露评测框架、音频分段、文本归一化与模型revision。",
+    "模型卡称将支持vLLM，截至本次核实其官方文档只给出transformers与SGLang路线（SGLang需开发版镜像）。",
+    "GitHub说明适配transformers与SGLang后权重格式已变更，2025-12-27之前下载的权重需重新拉取，旧权重与当前代码不匹配。",
+    "官方模型卡未披露token上下文；仓库config.json的text_config.max_position_embeddings为8192、音频编码器max_position_embeddings为1500，属实现配置，本条不将其作为上下文数值填写。",
+    "本站未实测识别准确率、低音量场景与方言效果。"
+  ],
+  "officialUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（transformers 5.x实现，需从源码安装）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+      "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512#transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求从GitHub源码安装）",
+        "torch",
+        "datasets（官方示例用于加载音频数组）",
+        "ffmpeg（GitHub仓库要求apt安装，用于音频解码）"
+      ],
+      "steps": [
+        {
+          "title": "从源码安装 Transformers",
+          "description": "官方模型卡给出的安装命令，用于获得该型号所需的新版transformers实现；GitHub仓库另提供transformers 4.51.3配合inference.py的旧权重路线。本站未执行。",
+          "command": "pip install git+https://github.com/huggingface/transformers"
+        },
+        {
+          "title": "按官方示例转写",
+          "description": "官方示例用AutoProcessor.apply_transcription_request处理音频URL或音频数组，再以AutoModelForSeq2SeqLM（或GlmAsrForConditionalGeneration）加载模型并generate（do_sample=False、max_new_tokens=500），最后batch_decode输出文本；批量推理可传音频列表。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出内存或显存需求数值，实际占用取决于精度与批大小。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sglang",
+      "runtime": "SGLang",
+      "systems": [
+        "Docker（官方要求使用开发版镜像）"
+      ],
+      "format": "Safetensors（SGLang服务加载）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+      "sourceUrl": "https://github.com/zai-org/GLM-ASR#inference",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "docker（官方说明暂无发行版，需用lmsysorg/sglang:dev开发镜像）",
+        "transformers（容器内需从源码安装）",
+        "openai（客户端示例使用）"
+      ],
+      "steps": [
+        {
+          "title": "拉取 SGLang 开发镜像",
+          "description": "官方README说明SGLang暂无发行版可用，示例使用开发镜像lmsysorg/sglang:dev。本站未拉取镜像。",
+          "command": "docker pull lmsysorg/sglang:dev"
+        },
+        {
+          "title": "启动兼容 OpenAI 接口的服务",
+          "description": "官方示例在容器内先安装源码版transformers，再用sglang.launch_server加载该模型（served-model-name为glm-asr，端口8000）。本站未启动服务。",
+          "command": "python3 -m sglang.launch_server --model-path zai-org/GLM-ASR-Nano-2512 --served-model-name glm-asr --host 0.0.0.0 --port 8000"
+        },
+        {
+          "title": "按官方示例发送请求",
+          "description": "官方给出OpenAI客户端示例：消息内容包含audio_url与文本指令，服务端返回转写结果；示例max_tokens为1024。本站未发送请求。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出该路线的显存或并发资源数值，开发版镜像的行为可能随版本变化。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "aishell-1-card-cer",
+      "benchmark": "官方模型卡基准表（CER）",
+      "dataset": "Aishell-1",
+      "language": "中文（普通话）",
+      "metric": "CER",
+      "value": 1.81,
+      "unit": "%",
+      "direction": "lower",
+      "version": "GLM-ASR-Nano-2512官方模型卡Benchmark图（bench.png）",
+      "settings": "数值转录自官方模型卡基准图：GLM-ASR-Nano（1.5B）列Aishell-1为1.81，同列对照为FunAudio-ASR-Nano 1.80、OpenAI Whisper V3 4.72、FireRed ASR 0.54、FunAudio-ASR 1.22、Seed-ASR 1.63（官方表注说明Seed-ASR结果取自FunAudio-ASR技术报告）；表注仅说明数值为CER/WER（越低越好），未披露评测框架、音频分段、文本归一化与模型revision；本站未复现。",
+      "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Z.ai（模型发布方自报）",
+      "externalModelId": "zai-org/GLM-ASR-Nano-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源为官方模型卡图片，未披露评测框架、音频分段、文本归一化与模型revision，也未提供逐项原始结果文件；原样记录，不与其他来源的同名数据集成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+        "notes": "仅记录官方模型卡图中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "zai",
+        "runId": "zai-glm-asr-nano-2512-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "wenet-meeting-card-cer",
+      "benchmark": "官方模型卡基准表（CER）",
+      "dataset": "Wenet Meeting",
+      "language": "中文（会议场景）",
+      "metric": "CER",
+      "value": 6.73,
+      "unit": "%",
+      "direction": "lower",
+      "version": "GLM-ASR-Nano-2512官方模型卡Benchmark图（bench.png）",
+      "settings": "数值转录自官方模型卡基准图：GLM-ASR-Nano（1.5B）列Wenet Meeting为6.73，同列对照为FunAudio-ASR-Nano 6.82、OpenAI Whisper V3 18.39、FireRed ASR 4.95、FunAudio-ASR 6.49、Seed-ASR 7.07。官方说明Wenet Meeting反映含噪声与重叠语音的真实会议场景；表注仅说明数值为CER/WER（越低越好），未披露评测框架、音频分段与文本归一化细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Z.ai（模型发布方自报）",
+      "externalModelId": "zai-org/GLM-ASR-Nano-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源为官方模型卡图片，未披露评测框架、音频分段、文本归一化与模型revision，也未提供逐项原始结果文件；原样记录，不与其他来源的同名数据集成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512",
+        "notes": "仅记录官方模型卡图中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "zai",
+        "runId": "zai-glm-asr-nano-2512-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "open-asr-lb-mean-wer",
+      "benchmark": "Open ASR Leaderboard（8个英文数据集平均WER）",
+      "dataset": "Open ASR Leaderboard英文数据集（AMI、Earnings22、GigaSpeech、LibriSpeech clean/other、SPGISpeech、TED-LIUM、VoxPopuli）",
+      "language": "英语",
+      "metric": "mean WER",
+      "value": 7.03,
+      "unit": "%",
+      "direction": "lower",
+      "version": "HF权重仓库.eval_results/open_asr_leaderboard.yaml（mean_wer，标注评测日期2025-12-09，提交时间2026-04-07）",
+      "settings": "该文件由hf-audio（Open ASR Leaderboard）生成并随官方权重仓库发布，同文件另列ami_wer 16.15、earnings22_wer 11.08、gigaspeech_wer 9.73、librispeech_clean_wer 2.15、librispeech_other_wer 4.42、spgispeech_wer 2.08、tedlium_wer 3.10、voxpopuli_wer 7.54与rtfx 145.28；文件只给出数值与日期，未附音频分段、文本归一化与推理运行时（速度指标未注明机器）；本站未复现。",
+      "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512/blob/main/.eval_results/open_asr_leaderboard.yaml",
+      "date": "2025-12-09",
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Open ASR Leaderboard（hf-audio执行）",
+      "externalModelId": "zai-org/GLM-ASR-Nano-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露音频分段、文本归一化、模型revision与推理运行时，执行者与模型发布方的关系未核实；原样记录，不与官方模型卡或其他来源的成绩直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://github.com/huggingface/open_asr_leaderboard",
+        "notes": "引用HF权重仓库中随模型发布的少量Open ASR Leaderboard结果；榜单代码为Apache-2.0但该许可不覆盖结果与评测语料，本记录不复制底层测试数据。"
+      },
+      "provenance": {
+        "sourceId": "hf-audio",
+        "runId": "open-asr-leaderboard-glm-asr-nano-2512",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "open-asr-lb-librispeech-clean",
+      "benchmark": "Open ASR Leaderboard（LibriSpeech test-clean）",
+      "dataset": "LibriSpeech test-clean",
+      "language": "英语",
+      "metric": "WER",
+      "value": 2.15,
+      "unit": "%",
+      "direction": "lower",
+      "version": "HF权重仓库.eval_results/open_asr_leaderboard.yaml（librispeech_clean_wer，标注评测日期2025-12-09，提交时间2026-04-07）",
+      "settings": "该文件由hf-audio（Open ASR Leaderboard）生成并随官方权重仓库发布；同文件librispeech_other_wer为4.42。官方模型卡基准图对Libri Clean给出2.00、Libri Other 4.19，两者口径与条件不同，本条只记录榜单文件数值。文件未附音频分段、文本归一化与推理运行时；本站未复现。",
+      "sourceUrl": "https://huggingface.co/zai-org/GLM-ASR-Nano-2512/blob/main/.eval_results/open_asr_leaderboard.yaml",
+      "date": "2025-12-09",
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Open ASR Leaderboard（hf-audio执行）",
+      "externalModelId": "zai-org/GLM-ASR-Nano-2512",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "test-clean",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露音频分段、文本归一化、模型revision与推理运行时，执行者与模型发布方的关系未核实，且与官方模型卡的同名数据集数值条件不同；原样记录，不与其他来源直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://github.com/huggingface/open_asr_leaderboard",
+        "notes": "引用HF权重仓库中随模型发布的少量Open ASR Leaderboard结果；榜单代码为Apache-2.0但该许可不覆盖结果与评测语料，本记录不复制底层测试数据。"
+      },
+      "provenance": {
+        "sourceId": "hf-audio",
+        "runId": "open-asr-leaderboard-glm-asr-nano-2512",
+        "independence": "unknown"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "independence-unverified",
+      "summary": "可作为中英双语与低音量场景的转写候选：官方模型卡自报Aishell-1 CER 1.81%、Wenet Meeting CER 6.73%，并称五项平均错误率4.10在可比开源模型中最低；HF权重仓库另附Open ASR Leaderboard结果，8个英文数据集平均WER 7.03%、LibriSpeech test-clean WER 2.15%（标注日期2025-12-09）。官方成绩与榜单成绩口径不同，且榜单执行者与发布方的关系未核实。",
+      "strengths": [
+        "官方基准表并列多个开源与闭源对照模型（含Whisper V3、FunAudio-ASR、FireRed ASR、Seed-ASR），并标注Seed-ASR结果取自FunAudio-ASR技术报告。",
+        "HF权重仓库附带Open ASR Leaderboard结果文件，含8个英文数据集的WER与RTFx，评测日期与执行者标识可查。",
+        "官方基于FLEURS给出17种语言的可用性分级，语言清单以图片形式公开。"
+      ],
+      "limitations": [
+        "官方基准图为图片，未披露评测框架、音频分段、文本归一化与模型revision，转录数值存在读数风险，本站未复现。",
+        "Open ASR Leaderboard结果由hf-audio执行，执行者与模型发布方的关系未核实，且文件未披露评测条件，不能作为独立交叉佐证。",
+        "官方称对粤语等方言做了优化，但17种语言清单不含粤语，也没有方言公开成绩。",
+        "模型卡称将支持vLLM，当前官方文档只有transformers与SGLang（开发版镜像）路线。",
+        "低音量语音能力只有官方描述，无对应公开指标；本站未实测识别质量、低音量与会议场景表现。"
+      ],
+      "evidenceIds": [
+        "aishell-1-card-cer",
+        "wenet-meeting-card-cer",
+        "open-asr-lb-mean-wer",
+        "open-asr-lb-librispeech-clean"
+      ]
+    }
+  ]
+}

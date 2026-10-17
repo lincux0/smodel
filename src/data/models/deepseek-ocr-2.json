@@ -1,0 +1,361 @@
+{
+  "id": "deepseek-ocr-2",
+  "name": "DeepSeek-OCR 2",
+  "family": "DeepSeek",
+  "version": "2",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.39,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "HF权重元数据safetensors张量参数和为3,389,119,360（约3.39B）；论文说明解码器沿用DeepSeek-OCR的3B参数MoE（约500M激活参数），DeepEncoder V2的因果流查询以Qwen2-0.5B实例化（约500M参数），视觉tokenizer约80M参数；官方未按整模单列参数总量与激活参数口径。",
+    "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方模型卡标注multilingual，未列具体语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/deepseek-ai/DeepSeek-OCR-2/blob/main/LICENSE.txt"
+    },
+    "trainingDisclosure": "论文披露训练管线：DeepEncoder V2先在160张A100（20节点×8卡）、批大小640、40k迭代、序列打包8K长度下预训练（约1亿图文对样本），再以DeepSeek-3B-A500M联合优化查询增强并继续训练LLM解码器；未公开完整训练语料清单与数据许可明细。"
+  },
+  "summary": "以视觉因果流为核心的端到端文档解析模型，DeepEncoder V2在送入语言模型前按图像语义动态重排视觉token，官方称在OmniDocBench v1.5上较上一代提升3.73分。",
+  "features": [
+    "DeepEncoder V2以Qwen2-0.5B实例化因果流查询，将视觉token按语义重排后再送入DeepSeek-MoE解码器",
+    "官方模型卡给出动态分辨率默认配置：(0-6)×768×768 + 1×1024×1024，对应(0-6)×144 + 256个视觉token",
+    "官方提供两种提示：<|grounding|>Convert the document to markdown（带版面）与Free OCR（不带版面）",
+    "官方GitHub提供vLLM推理脚本，含图片流式输出、PDF并发处理与OmniDocBench v1.5批量评测脚本",
+    "论文在OmniDocBench v1.5上报告Overall 91.09，较DeepSeek-OCR（9-crops）的87.36提升3.73分"
+  ],
+  "limitations": [
+    "官方未发布单独的发布日期公告；本条核实的依据是官方权重仓库提交历史：首个包含safetensors权重文件的提交时间为2026-01-27T03:09:57Z（仓库创建于同日02:56:54Z），论文arXiv 2601.20552v1提交于2026-01-28。该日期为仓库提交时间，不是官方公告日期。",
+    "官方模型卡未披露文本上下文长度；模型卡与GitHub示例给出的是分辨率档位与视觉token数，不能当作上下文窗口。",
+    "Transformers路线官方测试环境为固定版本组合（python 3.12.9、CUDA 11.8、torch 2.6.0、transformers 4.46.3）；vLLM路线官方指定vllm-0.8.5轮子，版本不匹配需自行验证。",
+    "论文Table 1中除DeepSeek-OCR两代以外的对照结果采集自OmniDocBench仓库，未逐项复现；本条只转录DeepSeek-OCR 2与DeepSeek-OCR两行。",
+    "生产环境重复率是在线服务与预训练数据管线的内部观测口径，不是公开基准，不能与其他OCR记录横比。",
+    "本站未在真实票据、表格或扫描件上验证版面、表格与阅读顺序还原效果。"
+  ],
+  "officialUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（含仓库内自定义代码，需trust_remote_code）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+      "sourceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch==2.6.0",
+        "transformers==4.46.3",
+        "tokenizers==0.20.3",
+        "einops",
+        "addict",
+        "easydict",
+        "flash-attn==2.7.3（需按官方命令单独安装）"
+      ],
+      "steps": [
+        {
+          "title": "安装 Python 依赖",
+          "description": "官方模型卡以Requirements列表给出各包版本（测试环境python 3.12.9与CUDA 11.8），此处转换为终端写法；flash-attn需按官方说明以--no-build-isolation单独安装。本站未执行该命令。",
+          "command": "python -m pip install torch==2.6.0 transformers==4.46.3 tokenizers==0.20.3 einops addict easydict"
+        },
+        {
+          "title": "加载指定模型并推理",
+          "description": "按官方示例以AutoModel.from_pretrained加载该模型（_attn_implementation='flash_attention_2'、trust_remote_code=True），调用infer并传入base_size=1024、image_size=768、crop_mode=True；提示可选带<|grounding|>的文档转Markdown或Free OCR。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；论文的160张A100为训练环境描述，不是推理资源需求；官方未给出该路线的内存或显存数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors（含仓库内自定义代码）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+      "sourceUrl": "https://github.com/deepseek-ai/DeepSeek-OCR-2#vllm-inference",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "conda（官方示例用conda创建环境）",
+        "python 3.12.9（官方示例）",
+        "torch==2.6.0、torchvision==0.21.0、torchaudio==2.6.0（官方cu118索引）",
+        "vllm-0.8.5+cu118 wheel（官方指定从vLLM Releases下载）",
+        "flash-attn==2.7.3（需按官方命令单独安装）"
+      ],
+      "steps": [
+        {
+          "title": "创建并激活环境",
+          "description": "官方README给出的conda创建命令（环境名deepseek-ocr2、python 3.12.9）；官方说明整体环境为cuda11.8+torch2.6.0。本站未执行。",
+          "command": "conda create -n deepseek-ocr2 python=3.12.9 -y"
+        },
+        {
+          "title": "安装 PyTorch 与 vLLM",
+          "description": "官方README给出的cu118索引安装命令，随后需安装vllm-0.8.5+cu118轮子、requirements.txt与flash-attn；官方提示若与transformers代码同环境，vLLM对transformers版本的要求报错可忽略。本站未执行。",
+          "command": "pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118"
+        },
+        {
+          "title": "按官方脚本运行推理与批量评测",
+          "description": "官方在DeepSeek-OCR2-master/DeepSeek-OCR2-vllm目录下提供脚本：run_dpsk_ocr2_image.py（图片流式输出）、run_dpsk_ocr2_pdf.py（PDF并发）、run_dpsk_ocr2_eval_batch.py（OmniDocBench v1.5批量评测）；运行前需按README修改config.py中的输入输出路径等设置。本站未运行任何脚本。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于分辨率档位、批大小、并发与vLLM版本，官方未给出该路线的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "omnidocbench-v15-overall",
+      "benchmark": "OmniDocBench v1.5",
+      "dataset": "OmniDocBench v1.5（综合分，覆盖版面、文本、公式、表格与阅读顺序）",
+      "language": "多语言（基准含中英文等文档）",
+      "metric": "Overall（v1.5综合分，越高越好）",
+      "value": 91.09,
+      "unit": "分",
+      "direction": "higher",
+      "version": "DeepSeek-OCR 2论文（arXiv 2601.20552v1）Table 1",
+      "settings": "论文Table 1为OmniDocBench v1.5综合评测，V-token max列表示每页最大视觉token数；DeepSeek-OCR 2为1120个视觉token、Overall 91.09，同表DeepSeek-OCR（9-crops）为1156个视觉token、Overall 87.36（提升3.73）。表注说明除DeepSeek-OCR两代外，其余模型结果采集自OmniDocBench仓库；论文未披露评测协议版本、提示模板、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2601.20552",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR-2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "OmniDocBench v1.5综合分与编辑距离等口径不同，来源也未披露评测协议版本、模型revision与完整推理配置；该结果仅记录原论文口径，不与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2601.20552",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr2-paper-table1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-v15-text-edit",
+      "benchmark": "OmniDocBench v1.5",
+      "dataset": "OmniDocBench v1.5（Text 元素编辑距离）",
+      "language": "多语言（基准含中英文等文档）",
+      "metric": "Text Edit Distance（越低越好）",
+      "value": 0.048,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "DeepSeek-OCR 2论文（arXiv 2601.20552v1）Table 1与Table 2",
+      "settings": "论文Table 1与Table 2均给出Text Edit：DeepSeek-OCR 2为0.048，DeepSeek-OCR为0.073（Table 2口径）。Table 2另列Formula Edit 0.198、Table Edit 0.096、R-order Edit 0.057与Overall Edit 0.100，并给出Gemini-3 pro Overall Edit 0.115、Seed-1.8 0.106作对照。论文未披露评测协议版本、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2601.20552",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR-2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页解析中Text元素的编辑距离，来源未披露评测协议版本、模型revision与推理配置；原样记录，不与其他OCR记录或流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2601.20552",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr2-paper-table1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "omnidocbench-v15-rorder-edit",
+      "benchmark": "OmniDocBench v1.5",
+      "dataset": "OmniDocBench v1.5（R-order 阅读顺序编辑距离）",
+      "language": "多语言（基准含中英文等文档）",
+      "metric": "R-order Edit Distance（越低越好）",
+      "value": 0.057,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "DeepSeek-OCR 2论文（arXiv 2601.20552v1）Table 1与Table 2",
+      "settings": "论文Table 1与Table 2均给出R-order Edit：DeepSeek-OCR 2为0.057，DeepSeek-OCR为0.085（Table 2口径）；该指标衡量阅读顺序，与论文提出的视觉因果流重排直接相关。Table 3另按PPT、学术论文、书籍等9类文档分列Text与R-order编辑距离。论文未披露评测协议版本、模型revision与推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2601.20552",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR-2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标为整页解析的阅读顺序编辑距离，来源未披露评测协议版本、模型revision与推理配置；原样记录，不与其他OCR记录或流水线成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2601.20552",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr2-paper-table1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "production-repeat-rate-image",
+      "benchmark": "生产环境重复率观测（论文Table 4）",
+      "dataset": "在线用户日志图片（online-user-logs，图像输入）",
+      "language": "多语言（线上服务日志）",
+      "metric": "Repeat rate（重复率，越低越好）",
+      "value": 4.17,
+      "unit": "%",
+      "direction": "lower",
+      "version": "DeepSeek-OCR 2论文（arXiv 2601.20552v1）Table 4",
+      "settings": "论文Table 4为生产环境对比：在线用户日志图片输入下DeepSeek-OCR 2重复率4.17%、DeepSeek-OCR为6.25%（下降2.08个百分点）；预训练数据PDF输入下为2.88%对3.69%（下降0.81个百分点）。论文说明生产环境无法获取真值，重复率是主要可观测质量指标。该表为内部生产观测口径，未披露样本量、时间窗口与判定脚本；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2601.20552",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "DeepSeek-AI（论文作者及模型发布方）",
+      "externalModelId": "deepseek-ai/DeepSeek-OCR-2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该指标是在线服务与数据管线的内部生产观测，不是公开基准，来源未披露样本量与判定脚本，不能与其他OCR基准成绩直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2601.20552",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "deepseek-ai",
+        "runId": "deepseek-ocr2-paper-table4",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "可作为整页文档解析候选：论文在OmniDocBench v1.5上报告该型号Overall 91.09分（每页最多1120个视觉token）、Text Edit 0.048、R-order Edit 0.057，较上一代DeepSeek-OCR的87.36、0.073、0.085均有改善；生产环境在线用户日志图片的重复率为4.17%（上一代6.25%）。均为发布方自测或内部观测，编辑距离与常规OCR字符准确率口径不同。",
+      "strengths": [
+        "论文按元素类别（文本、公式、表格、阅读顺序）分列编辑距离，并给出Overall综合分，可核对口径。",
+        "视觉token数（1120）与上一代（1156）接近，改进主要来自编码器重排而非堆叠token。",
+        "官方提供OmniDocBench v1.5批量评测脚本，评测流程可自行复现。",
+        "论文按9类文档分列Text与R-order编辑距离，便于了解版面差异。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立的同型号同条件复测；表内其他模型结果采集自OmniDocBench仓库。",
+        "论文未披露OmniDocBench评测协议版本、提示模板、模型revision与推理配置。",
+        "生产重复率为内部观测，样本量与判定规则未公开。",
+        "官方未披露文本上下文长度；分辨率档位与视觉token数不能换算为上下文窗口。",
+        "本站未在真实票据、表格或扫描件上验证版面、表格与阅读顺序还原效果。"
+      ],
+      "evidenceIds": [
+        "omnidocbench-v15-overall",
+        "omnidocbench-v15-text-edit",
+        "omnidocbench-v15-rorder-edit",
+        "production-repeat-rate-image"
+      ]
+    }
+  ]
+}
