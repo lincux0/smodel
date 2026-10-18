@@ -1,0 +1,395 @@
+{
+  "id": "mdenseon",
+  "name": "LightOn mDenseOn",
+  "family": "DenseOn",
+  "version": "mDenseOn",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.307,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡称该型号为 307M 参数的多语稠密（单向量）检索模型，骨干为 mmBERT-base（模型卡标注 307M parameters）；核对当日 HF 仓库主权重张量合计 306,939,648（约 306.9M），与 307M 口径一致，未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/lightonai/mDenseOn"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/lightonai/mDenseOn"
+  },
+  "languages": [
+    "九种训练语言：英语、法语、德语、意大利语、西班牙语、葡萄牙语、瑞典语、挪威语、阿拉伯语",
+    "模型卡说明稠密单向量模型对训练未覆盖语言的迁移弱于同系列晚交互模型：全语言 MIRACL 58.02、MLDR 51.59，明显低于目标语言子集"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/lightonai/mDenseOn"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡披露训练数据：多语精编预训练数据 2.16B 文本对加英语 665M 对（合计 2.8B 对训练混合物，含 220M 跨语言对），微调混合物 16.3M 样本，采用 NV-Retriever 方法过滤（丢弃评分高于正例 95% 的候选、保留 top-10 困难负例）并叠加 mxbai-rerank-large-v2 交叉编码器蒸馏，逐语言公开数据集链接；未公开可直接复核的完整原始语料。"
+  },
+  "summary": "面向多语言与代码检索的稠密（单向量）模型，在 BEIR、MIRACL、MLDR 与 MTEB Code 上与同规模稠密基线竞争，训练九种语言并支持 8192 tokens 长输入。",
+  "features": [
+    "307M 参数的 mmBERT-base 骨干，输出 768 维单向量，按余弦相似度打分，[CLS] 池化",
+    "查询与文档最大输入 8192 tokens，使用 query: 与 document: 前缀",
+    "官方模型卡 Headline Results 列出 BEIR 56.70、MIRACL 目标语言 59.61、MLDR 目标语言 64.98、MTEB Code 71.53",
+    "官方用法为 Sentence Transformers（model.encode 加 prompt_name=\"query\"/\"document\"）",
+    "训练数据（逐语言数据集）与训练脚本（GitHub）公开；官方另提供仅预训练的 mDenseOn-unsupervised 检查点"
+  ],
+  "limitations": [
+    "稠密单向量表示的跨语言迁移有限：模型卡称全语言 MIRACL 58.02、MLDR 51.59，明显低于目标语言子集；训练未覆盖语言建议改用同系列晚交互模型。",
+    "官方成绩为发布方自评，未披露模型 revision、编码精度与硬件条件，评测运行日期未披露；本站未复现。",
+    "MTEB 结果仓库收录该型号（revision d61878b0）的 41 个检索任务文件（MTEB 2.10.12），由 paulomouraj 于 2026-07-30 提交，文件未附 run_settings、部分文件无评测时间戳；本轮仅导入其中 2 条并标注独立性未确认，其余未导入。",
+    "训练脚本仓库位于 GitHub，模型卡未声明其代码许可，本条目按未核实处理。"
+  ],
+  "officialUrl": "https://huggingface.co/lightonai/mDenseOn",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/lightonai/mDenseOn",
+      "sourceUrl": "https://huggingface.co/lightonai/mDenseOn#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers"
+      ],
+      "steps": [
+        {
+          "title": "安装 Sentence Transformers",
+          "description": "按官方模型卡 Usage 章节安装最新版 Sentence Transformers。",
+          "command": "pip install -U sentence-transformers"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按官方示例用 SentenceTransformer(\"lightonai/mDenseOn\") 加载，查询与文档分别以 prompt_name=\"query\" 和 \"document\" 编码（对应 query:/document: 前缀），再用 model.similarity 计算余弦相似度。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "beir-ndcg10",
+      "benchmark": "BEIR",
+      "dataset": "BEIR（英语通用域检索；模型卡未列出逐数据集版本）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 56.7,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mDenseOn 模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡 Headline Results 表报告 mDenseOn 的 BEIR 为 56.70，同表列出 mLateOn（57.56）、pplx-embed-v1-0.6b（56.70）、jina-v5-text-small（56.70）等对照；模型卡称其略高于英语版 DenseOn（56.20）。该表未说明 BEIR 包含的数据集版本、编码精度与硬件条件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mDenseOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与基准子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mDenseOn",
+        "notes": "仅引用 LightOn 官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mdenseon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracol-tgt-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL（目标语言子集，仅含与训练目标语言重叠的语言；模型卡标注 MIRACL tgt）",
+      "language": "多语言（目标语言子集）",
+      "metric": "nDCG@10",
+      "value": 59.61,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mDenseOn 模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡 Headline Results 表报告 MIRACL tgt 为 59.61；表注说明 MIRACL tgt 与 MLDR tgt 只包含与训练目标语言重叠的语言，同表全语言 MIRACL 为 58.02。模型卡称其与 EmbeddingGemma（58.72）等同等规模模型形成竞争。表未披露模型 revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mDenseOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与语言子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mDenseOn",
+        "notes": "仅引用 LightOn 官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mdenseon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mldr-tgt-ndcg10",
+      "benchmark": "MLDR",
+      "dataset": "MLDR（目标语言子集；模型卡标注 MLDR tgt）",
+      "language": "多语言（目标语言子集）",
+      "metric": "nDCG@10",
+      "value": 64.98,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mDenseOn 模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡 Headline Results 表报告 MLDR tgt 为 64.98；表注说明 MLDR tgt 只包含与训练目标语言重叠的语言，同表全语言 MLDR 为 51.59（模型卡称稠密模型对未见语言迁移有限）。表未披露模型 revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mDenseOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与语言子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mDenseOn",
+        "notes": "仅引用 LightOn 官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mdenseon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-code-ndcg10",
+      "benchmark": "MTEB Code",
+      "dataset": "MTEB Code（代码检索）",
+      "language": "代码（官方未列具体语言）",
+      "metric": "nDCG@10",
+      "value": 71.53,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "mDenseOn 模型卡 Headline Results 表（NDCG@10）",
+      "settings": "模型卡称该成绩为 350M 以下稠密模型中第二高，且仅使用微调阶段的代码数据（using only fine-tuning-stage code data）、未做代码专属预训练；同表列出 mLateOn（73.48）、voyage-4-nano（76.43）、Qwen3-Embedding-0.6B（73.75）等对照。表未披露 MTEB Code 的具体任务子集、revision 与运行条件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/lightonai/mDenseOn",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "LightOn（模型发布方）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与代码基准子集构成；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/lightonai/mDenseOn",
+        "notes": "仅引用 LightOn 官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，涉及基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "lighton",
+        "runId": "lighton-mdenseon-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "cqadupstackretrieval-ndcg10",
+      "benchmark": "BEIR / MTEB",
+      "dataset": "CQADupstackRetrieval（英文编程问答社区检索，BEIR 子集；dataset revision 1）",
+      "language": "英语",
+      "metric": "nDCG@10",
+      "value": 0.456992,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.10.12（结果仓库 PR #653，提交记录 2026-07-30）",
+      "settings": "结果文件 CQADupstackRetrieval.json 记录 main_score=ndcg_at_10=0.456992，test 拆分；文件内时间戳 2026-07-16（UTC）记为评测运行日。PR #653 说明为提交 lightonai/mDenseOn 与 lightonai/mLateOn 结果，未附 run_settings，完整提示与推理配置未披露，且不能据提交者身份确认其与模型发布方的关系；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/lightonai__mDenseOn/d61878b089bba2156fe029d3bb8ccaad368a6249/CQADupstackRetrieval.json",
+      "date": "2026-07-16",
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "paulomouraj（MTEB 结果仓库提交者；与模型发布方关系未核实）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": "d61878b089bba2156fe029d3bb8ccaad368a6249",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但执行者身份与完整推理配置未披露；独立性未确认，不与官方模型卡汇总或其他模型的分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按 CC0 发布的少量成绩；BEIR / MTEB 任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "paulomouraj",
+        "runId": "paulomouraj-mteb-results-pr-653",
+        "independence": "unknown"
+      }
+    },
+    {
+      "id": "appsretrieval-ndcg10",
+      "benchmark": "MTEB (Code)",
+      "dataset": "AppsRetrieval（应用代码检索，test 拆分；dataset revision f22508f96b7a36c2415181ed8bb76f76e04ae2d5）",
+      "language": "英语、Python 代码",
+      "metric": "nDCG@10",
+      "value": 0.38124,
+      "unit": "分（0–1）",
+      "direction": "higher",
+      "version": "MTEB 2.10.12（结果仓库 PR #653，提交记录 2026-07-30）",
+      "settings": "结果文件 AppsRetrieval.json 记录 main_score=ndcg_at_10=0.38124，test 拆分；文件内 date 字段为空，评测运行日未披露。PR #653 说明为提交 lightonai/mDenseOn 与 lightonai/mLateOn 结果，未附 run_settings，完整提示与推理配置未披露，且不能据提交者身份确认其与模型发布方的关系；不是本站复测。",
+      "sourceUrl": "https://github.com/embeddings-benchmark/results/blob/main/results/lightonai__mDenseOn/d61878b089bba2156fe029d3bb8ccaad368a6249/AppsRetrieval.json",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "third-party",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "paulomouraj（MTEB 结果仓库提交者；与模型发布方关系未核实）",
+      "externalModelId": "lightonai/mDenseOn",
+      "modelConfig": {
+        "revision": "d61878b089bba2156fe029d3bb8ccaad368a6249",
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": "MTEB reference implementation"
+      },
+      "conditions": {
+        "split": "test",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "精确型号、任务与拆分明确，但评测运行日、执行者身份与完整推理配置未披露；独立性未确认，不与官方模型卡汇总或其他模型的分数直接比较。",
+      "rights": {
+        "status": "open-data",
+        "license": "CC0-1.0",
+        "url": "https://github.com/embeddings-benchmark/results",
+        "notes": "引用结果数据仓库中按 CC0 发布的少量成绩；MTEB Code 任务及其数据集分别遵循各自许可，本记录不复制基准数据。"
+      },
+      "provenance": {
+        "sourceId": "paulomouraj",
+        "runId": "paulomouraj-mteb-results-pr-653",
+        "independence": "unknown"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "independence-unverified",
+      "summary": "发布方模型卡报告：BEIR nDCG@10 56.70、MIRACL 目标语言子集 59.61（全语言 58.02）、MLDR 目标语言子集 64.98（全语言 51.59）、MTEB Code 71.53，覆盖英语通用检索、多语检索、长文档与代码检索；MTEB 结果仓库另有同 revision（d61878b0）的 CQADupstackRetrieval nDCG@10 0.456992 与 AppsRetrieval nDCG@10 0.38124，由 paulomouraj 于 2026-07-30 提交。官方成绩为发布方自评，仓库记录执行者与运行配置未确认，整体状态为独立性待确认。",
+      "strengths": [
+        "同一张表并列 BEIR、MIRACL、MLDR 与 MTEB Code，并给出对比模型的参数规模；表注明确区分目标语言子集与全语言口径。",
+        "模型卡披露训练数据构成、NV-Retriever 过滤方法与开源数据集链接，训练脚本仓库公开。",
+        "MTEB 结果仓库记录了同 revision 下的 BEIR 子集与代码检索分项，批次、拆分与数据集 revision 可追溯。"
+      ],
+      "limitations": [
+        "官方四项成绩由模型发布方运行，未披露模型 revision、编码精度、硬件与评测运行日期，本站未复现。",
+        "MTEB 结果仓库记录由 paulomouraj 提交、未附 run_settings，且提交者与 LightOn 论文作者同名但关系未获确认，独立性未确认，不构成独立交叉佐证。",
+        "MIRACL tgt/MLDR tgt 子集口径与全语言榜位不能混用；稠密单向量对训练外语言迁移有限，部署前需按目标语言评估。"
+      ],
+      "evidenceIds": [
+        "beir-ndcg10",
+        "miracol-tgt-ndcg10",
+        "mldr-tgt-ndcg10",
+        "mteb-code-ndcg10",
+        "cqadupstackretrieval-ndcg10",
+        "appsretrieval-ndcg10"
+      ]
+    }
+  ]
+}

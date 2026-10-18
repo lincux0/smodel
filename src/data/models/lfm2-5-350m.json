@@ -1,0 +1,346 @@
+{
+  "id": "lfm2-5-350m",
+  "name": "LFM2.5-350M",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.35,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注350M参数（16层：10个双门控卷积块＋6个GQA块）；HF权重元数据safetensors张量参数合计354,483,968（约0.354B），与官方口径一致。纯文本模型，无视觉或音频组件。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M"
+  },
+  "languages": [
+    "英语",
+    "阿拉伯语",
+    "中文",
+    "法语",
+    "德语",
+    "日语",
+    "韩语",
+    "葡萄牙语",
+    "西班牙语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-350M/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开训练口径：预训练从10T扩展至28T token，并采用大规模多阶段强化学习；知识截止2024年年中。未公开训练数据清单。"
+  },
+  "summary": "350M端侧指令模型，官方定位数据抽取、结构化输出与工具调用，支持9种语言、函数调用与32,768 token上下文。",
+  "features": [
+    "350M参数，16层（10个双门控卷积块＋6个GQA块），词表65,536",
+    "32,768 token上下文，知识截止2024年年中",
+    "官方称AMD CPU解码约313 tok/s、Snapdragon Gen4约188 tok/s，内存占用低于1GB（官方声明，本站未复现）",
+    "预训练由10T扩展至28T token并叠加多阶段强化学习，与LFM2-350M同档对照",
+    "官方称发布即支持llama.cpp、MLX与vLLM，另提供GGUF、ONNX、MLX与OpenVINO导出",
+    "支持函数调用（默认Python式调用，可切换JSON）"
+  ],
+  "limitations": [
+    "官方明确不推荐知识密集任务与编程。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "官方benchmark中MMLU-Pro为20.01，知识密集型问答能力有限。",
+    "官方支持语言为9种，未列入意大利语等语种。",
+    "官方未披露评测的数据版本、提示模板与采样配置，成绩为发布方自测；本站未复现评测与官方速度数据。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方快速开始使用Transformers加载，模型卡未给出本型号的具体安装命令，命令留空；本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用AutoModelForCausalLM以bfloat16加载LiquidAI/LFM2.5-350M，并用tokenizer.apply_chat_template应用ChatML风格模板；官方推荐生成参数temperature 0.1、top_k 50、repetition_penalty 1.05、max_new_tokens 512。本站未下载权重或运行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方列出AMD CPU约313 tok/s、Snapdragon Gen4约188 tok/s与低于1GB内存占用等设备数据，属于官方声明而非本站测量，不换算为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化等级（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方列出LFM2.5-350M-GGUF仓库，定位为面向llama.cpp及兼容工具的CPU推理与更低内存占用；本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "按llama.cpp文档加载",
+          "description": "官方推理表把llama.cpp列为支持框架并链接其项目；模型卡未给出具体加载命令，命令留空。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；具体占用取决于量化等级与运行时，不将文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 20.01,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-350M列MMLU-Pro为20.01，同表并列LFM2-350M（19.29）、Granite 4.0-H-350M（13.14）、Qwen3.5-0.8B (Instruct)（37.42）等对照模型。官方未披露该成绩的数据版本、模型revision、提示模板、few-shot与采样配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的数据版本、模型revision、提示模板与评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-350m-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 76.96,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-350M列IFEval为76.96，同表列出LFM2-350M（64.96）、Granite 4.0-H-350M（61.27）等对照。官方未披露该成绩的数据版本、模型revision、提示模板与strict/loose口径。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的数据版本、模型revision与评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-350m-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "multi-if",
+      "benchmark": "Multi-IF",
+      "dataset": "Multi-IF",
+      "language": "multilingual",
+      "metric": "score",
+      "value": 44.92,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-350M列Multi-IF为44.92，同表列出LFM2-350M（32.92）、Gemma 3 1B IT（44.25）等对照。官方未披露该成绩的语种范围、数据版本、模型revision与提示模板。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的语种范围、数据版本与评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-350m-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "bfcl-v3",
+      "benchmark": "BFCLv3",
+      "dataset": "BFCL",
+      "language": "en",
+      "metric": "score",
+      "value": 44.11,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v3",
+      "settings": "Liquid AI官方模型卡第二张benchmark表列出LFM2.5-350M列BFCLv3为44.11，同表列出Granite 4.0-H-350M（43.07）、Qwen3.5-0.8B (Instruct)（35.08）等对照。官方未披露该成绩的数据版本、模型revision、运行配置与handler设置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的数据版本、模型revision与运行配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-350M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-350m-benchmark-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为端侧数据抽取、结构化输出与工具调用候选：官方benchmark表报告MMLU-Pro 20.01、IFEval 76.96、Multi-IF 44.92、BFCLv3 44.11。成绩均来自发布方自测，且官方明确不推荐知识密集任务与编程。",
+      "strengths": [
+        "官方表在同一行并列LFM2-350M、Granite 4.0/4.0-H-350M、Qwen3.5-0.8B与Gemma 3 1B IT等同规模对照模型。",
+        "相对同档LFM2-350M在指令跟随与多语言指令上明显提升（官方表给出对照数值）。",
+        "官方公开训练预算、层结构与知识截止时间，能力边界较清楚。"
+      ],
+      "limitations": [
+        "官方明确不推荐知识密集任务与编程，官方benchmark也未覆盖代码生成能力。",
+        "MMLU-Pro 20.01，知识密集型问答能力有限。",
+        "官方未披露基准数据版本、提示模板与采样配置，不能与外部榜单直接横比；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "ifeval",
+        "multi-if",
+        "bfcl-v3"
+      ]
+    }
+  ]
+}

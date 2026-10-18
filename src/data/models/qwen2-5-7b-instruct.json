@@ -1,0 +1,352 @@
+{
+  "id": "qwen2-5-7b-instruct",
+  "name": "Qwen2.5-7B-Instruct",
+  "family": "Qwen",
+  "version": "2.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 7.61,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注总参数7.61B、非嵌入参数6.53B（28层，GQA 28 Q/4 KV）；HF权重元数据safetensors张量参数和为7,615,616,512（约7.62B）。官方未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": 131072,
+    "extension": "官方卡标注上下文最长131,072 tokens、生成8192 tokens；config.json默认32768 tokens，超过时需按卡片添加YaRN配置（factor 4.0、original_max_position_embeddings 32768），vLLM仅支持静态YaRN且可能影响短文本表现。",
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct"
+  },
+  "languages": [
+    "多语言（官方卡称支持超过29种语言，含中文、英文、法文、西班牙文、葡萄牙文、德文、意大利文、俄文、日文、韩文、越南文、泰文、阿拉伯文等；Hub卡片元数据仅标注en）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方卡与博客提供训练与后训练概述（称代码与数学能力提升来自领域专家模型），未提供完整可复核的逐样本训练集清单。"
+  },
+  "summary": "Qwen2.5系列7B级通用指令模型，官方称在知识、代码与数学能力上较前代增强，支持结构化输出与长上下文；131,072 tokens上下文需要YaRN配置。",
+  "features": [
+    "官方卡标注总参数7.61B、非嵌入参数6.53B，28层、GQA 28/4",
+    "官方称改进指令跟随、长文本生成与结构化输出（尤其JSON）",
+    "官方称支持超过29种语言",
+    "官方卡标注上下文最长131,072 tokens、生成8192 tokens（默认config为32768）",
+    "官方推荐使用vLLM部署并链接官方文档",
+    "官方博客标注2024年9月发布"
+  ],
+  "limitations": [
+    "131,072 tokens上下文需按官方卡添加YaRN配置；vLLM仅支持静态YaRN，短文本表现可能受影响。",
+    "官方模型卡本身不含评测数值，本条目评测来自Qwen2.5技术报告表格，且报告未披露完整评测配置。",
+    "与同系列Qwen2.5-Coder专用代码型号不同，本条目为通用Instruct版本，两类成绩不可混用。",
+    "本站未复现评测或部署。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方建议使用最新版；低于4.37.0会报KeyError: 'qwen2'）",
+        "torch（官方示例使用torch_dtype与device_map）"
+      ],
+      "steps": [
+        {
+          "title": "准备推理环境",
+          "description": "官方卡要求使用最新版transformers，并提示低于4.37.0会出现KeyError: 'qwen2'；模型卡未给出安装命令，命令留空。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方卡示例用AutoModelForCausalLM与AutoTokenizer加载Qwen/Qwen2.5-7B-Instruct，apply_chat_template组织多轮对话，示例max_new_tokens=512；超过32768 tokens的输入需按卡片添加YaRN配置。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于精度、输入长度、运行时与硬件，不从参数量或文件体积推算资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen2.5-7B-Instruct",
+      "sourceUrl": "https://qwen.readthedocs.io/en/latest/deployment/vllm.html",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vLLM（模型卡长文本章节推荐用于部署，未指定版本）"
+      ],
+      "steps": [
+        {
+          "title": "按官方文档部署",
+          "description": "模型卡长文本章节明确推荐使用vLLM部署并链接官方文档；模型卡未给出启动命令，命令留空。长文本需注意vLLM仅支持静态YaRN。本站未启动服务。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于精度、上下文长度、批大小与vLLM版本，不从参数量或文件体积推算资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 56.3,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表8指令模型评测的Qwen2.5-7B列；该章节正文称该列为Qwen2.5-7B-Instruct。报告未披露few-shot、提示模板、采样与输出长度等完整评测配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-7b-instruct-qwen25-report-t8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math",
+      "benchmark": "MATH",
+      "dataset": "MATH",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 75.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表8指令模型评测的Qwen2.5-7B列，MATH为75.5；正文点名该型号MATH优势。报告未披露few-shot、提示模板与解码等完整配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-7b-instruct-qwen25-report-t8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "code",
+      "metric": "score",
+      "value": 84.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表8指令模型评测的Qwen2.5-7B列，HumanEval为84.8；正文点名该型号代码优势。报告未披露pass@1口径、提示与采样配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-7b-instruct-qwen25-report-t8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "livecodebench",
+      "benchmark": "LiveCodeBench",
+      "dataset": "LiveCodeBench",
+      "language": "code",
+      "metric": "score",
+      "value": 28.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明版本与题目时间窗口",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表8指令模型评测的Qwen2.5-7B列，LiveCodeBench为28.7。报告未披露评测实现、题目时间窗口与生成配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-7b-instruct-qwen25-report-t8",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "通用知识与数学推理候选：官方技术报告表8列出MMLU-Pro 56.3与MATH 75.5，均为发布方自报，未披露提示、few-shot与采样配置，不能与外部统一条件横比。",
+      "strengths": [
+        "报告在同一表内并列前代Qwen2-7B与Gemma2-9B、Llama3.1-8B等对照，档位定位可直接查看。",
+        "覆盖知识与数学两类指标，并区分指令模型章节。"
+      ],
+      "limitations": [
+        "报告未披露few-shot、提示模板、采样与输出长度等完整配置，不能与外部榜单直接横比。",
+        "英文基准不能直接代表中文长文写作与对话表现。",
+        "未找到许可明确且经核实的同型号独立复测。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "math"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "代码生成候选：官方技术报告表8列出HumanEval 84.8与LiveCodeBench 28.7，覆盖函数级与竞赛式题目；仓库级工程任务没有官方成绩。",
+      "strengths": [
+        "报告同时给出简单函数生成（HumanEval）与较难的竞赛式题目（LiveCodeBench）两类口径。",
+        "报告正文点名该型号代码能力优势。"
+      ],
+      "limitations": [
+        "LiveCodeBench只覆盖算法题，不等价于真实仓库级工程任务。",
+        "报告未披露评测实现与生成配置；同系列Qwen2.5-Coder为专用代码型号，成绩不可混用。",
+        "本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "humaneval",
+        "livecodebench"
+      ]
+    }
+  ]
+}

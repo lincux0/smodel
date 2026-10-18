@@ -1132,7 +1132,7 @@
       "label": "首个公开版本",
       "file_type": "document",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L138",
+      "source_location": "L140",
       "_origin": "ast"
     },
     {
@@ -1180,7 +1180,7 @@
       "label": "可比性与单位",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L39",
+      "source_location": "L41",
       "_origin": "ast"
     },
     {
@@ -1188,7 +1188,7 @@
       "label": "来源与使用条件",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L49",
       "_origin": "ast"
     },
     {
@@ -1196,7 +1196,7 @@
       "label": "Artificial Analysis",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L55",
       "_origin": "ast"
     },
     {
@@ -1204,7 +1204,7 @@
       "label": "开放结果与独立性",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "_origin": "ast"
     },
     {
@@ -1212,7 +1212,7 @@
       "label": "维护与验收",
       "file_type": "document",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L65",
+      "source_location": "L67",
       "_origin": "ast"
     },
     {
@@ -1636,7 +1636,7 @@
       "label": "Arena 快照核验范围",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L58",
+      "source_location": "L82",
       "_origin": "ast"
     },
     {
@@ -1644,7 +1644,7 @@
       "label": "后续准入条件",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L62",
+      "source_location": "L86",
       "_origin": "ast"
     },
     {
@@ -1708,7 +1708,7 @@
       "label": "新增的 MTEB 分项",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L42",
+      "source_location": "L55",
       "_origin": "ast"
     },
     {
@@ -1716,7 +1716,7 @@
       "label": "来源入口",
       "file_type": "document",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L52",
+      "source_location": "L65",
       "_origin": "ast"
     },
     {
@@ -1816,24 +1816,24 @@
       "_origin": "ast"
     },
     {
-      "id": "docs_launch_plan_第_5_批_近一年系列补齐_16_项",
-      "label": "第 5 批：近一年系列补齐（16 项）",
+      "id": "docs_launch_plan_第_5_批_近一年系列补齐_16_项_已于_2026_10_17_上线",
+      "label": "第 5 批：近一年系列补齐（16 项，已于 2026-10-17 上线）",
       "file_type": "document",
       "source_file": "docs/LAUNCH_PLAN.md",
       "source_location": "L126",
       "_origin": "ast"
     },
     {
-      "id": "docs_launch_plan_第_6_批_经典通用与视觉_14_项",
-      "label": "第 6 批：经典通用与视觉（14 项）",
+      "id": "docs_launch_plan_第_6_批_经典通用与视觉_14_项_已于_2026_10_17_上线",
+      "label": "第 6 批：经典通用与视觉（14 项，已于 2026-10-17 上线）",
       "file_type": "document",
       "source_file": "docs/LAUNCH_PLAN.md",
       "source_location": "L149",
       "_origin": "ast"
     },
     {
-      "id": "docs_launch_plan_第_7_批_经典检索_重排_ocr_语音_8_项",
-      "label": "第 7 批：经典检索/重排/OCR/语音（8 项）",
+      "id": "docs_launch_plan_第_7_批_经典检索_重排_ocr_语音_8_项_已于_2026_10_17_上线",
+      "label": "第 7 批：经典检索/重排/OCR/语音（8 项，已于 2026-10-17 上线）",
       "file_type": "document",
       "source_file": "docs/LAUNCH_PLAN.md",
       "source_location": "L170",
@@ -2021,6 +2021,14 @@
       "file_type": "document",
       "source_file": "docs/SOURCES.md",
       "source_location": "L178",
+      "_origin": "ast"
+    },
+    {
+      "id": "docs_sources_2026_10_17_批次5_7上线",
+      "label": "2026-10-17 批次5-7上线",
+      "file_type": "document",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L218",
       "_origin": "ast"
     },
     {
@@ -4182,7 +4190,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L136",
+      "source_location": "L138",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4192,7 +4200,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L138",
+      "source_location": "L140",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4202,7 +4210,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/ARCHITECTURE.md",
-      "source_location": "L140",
+      "source_location": "L142",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4272,7 +4280,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L39",
+      "source_location": "L41",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4282,7 +4290,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L47",
+      "source_location": "L49",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4292,7 +4300,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L49",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4302,7 +4310,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L49",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4312,7 +4320,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L49",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4322,7 +4330,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L53",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4332,7 +4340,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L59",
+      "source_location": "L61",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4342,7 +4350,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L65",
+      "source_location": "L67",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4352,7 +4360,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/CAPABILITY_EVIDENCE.md",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4932,7 +4940,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "docs/DEVELOPMENT_PLAN.md",
-      "source_location": "L327",
+      "source_location": "L328",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4982,7 +4990,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L58",
+      "source_location": "L82",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -4992,7 +5000,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_GENERAL_COVERAGE.md",
-      "source_location": "L62",
+      "source_location": "L86",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5072,7 +5080,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L42",
+      "source_location": "L55",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5082,7 +5090,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/EVIDENCE_SPECIAL_COVERAGE.md",
-      "source_location": "L52",
+      "source_location": "L65",
       "weight": 1.0,
       "_origin": "ast"
     },
@@ -5218,7 +5226,7 @@
     },
     {
       "source": "docs_launch_plan_6_阶段三_中优先长尾",
-      "target": "docs_launch_plan_第_5_批_近一年系列补齐_16_项",
+      "target": "docs_launch_plan_第_5_批_近一年系列补齐_16_项_已于_2026_10_17_上线",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/LAUNCH_PLAN.md",
@@ -5228,7 +5236,7 @@
     },
     {
       "source": "docs_launch_plan_6_阶段三_中优先长尾",
-      "target": "docs_launch_plan_第_6_批_经典通用与视觉_14_项",
+      "target": "docs_launch_plan_第_6_批_经典通用与视觉_14_项_已于_2026_10_17_上线",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/LAUNCH_PLAN.md",
@@ -5238,7 +5246,7 @@
     },
     {
       "source": "docs_launch_plan_6_阶段三_中优先长尾",
-      "target": "docs_launch_plan_第_7_批_经典检索_重排_ocr_语音_8_项",
+      "target": "docs_launch_plan_第_7_批_经典检索_重排_ocr_语音_8_项_已于_2026_10_17_上线",
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/LAUNCH_PLAN.md",
@@ -5543,6 +5551,16 @@
       "confidence": "EXTRACTED",
       "source_file": "docs/SOURCES.md",
       "source_location": "L178",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "docs_sources_模型来源与字段口径",
+      "target": "docs_sources_2026_10_17_批次5_7上线",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/SOURCES.md",
+      "source_location": "L218",
       "weight": 1.0,
       "_origin": "ast"
     },

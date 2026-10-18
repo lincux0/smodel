@@ -1,0 +1,257 @@
+{
+  "id": "multilingual-e5-small",
+  "name": "Multilingual-E5-Small",
+  "family": "E5",
+  "version": "Small",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.118,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注该型号 12 层、向量维度 384，由 microsoft/Multilingual-MiniLM-L12-H384 初始化；模型卡与技术报告均未单列参数量，本记录沿用约 118M 的公开部署口径（与 Multilingual-MiniLM-L12-H384 同量级），核对当日 HF 仓库张量合计 117,654,272（约 117.7M），未从权重文件大小反推。",
+    "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-small"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-small"
+  },
+  "languages": [
+    "多语言（官方声明支持 xlm-roberta 的 100 种语言；低资源语言可能出现性能下降）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/intfloat/multilingual-e5-small"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡披露两阶段训练：弱监督对比预训练（Filtered mC4 约 1B 对、CC News 400M、NLLB 翻译对 2.4B、Wikipedia 150M、Filtered Reddit 800M、S2ORC 100M、Stackexchange 50M、xP3 80M 等）与监督微调（MS MARCO、NQ、Trivia QA、ELI5、DuReader、KILT、MIRACL 16 语言、Mr. TyDi 11 语言等，且只用各数据集的训练集）；未公开可直接复核的完整原始语料。"
+  },
+  "summary": "基于 Multilingual-MiniLM-L12-H384 初始化的轻量多语言文本嵌入模型（12 层、384 维），检索场景需使用 query: 与 passage: 前缀，输入超过 512 tokens 会被截断。",
+  "features": [
+    "384 维向量、12 层编码器",
+    "官方声明支持 xlm-roberta 的 100 种语言",
+    "检索任务使用 query: 与 passage: 前缀（模型卡 FAQ 明确要求）",
+    "最大输入 512 tokens",
+    "由 microsoft/Multilingual-MiniLM-L12-H384 初始化并在多语数据上持续训练，是同系列中资源需求最低的档位"
+  ],
+  "limitations": [
+    "输入超过 512 tokens 会被截断，长文档检索需要自行切分。",
+    "前缀与训练方式不一致会带来检索性能下降；对称相似度任务官方建议也使用 query: 前缀。",
+    "官方成绩由发布方运行且未披露评测运行日期，本站未复现。",
+    "小尺寸模型在低资源语言与复杂检索任务上表现有限，官方提示低资源语言可能出现性能下降。",
+    "MTEB 结果仓库收录有该型号（revision c007d7ef 等）的多批次社区提交记录，执行者与运行配置未核实，未导入。"
+  ],
+  "officialUrl": "https://huggingface.co/intfloat/multilingual-e5-small",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors / PyTorch（官方仓库同时提供 ONNX 等导出格式）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/intfloat/multilingual-e5-small",
+      "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-small#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers"
+      ],
+      "steps": [
+        {
+          "title": "安装依赖",
+          "description": "模型卡 Package requirements 给出的安装命令（示例带旧版版本约束，实际版本需与目标环境匹配）。",
+          "command": "pip install sentence_transformers~=2.2.2"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡示例用 SentenceTransformer 加载 intfloat/multilingual-e5-small；每条文本需按训练口径加 query: 或 passage: 前缀；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mr-tydi-mrr10",
+      "benchmark": "Mr. TyDi",
+      "dataset": "Mr. TyDi（11 种语言的检索数据集）",
+      "language": "多语言（11 种语言）",
+      "metric": "Avg MRR@10",
+      "value": 64.4,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "模型卡 Benchmark Results on Mr. TyDi 表",
+      "settings": "模型卡 Mr. TyDi 表列出 multilingual-e5-small 平均 MRR@10 为 64.4，并给出逐语言结果（如 ar 71.5、te 89.1、th 70.1）；同表 multilingual-e5-base 为 65.9、multilingual-e5-large 为 70.5。该表未标注模型 revision、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://huggingface.co/intfloat/multilingual-e5-small",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "intfloat（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-small",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/intfloat/multilingual-e5-small",
+        "notes": "仅引用官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，Mr. TyDi 等基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "intfloat",
+        "runId": "intfloat-multilingual-e5-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "miracol-ndcg10",
+      "benchmark": "MIRACL",
+      "dataset": "MIRACL dev set（16 种语言的检索子集）",
+      "language": "多语言（16 种语言）",
+      "metric": "nDCG@10",
+      "value": 60.8,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Multilingual E5 技术报告 Table 6（arXiv v1）",
+      "settings": "技术报告 Table 6（nDCG@10 与 R@100，MIRACL dev 集）报告 mE5-small 平均 nDCG@10 为 60.8（同表 R@100 为 92.4；mE5-base 62.3、mE5-large 66.5、mE5-large-instruct 65.7；Table 4 为多模型对照）。报告未披露模型 revision、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.05672v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Microsoft E5 团队（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-small",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "dev",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与运行条件；该结果仅记录原技术报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2402.05672v1",
+        "notes": "仅引用技术报告中的少量评测事实并保留作者与来源链接；不复制报告表格或基准数据，MIRACL 等基准继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft-e5-team",
+        "runId": "microsoft-e5-multilingual-report-2024",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-english-average",
+      "benchmark": "MTEB",
+      "dataset": "MTEB（英文部分任务集，56 datasets）",
+      "language": "英语",
+      "metric": "任务集平均分",
+      "value": 57.9,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Multilingual E5 技术报告 Table 3（arXiv v1）",
+      "settings": "技术报告 Table 3（MTEB 英文部分，56 datasets）报告 mE5-small 平均分为 57.9（同表 mE5-base 59.5、mE5-large 61.5、LaBSE 45.2、BGE large-en-v1.5 64.2）。报告说明该分数是所列任务集的平均，未披露使用的 MTEB 版本、评测运行日期与硬件条件；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2402.05672v1",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Microsoft E5 团队（模型发布方）",
+      "externalModelId": "intfloat/multilingual-e5-small",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "任务集平均分口径且来源未披露完整模型 revision、MTEB 版本与运行条件；该结果仅记录原技术报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2402.05672v1",
+        "notes": "仅引用技术报告中的少量评测事实并保留作者与来源链接；不复制报告表格或基准数据，MTEB 等基准继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft-e5-team",
+        "runId": "microsoft-e5-multilingual-report-2024",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方公开成绩：模型卡报告 Mr. TyDi 平均 MRR@10 为 64.4；多语 E5 技术报告（arXiv:2402.05672，称 small/base/large 于 2023 年年中发布）报告 MIRACL dev 集平均 nDCG@10 为 60.8、MTEB 英文部分平均分 57.9。三项均为发布方运行；512 tokens 截断是部署时的主要限制。",
+      "strengths": [
+        "模型卡与同名技术报告分别给出检索（Mr. TyDi、MIRACL）与通用任务集（MTEB 英文）成绩，且同表列出更大档位的对照。",
+        "模型卡披露弱监督预训练与监督微调的数据集构成及规模。",
+        "官方 FAQ 明确说明 query:/passage: 前缀的使用规则。"
+      ],
+      "limitations": [
+        "所有数值由模型发布方运行，未找到许可明确且确认为独立方的同型号结果；MTEB 结果仓库虽有该型号记录，但执行者与运行配置未在本批次核实。",
+        "来源未披露评测运行日期、模型 revision 与硬件条件，本站未复现。",
+        "512 tokens 输入上限限制长文档与长查询场景；小尺寸档位在低资源语言上的表现官方提示可能下降。"
+      ],
+      "evidenceIds": [
+        "mr-tydi-mrr10",
+        "miracol-ndcg10",
+        "mteb-english-average"
+      ]
+    }
+  ]
+}

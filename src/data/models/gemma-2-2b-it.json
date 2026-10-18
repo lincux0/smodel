@@ -1,0 +1,279 @@
+{
+  "id": "gemma-2-2b-it",
+  "name": "Gemma 2 2B IT",
+  "family": "Gemma",
+  "version": "2",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 2.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "Gemma 2技术报告Table 2给出该档位嵌入参数590,118,912与非嵌入参数2,024,517,888，合计2,614,636,800（约2.61B）；官方以2.6B/2B档位指称该型号。未另列激活或有效参数口径。",
+    "sourceUrl": "https://arxiv.org/abs/2408.00118"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://arxiv.org/abs/2408.00118"
+  },
+  "languages": [
+    "英语（官方模型卡说明模型以英语文本为输入输出；未声明其他语言支持）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Gemma Terms of Use",
+      "url": "https://ai.google.dev/gemma/terms"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡披露训练数据由网页文档（主要为英语）、代码与数学文本组成：2B使用2万亿token、9B使用8万亿token、27B使用13万亿token，2B/9B采用知识蒸馏训练；做过CSAM与敏感数据过滤及内容质量安全过滤；未提供完整逐样本清单。"
+  },
+  "summary": "Google 的 2B 档位指令微调模型，面向笔记本等受限设备的英语文本生成与对话。",
+  "features": [
+    "官方技术报告给出2.6B档位参数量（嵌入590,118,912与非嵌入2,024,517,888）",
+    "8192 token上下文，采用局部-全局注意力交错与GQA",
+    "官方提供Transformers、bitsandbytes 8/4bit量化与local-gemma CLI示例",
+    "官方卡给出必须按chat template使用的<start_of_turn>/<end_of_turn>对话格式"
+  ],
+  "limitations": [
+    "权重受Gemma Terms of Use约束，下载前需接受条款；许可包含禁止使用政策（Gemma Prohibited Use Policy）。",
+    "官方模型卡与当前文档的能力基准表面向PT模型；IT型号在技术报告中只有MMLU/MBPP对照（Table 17）与安全评估表可用，缺少带完整配置的对话能力评测。",
+    "官方资料将输入输出说明为英语文本，其他语言未声明支持。",
+    "技术报告未披露Table 17中IT行的shot数、提示模板与解码配置，成绩不能直接与外部榜单横比。",
+    "本站未复现评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/google/gemma-2-2b-it",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/google/gemma-2-2b-it",
+      "sourceUrl": "https://huggingface.co/google/gemma-2-2b-it",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "accelerate（device_map与多卡示例需要）"
+      ],
+      "steps": [
+        {
+          "title": "接受许可",
+          "description": "先阅读并接受Google Gemma Terms；Hugging Face还要求登录确认许可后才能取权重。本站未执行。",
+          "command": null
+        },
+        {
+          "title": "准备运行环境",
+          "description": "官方卡给出 pip install -U transformers，此处按终端写法转换为 python -m pip；量化示例另需 bitsandbytes 与 accelerate。本站未执行安装。",
+          "command": "python -m pip install -U transformers"
+        },
+        {
+          "title": "加载模型并推理",
+          "description": "按官方示例用 pipeline(\"text-generation\", model=\"google/gemma-2-2b-it\", model_kwargs={\"torch_dtype\": torch.bfloat16}) 加载，并用 tokenizer.apply_chat_template 生成对话提示；官方另给出bitsandbytes 8/4bit量化与torch.compile示例。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与内存占用取决于精度、量化方式、上下文长度与运行时，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pt-it-comparison",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 56.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Gemma 2技术报告Table 17（PT与IT对照的few-shot基准）",
+      "settings": "Gemma 2技术报告Table 17并列PT与IT成绩：2B为PT 52.2 / IT 56.1（9B为71.3/72.3）；报告说明IT模型对问题格式更稳健，但未单独重述IT行的shot数、提示模板与解码配置。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2408.00118",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google（模型发布方自报，Gemma 2技术报告）",
+      "externalModelId": "google/gemma-2-2b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源只给出PT/IT对照数值，未披露足以复现和对齐的模型revision、shot数、提示模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2408.00118",
+        "notes": "仅引用Gemma 2技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "google",
+        "runId": "gemma-2-2b-it-gemma2-report-pt-it-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "truthfulqa-mc2",
+      "benchmark": "TruthfulQA",
+      "dataset": "TruthfulQA",
+      "language": "en",
+      "metric": "accuracy（MC2Acc）",
+      "value": 43.72,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Ethics and Safety评估结果（Gemma 2.0 IT表）",
+      "settings": "Google官方模型卡在安全评估结果表中列出Gemma 2 IT 2B的TruthfulQA为43.72（9B为50.27）；同一数值在技术报告安全表（Table 18/20）中标注指标为MC2Acc。模型卡未披露该表提示模板与解码配置。本站未复现。",
+      "sourceUrl": "https://ai.google.dev/gemma/docs/core/model_card_2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Google（模型发布方自报）",
+      "externalModelId": "google/gemma-2-2b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露该成绩的模型revision、提示模板与完整评测配置，且该表以安全评估为目的；仅记录原始口径，不与外部榜单排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ai.google.dev/gemma/docs/core/model_card_2",
+        "notes": "仅摘录官方模型卡中的少量评测事实并署名链接；未复制报告表格或数据集。"
+      },
+      "provenance": {
+        "sourceId": "google",
+        "runId": "gemma-2-2b-it-gemma2-card-safety-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mbpp-pt-it-comparison",
+      "benchmark": "MBPP",
+      "dataset": "MBPP",
+      "language": "en",
+      "metric": "score",
+      "value": 36.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Gemma 2技术报告Table 17（PT与IT对照的few-shot基准）",
+      "settings": "Gemma 2技术报告Table 17并列PT与IT成绩：2B为PT 30.2 / IT 36.6（9B为52.4/59.2）；报告仅标注该表为few-shot基准，未注明MBPP的shot数、采样与判题配置。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2408.00118",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Google（模型发布方自报，Gemma 2技术报告）",
+      "externalModelId": "google/gemma-2-2b-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源只给出PT/IT对照数值，未披露足以复现和对齐的模型revision、shot数、采样与判题配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2408.00118",
+        "notes": "仅引用Gemma 2技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "google",
+        "runId": "gemma-2-2b-it-gemma2-report-pt-it-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方可用数据有限：技术报告Table 17报告IT版MMLU为56.1%（PT版52.2%），模型卡安全表报告TruthfulQA（MC2Acc）为43.72%。这组数值说明其在英语知识与事实性问答上仍属轻量档位，且均缺少可复现的提示与解码配置。",
+      "strengths": [
+        "报告同时给出PT与IT成绩，可观察指令微调带来的变化。",
+        "模型卡有一组面向IT型号的安全与真实性指标，未被混用为通用能力总分。"
+      ],
+      "limitations": [
+        "官方能力基准表主要面向PT模型，IT型号没有MMLU-Pro、IFEval等完整能力评测行。",
+        "Table 17的IT行未注明shot数与提示模板；TruthfulQA为安全评估口径。",
+        "官方说明输入输出为英语文本，不能据此外推中文能力。",
+        "未找到许可明确且确认为独立方的同型号条件对齐复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pt-it-comparison",
+        "truthfulqa-mc2"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "技术报告Table 17报告IT版MBPP为36.6%（PT版30.2%），是当前唯一可核对的该型号代码基准；该分数明显低于同报告9B档位（59.2%），不代表真实工程任务表现。",
+      "strengths": [
+        "官方报告为该精确IT型号给出MBPP数值，并有PT对照。"
+      ],
+      "limitations": [
+        "报告未注明MBPP的shot数、采样与判题配置，无法与外部结果对齐比较。",
+        "MBPP为函数级短程序基准，不能替代仓库级修改与调试任务验证。",
+        "本站未在真实项目中运行该模型。"
+      ],
+      "evidenceIds": [
+        "mbpp-pt-it-comparison"
+      ]
+    }
+  ]
+}

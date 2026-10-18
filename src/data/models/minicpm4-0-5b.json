@@ -1,0 +1,340 @@
+{
+  "id": "minicpm4-0-5b",
+  "name": "MiniCPM4 0.5B",
+  "family": "MiniCPM",
+  "version": "4",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注0.5B参数、1T训练token；HF权重元数据safetensors张量参数和为433,873,920（约0.43B）。未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://arxiv.org/abs/2506.07900"
+  },
+  "languages": [
+    "中文",
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方卡与技术报告披露：0.5B版训练1T token（8B为8T）；预训练数据通过UltraClean清洗与生成（含中英双语网页数据UltraFinweb），监督微调数据来自UltraChat v2，训练采用ModelTunnel v2配置搜索、FP8计算与多token预测；未公开完整可复核的逐样本清单。"
+  },
+  "summary": "OpenBMB 面向端侧的 0.5B 级指令模型，主打极低算力下的中英文本生成。",
+  "features": [
+    "官方口径0.5B参数、1T训练token",
+    "原生32K上下文，技术报告给出稀疏注意力与长文本外推方案",
+    "官方提供Transformers与vLLM运行示例",
+    "技术报告5.1节说明主要在中英双语语料上预训练"
+  ],
+  "limitations": [
+    "0.5B型号卡未包含8B卡中的LongRoPE扩展章节，128K长文扩展未在该型号卡上声明。",
+    "技术报告Table 8未披露该型号的提示模板、采样参数与各基准的指标定义（如shot数），成绩不能与外部榜单直接横比。",
+    "官方定位为端侧小模型，容量有限，复杂推理与长文任务表现需自行评估。",
+    "模型卡说明生成内容不代表开发者观点，需用户自行评估与核验。",
+    "本站未复现评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B#inference-with-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方卡未给出固定依赖版本，示例需要 transformers 与 torch，并加载远程自定义代码（trust_remote_code=True）。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并推理",
+          "description": "按官方示例用 AutoModelForCausalLM.from_pretrained('openbmb/MiniCPM4-0.5B', torch_dtype=torch.bfloat16, device_map=device, trust_remote_code=True) 加载，并用 apply_chat_template 生成提示后调用 generate。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡给出端侧芯片上的效率对比（如Jetson AGX Orin、RTX 4090），属官方特定平台的加速数据，不是本站测量，也不构成最低配置要求。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-0.5B#inference-with-vllm",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm（官方要求nightly预发布版）"
+      ],
+      "steps": [
+        {
+          "title": "安装nightly版vLLM",
+          "description": "官方卡给出 pip install -U vllm --pre --extra-index-url https://wheels.vllm.ai/nightly，此处按终端写法转换为 python -m pip 并保持同一索引参数。本站未执行安装。",
+          "command": "python -m pip install -U vllm --pre --extra-index-url https://wheels.vllm.ai/nightly"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方卡给出 vllm serve openbmb/MiniCPM4-0.5B；调用聊天接口时卡上提示需显式传 add_special_tokens=True，否则BOS等特殊token不会自动加入。本站未执行。",
+          "command": "vllm serve openbmb/MiniCPM4-0.5B"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于批大小、精度、上下文长度与vLLM版本，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "score",
+      "value": 55.55,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8为MiniCPM4与Qwen3、Llama3.2、Gemma3等开源模型的标准评测对比，该列标注0.5B参数、1T训练数据；报告未披露该行的模型revision、提示模板、采样与各基准指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-0-5b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "cmmlu",
+      "benchmark": "CMMLU",
+      "dataset": "CMMLU",
+      "language": "zh",
+      "metric": "score",
+      "value": 65.22,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中0.5B列的中文知识基准成绩；同表列出Llama3.2-1B为23.73、Gemma3-1B为25.09作为对照。报告未披露提示模板、采样与指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-0-5b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ceval",
+      "benchmark": "C-Eval",
+      "dataset": "C-Eval",
+      "language": "zh",
+      "metric": "score",
+      "value": 66.11,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中0.5B列的中文综合基准成绩；同表列出Llama3.2-1B为36.74、Gemma3-1B为31.83作为对照。报告未披露提示模板、采样与指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-0-5b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "score",
+      "value": 52.08,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中0.5B列的数学基准成绩；同表列出Llama3.2-1B为39.76、Gemma3-1B为61.26作为对照。报告未披露该行的shot数、采样与答案抽取方式。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、shot数、采样与答案抽取配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-0-5b-paper-table8",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "技术报告Table 8报告MMLU为55.55%、CMMLU为65.22%、C-Eval为66.11%、GSM8K为52.08%；报告同时说明官方训练数据为1T token，并称该0.5B型号在同规模对比中优于Llama3.2-1B与Gemma3-1B的中文表现。所有数值均缺少可复现的评测配置。",
+      "strengths": [
+        "同表并列多个开源模型对照，且训练token规模一并标注，便于判断口径。",
+        "中文知识（CMMLU/C-Eval）与英文知识（MMLU）、数学分别报告，未合成单一总分。"
+      ],
+      "limitations": [
+        "报告未披露提示模板、采样参数、指标定义（shot数）与模型revision，不能与外部榜单直接横比。",
+        "官方称优于同规模对照模型时未给出统计显著性或误差范围。",
+        "0.5B容量有限，长文与复杂推理的可靠性需自行评估；官方卡未对该型号声明128K扩展。",
+        "未找到许可明确且确认为独立方的同型号复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu",
+        "cmmlu",
+        "ceval",
+        "gsm8k"
+      ]
+    }
+  ]
+}

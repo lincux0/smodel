@@ -1,0 +1,330 @@
+{
+  "id": "lfm2-5-audio-1-5b",
+  "name": "LFM2.5-Audio-1.5B",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition",
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "audio"
+    ],
+    "output": [
+      "text",
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.47,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方型号档位为1.5B；模型卡参数表只给出“Parameters (LM only) 1.2B”，并列出音频编码器FastConformer（115M，canary-180m-flash）与Mimi兼容音频解词器（8个码本）。HF权重元数据safetensors张量参数合计1,470,308,496（约1.47B），为仓库内整包权重（语言骨干＋音频编码器＋解词器等）的口径，官方未按整套系统给出统一参数总量，故不以档位名或语言骨干替代整包数值。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B"
+  },
+  "languages": [
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B/blob/main/LICENSE"
+    },
+    "code": {
+      "name": "LFM Open License v1.0（liquid-audio 包仓库）",
+      "url": "https://github.com/Liquid4All/liquid-audio/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "官方公开口径：由预训练的LFM2.5语言模型作为多模态骨干，配FastConformer音频编码器（115M，canary-180m-flash）处理连续音频输入，以及RQ-transformer生成离散token并配轻量音频解词器输出音频；官方称该版本基于更强的LFM2.5-1.2B基座并改进ASR与TTS。训练数据清单、语料规模与许可未公开。"
+  },
+  "summary": "1.5B档端到端语音语言模型，官方定位低延迟实时语音对话：同一模型完成语音识别与语音合成，无需外挂独立ASR/TTS组件，仅支持英语。",
+  "features": [
+    "端到端音频语言模型：官方称无需单独的ASR与TTS组件，模型卡参数表列出语言骨干1.2B、FastConformer音频编码器115M（canary-180m-flash）与Mimi兼容音频解词器（8个码本，24kHz输出）",
+    "支持两种生成流程：interleaved面向实时语音对话（输出文本与音频交替），sequential适用于ASR、TTS等非对话任务并可通过特殊token切换模态",
+    "官方标注上下文32,768 token，词表为文本65,536与音频2049*8，精度bfloat16",
+    "支持英语；官方在模型卡Supported languages仅列出English",
+    "提供四个预置音色，通过系统提示选择（US male、US female、UK male、UK female）",
+    "官方提供liquid-audio Python包、Gradio演示命令liquid-audio-demo，以及适配llama.cpp的GGUF仓库（含llama-liquid-audio-cli与llama-liquid-audio-server运行器）",
+    "官方称1.2.0起支持interleaved与sequential两种模式的微调，提供数据准备工具与轻量训练器"
+  ],
+  "limitations": [
+    "仅支持英语：官方模型卡Supported languages只列English，其他语种的识别与合成效果未获官方支持。",
+    "官方未公布任何TTS客观音质指标（如MOS、SIM或合成内容WER），只称“更好的TTS voices”，语音合成质量缺少可引用证据。",
+    "官方模型卡未披露ASR评测的音频划分、文本标准化、解码配置与模型revision；成绩为发布方自测，本站未复现。",
+    "音频输出依赖Mimi兼容解词器（24kHz），解码链路与纯文本模型不同；推理需要liquid-audio包或官方GGUF运行器。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "随包分发的第三方组件另有许可：音频编码器代码基于Nvidia NeMo（Apache-2.0），canary-180m-flash检查点为CC-BY-4.0，附带Kyutai Mimi代码（MIT）与Mimi权重（CC-BY-4.0）；再分发时需一并遵守。",
+    "本站未实测识别准确率、合成质量与实时延迟。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-liquid-audio",
+      "runtime": "liquid-audio（Python 包）",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "liquid-audio",
+        "torch",
+        "torchaudio",
+        "flash-attn（官方标注为可选优化项，未安装时回退torch SDPA）"
+      ],
+      "steps": [
+        {
+          "title": "安装 liquid-audio",
+          "description": "官方How to run给出的安装命令；官方另说明AMD ROCm环境需匹配对应的PyTorch版本。本站未执行。",
+          "command": "pip install liquid-audio"
+        },
+        {
+          "title": "可选：安装演示依赖",
+          "description": "官方标注demo依赖为可选项，安装后可启动Gradio演示界面。本站未执行。",
+          "command": "pip install \"liquid-audio [demo]\""
+        },
+        {
+          "title": "启动 Gradio 演示",
+          "description": "官方说明该命令会在7860端口启动本地webserver，可通过http://localhost:7860/访问。本站未启动。",
+          "command": "liquid-audio-demo"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用LFM2AudioProcessor与LFM2AudioModel从LiquidAI/LFM2.5-Audio-1.5B加载，用ChatState组织回合；对话用generate_interleaved（系统提示Respond with interleaved text and audio.），ASR与TTS用generate_sequential，音频经processor.decode解词为24kHz波形。本站未下载权重或运行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存与延迟取决于运行时、精度、音频长度与是否使用FlashAttention 2，官方未给出该型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp（llama-liquid-audio 运行器）",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化等级（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方称LFM2.5-Audio-1.5B随版本提供兼容llama.cpp的GGUF，用于CPU推理与本地部署；仓库指向LFM2.5-Audio-1.5B-GGUF。本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "使用官方运行器",
+          "description": "GGUF仓库的runners目录提供llama-liquid-audio-cli与llama-liquid-audio-server两个运行器；模型卡与仓库未给出可直接复制的命令行示例，命令留空。本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；具体占用取决于量化等级与运行时，不将文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "asr-average-wer",
+      "benchmark": "LFM2.5-Audio官方模型卡ASR评测（WER）",
+      "dataset": "官方ASR表8个数据集的WER平均值（AMI、Earnings22、GigaSpeech、LibriSpeech-clean、LibriSpeech-other、SPGISpeech、TED-LIUM、VoxPopuli）",
+      "language": "en",
+      "metric": "WER",
+      "value": 7.53,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方模型卡ASR表（Word Error Rate，越低越好）",
+      "settings": "Liquid AI官方模型卡ASR表列出LFM2.5-Audio-1.5B的WER average为7.53，同表并列LFM2-Audio-1.5B（9.38）、Qwen2.5-Omni-3B（7.90）与Whisper-large-V3（7.44）等对照，并逐数据集列出数值。表未披露模型revision、音频划分、文本标准化、解码配置与评测运行日期；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-Audio-1.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频划分、文本标准化与解码配置等足以复现和统一对齐的评测条件；该汇总值仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-audio-1-5b-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "librispeech-clean-wer",
+      "benchmark": "LFM2.5-Audio官方模型卡ASR评测（WER）",
+      "dataset": "LibriSpeech-clean",
+      "language": "en",
+      "metric": "WER",
+      "value": 1.95,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方模型卡ASR表（Word Error Rate，越低越好）",
+      "settings": "Liquid AI官方模型卡ASR表列出LFM2.5-Audio-1.5B在LibriSpeech-clean列为1.95，同表并列LFM2-Audio-1.5B（2.03）、Qwen2.5-Omni-3B（2.14）与Whisper-large-V3（2.01）。表未披露模型revision、音频划分、文本标准化与解码配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-Audio-1.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频划分、文本标准化与解码配置等足以复现和统一对齐的评测条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-audio-1-5b-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ami-wer",
+      "benchmark": "LFM2.5-Audio官方模型卡ASR评测（WER）",
+      "dataset": "AMI（远场会议语音）",
+      "language": "en",
+      "metric": "WER",
+      "value": 15.63,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方模型卡ASR表（Word Error Rate，越低越好）",
+      "settings": "Liquid AI官方模型卡ASR表列出LFM2.5-Audio-1.5B在AMI列为15.63，为该表本型号的最高错误率列，同表并列Qwen2.5-Omni-3B（15.05）与Whisper-large-V3（15.95）；Earnings22为14.56、VoxPopuli为7.13。表未披露模型revision、音频划分、文本标准化与解码配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-Audio-1.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、音频划分、文本标准化与解码配置等足以复现和统一对齐的评测条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-audio-1-5b-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为英语端侧转写候选：官方模型卡报告LFM2.5-Audio-1.5B的8数据集WER平均值为7.53%、LibriSpeech-clean 1.95%、AMI 15.63%，官方称相对LFM2-Audio-1.5B整体改善。仅支持英语，成绩为发布方自测。",
+      "strengths": [
+        "官方表同时列出8个公开数据集与本型号逐数据集WER，并给出Whisper-large-V3等对照，便于定位难度分布。",
+        "同一模型可端到端完成语音识别与语音合成，无需外挂独立ASR/TTS组件。",
+        "官方提供liquid-audio包与llama.cpp兼容GGUF两条部署路线。"
+      ],
+      "limitations": [
+        "仅支持英语，其他语种与口音覆盖未获官方支持。",
+        "官方未披露音频划分、文本标准化、解码配置与模型revision；未找到许可明确且确认为独立方的同型号复测。",
+        "远场会议类数据（AMI 15.63%）等困难场景错误率明显高于朗读类数据。",
+        "本站未实测识别准确率与延迟。"
+      ],
+      "evidenceIds": [
+        "asr-average-wer",
+        "librispeech-clean-wer",
+        "ami-wer"
+      ]
+    },
+    {
+      "task": "text-to-speech",
+      "status": "insufficient",
+      "summary": "证据不足：官方模型卡只称该版本相较LFM2-Audio-1.5B有“更好的TTS voices”，未公布任何TTS客观指标（MOS、SIM或合成内容WER），也没有公开测试集与配置；因此不给出语音合成质量结论。",
+      "strengths": [
+        "官方与配套仓库说明支持四个预置音色（US/UK 男声与女声），并以sequential生成模式覆盖TTS，接口与示例完整。",
+        "官方称1.2.0起支持TTS场景的微调，提供数据准备工具与轻量训练器。"
+      ],
+      "limitations": [
+        "缺少可引用的客观音质或自然度指标，官方仅作定性描述。",
+        "官方模型卡另提供音频输入对话质量（VoiceBench）成绩，但该口径不属于语音识别或语音合成指标，本条目未收录。",
+        "预置音色数量有限，不支持官方文档范围外的音色选择；本站未做听测或延迟验证。"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

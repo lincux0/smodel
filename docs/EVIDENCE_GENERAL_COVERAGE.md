@@ -54,6 +54,30 @@
 | MiniCPM-V 4.5 | 官方未发布纯文本基准 | 本站未收录此用途 | OpenCompass 77.0、MMMU 67.7、OCRBench 89.0、OmniDocBench(EN) 0.175 已登记 | 视觉仅官方；文本用途证据不足 |
 | DeepSeek-R1-Distill-Qwen-1.5B | 模型卡已登记 AIME 28.9、MATH-500 83.9、GPQA 33.8 | LiveCodeBench 16.9 已登记 | 不适用 | 仅官方；上下文未披露（not-provided）；采样协议已注明 |
 | DeepSeek-R1-Distill-Qwen-7B | 模型卡已登记 AIME 55.5、MATH-500 92.8、GPQA 49.1 | LiveCodeBench 37.6 已登记 | 不适用 | 仅官方；同上 |
+| LFM2.5-230M | 模型卡已登记 MMLU-Pro 20.25、IFEval 71.71 | 本站未收录此用途 | 不适用 | 仅官方；超小档位（数据抽取/轻量代理定位） |
+| LFM2.5-350M | 模型卡已登记 MMLU-Pro 20.01、IFEval 76.96 | 本站未收录此用途 | 不适用 | 仅官方 |
+| LFM2.5-1.2B-Thinking | 模型卡已登记 MMLU-Pro 49.65、IFEval 88.42、AIME25 31.73 | 本站未收录此用途 | 不适用 | 仅官方（thinking 模式） |
+| LFM2.5-8B-A1B | 模型卡已登记 IFEval 91.84、IFBench 56.47、AIME25 42.53 | BFCL 数值冲突未收录（limitations 说明） | 不适用 | 仅官方；MoE 8.3B/1.5B |
+| LFM2.5-VL-450M | 用途仅视觉，未收录文本成绩 | 本站未收录此用途 | MMMU 32.67、MMStar 43.00、OCRBench 684、RefCOCO-M 81.28 已登记 | 仅官方 |
+| LFM2.5-VL-1.6B | 卡无语言基准表 | 本站未收录此用途 | MMMU 40.56、MMStar 50.67、InfoVQA 62.71 已登记 | 视觉仅官方；文本证据不足 |
+| Qwen3-VL-2B-Instruct | 技术报告 Table 6 已登记 MMLU-Pro 49.0、GPQA 42.0 | LiveCodeBench v6 20.3 已登记 | 视觉表为图片未转录 | 文本与代码仅官方；视觉不足 |
+| Qwen3.5-0.8B | 模型卡已登记 MMLU-Pro 42.3/29.7、C-Eval 50.5 | 官方无该档位代码基准 | MMMU-Pro 31.2 已登记 | 文本与视觉仅官方；代码不足 |
+| Granite 4.0 1B | 模型卡已登记 MMLU 59.39、IFEval 77.38 | HumanEval 74、MBPP 65 已登记 | 不适用 | 仅官方 |
+| Granite 4.0 H-1B | 模型卡已登记 MMLU 59.74、IFEval 78.53 | HumanEval 73、MBPP 69 已登记 | 不适用 | 仅官方；Mamba2 混合架构 |
+| Qwen2.5-7B-Instruct | 报告已登记 MMLU-Pro 56.3、MATH 75.5 | HumanEval 84.8、LiveCodeBench 28.7 已登记 | 不适用 | 仅官方；与 Coder 系列互不混用 |
+| Qwen2.5-1.5B-Instruct | 报告已登记 MMLU-Pro 32.4、MATH 55.2 | HumanEval 61.6、LiveCodeBench 14.8 已登记 | 不适用 | 仅官方 |
+| Qwen2.5-0.5B-Instruct | 报告已登记 MMLU-Pro 15.0、MATH 34.4、GSM8K 49.6 | 用途不含代码 | 不适用 | 仅官方 |
+| Llama 3.2 1B Instruct | 官方卡已登记 MMLU 49.3、IFEval 59.5、GSM8K 44.4 | 官方无代码基准 | 不适用 | 仅官方；代码证据不足 |
+| Llama 3.2 3B Instruct | 官方卡已登记 MMLU 63.4、IFEval 77.4、GSM8K 77.7 | 同上 | 不适用 | 仅官方；代码证据不足 |
+| Llama 3.1 8B Instruct | 官方卡已登记 MMLU 69.4、IFEval 80.4、GSM8K 84.5 | HumanEval 72.6、MBPP++ 72.8 已登记 | 不适用 | 仅官方 |
+| Gemma 2 2B IT | 报告已登记 MMLU（IT）56.1、TruthfulQA 43.72 | MBPP 36.6 已登记 | 不适用 | 仅官方；IT 版 MT-Bench 官方未发布 |
+| Gemma 2 9B IT | 报告已登记 MMLU 72.3、TruthfulQA 50.27 | MBPP 59.2 已登记 | 不适用 | 仅官方 |
+| Phi-3.5-mini-instruct | 模型卡已登记 MMLU 69、MMLU-Pro 47.4 | HumanEval 62.8、MBPP 69.6 已登记 | 不适用 | 仅官方（厂商内部工具口径已注明） |
+| SmolLM2-1.7B-Instruct | 模型卡已登记 IFEval 56.7、MMLU-Pro 19.3、GSM8K 48.2 | HumanEval 28.1 已登记 | 不适用 | 仅官方；GSM8K 卡/论文差异已注明 |
+| MiniCPM4 0.5B | 报告已登记 MMLU 55.55、CMMLU 65.22、C-Eval 66.11 | 用途不含代码 | 不适用 | 仅官方 |
+| MiniCPM4 8B | 报告已登记 MMLU 75.83、CMMLU 80.62、C-Eval 81.36 | MBPP 78.99、HumanEval 85.37 已登记 | 不适用 | 仅官方 |
+| InternVL3.5-1B | 论文 Table 14 已登记 MMLU 49.1 | 本站未收录此用途 | MMMU 44.2、MathVista 59.3、OCRBench 795 已登记 | 仅官方（发布版口径） |
+| InternVL3.5-2B | 论文 Table 14 已登记 MMLU 61.9 | 本站未收录此用途 | MMMU 59.0、MathVista 71.8、OCRBench 836 已登记 | 仅官方 |
 
 ### Arena 快照核验范围
 

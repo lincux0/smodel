@@ -1,0 +1,407 @@
+{
+  "id": "qwen3-5-0-8b",
+  "name": "Qwen3.5-0.8B",
+  "family": "Qwen",
+  "version": "3.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding",
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image",
+      "video"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡Language Model节标注参数量0.8B（语言模型口径），并给出Gated DeltaNet与Gated Attention混合布局等结构信息；模型同时包含视觉编码器，卡中未单列其参数量，不把整模张量统计当作官方参数总量。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
+  },
+  "context": {
+    "nativeTokens": 262144,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B"
+  },
+  "languages": [
+    "多语言（官方称支持201种语言和方言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡提供架构、评测与部署说明并链接Qwen3.5博客；未公开完整训练数据清单。"
+  },
+  "summary": "0.8B级后训练多模态模型（含视觉编码器），支持文本、图像与视频输入；该档位默认非思考模式，原生262,144 token上下文，官方定位为原型、任务微调与研究用途。",
+  "features": [
+    "原生262,144 token上下文（官方给出vLLM/SGLang 262144 max-model-len示例，并提示OOM时可缩小上下文窗口）",
+    "该档位默认非思考模式，可通过enable_thinking开启思考；官方不支持Qwen3的/think软开关",
+    "官方给出Transformers、vLLM、SGLang与KTransformers部署命令，并列出工具调用与MTP变体",
+    "官方说明面向原型、任务特定微调与研究用途；支持工具调用（BFCL-V4 25.3）并覆盖201种语言和方言"
+  ],
+  "limitations": [
+    "0.8B是官方语言模型口径档位，不代表多模态整模参数的精确总数。",
+    "官方指出该档位在思考模式下比其他Qwen3.5型号更易进入思考循环，建议调整采样并用流式生成及时中断。",
+    "官方语言基准表未提供该档位的代码基准成绩；思考模式下HMMT Feb 25与HMMT Nov 25为未提供。",
+    "本站未复现评测或设备表现。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方要求最新版，serving组件从GitHub主分支安装）",
+        "torchvision",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "安装Transformers serving环境",
+          "description": "官方要求最新版transformers并请确保安装torchvision与pillow；官方安装命令从GitHub主分支安装serving组件。本站未执行。",
+          "command": "pip install \"transformers[serving] @ git+https://github.com/huggingface/transformers.git@main\""
+        },
+        {
+          "title": "启动轻量推理服务",
+          "description": "官方说明该命令会提供OpenAI兼容端点并尽可能将模型放置在加速器上，适用于快速测试与中等负载。本站未执行。",
+          "command": "transformers serve --force-model Qwen/Qwen3.5-0.8B --port 8000 --continuous-batching"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm（官方要求主分支新版，按nightly索引安装）"
+      ],
+      "steps": [
+        {
+          "title": "安装支持Qwen3.5的vLLM",
+          "description": "官方要求vLLM主分支新版并给出nightly索引安装命令。本站未执行。",
+          "command": "uv pip install vllm --torch-backend=auto --extra-index-url https://wheels.vllm.ai/nightly"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方给出的标准启动命令，最大上下文262,144 token；另有工具调用、MTP与纯文本模式（--language-model-only）等变体见官方卡。本站未执行。",
+          "command": "vllm serve Qwen/Qwen3.5-0.8B --port 8000 --tensor-parallel-size 1 --max-model-len 262144"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于并行配置、上下文长度与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sglang",
+      "runtime": "SGLang",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sglang（官方要求主分支版本，按官方git安装命令）"
+      ],
+      "steps": [
+        {
+          "title": "安装主分支SGLang",
+          "description": "官方要求SGLang主分支版本，并给出以下安装命令。本站未执行。",
+          "command": "uv pip install 'git+https://github.com/sgl-project/sglang.git#subdirectory=python&egg=sglang[all]'"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方给出的标准启动命令，最大上下文262,144 token；工具调用与MTP变体见官方卡。本站未执行。",
+          "command": "python -m sglang.launch_server --model-path Qwen/Qwen3.5-0.8B --port 8000 --tp-size 1 --mem-fraction-static 0.8 --context-length 262144"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与吞吐取决于并行配置、上下文长度与量化，不将参数量换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro-thinking",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 42.3,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡语言基准表Knowledge & STEM (Thinking)分节列出Qwen3.5-0.8B为42.3，即思考模式。卡表脚注说明该表实验设置top_p=0.95、top_k=20、presence_penalty=1.5、temperature=1.0；未披露shot数、提示模板与生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-0.8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、shot数、提示模板与生成长度；原样记录，不与条件不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-0-8b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmlu-pro-nonthinking",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 29.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡语言基准表Non-Thinking Mode分节列出Qwen3.5-0.8B为29.7，即非思考模式（该档位默认模式）。卡表脚注说明该表实验设置top_p=0.95、top_k=20、presence_penalty=1.5、temperature=1.0；未披露shot数、提示模板与生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-0.8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "disabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、shot数、提示模板与生成长度；原样记录，不与条件不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-0-8b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "c-eval-thinking",
+      "benchmark": "C-Eval",
+      "dataset": "C-Eval",
+      "language": "zh",
+      "metric": "accuracy",
+      "value": 50.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡语言基准表Knowledge & STEM (Thinking)分节列出Qwen3.5-0.8B为50.5，即思考模式。卡表脚注说明该表实验设置top_p=0.95、top_k=20、presence_penalty=1.5、temperature=1.0；未披露shot数、提示模板与生成长度；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-0.8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、shot数、提示模板与生成长度；原样记录，不与条件不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "text-generation",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-0-8b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmmu-pro-thinking",
+      "benchmark": "MMMU-Pro",
+      "dataset": "MMMU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 31.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡未注明数据版本",
+      "settings": "官方卡视觉语言基准表按Thinking/Non-thinking两个数值报告，Qwen3.5-0.8B为31.2/31.4；本条取Thinking值31.2。卡表脚注说明非视频基准在思考模式下使用top_p=0.95、top_k=20、presence_penalty=1.5、temperature=0.6；未披露shot数、提示模板与图像预处理细节；本站未复现。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Qwen Team",
+      "externalModelId": "Qwen/Qwen3.5-0.8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方模型卡未披露该成绩的模型revision、图像预处理与提示等完整评测条件；原样记录，不与条件不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen3-5-0-8b-qwen-model-card-unknown",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方卡分别报告思考与非思考模式的MMLU-Pro（42.3% / 29.7%）及思考模式C-Eval 50.5%，可据此了解该超小档位的中英文知识与推理水平；考试结果不能代表中文写作或开放式对话质量。",
+      "strengths": [
+        "官方表明确区分思考与非思考两种模式，数值可直接对应推理开关（该档位默认非思考）。",
+        "同表另有MMLU-Redux、SuperGPQA、IFEval、MMMLU、BFCL-V4等维度可参考。"
+      ],
+      "limitations": [
+        "两种模式成绩差异明显，使用时应按官方采样配置选择模式。",
+        "考试基准不能替代中文写作与自然对话验证。",
+        "评测条件未完整披露，本站未复现。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro-thinking",
+        "mmlu-pro-nonthinking",
+        "c-eval-thinking"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "insufficient",
+      "summary": "本轮未找到该档位的官方代码基准成绩：官方语言基准表未列出LiveCodeBench或同类代码评测，仅有HMMT（该档位为未提供）、BFCL-V4/TAU2-Bench代理类与多语言结果。因此不做代码能力结论，建议以目标仓库的实际执行结果验证。",
+      "strengths": [
+        "官方将模型定位为原型、任务微调与研究用途。"
+      ],
+      "limitations": [
+        "官方卡未提供该档位的代码生成基准。",
+        "数学与代理类成绩不能替代代码正确性验证。",
+        "本站未在真实仓库测试该型号。"
+      ],
+      "evidenceIds": []
+    },
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "可作为超小图文问答候选：官方视觉语言表列出MMMU-Pro 31.2%（思考模式，非思考31.4%）。该单项基准不能保证OCR或细节识别效果；同表另有OCRBench 74.5/79.1与RefCOCO(avg) 79.3/77.8等分项。",
+      "strengths": [
+        "官方表同时给出思考与非思考两个数值，并含OCRBench、MMMBench、RefCOCO等维度。"
+      ],
+      "limitations": [
+        "MMMU-Pro 31.2%为官方表内同系列最低档位，复杂图文推理有限。",
+        "图像预处理、提示与划分未完整披露。",
+        "本站未使用本地图片输入验证。"
+      ],
+      "evidenceIds": [
+        "mmmu-pro-thinking"
+      ]
+    }
+  ]
+}

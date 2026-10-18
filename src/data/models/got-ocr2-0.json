@@ -1,0 +1,354 @@
+{
+  "id": "got-ocr2-0",
+  "name": "GOT-OCR 2.0",
+  "family": "GOT (General OCR Theory)",
+  "version": "2.0",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.716,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "HF权重元数据safetensors张量参数总和为716,033,280（约0.716B）；论文说明整模约580M参数，由约80M高压缩编码器（1024×1024输入压缩为256个tokens）与0.5B解码器组成，与HF张量计数口径不同，官方未统一单列。",
+    "sourceUrl": "https://huggingface.co/stepfun-ai/GOT-OCR2_0"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://arxiv.org/abs/2409.01704"
+  },
+  "languages": [
+    "英语",
+    "中文（论文说明主要支持中英文；HF模型卡frontmatter标注multilingual）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/stepfun-ai/GOT-OCR2_0"
+    },
+    "code": null,
+    "trainingDisclosure": "论文介绍三段式训练流程（编码器解耦预训练、编码器与解码器联合训练、解码器后训练），联合训练数据由纯OCR数据、Mathpix-markdown格式数据与通用OCR数据构成；未公开完整训练语料清单。"
+  },
+  "summary": "把整页文档或场景图像直接解码为纯文本或带格式（Markdown/LaTeX等）文本的端到端OCR模型。",
+  "features": [
+    "约80M高压缩编码器：1024×1024图像编码为256个tokens",
+    "0.5B解码器，论文说明最大支持8K tokens",
+    "支持纯文本、格式化、细粒度（坐标或颜色框选）、多裁剪与多页OCR",
+    "官方提供Transformers用法与GitHub仓库demo/eval脚本两条路线"
+  ],
+  "limitations": [
+    "论文主要支持英文与中文，其他语言无官方评测。",
+    "论文Table 3、Table 4的格式化与细粒度成绩建立在论文自建基准上，不是公开榜单；OCRBench成绩未出现在官方论文、模型卡或GitHub仓库中，本页不导入该榜。",
+    "8K为论文声明的解码器最大tokens长度，官方未给出按输入分辨率或输出格式变化的实际可用长度。",
+    "HF模型卡未披露训练语料清单；GitHub仓库未提供许可证文件，代码许可未核实。",
+    "HF张量口径（约0.716B）与论文的约580M参数口径不同，页面参数列采用HF口径；本站未在票据、表格或扫描件上验证版面与格式还原效果。"
+  ],
+  "officialUrl": "https://huggingface.co/stepfun-ai/GOT-OCR2_0",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/stepfun-ai/GOT-OCR2_0",
+      "sourceUrl": "https://huggingface.co/stepfun-ai/GOT-OCR2_0",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch==2.0.1",
+        "torchvision==0.15.2",
+        "transformers==4.37.2",
+        "tiktoken==0.6.0",
+        "verovio==4.3.1",
+        "accelerate==0.28.0"
+      ],
+      "steps": [
+        {
+          "title": "安装 Python 依赖",
+          "description": "官方模型卡以Requirements列表给出各包版本（官方测试环境为python 3.10与NVIDIA GPU），此处转换为终端写法；本站未执行该命令。",
+          "command": "python -m pip install torch==2.0.1 torchvision==0.15.2 transformers==4.37.2 tiktoken==0.6.0 verovio==4.3.1 accelerate==0.28.0"
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页示例以trust_remote_code加载模型，并用model.chat调用ocr_type='ocr'（纯文本）或'format'（格式化输出）；细粒度与多裁剪分别使用ocr_box/ocr_color与chat_crop。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于输入分辨率、裁剪档位、批大小与精度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-got-ocr",
+      "runtime": "GOT官方仓库（PyTorch）",
+      "systems": [],
+      "format": "Safetensors（HF权重）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/stepfun-ai/GOT-OCR2_0",
+      "sourceUrl": "https://github.com/Ucas-HaoranWei/GOT-OCR2.0#install",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "Python 3.10（官方conda示例）",
+        "CUDA 11.8 + torch 2.0.1（官方环境说明）",
+        "ninja",
+        "flash-attn（需按官方命令以 --no-build-isolation 安装）"
+      ],
+      "steps": [
+        {
+          "title": "克隆官方仓库并创建环境",
+          "description": "官方README第1步为克隆仓库，随后cd进入目录；第2步给出conda create -n got python=3.10 -y 与 conda activate got，此处仅记录克隆命令，其余按README依次执行。本站未执行。",
+          "command": "git clone https://github.com/Ucas-HaoranWei/GOT-OCR2.0.git"
+        },
+        {
+          "title": "安装包与Flash-Attention",
+          "description": "在已激活的conda环境中执行 pip install -e .；再安装ninja并按官方命令安装flash-attn。官方环境为cuda11.8+torch2.0.1。本站未执行。",
+          "command": "pip install -e ."
+        },
+        {
+          "title": "运行官方demo脚本",
+          "description": "官方README给出纯文本OCR的demo命令；--model-name指向本地权重目录、--image-file指向图片，均需替换。格式化为--type format，细粒度加--box或--color，多图/多页使用run_ocr_2.0_crop.py。本站未下载权重或执行模型。",
+          "command": "python3 GOT/demo/run_ocr_2.0.py --model-name /GOT_weights/ --image-file /an/image/file.png --type ocr"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方仅给出环境与依赖说明，未提供内存或显存需求估算。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "fox-doc-ocr-en-edit-distance",
+      "benchmark": "Fox（PDF文档级纯文本OCR）",
+      "dataset": "Fox英文PDF文档（论文说明使用开源Fox基准；词级切分计算指标）",
+      "language": "英语",
+      "metric": "Edit Distance",
+      "value": 0.035,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "GOT-OCR 2.0论文Table 1（arXiv v1）",
+      "settings": "论文4.2.1用开源Fox基准测试中英文PDF纯文本OCR，指标为词级编辑距离（越低越好，论文写作edict distance）；Table 1列出GOT 580M的en列为0.035。论文未披露Fox版本、模型revision与完整推理配置；arXiv v1提交日2024-09-03不是已知评测运行日；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2409.01704",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "GOT作者团队（StepFun等，模型发布方自报）",
+      "externalModelId": "stepfun-ai/GOT-OCR2_0（论文中称GOT，0.58B）",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露基准版本、模型revision与完整推理配置，且该编辑距离为论文自评口径；仅记录原报告，不与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2409.01704",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据。论文页面标注CC BY-SA 4.0，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "stepfun",
+        "runId": "stepfun-got-ocr2-paper-table1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "fox-doc-ocr-zh-edit-distance",
+      "benchmark": "Fox（PDF文档级纯文本OCR）",
+      "dataset": "Fox中文PDF文档（论文说明使用开源Fox基准；词级切分计算指标）",
+      "language": "中文",
+      "metric": "Edit Distance",
+      "value": 0.038,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "GOT-OCR 2.0论文Table 1（arXiv v1）",
+      "settings": "论文4.2.1用开源Fox基准测试中英文PDF纯文本OCR，指标为词级编辑距离（越低越好）；Table 1列出GOT 580M的zh列为0.038。论文未披露Fox版本、模型revision与完整推理配置；arXiv v1提交日2024-09-03不是已知评测运行日；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2409.01704",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "GOT作者团队（StepFun等，模型发布方自报）",
+      "externalModelId": "stepfun-ai/GOT-OCR2_0（论文中称GOT，0.58B）",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露基准版本、模型revision与完整推理配置，且该编辑距离为论文自评口径；仅记录原报告，不与其他OCR记录或整套文档解析流水线直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2409.01704",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据。论文页面标注CC BY-SA 4.0，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "stepfun",
+        "runId": "stepfun-got-ocr2-paper-table1",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "formatted-doc-ocr-single-edit-distance",
+      "benchmark": "格式化文档OCR（论文自建中英文文档基准）",
+      "dataset": "论文自建中英文文档页面基准（先用Mathpix生成伪标注再人工修正）",
+      "language": "中文与英语（论文基准未分列）",
+      "metric": "Edit Distance（Markdown文档，单尺度输入，全文本行）",
+      "value": 0.097,
+      "unit": "无单位",
+      "direction": "lower",
+      "version": "GOT-OCR 2.0论文Table 3（single行）",
+      "settings": "论文4.2.3测试格式化（Mathpix markdown/tikz/smiles/kern）输出；Table 3在single（原始整图输入）下All text编辑距离为0.097，multi-crop（动态分辨率）同行为0.086，Formula/Table分行为0.269/0.254（single）。表注说明single为原始图像输入、multi-crop为动态分辨率策略；论文未披露基准版本与完整推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2409.01704",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "GOT作者团队（StepFun等，模型发布方自报）",
+      "externalModelId": "stepfun-ai/GOT-OCR2_0（论文中称GOT，0.58B）",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该成绩来自论文自建基准的编辑距离口径，非公开榜单；来源未披露基准版本、模型revision与完整推理配置，不能与其他OCR记录直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2409.01704",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据。论文页面标注CC BY-SA 4.0，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "stepfun",
+        "runId": "stepfun-got-ocr2-paper-table3",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "chartqa-se-ap-strict",
+      "benchmark": "ChartQA-SE（结构化提取版本）",
+      "dataset": "ChartQA-SE（论文引用的ChartQA结构化提取版本）",
+      "language": "英语",
+      "metric": "AP@strict",
+      "value": 0.747,
+      "unit": "无单位（0–1）",
+      "direction": "higher",
+      "version": "GOT-OCR 2.0论文Table 5（arXiv v1）",
+      "settings": "论文4.2.5用ChartQA-SE与PlotQA-SE评估图表OCR；Table 5列出GOT（0.58B）ChartQA-SE AP@strict 0.747、AP@slight 0.845、AP@high 0.867，PlotQA-SE AP@strict 0.133。表内其他模型的个别数值存在明显排版异常，本记录仅取GOT行；论文未披露基准版本与完整推理配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2409.01704",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "GOT作者团队（StepFun等，模型发布方自报）",
+      "externalModelId": "stepfun-ai/GOT-OCR2_0（论文中称GOT，0.58B）",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该平均精度来自论文表格口径，来源未披露基准版本、模型revision与完整推理配置，不能与其他OCR记录直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2409.01704",
+        "notes": "仅记录论文中的少量型号成绩并保留作者与来源链接；不复制论文表格或底层基准数据。论文页面标注CC BY-SA 4.0，引用不更改论文及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "stepfun",
+        "runId": "stepfun-got-ocr2-paper-table5",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "可作为端到端文档与场景OCR候选：论文报告GOT（580M）在Fox中英文PDF纯文本OCR上编辑距离为0.035/0.038，自建格式化文档基准的Markdown全文本编辑距离0.097（single；multi-crop为0.086），ChartQA-SE结构化图表AP@strict为0.747。论文另报告场景文本编辑距离0.112/0.096与细粒度框选结果（英文region 0.041）未逐项导入。均为发布方自测，且论文基准与公开榜单口径不同；OCRBench成绩未在官方论文、模型卡或GitHub仓库中出现。",
+      "strengths": [
+        "论文按基准逐表给出中英文编辑距离及格式化、图表等分项，当前记录明确对应GOT（580M）行。",
+        "同页给出single与multi-crop两种输入策略的对照，便于按精度与算力取舍。",
+        "官方GitHub提供demo与evaluate_GOT.py脚本，部署与复现路线明确。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "论文Table 3、Table 4的格式化与细粒度成绩来自自建基准，非公开榜单；场景文本与细粒度结果未逐项导入。",
+        "训练语料未公开清单；GitHub仓库未提供许可证文件，代码许可未核实。",
+        "HF张量口径（约0.716B）与论文约580M参数口径不同；8K为解码器最大tokens声明，实际可用长度未披露。",
+        "本站未在真实票据、表格或扫描件上验证版面与表格结构还原。"
+      ],
+      "evidenceIds": [
+        "fox-doc-ocr-en-edit-distance",
+        "fox-doc-ocr-zh-edit-distance",
+        "formatted-doc-ocr-single-edit-distance",
+        "chartqa-se-ap-strict"
+      ]
+    }
+  ]
+}

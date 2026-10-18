@@ -1,0 +1,346 @@
+{
+  "id": "phi-3-5-mini-instruct",
+  "name": "Phi-3.5-mini-instruct",
+  "family": "Phi",
+  "version": "3.5-mini",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡说明为3.8B稠密解码器模型（多语言章节表述为3.8B活跃参数、Benchmarks章节表述为3.8B-param）；HF权重元数据safetensors张量参数和为3,821,079,552（约3.82B）。官方未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct"
+  },
+  "languages": [
+    "阿拉伯语",
+    "中文",
+    "捷克语",
+    "丹麦语",
+    "荷兰语",
+    "英语",
+    "芬兰语",
+    "法语",
+    "德语",
+    "希伯来语",
+    "匈牙利语",
+    "意大利语",
+    "日语",
+    "韩语",
+    "挪威语",
+    "波兰语",
+    "葡萄牙语",
+    "俄语",
+    "西班牙语",
+    "瑞典语",
+    "泰语",
+    "土耳其语",
+    "乌克兰语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct/resolve/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡说明训练数据合计3.4万亿token，由严格筛选的公开文档与教育数据、代码，合成的教科书式数据，以及高质量对话监督数据组成；训练使用512张H100-80G、约10天，2024年6月至8月完成，公开数据截止2023年10月；后训练包含监督微调、PPO与DPO；未公开完整语料清单。"
+  },
+  "summary": "3.8B稠密轻量模型，官方定位内存/算力受限环境与低延迟场景，支持128K上下文与多语言，2024年8月发布。",
+  "features": [
+    "官方卡标注3.8B稠密解码器模型、128K token上下文",
+    "官方定位：资源受限环境、低延迟场景与强推理（尤其代码、数学和逻辑）",
+    "官方称较2024年6月版Phi-3 Mini在多语言、多轮对话质量与推理能力上大幅提升",
+    "官方卡给出Transformers用法与依赖版本（Phi-3系列自transformers 4.43.0起集成）",
+    "官方评测覆盖知识、推理、数学、多语言、长上下文与代码生成",
+    "MIT许可，官方标注2024年8月发布"
+  ],
+  "limitations": [
+    "官方Benchmarks结果以completion format运行，提示与few-shot配置来自微软内部评测工具且未完整披露，不能与外部榜单直接横比。",
+    "官方明确说明模型容量有限、事实性知识存储能力受限，可能产生事实错误，建议配合检索（RAG）使用。",
+    "默认使用flash attention，V100及更早GPU需显式改为eager实现。",
+    "公开训练数据截止2023年10月，知识时效有限。",
+    "本站未复现官方基准或部署。"
+  ],
+  "officialUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers==4.43.0（官方卡要求）",
+        "torch==2.3.1（官方卡要求）",
+        "accelerate==0.31.0（官方卡要求）",
+        "flash_attn==2.5.8（官方卡要求）"
+      ],
+      "steps": [
+        {
+          "title": "按官方要求准备环境",
+          "description": "官方模型卡列出依赖版本（transformers 4.43.0、torch 2.3.1、accelerate 0.31.0、flash_attn 2.5.8）并说明Phi-3系列自transformers 4.43.0起集成；模型卡未给出安装命令，命令留空。本站未执行安装，依赖与模型版本需保持匹配。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方卡Input Formats示例用聊天格式组织提示并用AutoModelForCausalLM与AutoTokenizer加载microsoft/Phi-3.5-mini-instruct；默认走flash attention，V100及更早GPU需改为attn_implementation=\"eager\"。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方说明默认使用flash attention并测试过A100、A6000与H100，该说明不是本站测量，也不构成最低配置要求。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-5shot",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 69,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmarks表（2024-08系列）",
+      "settings": "微软官方模型卡Benchmarks表Phi-3.5 Mini-Ins列的MMLU行（5-shot）为69；模型卡说明全部数字以completion format、temperature 0运行，提示与shot配置来自微软内部评测工具且未完整披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Microsoft（模型发布方自报）",
+      "externalModelId": "microsoft/Phi-3.5-mini-instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 5,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测工具，未披露足以复现和对齐的模型revision、提示模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+        "notes": "仅记录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改模型卡或基准许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft",
+        "runId": "microsoft-phi-3-5-mini-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmlu-pro-0shot-cot",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 47.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmarks表（2024-08系列）",
+      "settings": "微软官方模型卡Benchmarks表Phi-3.5 Mini-Ins列的MMLU-Pro行（0-shot, CoT）为47.4；模型卡未披露具体CoT模板、采样参数与模型revision；本站未复现。",
+      "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Microsoft（模型发布方自报）",
+      "externalModelId": "microsoft/Phi-3.5-mini-instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测工具，未披露足以复现和对齐的模型revision、提示模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+        "notes": "仅记录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改模型卡或基准许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft",
+        "runId": "microsoft-phi-3-5-mini-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval-0shot",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "code",
+      "metric": "score",
+      "value": 62.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmarks表（2024-08系列）",
+      "settings": "微软官方模型卡Benchmarks表Phi-3.5 Mini-Ins列Code Generation分组的HumanEval行（0-shot）为62.8；模型卡未披露评测实现（如pass@1口径）、提示与采样参数；本站未复现。",
+      "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Microsoft（模型发布方自报）",
+      "externalModelId": "microsoft/Phi-3.5-mini-instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测工具，未披露足以复现和对齐的模型revision、评测实现与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+        "notes": "仅记录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改模型卡或基准许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft",
+        "runId": "microsoft-phi-3-5-mini-card-benchmarks",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mbpp-3shot",
+      "benchmark": "MBPP",
+      "dataset": "MBPP",
+      "language": "code",
+      "metric": "score",
+      "value": 69.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Benchmarks表（2024-08系列）",
+      "settings": "微软官方模型卡Benchmarks表Phi-3.5 Mini-Ins列Code Generation分组的MBPP行（3-shot）为69.6；模型卡未披露评测实现（如pass@1口径）、提示与采样参数；本站未复现。",
+      "sourceUrl": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Microsoft（模型发布方自报）",
+      "externalModelId": "microsoft/Phi-3.5-mini-instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 3,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测工具，未披露足以复现和对齐的模型revision、评测实现与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/microsoft/Phi-3.5-mini-instruct",
+        "notes": "仅记录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据，引用不更改模型卡或基准许可。"
+      },
+      "provenance": {
+        "sourceId": "microsoft",
+        "runId": "microsoft-phi-3-5-mini-card-benchmarks",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "小尺寸知识问答候选：官方卡报告MMLU 5-shot为69、MMLU-Pro 0-shot CoT为47.4，并与Phi-4-mini等其他型号并列对照；均为发布方内部评测工具运行，未披露完整配置。",
+      "strengths": [
+        "官方表在同一表内并列Phi-3.0-Mini、Llama-3.1-8B、Gemma-2-9B等对照模型，档位定位可直接查看。",
+        "官方说明较2024年6月版在多语言与推理上大幅提升，并给出逐语言多语言MMLU结果。"
+      ],
+      "limitations": [
+        "全部成绩由发布方内部工具以completion format运行，未完整披露提示、shot与解码配置，不能与外部榜单直接横比。",
+        "官方明确提示模型容量有限、事实性知识容易出错，建议配合检索使用。",
+        "公开数据截止2023年10月，知识时效有限。",
+        "未找到许可明确且经核实的同型号独立复测。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-5shot",
+        "mmlu-pro-0shot-cot"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "函数级代码生成候选：官方卡Code Generation分组列出HumanEval 0-shot 62.8与MBPP 3-shot 69.6；仓库级任务与真实项目修复没有官方成绩。",
+      "strengths": [
+        "官方卡单列代码生成分组，两项基准均为经典函数级题目。",
+        "官方定位包含代码与逻辑推理增强方向。"
+      ],
+      "limitations": [
+        "HumanEval/MBPP只覆盖函数级题目，不等价于仓库级工程任务。",
+        "模型卡未披露评测实现与生成配置；本站未在真实仓库或测试用例上验证生成代码。"
+      ],
+      "evidenceIds": [
+        "humaneval-0shot",
+        "mbpp-3shot"
+      ]
+    }
+  ]
+}

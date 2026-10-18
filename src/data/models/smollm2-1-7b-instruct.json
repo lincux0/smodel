@@ -1,0 +1,404 @@
+{
+  "id": "smollm2-1-7b-instruct",
+  "name": "SmolLM2-1.7B-Instruct",
+  "family": "SmolLM",
+  "version": "2",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.7,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡将1.7B列为该家族三档规模之一（135M/360M/1.7B）；HF权重元数据safetensors张量参数和为1,711,376,384（约1.71B）。未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://arxiv.org/abs/2502.02737"
+  },
+  "languages": [
+    "英语（官方说明主要理解和生成英语内容；模型卡未声明其他语言支持）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡披露：1.7B在11万亿token上预训练，数据混合包括FineWeb-Edu、DCLM、The Stack及官方整理的新数学与代码数据集；指令版经SmolTalk（公开数据与自建数据）SFT，并基于UltraFeedback做DPO；训练使用256张H100与nanotron/alignment-handbook；未提供完整逐样本语料清单。"
+  },
+  "summary": "Hugging Face 的 1.7B 档位指令模型，主打端侧运行，支持改写、摘要与函数调用等轻量任务。",
+  "features": [
+    "1.7B档位，训练上下文扩展到8K（论文4.6节）",
+    "官方卡提供Transformers、TRL CLI与Transformers.js三种运行示例",
+    "官方卡给出函数调用的系统提示与工具调用解析示例",
+    "SFT+DPO对齐，SFT数据集SmolTalk公开"
+  ],
+  "limitations": [
+    "官方说明主要面向英语，其他语言能力未声明。",
+    "官方卡引用的BFCL 27%为第三方榜单数值，本站未按该榜单口径核实，未作为评测记录导入。",
+    "模型卡也提示生成内容可能不准确、不一致或带训练数据偏见，需自行核验重要信息。",
+    "官方模型卡的指令版评测表没有代码基准行；本条目收录的HumanEval来自论文表，论文与模型卡的GSM8K等数值存在小版本差异，均已注明来源。",
+    "本站未复现评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "accelerate（多卡device_map需要，可选）"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方卡给出的安装命令为 pip install transformers，此处按终端写法转换为 python -m pip。本站未执行安装。",
+          "command": "python -m pip install -U transformers"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用 AutoModelForCausalLM 与 AutoTokenizer 从 HuggingFaceTB/SmolLM2-1.7B-Instruct 加载，并用 apply_chat_template 构造消息；多GPU时需另装accelerate并使用device_map。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存与速度取决于精度、输入长度、运行时与硬件，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-trl-cli",
+      "runtime": "TRL CLI",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct#chat-in-trl",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "trl"
+      ],
+      "steps": [
+        {
+          "title": "安装TRL",
+          "description": "官方卡的终端聊天示例给出 pip install trl，此处按终端写法转换为 python -m pip。本站未执行安装。",
+          "command": "python -m pip install -U trl"
+        },
+        {
+          "title": "启动终端聊天",
+          "description": "按官方示例在终端与模型对话；官方命令使用CPU设备，实际设备需按机器情况调整。本站未执行。",
+          "command": "trl chat --model_name_or_path HuggingFaceTB/SmolLM2-1.7B-Instruct --device cpu"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；CPU对话的内存与速度取决于实现与机器配置，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score（Average prompt/inst）",
+      "value": 56.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Model表",
+      "settings": "官方卡说明全部评测使用lighteval且除非另注为zero-shot；同表列出Llama 3.2 1B Instruct 53.5、Qwen2.5-1.5B-Instruct 47.4。模型卡未披露提示模板、生成预算与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB（模型发布方自报）",
+      "externalModelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingfacetb",
+        "runId": "smollm2-1-7b-instruct-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmlu-pro-mcf",
+      "benchmark": "MMLU-Pro（MCF）",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "score（MCF）",
+      "value": 19.3,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Model表",
+      "settings": "官方卡以MMLU-Pro（MCF）口径列出19.3；同表Llama 3.2 1B Instruct 12.7、Qwen2.5-1.5B-Instruct 24.2。评测使用lighteval且除非另注为zero-shot，未披露提示模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB（模型发布方自报）",
+      "externalModelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingfacetb",
+        "runId": "smollm2-1-7b-instruct-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k-5shot",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "score",
+      "value": 48.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Model表（5-shot）",
+      "settings": "官方卡标注为5-shot；同表Llama 3.2 1B Instruct 26.8、Qwen2.5-1.5B-Instruct 42.8。评测使用lighteval，未披露采样与答案抽取配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB（模型发布方自报）",
+      "externalModelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 5,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露权重revision、提示模板、生成预算及完整解码条件；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingfacetb",
+        "runId": "smollm2-1-7b-instruct-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mt-bench",
+      "benchmark": "MT-Bench",
+      "dataset": "MT-Bench",
+      "language": "en",
+      "metric": "score",
+      "value": 6.13,
+      "unit": "分（报告口径）",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Model表",
+      "settings": "官方卡列出MT-Bench 6.13；同表Llama 3.2 1B Instruct 5.48、Qwen2.5-1.5B-Instruct 6.52。模型卡未说明裁判模型、评分提示与生成预算。本站未复现。",
+      "sourceUrl": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "HuggingFaceTB（模型发布方自报）",
+      "externalModelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露裁判配置、权重revision、提示模板与生成预算；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct",
+        "notes": "仅摘录少量官方评测事实并署名链接；模型权重Apache-2.0不代表评测表数据自动采用相同许可。"
+      },
+      "provenance": {
+        "sourceId": "huggingfacetb",
+        "runId": "smollm2-1-7b-instruct-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "en",
+      "metric": "score",
+      "value": 28.1,
+      "unit": "%",
+      "direction": "higher",
+      "version": "SmolLM2论文Table 5（1-2B指令模型对比）",
+      "settings": "SmolLM2论文5.4节说明为最终指令版SmolLM2与Qwen2.5-1.5B-Instruct、Llama3.2-1B-Instruct的对比表（列名省略了-Instruct后缀）；同表列出Llama3.2-1B为33.5、Qwen2.5-1.5B为30.5。论文未披露该行提示模板、采样与输出预算。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2502.02737",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "HuggingFaceTB（论文作者自报）",
+      "externalModelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "论文未披露该行的权重revision、提示模板、采样与输出预算配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2502.02737",
+        "notes": "仅引用SmolLM2论文中的少量成绩事实并保留出处链接；不复制论文表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "huggingfacetb",
+        "runId": "smollm2-1-7b-instruct-paper-table5",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方模型卡报告IFEval为56.7%、MMLU-Pro（MCF）为19.3%、GSM8K 5-shot为48.2%、MT-Bench为6.13，同表与Llama 3.2 1B Instruct、Qwen2.5-1.5B-Instruct对照。整体表现为1.7B档位的英语助手水平，指令遵循与数学相对突出，知识宽度有限。",
+      "strengths": [
+        "官方卡在同一表内并列同档位对照模型，定位可直接查看并说明使用lighteval与zero-shot口径。",
+        "指令遵循、知识问答、数学与对话分别有独立口径，未合成为单一总分。",
+        "卡上给出改写、摘要与函数调用的示例提示。"
+      ],
+      "limitations": [
+        "官方卡未披露权重revision、提示模板、生成预算与完整解码配置，不能与外部榜单直接横比。",
+        "MMLU-Pro（MCF）与GSM8K等数值存在论文（48.8）与模型卡（48.2）的小版本差异，本条目按模型卡口径记录。",
+        "模型卡说明其内容可能不准确、不一致或带训练数据偏见，重要信息需自行核验。",
+        "未找到许可明确且确认为独立方的同型号条件对齐复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "ifeval",
+        "mmlu-pro-mcf",
+        "gsm8k-5shot",
+        "mt-bench"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "SmolLM2论文Table 5报告指令版HumanEval为28.1%，同表Llama3.2-1B为33.5%、Qwen2.5-1.5B为30.5；官方模型卡的指令版评测表本身没有代码行，代码能力证据只来自论文表格。",
+      "strengths": [
+        "论文给出该指令版的HumanEval数值，并与同档位模型并列对照。"
+      ],
+      "limitations": [
+        "论文未披露提示模板、采样与判题配置，无法与外部HumanEval结果对齐比较。",
+        "28.1%的短程序功能正确率不代表仓库级代码任务能力。",
+        "官方模型卡未收录该代码成绩，卡片后续更新也未补充代码行。",
+        "本站未运行模型或复核生成代码。"
+      ],
+      "evidenceIds": [
+        "humaneval"
+      ]
+    }
+  ]
+}

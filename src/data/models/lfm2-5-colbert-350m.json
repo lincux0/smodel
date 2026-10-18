@@ -1,0 +1,301 @@
+{
+  "id": "lfm2-5-colbert-350m",
+  "name": "LFM2.5-ColBERT-350M",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.353,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注总参数约353M，骨干为LFM2.5-350M-Base加双向注意力补丁，共17层（10个卷积块＋6个注意力块＋1个全连接层），词表64,402；HF权重元数据safetensors张量参数合计353,322,752（约0.353B），与官方口径一致。官方未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M"
+  },
+  "languages": [
+    "英语",
+    "西班牙语",
+    "德语",
+    "法语",
+    "意大利语",
+    "葡萄牙语",
+    "阿拉伯语",
+    "瑞典语",
+    "挪威语",
+    "日语",
+    "韩语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方说明该模型基于LFM2.5-350M-Base并加装双向注意力补丁，是LFM家族首批双向模型之一，与LFM2.5-Embedding-350M联合发布；训练数据清单、语料规模与许可未公开。"
+  },
+  "summary": "350M多向量late-interaction（ColBERT式）检索模型，按token输出128维向量并以MaxSim打分，官方定位多语言/跨语言短文本检索与重排。",
+  "features": [
+    "官方标注约353M参数，17层（10个卷积块＋6个注意力块＋1个全连接层），每token输出128维向量，相似度为MaxSim",
+    "官方标注文档长度512 token、查询长度32 token；模型架构块max_seq_length为511",
+    "官方支持11种语言（英语、西班牙语、德语、法语、意大利语、葡萄牙语、阿拉伯语、瑞典语、挪威语、日语、韩语）",
+    "官方同时给出Sentence Transformers（MultiVectorEncoder）与PyLate（PLAID索引、FastPLAID检索或rank.rerank重排）两条用法",
+    "官方称在MacBook Pro M4 Max上经llama.cpp fp16做查询编码p50为8.1 ms，查询编码加MaxSim p50为8.2 ms，未缓存文档时整链路p50为34.3 ms（官方声明，本站未复现）",
+    "官方提供适配llama.cpp的GGUF量化仓库"
+  ],
+  "limitations": [
+    "多向量表示按token存储，索引体积与检索算力显著高于单向量模型，需要MaxSim/PLAID类检索栈支持；官方未给出索引规模与存储成本的具体数值。",
+    "官方定位短上下文检索：文档上限512 token、查询上限32 token，超出需自行切分或改用其他路线。",
+    "官方评测只覆盖其自建的多语言基准，未给出MTEB等公共榜单结果；成绩为发布方自测，本站未复现。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "官方未声明代码许可；本站未实测检索质量、索引体积与延迟。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-pylate",
+      "runtime": "PyLate",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "pylate",
+        "transformers",
+        "trust_remote_code（官方示例要求，用于加载双向补丁）"
+      ],
+      "steps": [
+        {
+          "title": "安装 PyLate",
+          "description": "官方Using PyLate章节给出的安装命令。本站未执行。",
+          "command": "pip install -U pylate"
+        },
+        {
+          "title": "加载模型并建立索引",
+          "description": "按官方示例用models.ColBERT加载LiquidAI/LFM2.5-ColBERT-350M并传trust_remote_code=True，将pad_token设为eos_token，用indexes.PLAID建立索引（FastPLAID检索），文档编码需传is_query=False、查询传is_query=True。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        },
+        {
+          "title": "可选：作为重排器使用",
+          "description": "官方Reranking示例用rank.rerank对已有候选文档做MaxSim重排，无需建立索引。本站未执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；多向量编码的内存与显存占用随输入长度、批大小与索引规模增长，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers>=6.0.0",
+        "trust_remote_code（官方示例要求，用于加载双向补丁）"
+      ],
+      "steps": [
+        {
+          "title": "安装支持多向量的 Sentence Transformers",
+          "description": "官方Using Sentence Transformers章节给出的安装命令。本站未执行。",
+          "command": "pip install \"sentence-transformers>=6.0.0\""
+        },
+        {
+          "title": "加载并打分",
+          "description": "按官方示例用MultiVectorEncoder(\"LiquidAI/LFM2.5-ColBERT-350M\", trust_remote_code=True)分别encode_query与encode_document，再用model.similarity计算MaxSim分数（官方示例查询输出形状为32×128）。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用随输入长度与批大小增长，不在无来源估算时填写资源数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化方案（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方称LFM2.5-ColBERT-350M-GGUF仓库提供多种量化方案，面向llama.cpp；官方延迟表即基于llama.cpp fp16测量。本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "按llama.cpp文档加载",
+          "description": "模型卡未给出本型号的具体加载命令，命令留空；需按llama.cpp当前文档核对多向量输出与MaxSim打分链路。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方latency表基于MacBook Pro M4 Max与fp16，属于官方声明与特定条件，不作为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "nanobeir-multilingual-ndcg10",
+      "benchmark": "NanoBEIR Multilingual Extended（NDCG@10）",
+      "dataset": "LiquidAI/nanobeir-multilingual-extended（多语言检索；模型卡列出AVG与11个语种分项）",
+      "language": "多语言（官方表AVG列，含ar、de、en、es、fr、it、ja、ko、no、pt、sv）",
+      "metric": "NDCG@10",
+      "value": 0.605,
+      "unit": "分数（0–1，官方表原始口径）",
+      "direction": "higher",
+      "version": "官方模型卡性能表（NanoBEIR Multilingual Extended — NDCG@10）",
+      "settings": "Liquid AI官方模型卡性能表列出LFM2.5-ColBERT-350M为晚交互（late）组最佳，AVG为0.605（英语0.687、日语0.614、韩语0.590等分项同表列出），同表并列LFM2.5-Embedding-350M（0.577）、Qwen3-Embedding-0.6B（0.556）、LFM2-ColBERT-350M（0.540）等对照。表未披露模型revision、编码精度、硬件与评测运行日期；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-ColBERT-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、编码精度、硬件与文档切分等足以复现和统一对齐的检索配置，且为发布方自建基准；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+        "notes": "仅摘录官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-colbert-350m-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mkqa-11-recall20",
+      "benchmark": "MKQA-11（Recall@20）",
+      "dataset": "MKQA（官方取目标11语言子集，模型卡标注MKQA-11）",
+      "language": "多语言（官方表AVG列，含ar、de、en、es、fr、it、ja、ko、no、pt、sv）",
+      "metric": "Recall@20",
+      "value": 0.694,
+      "unit": "分数（0–1，官方表原始口径）",
+      "direction": "higher",
+      "version": "官方模型卡性能表（MKQA-11 — Recall@20）",
+      "settings": "Liquid AI官方模型卡性能表列出LFM2.5-ColBERT-350M的跨语言AVG为0.694，同表并列LFM2.5-Embedding-350M（0.691）、gte-multilingual-base（0.675）、Qwen3-Embedding-0.6B（0.638）等对照，并逐语种列出数值。表未披露模型revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-ColBERT-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、语料划分、编码精度与硬件等足以复现和统一对齐的检索配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M",
+        "notes": "仅摘录官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-colbert-350m-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "可作为多语言短文本检索与重排候选：官方模型卡报告NanoBEIR Multilingual Extended NDCG@10 AVG 0.605（晚交互组最佳）、MKQA-11 Recall@20 AVG 0.694，均高于同系列单向量模型LFM2.5-Embedding-350M。代价是按token存向量带来的索引体积与算力，成绩为发布方自测。",
+      "strengths": [
+        "官方同一张表并列单向量与多向量模型并逐语种列出11种语言结果，两个基准上均为晚交互组最佳（官方高亮标注）。",
+        "官方同时提供Sentence Transformers（MultiVectorEncoder）与PyLate（PLAID/FastPLAID）两条用法，并可直接用rank.rerank做重排。",
+        "官方给出llama.cpp与GPU两套延迟数值（含查询编码＋MaxSim与未缓存文档的整链路）。"
+      ],
+      "limitations": [
+        "多向量表示需要MaxSim/PLAID类检索栈，索引体积与检索成本高于单向量模型；官方未量化存储开销。",
+        "文档上限512 token、查询上限32 token，只适用于短上下文检索。",
+        "官方未给出MTEB等公共榜单结果，也未披露模型revision、编码精度与评测运行日期；未找到许可明确且确认为独立方的同型号复测。",
+        "本站未复现检索质量，也未实测索引构建、存储与延迟。"
+      ],
+      "evidenceIds": [
+        "nanobeir-multilingual-ndcg10",
+        "mkqa-11-recall20"
+      ]
+    }
+  ]
+}

@@ -214,3 +214,40 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 | BGE-Large-ZH-v1.5 | [模型卡](https://huggingface.co/BAAI/bge-large-zh-v1.5) · [C-Pack 论文](https://arxiv.org/abs/2309.07597) | 326M（C-Pack 论文口径；MTEB 元数据 1.34B 与结构不符未采用）、512、1024 维；C-MTEB 平均 64.53、检索 70.46、STS 56.25；另收录 MTEB 仓库 MIRACLHardNegatives 中文子集 0.37674（CC0，提交者身份未核实）。MIT；2023-09-12 发布。 |
 
 本轮非商业许可（Jina 系列 CC BY-NC 4.0、Jina v4 的 Qwen Research License、SenseVoice/GLM 的区分处理）均在条目许可字段写明名称与条款链接；批次完成情况与后续批次见[计划型号分阶段上线方案](LAUNCH_PLAN.md)。
+
+## 2026-10-17 批次5-7上线
+
+按[计划型号分阶段上线方案](LAUNCH_PLAN.md)第 5–7 批上线 38 个型号：LFM2.5 系列（230M、350M、1.2B-Thinking、8B-A1B、Embedding-350M、ColBERT-350M、Audio-1.5B、VL-450M、VL-1.6B）、Qwen 系（Qwen3-VL-2B、Qwen3.5-0.8B、Qwen2.5-7B/1.5B/0.5B-Instruct、Qwen3-Embedding-8B、Qwen3-Reranker-8B）、经典通用（Llama 3.2 1B/3B、Llama 3.1 8B、Gemma 2 2B/9B、Phi-3.5-mini、SmolLM2-1.7B、MiniCPM4 0.5B/8B）、视觉（InternVL3.5-1B/2B）、检索与重排（Jina Embeddings v5 Text Nano、Nomic Embed Text v1.5、Multilingual-E5-Small/Base、LightOn mDenseOn、NVIDIA Llama-NV-Embed-Reasoning-3B）与语音/OCR（Whisper large-v3、GOT-OCR 2.0、CosyVoice 2 0.5B）、Granite 4.0 1B/H-1B。目录增至 110 型号、170 用途摘要、425 条成绩（387 官方、38 第三方）。
+
+字段均取自发布方模型卡、许可文件、技术报告与官方仓库；新增 139 条成绩（136 官方、3 第三方）全部标注不可比，未导入 AA 数据。主要核实与口径：
+
+| 型号 | 官方出处与已录口径 |
+| --- | --- |
+| LFM2.5-230M / 350M | [230M 卡](https://huggingface.co/LiquidAI/LFM2.5-230M) · [350M 卡](https://huggingface.co/LiquidAI/LFM2.5-350M) | 230M/350M、32,768 上下文、9–10 语；评测各 4 条（MMLU-Pro 20.25/20.01、IFEval 71.71/76.96、BFCLv3 43.26/44.11 等）；LFM Open License v1.0（商用 $1000 万年收入门槛已写入限制）。 |
+| LFM2.5-1.2B-Thinking | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking) | 1.17B、32,768；MMLU-Pro 49.65、IFEval 88.42、AIME25 31.73、BFCLv3 56.97（thinking）；官方方法学提及 artificialanalysis.ai 方法学并在 settings 如实注明，未导入其数据。 |
+| LFM2.5-8B-A1B | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-8B-A1B) | 总参数 8.3B、激活 1.5B（MoE）、128,000 上下文；IFEval 91.84、IFBench 56.47、AIME25 42.53、τ²-Telecom 88.07；官方卡 BFCL 数值自相矛盾（64.36/48.50 与 64.79/49.73 并存），未收录并在 limitations 说明。 |
+| LFM2.5-Embedding-350M / ColBERT-350M | [Embedding 卡](https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M) · [ColBERT 卡](https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M) | 354M/353M、512 文档长度；NanoBEIR nDCG@10 0.577/0.605、MKQA-11 0.691/0.694；前缀（query/document）为使用前提（已注明）。 |
+| LFM2.5-Audio-1.5B | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B) | LM 骨干 1.2B＋FastConformer 音频编码器 115M（整包 1.47B 记 totalB）；仅英语；ASR 平均 WER 7.53、LibriSpeech-clean 1.95、AMI 15.63；语音合成无客观指标（证据不足）；第三方组件（NeMo/CC-BY-4.0/MIT）许可已注明。 |
+| LFM2.5-VL-450M / 1.6B | [450M 卡](https://huggingface.co/LiquidAI/LFM2.5-VL-450M) · [1.6B 卡](https://huggingface.co/LiquidAI/LFM2.5-VL-1.6B) | 450M：LM 350M＋SigLIP2 86M；MMMU 32.67、MMStar 43.00、OCRBench 684、RefCOCO-M 81.28。1.6B：LM 1.2B＋SigLIP2 400M；MMMU 40.56、MMStar 50.67、InfoVQA 62.71、OCRBench v2 41.44；纯文本无基准（证据不足）。 |
+| Qwen3-VL-2B-Instruct | [模型卡](https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct) · [报告](https://arxiv.org/html/2511.21631v2) | 技术报告 Table 6 的 2B 列：MMLU-Pro 49.0、GPQA 42.0、LiveCodeBench v6 20.3；视觉表为图片未转录（与该系列 4B/8B 口径一致）；256K 原生、扩展 1M。 |
+| Qwen3.5-0.8B | [模型卡](https://huggingface.co/Qwen/Qwen3.5-0.8B) | 0.8B、262,144 原生；MMLU-Pro 42.3（思考）/29.7（非思考）、C-Eval 50.5、MMMU-Pro 31.2（思考）；默认非思考模式且官方提示更易进入思考循环（已注明）；代码无官方基准（证据不足）。 |
+| Granite 4.0 1B / H-1B | [1B 卡](https://huggingface.co/ibm-granite/granite-4.0-1b) · [H-1B 卡](https://huggingface.co/ibm-granite/granite-4.0-h-1b) | 1.6B 稠密 / 1.5B 混合（4 层注意力＋36 层 Mamba2）；128K；MMLU 59.39/59.74、IFEval 77.38/78.53、HumanEval 74/73、MBPP 65/69；官方 GGUF 仓库存在。 |
+| Qwen2.5-7B / 1.5B / 0.5B-Instruct | [报告](https://arxiv.org/html/2412.15115v2) | 报告 Table 8/10 对应列：MMLU-Pro 56.3/32.4/15.0、MATH 75.5/55.2/34.4、HumanEval 84.8/61.6（0.5B 用途不含代码未收录）、LiveCodeBench 28.7/14.8、GSM8K 49.6（0.5B）；7B 长文本 131K（YaRN）、1.5B/0.5B 32K；与 Qwen2.5-Coder 系列互不混用（已注明）。 |
+| Llama 3.2 1B / 3B Instruct | [官方模型卡](https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/MODEL_CARD.md) | MMLU 49.3/63.4、IFEval 59.5/77.4、GSM8K 44.4/77.7、MGSM 24.5/58.2（bf16 列）；128K；Llama 3.2 Community License；代码用途官方无基准（证据不足）。 |
+| Llama 3.1 8B Instruct | [官方模型卡](https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md) | MMLU 69.4、IFEval 80.4、GSM8K 84.5、MATH 51.9、HumanEval 72.6、MBPP++ 72.8；128K；Llama 3.1 Community License。 |
+| Gemma 2 2B / 9B IT | [报告](https://arxiv.org/html/2408.00118v1) · [模型卡 2](https://ai.google.dev/gemma/docs/core/model_card_2) | 报告 Table 17 与安全表：MMLU（IT）56.1/72.3、MBPP 36.6/59.2、TruthfulQA 43.72/50.27；8192 上下文；IT 版 MT-Bench 官方未发布（未收录，已注明）。 |
+| Phi-3.5-mini-instruct | [模型卡](https://huggingface.co/microsoft/Phi-3.5-mini-instruct) | 3.8B、128K；MMLU 69、MMLU-Pro 47.4、HumanEval 62.8、MBPP 69.6（厂商内部工具与完成式口径，已注明）；MIT。 |
+| SmolLM2-1.7B-Instruct | [模型卡](https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct) · [论文](https://arxiv.org/abs/2502.02737) | 1.7B、8K；IFEval 56.7、MMLU-Pro 19.3、GSM8K 48.2、MT-Bench 6.13、HumanEval 28.1；GSM8K 卡/论文差异（48.2/48.8）已注明。 |
+| MiniCPM4 0.5B / 8B | [技术报告](https://arxiv.org/abs/2506.07900) | 32K（LongRoPE 扩展至 128K 已验证）；MMLU 55.55/75.83、CMMLU 65.22/80.62、C-Eval 66.11/81.36、GSM8K 52.08/91.51；8B 另收 MBPP 78.99、HumanEval 85.37。 |
+| InternVL3.5-1B / 2B | [1B 卡](https://huggingface.co/OpenGVLab/InternVL3_5-1B) · [2B 卡](https://huggingface.co/OpenGVLab/InternVL3_5-2B) · [报告](https://arxiv.org/abs/2508.18265) | 论文 Table 14 MMLU 49.1/61.9；Table 3/4：MMMU 44.2/59.0、MathVista 59.3/71.8、OCRBench 795/836；上下文 32K 依据 SFT 说明与 LMDeploy 示例（已注明）。 |
+| Jina Embeddings v5 Text Nano | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v5-text-nano) | 239M、8192、768 维；MTEB English v2 71.0、MMTEB 65.5；卡内单列发布日期 2026-02-18（台账已证实）；上下文 8192/32K 与参数 239M/212M 的卡内差异已注明；CC BY-NC 4.0。 |
+| Nomic Embed Text v1.5 | [模型卡](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5) · [报告](https://arxiv.org/abs/2402.01613) | 137M、8192（动态 RoPE）；MTEB 768 维 62.28、512 维 61.96、256 维 61.04；许可 Apache-2.0；官方无发布日期文字（台账日期未获佐证已注明）。 |
+| Multilingual-E5-Small / Base | [Small 卡](https://huggingface.co/intfloat/multilingual-e5-small) · [Base 卡](https://huggingface.co/intfloat/multilingual-e5-base) · [报告](https://arxiv.org/html/2402.05672v1) | 118M/278M；Mr. TyDi 64.4/65.9、MIRACL dev 60.8/62.3、MTEB 英文 57.9/59.5；MIT；前缀范式为使用前提。 |
+| LightOn mDenseOn | [模型卡](https://huggingface.co/lightonai/mDenseOn) | 307M、8192、768 维；BEIR 56.70、MIRACL 目标语言子集 59.61、MLDR 目标语言子集 64.98、MTEB Code 71.53；另收 MTEB 结果仓库 PR #653 两项（提交者身份未核实，independence unknown）。 |
+| NVIDIA Llama-NV-Embed-Reasoning-3B | [模型卡](https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b) | 3.2B、训练 512/评测 8192、最高 3072 维；BRIGHT 平均 nDCG@10 38.3。**权重许可经 LICENSE 原文核实为 CC BY-NC 4.0（非商业；HF 元数据标签 cc-by-4.0 与许可证不一致，已按原文记录并注明）**，代码 Apache-2.0，底模 Llama-3.2-3B 另受 Meta 许可约束；台账已同步。 |
+| Qwen3-Embedding-8B / Reranker-8B | [Embedding 卡](https://huggingface.co/Qwen/Qwen3-Embedding-8B) · [技术报告](https://arxiv.org/html/2506.05176v1) | Embedding-8B：MTEB 多语 70.58、英文 v2 75.22、C-MTEB 73.84；Reranker-8B（Table 4 8B 行）：MTEB-R 69.02、CMTEB-R 77.45、MMTEB-R 72.94、MTEB-Code 81.22（与 0.6B/4B 同批次，runId 一致）。 |
+| Whisper large-v3 | [模型卡](https://huggingface.co/openai/whisper-large-v3) · [Open ASR 榜单](https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results) | 1.543B；官方卡无单列 WER（仅相对"较 large-v2 降低 10–20%"定性表述，未收录）；收录 Open ASR english_short_latest.csv 行 7.84%（third-party、independence unknown，与 turbo 条目同文件版本与 runId）；HF 权重 Apache-2.0、上游代码 MIT 分开记录。 |
+| GOT-OCR 2.0 | [模型卡](https://huggingface.co/stepfun-ai/GOT-OCR2_0) · [论文](https://arxiv.org/html/2409.01704v1) | 0.716B（HF 张量口径；论文 580M 并列注明）；Fox 文档级 0.035/0.038、格式化文档 0.097、ChartQA-SE 0.747；解码 8K tokens；OCRBench 在官方来源中无此名，未收录（已注明）；代码许可未声明置 null。 |
+| CosyVoice 2 0.5B | [模型卡](https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B) · [论文](https://arxiv.org/html/2412.10117v1) | 0.5B（文本 LLM 为 Qwen2.5-0.5B）；test-zh CER 1.45/SS 75.7、test-en WER 2.57、test-hard CER 6.83（只取 CV2 行）；2024/12 发布（精确日期未披露）；Apache-2.0。 |
+
+本轮非商业与自定义许可（LFM 系列、Jina nano 的 CC BY-NC 4.0、NVIDIA 的 CC BY-NC 4.0、Llama/Gemma 条款型许可）均在条目许可字段写明名称与条款链接；批次完成情况与后续批次见[计划型号分阶段上线方案](LAUNCH_PLAN.md)。

@@ -1,0 +1,216 @@
+{
+  "id": "llama-nv-embed-reasoning-3b",
+  "name": "NVIDIA Llama-NV-Embed-Reasoning-3B",
+  "family": "Llama-NV-Embed",
+  "version": "Reasoning 3B",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.2,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡称该型号约 3.2B 参数（approximately 3.2B），由 meta-llama/Llama-3.2-3B 构建；核对当日 HF 仓库主权重张量合计 3,212,749,824（约 3.21B），与 3.2B 口径一致。",
+    "sourceUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b"
+  },
+  "languages": [
+    "英语（模型卡未列其他语言；训练语料与 BRIGHT 评测均为英语内容）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "CC BY-NC 4.0（底模 Llama-3.2-3B 另适用 Meta Llama 3.2 Community License）",
+      "url": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b/blob/main/LICENSE"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "模型卡披露训练语料由 LLM 合成管线构造：从 BRIGHT 等语料筛选文档生成查询（Qwen3-235B-A22B），用 Qwen3-Next-80B-A3B-Instruct 标注正例、检索模型挖掘困难负例，并整合 ReasonEmbed、ReasonAug、ReasonRank 三个公开数据集；训练数据量级为 10 亿 tokens 以下。"
+  },
+  "summary": "面向推理密集型检索与语义搜索的 3.2B 稠密文本嵌入模型，基于 Meta Llama 3.2 3B 构建，覆盖 RAG、技术文档与问答检索场景；权重为非商业许可。",
+  "features": [
+    "输出最高 3072 维稠密向量，官方示例使用平均池化并归一化",
+    "查询与文档使用 query: 与 passage: 前缀",
+    "官方说明训练时最大 512 tokens、评测使用最大 8192 tokens",
+    "官方提供 Transformers（transformers==4.51.0、flash-attn==2.6.3、accelerate==0.34.2）与 vLLM（>=0.14.0）两种部署方式；官方列出兼容硬件为 A100 40GB/80GB 与 H100 80GB、操作系统为 Linux",
+    "模型卡 BRIGHT(v1.1) 结果：12 个短文档数据集平均 nDCG@10 38.3，并给出逐领域分项（Bio. 63.4、Earth. 60.2 等）"
+  ],
+  "limitations": [
+    "许可组合需注意：仓库 LICENSE 声明二进制模型权重为 CC BY-NC 4.0（非商业）、源文件为 Apache-2.0，卡片正文写明“non-commercial/research use only”，而 HF 元数据标签为 cc-by-4.0；底模 meta-llama/Llama-3.2-3B 另行适用 Meta Llama 3.2 Community License（仓库 NOTICE 指明），再分发或商用前应同时核对两项条款并确认所附授权文件。",
+    "官方成绩为发布方自评；模型卡注明部分对照数值引自论文或榜单、仅标 * 的为按同设置复跑，且未披露本次评测运行日期与硬件，本站未复现。",
+    "训练最大 512 tokens 与评测最大 8192 tokens 之间存在差距，模型卡未说明更长输入或超出 8192 的行为。",
+    "模型卡未声明英语以外的语言支持，训练与评测数据均为英语推理检索内容，跨语言使用需自行评估。",
+    "输出维度上限 3072，模型卡未说明是否支持降维或截断，部署成本高于小型嵌入模型。"
+  ],
+  "officialUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors（BF16）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b",
+      "sourceUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b#usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers==4.51.0",
+        "flash-attn==2.6.3",
+        "accelerate==0.34.2"
+      ],
+      "steps": [
+        {
+          "title": "安装官方指定版本的 Transformers",
+          "description": "模型卡 Installation 给出的第一条安装命令（需与后续两条配套）。",
+          "command": "pip install transformers==4.51.0"
+        },
+        {
+          "title": "安装 FlashAttention",
+          "description": "模型卡 Installation 给出的 FlashAttention 安装命令，--no-build-isolation 为官方原样参数。",
+          "command": "pip install flash-attn==2.6.3 --no-build-isolation"
+        },
+        {
+          "title": "安装 accelerate",
+          "description": "模型卡 Installation 给出的 accelerate 安装命令。",
+          "command": "pip install accelerate==0.34.2"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按模型卡示例用 AutoModel.from_pretrained(..., trust_remote_code=True) 加载并移至 CUDA；查询与文档分别加 query:/passage: 前缀，last_hidden_state 经 attention mask 平均池化并归一化得到 3072 维向量，再点积计算相似度。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡列出兼容硬件为 A100 40GB/80GB 与 H100 80GB、系统为 Linux，但未给出内存/显存数值，不换算资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM（>=0.14.0）",
+      "systems": [],
+      "format": "Safetensors（BF16，模型默认）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b",
+      "sourceUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b#vllm",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm>=0.14.0"
+      ],
+      "steps": [
+        {
+          "title": "启动嵌入服务",
+          "description": "模型卡 vLLM 章节的最小启动命令（required minimal command）；官方另提供 --dtype、--data-parallel-size、--port 等可选参数。",
+          "command": "vllm serve nvidia/llama-nv-embed-reasoning-3b --trust-remote-code"
+        },
+        {
+          "title": "请求嵌入",
+          "description": "服务启动后可用 OpenAI SDK（client.embeddings.create）或离线 LLM.embed 接口请求嵌入；输入仍建议带 query:/passage: 前缀。本站未执行或验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出该部署路线的显存/内存需求，不填写资源数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "bright-avg-ndcg10",
+      "benchmark": "BRIGHT",
+      "dataset": "BRIGHT (v1.1) 短文档（short documents）12 个数据集平均：Bio.、Earth.、Econ.、Psy.、Rob.、Stack.、Sus.、Leet.、Pony、AoPS、TheoQ.、TheoT.",
+      "language": "英语",
+      "metric": "nDCG@10（Avg）",
+      "value": 38.3,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "llama-nv-embed-reasoning-3b 模型卡 BRIGHT(v1.1) 结果表（模型版本 1）",
+      "settings": "模型卡列出该模型 12 个短文档数据集平均 nDCG@10 为 38.3，并给出分项（Bio. 63.4、Earth. 60.2、Econ. 39.5、Psy. 45.5、Rob. 32.6、Stack. 34.0、Sus. 43.3、Leet. 37.5、Pony 15.0、AoPS 10.5、TheoQ. 39.5、TheoT. 38.5）；同表对照 ReasonEmbed-Qwen3-8B (Redapter) 38.1、ReasonEmbed-Qwen3-4B (Redapter) 37.1、ReasonIR-8B 24.4、Qwen3-Embedding-8B 22.8、BM25 14.5 等。模型卡注明部分对照数值引自论文或榜单、仅标 * 的为按同设置复跑；未披露本次评测运行日期与硬件，官方提供 eval_bright.py（mteb==2.8.1）用于复现。本站未复现。",
+      "sourceUrl": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "NVIDIA（模型发布方）",
+      "externalModelId": "nvidia/llama-nv-embed-reasoning-3b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和统一对齐的完整模型 revision、编码配置与评测运行条件；该结果仅记录发布方模型卡口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b",
+        "notes": "仅引用 NVIDIA 官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，BRIGHT 等基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nvidia-llama-nv-embed-reasoning-3b-card-bright",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "发布方模型卡报告 BRIGHT(v1.1) 12 个短文档数据集平均 nDCG@10 为 38.3，并给出逐领域分项与多模型对照；覆盖推理密集型检索、技术文档与问答场景。成绩为发布方自评、未披露运行日期与硬件，也未经独立复测；非商业权重与底模 Llama 许可组合是部署前的主要约束。",
+      "strengths": [
+        "模型卡在 BRIGHT 表并列 Reasoning 系检索模型与通用嵌入模型的对照，并标出数值是否按同设置复跑。",
+        "官方详细披露合成训练数据管线（查询生成、正例标注、困难负例挖掘）与整合的三个公开数据集。",
+        "同时提供 Transformers 与 vLLM 官方用法，并列出兼容硬件（A100 40/80GB、H100 80GB）与复现脚本。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未披露评测运行日期、模型 revision 与精度配置，本站未复现；MTEB 结果仓库本轮未发现该型号目录。",
+        "权重为 CC BY-NC 4.0 非商业许可且与 HF 元数据标签 cc-by-4.0 不一致，底模 Llama-3.2 另附 Meta Llama 3.2 Community License；商用与再分发前必须核对授权文件。",
+        "训练 512 tokens、评测 8192 tokens，更长输入行为未说明；3.2B 规模在资源受限环境下部署成本较高。"
+      ],
+      "evidenceIds": [
+        "bright-avg-ndcg10"
+      ]
+    }
+  ]
+}

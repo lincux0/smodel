@@ -1,0 +1,332 @@
+{
+  "id": "lfm2-5-vl-450m",
+  "name": "LFM2.5-VL-450M",
+  "family": "LFM",
+  "version": "2.5-VL",
+  "variant": "instruct",
+  "tasks": [
+    "image-understanding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.45,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡列明LM骨干为LFM2.5-350M、视觉编码器为SigLIP2 NaFlex shape优化86M，官方未按整模单列精确参数总量，按型号档位记录为0.45B；HF权重元数据safetensors张量参数和为448,718,848（约0.45B），与本档位一致。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M"
+  },
+  "languages": [
+    "英语、阿拉伯语、中文、法语、德语、日语、韩语、葡萄牙语、西班牙语（官方模型卡列明9种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡说明该型号为LFM2-VL-450M的更新版本，基于更新后的LFM2.5-350M骨干与SigLIP2 NaFlex视觉编码器调优；未公开完整训练数据清单。"
+  },
+  "summary": "Liquid AI端侧多模态最小档位：LFM2.5-350M语言骨干加SigLIP2 NaFlex 86M视觉编码器，支持文本与图像输入，原生32,768 token上下文，官方推荐用于图像描述与目标检测，明确定位不适合知识密集任务与细粒度OCR。",
+  "features": [
+    "官方模型卡列出LM骨干LFM2.5-350M与SigLIP2 NaFlex shape优化86M视觉编码器；原生分辨率处理512×512以内图像，大图按512×512分块并加缩略图编码",
+    "支持自然语言查询的边界框预测与目标检测（官方示例输出归一化JSON坐标），并新增仅文本输入的函数调用支持（官方表列BFCLv4 21.08）",
+    "官方提供Transformers、vLLM、SGLang与llama.cpp等多条推理路线，另有GGUF、ONNX与MLX（4bit/5bit/6bit/8bit/bf16）导出",
+    "官方给出文本与视觉两套生成参数：文本temperature=0.1、min_p=0.15、repetition_penalty=1.05；视觉min_image_tokens=32、max_image_tokens=256、do_image_splitting=True"
+  ],
+  "limitations": [
+    "权重采用自定义LFM Open License v1.0（许可正文含商业使用条件与1000万美元年收入门槛定义），不等同Apache/MIT；使用前须阅读许可原文。",
+    "官方明确定位不适合知识密集任务与细粒度OCR；推荐场景为通用视觉语言、captioning与目标检测。",
+    "官方benchmark表另含语言类基准（GPQA 25.66、MMLU Pro 19.32、IFEval 61.16、Multi-IF 34.63、BFCLv4 21.08）；本条目用途为视觉理解，未收录文本生成证据。",
+    "官方benchmark表未披露成绩对应的模型revision、提示模板与完整生成配置（卡注视觉成绩使用VLMEvalKit）；本站未复现端侧或GPU推理表现。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.1.0",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "准备环境",
+          "description": "官方模型卡要求transformers v5.1或更新版本，并给出以下安装命令；本站未执行。",
+          "command": "pip install transformers pillow"
+        },
+        {
+          "title": "按官方示例加载模型",
+          "description": "官方示例使用AutoModelForImageTextToText（dtype=bfloat16、device_map=\"auto\"）与AutoProcessor，经apply_chat_template处理图像与文本；官方标注文本生成参数temperature=0.1、min_p=0.15、repetition_penalty=1.05，视觉侧min_image_tokens=32、max_image_tokens=256、do_image_splitting=True。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；端侧内存取决于量化格式、图像分辨率与上下文长度，官方未给出本型号的资源需求数值。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M-GGUF",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化并本地推理",
+          "description": "官方提供GGUF导出（LFM2.5-VL-450M-GGUF），定位为面向llama.cpp的CPU推理与更低内存占用；模型卡未列出本型号的具体命令，本站未下载或执行。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；端侧内存取决于量化格式、图像分辨率与上下文长度。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmmu-val",
+      "benchmark": "MMMU",
+      "dataset": "MMMU (val)",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 32.67,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-450M列MMMU (val) 32.67，对照LFM2-VL-450M 34.44与SmolVLM2-500M 34.10；卡注说明视觉成绩均使用VLMEvalKit获得；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-450M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": "val",
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板与完整生成配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-450m-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mmstar",
+      "benchmark": "MMStar",
+      "dataset": "MMStar",
+      "language": "en",
+      "metric": "score",
+      "value": 43.0,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-450M列MMStar 43.00，对照LFM2-VL-450M 40.87与SmolVLM2-500M 38.20；卡注说明视觉成绩均使用VLMEvalKit获得；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-450M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板与完整生成配置；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-450m-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ocrbench",
+      "benchmark": "OCRBench",
+      "dataset": "OCRBench（卡表未注明子集）",
+      "language": "en",
+      "metric": "OCRBench综合得分",
+      "value": 684,
+      "unit": "分（0–1000）",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-450M列OCRBench 684，对照LFM2-VL-450M 657与SmolVLM2-500M 609；卡注说明视觉成绩均使用VLMEvalKit获得；卡表未再注明子集与计分口径（OCRBench综合分为0–1000口径）；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-450M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "该分数为OCRBench综合分口径，来源未披露子集、模型revision、提示模板与推理配置；原样记录，不与整页文档解析等不同口径的结果直接比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-450m-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "refcoco-m",
+      "benchmark": "RefCOCO-M",
+      "dataset": "RefCOCO-M",
+      "language": "en",
+      "metric": "score",
+      "value": 81.28,
+      "unit": "%",
+      "direction": "higher",
+      "version": "Liquid AI官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-VL-450M列RefCOCO-M 81.28；卡内说明该系列本代新增bounding box prediction（以RefCOCO-M衡量）与函数调用能力，对照LFM2-VL-450M该列为空；卡注说明视觉成绩均使用VLMEvalKit获得；未披露提示模板、划分与生成配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "publisher": "Liquid AI",
+      "externalModelId": "LiquidAI/LFM2.5-VL-450M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露该成绩的模型revision、提示模板与完整生成配置，且该列仅本代型号有值；原样记录，不与配置不同的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-VL-450M",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡或博客原文许可。"
+      },
+      "task": "image-understanding",
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-vl-450m-liquid-model-card-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "image-understanding",
+      "status": "official-only",
+      "summary": "超小参数端侧视觉候选：官方表列出MMMU (val) 32.67、MMStar 43.00、OCRBench 684分与RefCOCO-M 81.28（卡注VLMEvalKit口径）。定位偏captioning、目标检测与轻量图文任务，官方明确不推荐知识密集任务与细粒度OCR。",
+      "strengths": [
+        "官方benchmark覆盖通用视觉（MMStar、MMBench）、幻觉（POPE）、grounding（RefCOCO-M）与OCR等不同维度。",
+        "官方称相对LFM2-VL-450M在指令跟随与多语言视觉理解上提升，并在表内给出对照数值。",
+        "官方提供Transformers、llama.cpp、ONNX与MLX等多条端侧推理路线。"
+      ],
+      "limitations": [
+        "MMMU (val) 32.67与MMStar 43.00显示高难度图文推理有限；官方明确定位不适合知识密集任务。",
+        "OCRBench 684分为综合口径，官方不推荐细粒度OCR。",
+        "评测条件与提示模板未完整披露；本站未复现官方成绩。"
+      ],
+      "evidenceIds": [
+        "mmmu-val",
+        "mmstar",
+        "ocrbench",
+        "refcoco-m"
+      ]
+    }
+  ]
+}

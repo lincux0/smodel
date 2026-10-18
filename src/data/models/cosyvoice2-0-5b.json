@@ -1,0 +1,333 @@
+{
+  "id": "cosyvoice2-0-5b",
+  "name": "CosyVoice2-0.5B",
+  "family": "CosyVoice",
+  "version": "2",
+  "variant": "specialized",
+  "tasks": [
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "audio"
+    ],
+    "output": [
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡评测表的Model Size列为0.5B，官方型号名使用0.5B档；论文说明文本-语音语言模型以Qwen2.5-0.5B初始化。权重仓库以llm.pt、flow.pt、hift.pt等文件分发，另含CosyVoice-BlankEN子目录（Qwen2架构初始化权重）；整仓未提供可核对的safetensors参数总数。",
+    "sourceUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "中文",
+    "英语",
+    "法语",
+    "西班牙语",
+    "日语",
+    "韩语",
+    "意大利语",
+    "俄语",
+    "德语（以上为HF模型卡frontmatter列出的9种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/FunAudioLLM/CosyVoice/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "论文说明CosyVoice 2复用上一版（CosyVoice）的训练数据；语音tokenizer训练语料含约11.1万小时中文与约10万小时英文，文本侧由Paraformer与SenseVoice生成伪标注；未公开完整逐样本语料清单与许可。"
+  },
+  "summary": "基于Qwen2.5-0.5B文本-语音语言模型的零样本语音合成权重，支持流式与非流式统一推理、跨语种合成、指令控制与细粒度标记。",
+  "features": [
+    "零样本声音克隆（zero-shot）与跨语种（cross-lingual）合成",
+    "流式与非流式统一建模（论文说明）",
+    "指令控制（inference_instruct2）与细粒度控制标记（如[laughter]）",
+    "文本-语音语言模型由Qwen2.5-0.5B初始化",
+    "官方仓库另提供CosyVoice-ttsfrd文本正则化资源（可选，未安装时默认wetext）"
+  ],
+  "limitations": [
+    "官方评测表同时列出Fun-CosyVoice3等后续型号行，本条只记录CosyVoice2（0.5B）行，不与后续型号混用。",
+    "来源未说明test-zh/test-en/test-hard的构成、划分与相似度模型，也未标注评测运行日期。",
+    "论文Table 6在SEED评测设置下报告相同CER/WER（1.45/2.57/6.83），相似度为0–1刻度的0.806/0.736/0.776，与模型卡当前的75.7/65.9/72.4（%）不同，两个来源的口径可能不同，不能混用。",
+    "权重仓库未附独立LICENSE文件，权重许可声明来自模型卡frontmatter（apache-2.0）与Hugging Face平台元数据；使用或再分发前建议按目标工件再次核对许可。",
+    "模型卡未披露合成文本长度上限；权重仓库LLM子配置（CosyVoice-BlankEN/config.json）的max_position_embeddings为32768（Qwen2架构），不是官方声明的合成输入限制，不宜当作可用文本长度。",
+    "本站未做听测，也未验证流式推理的实际延迟与音质。"
+  ],
+  "officialUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-cosyvoice",
+      "runtime": "CosyVoice（PyTorch）",
+      "systems": [],
+      "format": "PyTorch checkpoint（llm.pt、flow.pt、hift.pt）及随仓库提供的ONNX组件（campplus、flow.decoder.estimator、speech_tokenizer_v2等）",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+      "sourceUrl": "https://github.com/FunAudioLLM/CosyVoice#model-download",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "Python 3.10（官方conda示例）",
+        "requirements.txt（官方仓库）",
+        "third_party/Matcha-TTS（官方git子模块）",
+        "PyTorch（含torchaudio）",
+        "huggingface_hub或modelscope（下载权重）"
+      ],
+      "steps": [
+        {
+          "title": "克隆官方仓库并初始化子模块",
+          "description": "官方README的克隆命令；仓库依赖third_party/Matcha-TTS子模块，需使用--recursive或在克隆后手动初始化。本站未执行。",
+          "command": "git clone --recursive https://github.com/FunAudioLLM/CosyVoice.git"
+        },
+        {
+          "title": "创建环境并安装依赖",
+          "description": "官方conda环境示例为Python 3.10；requirements.txt安装命令按官方README原样保留（使用阿里云镜像源及--trusted-host参数），其他网络环境可自行替换索引源。如遇sox兼容问题可参考官方给出的系统依赖说明。本站未执行。",
+          "command": "pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com"
+        },
+        {
+          "title": "下载模型权重",
+          "description": "官方README以Python片段给出snapshot_download调用；此处转换为单行命令，local_dir沿用官方示例的pretrained_models/CosyVoice2-0.5B。可选下载CosyVoice-ttsfrd资源以改进文本正则化，未安装时官方说明默认使用wetext。本站未下载权重。",
+          "command": "python -c \"from huggingface_hub import snapshot_download; snapshot_download('FunAudioLLM/CosyVoice2-0.5B', local_dir='pretrained_models/CosyVoice2-0.5B')\""
+        },
+        {
+          "title": "按官方Basic Usage示例运行",
+          "description": "官方README以AutoModel(model_dir='pretrained_models/CosyVoice2-0.5B')加载，并给出zero_shot、cross_lingual、instruct2等调用示例；如需复现官方demo页结果，README提示推理时使用text_frontend=False。本站未执行，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、参考音频长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "test-zh-cer",
+      "benchmark": "CosyVoice模型卡评测表（test-zh/test-en/test-hard）",
+      "dataset": "test-zh（来源表格字段名）",
+      "language": "中文",
+      "metric": "CER",
+      "value": 1.45,
+      "unit": "%",
+      "direction": "lower",
+      "version": "FunAudioLLM/CosyVoice2-0.5B模型卡评测表（来源未标注评测版本）",
+      "settings": "官方权重仓库模型卡评测表中CosyVoice2行（0.5B，非后续Fun-CosyVoice3行）的test-zh CER。模型卡未说明测试集构成与划分、参考音频与说话人条件；论文对应设置说明test-zh与test-hard用Paraformer识别、约2,000条中文样本来自CommonVoice（arXiv:2412.10117）。来源未标注评测运行日期；同表列出Human、Seed-TTS、F5-TTS等对照值仅作背景；本站未复现。",
+      "sourceUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "FunAudioLLM（模型发布方自报）",
+      "externalModelId": "FunAudioLLM/CosyVoice2-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露测试集构成与划分、参考音频条件、识别器与模型revision等足以复现的信息；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "funaudiollm",
+        "runId": "funaudiollm-cosyvoice2-05b-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "test-zh-speaker-similarity",
+      "benchmark": "CosyVoice模型卡评测表（test-zh/test-en/test-hard）",
+      "dataset": "test-zh（来源表格字段名）",
+      "language": "中文",
+      "metric": "说话人相似度（SS）",
+      "value": 75.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "FunAudioLLM/CosyVoice2-0.5B模型卡评测表（来源未标注评测版本）",
+      "settings": "官方权重仓库模型卡评测表中CosyVoice2行（0.5B，非后续Fun-CosyVoice3行）的test-zh Speaker Similarity。来源未说明相似度模型、参考音频条件与说话人划分，也未标注评测运行日期；论文Table 6在SEED设置下同项为0.806（0–1刻度），与模型卡数值不同，两口径不能混用；Sim口径为克隆协议的相似度，不能套到预置音色TTS；本站未复现。",
+      "sourceUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "FunAudioLLM（模型发布方自报）",
+      "externalModelId": "FunAudioLLM/CosyVoice2-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露相似度模型、测试集构成与参考音频条件等足以复现的信息；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "funaudiollm",
+        "runId": "funaudiollm-cosyvoice2-05b-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "test-en-wer",
+      "benchmark": "CosyVoice模型卡评测表（test-zh/test-en/test-hard）",
+      "dataset": "test-en（来源表格字段名）",
+      "language": "英语",
+      "metric": "WER",
+      "value": 2.57,
+      "unit": "%",
+      "direction": "lower",
+      "version": "FunAudioLLM/CosyVoice2-0.5B模型卡评测表（来源未标注评测版本）",
+      "settings": "官方权重仓库模型卡评测表中CosyVoice2行（0.5B，非后续Fun-CosyVoice3行）的test-en WER。模型卡未说明测试集构成与划分、参考音频与说话人条件；论文对应设置说明test-en用Whisper-large V3识别、约1,000条英文样本来自CommonVoice（arXiv:2412.10117）。来源未标注评测运行日期；同表列出Human、Seed-TTS、F5-TTS等对照值仅作背景；本站未复现。",
+      "sourceUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "FunAudioLLM（模型发布方自报）",
+      "externalModelId": "FunAudioLLM/CosyVoice2-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露测试集构成与划分、参考音频条件、识别器与模型revision等足以复现的信息；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "funaudiollm",
+        "runId": "funaudiollm-cosyvoice2-05b-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "test-hard-cer",
+      "benchmark": "CosyVoice模型卡评测表（test-zh/test-en/test-hard）",
+      "dataset": "test-hard（来源表格字段名；官方未说明其构成）",
+      "language": "中文",
+      "metric": "CER",
+      "value": 6.83,
+      "unit": "%",
+      "direction": "lower",
+      "version": "FunAudioLLM/CosyVoice2-0.5B模型卡评测表（来源未标注评测版本）",
+      "settings": "官方权重仓库模型卡评测表中CosyVoice2行（0.5B，非后续Fun-CosyVoice3行）的test-hard CER。来源未说明该测试集的语言与难度构成、划分、参考音频条件与识别器细节；论文对应设置说明test-hard为约400条困难样例并用Paraformer识别，但Table 6中该列表头写作WER（arXiv:2412.10117）；本站未复现。",
+      "sourceUrl": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-to-speech",
+      "publisher": "FunAudioLLM（模型发布方自报）",
+      "externalModelId": "FunAudioLLM/CosyVoice2-0.5B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露test-hard的构成与划分、参考音频条件、识别器与模型revision等足以复现的信息；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B",
+        "notes": "仅记录官方模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层测试数据，引用不更改原仓库及数据集许可。"
+      },
+      "provenance": {
+        "sourceId": "funaudiollm",
+        "runId": "funaudiollm-cosyvoice2-05b-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "official-only",
+      "summary": "可作为多语种零样本声音克隆候选：官方模型卡报告CosyVoice2（0.5B）test-zh CER 1.45%、说话人相似度75.7%，test-en WER 2.57%，test-hard CER 6.83%；论文Table 6在SEED设置下报告相同CER/WER，相似度为0–1刻度的0.806/0.736/0.776。CER/WER只衡量合成内容与文本的一致性，相似度只衡量与参考音频的说话人接近程度，均不代表听感自然度。",
+      "strengths": [
+        "官方按权重逐行列列出CosyVoice2与后续Fun-CosyVoice3等行，本条只采用CosyVoice2行。",
+        "同一表格按语言与难度（test-zh/test-en/test-hard）分别给出内容一致性指标与相似度指标。",
+        "论文公开SEED评测设置与识别器（test-zh/test-hard用Paraformer、test-en用Whisper-large V3），可核对口径来源。",
+        "权重仓库模型卡frontmatter明确声明license: apache-2.0，与代码仓Apache-2.0许可相互独立、分别记录。"
+      ],
+      "limitations": [
+        "成绩由模型发布方运行，未找到许可明确且确认为独立方的同型号同条件复测。",
+        "来源未标注评测运行日期，也未说明test系列测试集的构成、划分与相似度模型；论文与模型卡的相似度数值不同，不能混用。",
+        "权重仓库未附独立LICENSE文件；许可判断基于模型卡元数据声明，使用前需按目标工件再次核对。",
+        "权重仓库分发llm.pt等非safetensors文件，无法与HF张量元数据核对参数总数；模型卡未披露合成文本长度上限。",
+        "本站未做听测，也未验证流式与非流式推理的实际延迟与音质。"
+      ],
+      "evidenceIds": [
+        "test-zh-cer",
+        "test-zh-speaker-similarity",
+        "test-en-wer",
+        "test-hard-cer"
+      ]
+    }
+  ]
+}

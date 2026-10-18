@@ -1,0 +1,302 @@
+{
+  "id": "qwen2-5-0-5b-instruct",
+  "name": "Qwen2.5-0.5B-Instruct",
+  "family": "Qwen",
+  "version": "2.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.49,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注总参数0.49B、非嵌入参数0.36B（24层，GQA 14 Q/2 KV，词嵌入绑定）；HF权重元数据safetensors张量参数和为494,032,768（约0.49B）。官方未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct"
+  },
+  "languages": [
+    "多语言（官方卡称支持超过29种语言，含中文、英文、法文、西班牙文、葡萄牙文、德文、意大利文、俄文、日文、韩文、越南文、泰文、阿拉伯文等；Hub卡片元数据仅标注en）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方卡与博客提供训练与后训练概述，称代码与数学能力提升来自领域专家模型；未提供完整可复核的逐样本训练集清单。"
+  },
+  "summary": "Qwen2.5系列最小档位0.5B通用指令模型，官方定位端侧与极受限资源场景；本站按通用文本生成收录。",
+  "features": [
+    "官方卡标注总参数0.49B、非嵌入参数0.36B，24层、GQA 14/2",
+    "官方卡标注上下文32,768 tokens、生成8192 tokens",
+    "官方称支持超过29种语言",
+    "官方博客标注2024年9月发布"
+  ],
+  "limitations": [
+    "官方卡仅标注32,768 tokens上下文，未提供该尺寸的长文本扩展（YaRN）说明；系列介绍中的128K表述不适用于按该卡片使用。",
+    "官方模型卡本身不含评测数值，本条目评测来自Qwen2.5技术报告表格，且报告未披露完整评测配置。",
+    "0.5B档位知识、数学与指令跟随成绩均较低，不适合复杂推理或代码任务。",
+    "本站未复现评测或部署。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers（官方建议使用最新版；低于4.37.0会报KeyError: 'qwen2'）",
+        "torch（官方示例使用torch_dtype与device_map）"
+      ],
+      "steps": [
+        {
+          "title": "准备推理环境",
+          "description": "官方卡要求使用最新版transformers，并提示低于4.37.0会出现KeyError: 'qwen2'；模型卡未给出安装命令，命令留空。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方卡示例用AutoModelForCausalLM与AutoTokenizer加载Qwen/Qwen2.5-0.5B-Instruct，apply_chat_template组织多轮对话，示例max_new_tokens=512。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于精度、输入长度、运行时与硬件，不从参数量或文件体积推算资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 15,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表10指令模型评测的Qwen2.5-0.5B列（该表并列Qwen2与Qwen2.5的0.5B/1.5B档位）；报告正文称Qwen2.5-0.5B-Instruct。报告未披露few-shot、提示模板、采样与输出长度等完整配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-0.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-0-5b-instruct-qwen25-report-t10",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math",
+      "benchmark": "MATH",
+      "dataset": "MATH",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 34.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表10指令模型评测的Qwen2.5-0.5B列，MATH为34.4。报告未披露few-shot、提示模板与解码等完整配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-0.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-0-5b-instruct-qwen25-report-t10",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 49.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表10指令模型评测的Qwen2.5-0.5B列，GSM8K为49.6。报告未披露few-shot、提示模板与解码等完整配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-0.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-0-5b-instruct-qwen25-report-t10",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 27.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "报告未注明数据版本",
+      "settings": "Qwen2.5技术报告（arXiv:2412.15115v2）表10指令模型评测的Qwen2.5-0.5B列，IFEval为27.9。报告未披露评测实现（如strict/loose口径）与提示配置；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2412.15115v2",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen2.5-0.5B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告未披露可复现比较所需的模型revision、运行时与完整提示、生成配置；保留原始报告口径，不与其他记录排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2412.15115v2",
+        "notes": "少量引用Qwen2.5技术报告中的评测事实；报告与评测结果的再分发许可未由权重Apache-2.0许可自动覆盖。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen2-5-0-5b-instruct-qwen25-report-t10",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "极低资源文本生成候选：官方技术报告表10列出MMLU-Pro 15.0、MATH 34.4、GSM8K 49.6与IFEval 27.9，较前代0.5B全面提升但整体水平有限；均为发布方自报。",
+      "strengths": [
+        "报告在同一表内并列前代Qwen2-0.5B对照，档位提升可直接查看。",
+        "覆盖知识、数学（MATH与GSM8K）与指令跟随（IFEval）三类指标。"
+      ],
+      "limitations": [
+        "全部成绩为该尺寸下的低分区间，不适合复杂推理、数学或长文任务。",
+        "报告未披露few-shot、提示模板与评测实现等完整配置，不能与外部榜单直接横比。",
+        "英文基准不能直接代表中文表现。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "math",
+        "gsm8k",
+        "ifeval"
+      ]
+    }
+  ]
+}

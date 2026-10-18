@@ -1,0 +1,345 @@
+{
+  "id": "lfm2-5-1-2b-thinking",
+  "name": "LFM2.5-1.2B-Thinking",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.17,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注1.17B（16层：10个双门控卷积块＋6个GQA块）；HF权重元数据safetensors张量参数合计1,170,340,608（约1.17B），与官方口径一致。纯文本推理模型，无视觉或音频组件。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking"
+  },
+  "languages": [
+    "英语",
+    "阿拉伯语",
+    "中文",
+    "法语",
+    "德语",
+    "日语",
+    "韩语",
+    "西班牙语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开训练口径：预训练从10T扩展至28T token，并采用大规模多阶段强化学习；知识截止2024年年中。未公开训练数据清单。"
+  },
+  "summary": "1.17B端侧推理模型，官方定位代理任务、数据抽取与RAG，支持8种语言、函数调用与32,768 token上下文。",
+  "features": [
+    "1.17B参数，16层（10个双门控卷积块＋6个GQA块），词表65,536",
+    "为纯推理模型，回答前生成思考内容；官方推荐生成参数temperature 0.05、top_k 50、repetition_penalty 1.05",
+    "32,768 token上下文，知识截止2024年年中",
+    "官方称AMD Ryzen AI 9 HX 370的CPU（llama.cpp Q4_0）解码约116 tok/s、Snapdragon Gen4 NPU约82 tok/s，并称在16K上下文下解码仍约52 tok/s、满32K约46 tok/s（官方声明，本站未复现）",
+    "官方称相对Qwen3-1.7B思考模式在多数基准上更高且输出token更少",
+    "支持函数调用（默认Python式调用，可切换JSON），官方提供GGUF、ONNX与MLX导出"
+  ],
+  "limitations": [
+    "官方明确不推荐知识密集任务与编程。",
+    "作为纯推理模型先输出思考内容，使用时需考虑延迟与输出长度成本；官方推荐的temperature为0.05，与指令模型不同。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "官方benchmark中GPQA Diamond 37.86、MMLU-Pro 49.65，知识密集与研究生级问答能力仍为端侧水平。",
+    "官方未披露提示模板与采样细节；成绩为发布方自测的五次运行均值，本站未复现。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方快速开始使用Transformers加载本型号；模型卡未给出本型号的具体安装命令，命令留空；本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用AutoModelForCausalLM以bfloat16加载LiquidAI/LFM2.5-1.2B-Thinking；官方推荐temperature 0.05、top_k 50、repetition_penalty 1.05、max_new_tokens 512。该型号为推理模型，输出包含思考内容。本站未下载权重或运行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方列出AMD Ryzen AI 9 HX 370 CPU（llama.cpp Q4_0）约116 tok/s、Snapdragon Gen4 NPU约82 tok/s与856MB至1.6GB内存占用等设备数据，属于官方声明而非本站测量，不换算为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化等级（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方列出LFM2.5-1.2B-Thinking-GGUF仓库，定位为面向llama.cpp及兼容工具的CPU推理与更低内存占用；官方速度表使用llama.cpp Q4_0量化档。本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "按llama.cpp文档加载",
+          "description": "官方推理表把llama.cpp列为支持框架并链接其项目；模型卡未给出具体加载命令，命令留空。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方速度表中的llama.cpp Q4_0档位给出856MB与719MB内存占用，属于官方声明与特定设备条件，不作为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-pro",
+      "benchmark": "MMLU-Pro",
+      "dataset": "MMLU-Pro",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 49.65,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-1.2B-Thinking为49.65（±0.18），同表并列Qwen3-1.7B思考/指令模式、LFM2.5-1.2B-Instruct、Granite-4.0-H-1B与Llama 3.2 1B Instruct等对照。官方说明GPQA、MMLU-Pro、IFBench与AIME25遵循 artificialanalysis.ai 公布的方法学自测，思考模型报告五次运行（temperature=0.6）的均值与标准差；本站未复现，也未导入该站任何成绩。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-1.2B-Thinking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露数据版本、模型revision、提示模板与完整解码配置，且成绩为五次运行均值；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-1-2b-thinking-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 88.42,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-1.2B-Thinking为88.42（±0.35）；官方说明IFEval与Multi-IF报告strict与loose提示/指令准确率的平均分，思考模型为五次运行（temperature=0.6）的均值与标准差。未披露数据版本、提示模板与完整解码配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-1.2B-Thinking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露数据版本、模型revision与完整评测配置，且成绩为五次运行均值；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-1-2b-thinking-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "aime25",
+      "benchmark": "AIME25",
+      "dataset": "AIME 2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 31.73,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-1.2B-Thinking为31.73（±1.81）；官方说明GPQA、MMLU-Pro、IFBench与AIME25遵循 artificialanalysis.ai 公布的方法学自测，思考模型为五次运行（temperature=0.6）的均值与标准差。未披露提示模板与完整解码配置；本站未复现，也未导入该站任何成绩。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-1.2B-Thinking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露数据版本、模型revision与完整解码配置，且不同对照模型使用不同推理模式；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-1-2b-thinking-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "bfcl-v3",
+      "benchmark": "BFCLv3",
+      "dataset": "BFCL",
+      "language": "en",
+      "metric": "score",
+      "value": 56.97,
+      "unit": "%",
+      "direction": "higher",
+      "version": "v3",
+      "settings": "Liquid AI官方模型卡benchmark表列出LFM2.5-1.2B-Thinking为56.97（±0.30）；官方说明BFCLv3分数为最终加权平均分，并使用支持其工具模板的自定义Liquid handler。未披露数据版本、模型revision与运行配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-1.2B-Thinking",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方benchmark表未披露数据版本、模型revision与运行配置，且使用自定义handler；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-1-2b-thinking-benchmark-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为端侧推理与工具调用候选：官方benchmark表报告MMLU-Pro 49.65、IFEval 88.42、AIME25 31.73、BFCLv3 56.97（思考模式，五次运行均值）。官方称相对Qwen3-1.7B思考模式在多数基准上更高且输出token更少，并明确不推荐知识密集任务与编程。",
+      "strengths": [
+        "官方表在同一行并列同档Qwen3-1.7B、Granite-4.0-1B、Gemma 3 1B IT与Llama 3.2 1B Instruct等对照模型，并为本型号给出多次运行的均值与标准差。",
+        "覆盖知识、数学、指令跟随与工具调用多个维度。",
+        "官方公开长期上下文下的解码速度与端侧内存声明，能力与资源边界较清楚。"
+      ],
+      "limitations": [
+        "官方明确不推荐知识密集任务与编程，官方benchmark也未覆盖代码生成能力。",
+        "部分基准官方注明遵循 artificialanalysis.ai 公布的方法学自测，且未披露提示模板与完整解码配置，不能与外部榜单直接横比。",
+        "作为推理模型，官方分数不体现思考内容带来的延迟与输出长度成本；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-pro",
+        "ifeval",
+        "aime25",
+        "bfcl-v3"
+      ]
+    }
+  ]
+}

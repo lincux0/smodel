@@ -1,0 +1,348 @@
+{
+  "id": "lfm2-5-8b-a1b",
+  "name": "LFM2.5-8B-A1B",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.3,
+    "activeB": 1.5,
+    "effectiveB": null,
+    "notes": "官方模型卡标注总参数8.3B、激活参数1.5B（24层：18个双门控卷积块＋6个GQA块），词表128,000；官方另提供328M的DSpark投机解码草稿模型，不计入本口径。HF权重元数据safetensors张量参数合计8,467,856,832（约8.47B，含704个F32参数），与官方8.3B总参数口径存在差异，本站以官方口径为准并保留两者。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B"
+  },
+  "context": {
+    "nativeTokens": 128000,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B"
+  },
+  "languages": [
+    "英语",
+    "阿拉伯语",
+    "中文",
+    "法语",
+    "德语",
+    "意大利语",
+    "日语",
+    "韩语",
+    "葡萄牙语",
+    "西班牙语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开训练口径：训练预算38T token，经过推理能力训练与大规模强化学习；官方称相对前代LFM2-8B-A1B在全benchmark上提升。官方未公开训练数据清单，也未披露知识截止时间。"
+  },
+  "summary": "8.3B总参数、1.5B激活参数的端侧MoE推理模型，官方定位代理工作流、工具调用、结构化输出与多语言助手，支持128,000 token上下文。",
+  "features": [
+    "总参数8.3B、激活参数1.5B，24层（18个双门控卷积块＋6个GQA块），词表128,000",
+    "128,000 token上下文，官方推荐temperature 0.2、top_k 80、repetition_penalty 1.05、max_new_tokens 8192",
+    "为推理模型，助手回合在最终回答前包含显式思维链",
+    "官方称CPU与GPU推理在同尺寸级别最快，单张H100在高并发下可达18.5K输出token/秒、日均超过1.6B token（官方声明，本站未复现）",
+    "官方提供328M的DSpark投机解码草稿模型，称在SGLang中配对可获约2.5倍解码加速且输出完全一致",
+    "支持函数调用（默认Python式调用，可切换JSON），官方称发布即支持Transformers、vLLM、SGLang、llama.cpp、MLX与LM Studio"
+  ],
+  "limitations": [
+    "官方明确不推荐重度编程，以及不借助检索的知识密集型问答。",
+    "作为推理模型，助手回合包含显式思维链，官方分数不体现延迟与输出长度成本。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "官方模型卡两组表格对BFCLv3与BFCLv4给出不同数值（64.36/48.50与64.79/49.73），未说明差异原因，本条目未收录这两项。",
+    "官方表另含第三方评测机构方法学口径的知识与幻觉指标列，本条目未导入该类成绩；官方未披露知识截止时间，本站未复现任何一项基准。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=5.0.0"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方快速开始说明兼容transformers>=5.0.0；模型卡未给出具体安装命令，命令留空；本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用AutoModelForCausalLM以bfloat16加载LiquidAI/LFM2.5-8B-A1B，并用tokenizer.apply_chat_template应用ChatML风格模板；官方推荐temperature 0.2、top_k 80、repetition_penalty 1.05、max_new_tokens 8192。本站未下载权重或运行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方列出单张H100在高并发下18.5K输出token/秒与日均超过1.6B token等设备数据，属于官方声明而非本站测量，不换算为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化等级（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方列出LFM2.5-8B-A1B-GGUF仓库，定位为面向llama.cpp及兼容工具的端侧推理与本地部署；本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "按llama.cpp文档加载",
+          "description": "官方推理表把llama.cpp列为支持框架并链接其项目；模型卡未给出具体加载命令，命令留空。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；MoE模型的实际占用取决于激活路径、量化等级、上下文长度与运行时，不将文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 91.84,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡列出LFM2.5-8B-A1B的IFEval为91.84（官方另在“相对前代提升”表中给出LFM2-8B-A1B为79.44、Δ+12.40）。未披露数据版本、模型revision、提示模板与采样配置；该型号为推理模型，分数包含显式思维链输出。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-8B-A1B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方未披露数据版本、模型revision、提示模板与采样配置，且不同对照模型采用不同推理模式；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-8b-a1b-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifbench",
+      "benchmark": "IFBench",
+      "dataset": "IFBench",
+      "language": "en",
+      "metric": "score",
+      "value": 56.47,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡列出LFM2.5-8B-A1B的IFBench为56.47（官方另在“相对前代提升”表中给出LFM2-8B-A1B为26.00、Δ+30.47）。未披露数据版本、模型revision、提示模板与采样配置；该型号为推理模型。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-8B-A1B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方未披露数据版本、模型revision与评测配置，且不同对照模型采用不同推理模式；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-8b-a1b-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "aime25",
+      "benchmark": "AIME25",
+      "dataset": "AIME 2025",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 42.53,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡“数学与代理工作流”表列出LFM2.5-8B-A1B的AIME25为42.53，同表另列AIME26 50.00与MATH500 88.76，并列Qwen3.5-4B、Qwen3-30B-A3B-Thinking-2507、Granite-4.0-H-Tiny等对照。未披露数据版本、模型revision与采样配置；该型号为推理模型。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-8B-A1B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方未披露数据版本、模型revision与采样配置，且不同对照模型采用不同推理模式；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-8b-a1b-benchmark-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "tau2-bench-telecom",
+      "benchmark": "τ²-Bench Telecom",
+      "dataset": "τ²-Bench Telecom",
+      "language": "en",
+      "metric": "score",
+      "value": 88.07,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡benchmark表（未注明数据版本）",
+      "settings": "Liquid AI官方模型卡“数学与代理工作流”表列出LFM2.5-8B-A1B的Tau² Telecom为88.07（官方另在“相对前代提升”表中标注LFM2-8B-A1B为13.60、Δ+74.47，并有Tau² Retail 39.82）。未披露数据版本、模型revision、工具环境与采样配置；该型号为推理模型。本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-8B-A1B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "enabled",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方未披露数据版本、模型revision、工具环境与采样配置，且不同对照模型采用不同推理模式；无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或基准数据自身许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-8b-a1b-benchmark-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "可作为端侧代理与个人信息助手候选：官方benchmark表报告IFEval 91.84、IFBench 56.47、AIME25 42.53、Tau² Telecom 88.07，官方称相对前代LFM2-8B-A1B全面提升（如Tau² Telecom +74.47）。成绩均来自发布方自测，且官方明确不推荐重度编程与无检索的知识密集型问答。",
+      "strengths": [
+        "官方表并列Qwen3.5-4B、Qwen3-30B-A3B-Thinking-2507、Granite-4.0-H-Tiny与Gemma-4等同尺寸或更大对照模型，并列出参数规模。",
+        "覆盖指令跟随、数学推理与代理工具使用（Tau²-Bench）多个维度，并给出相对前代的前后对照数值。",
+        "官方提供DSpark投机解码草稿模型与多条推理路线，部署侧信息较完整。"
+      ],
+      "limitations": [
+        "官方明确不推荐重度编程与不借助检索的知识密集型问答，官方表也未报告代码基准。",
+        "作为推理模型，官方分数不体现思维链带来的延迟与输出长度成本。",
+        "官方两组表格对BFCLv3/BFCLv4数值不一致且未说明原因，本条目未收录这两项；官方也未披露知识截止时间与完整评测配置，不能与外部榜单直接横比。",
+        "本站未复现任何一项基准或官方吞吐声明。"
+      ],
+      "evidenceIds": [
+        "ifeval",
+        "ifbench",
+        "aime25",
+        "tau2-bench-telecom"
+      ]
+    }
+  ]
+}

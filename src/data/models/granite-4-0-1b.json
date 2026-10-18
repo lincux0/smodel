@@ -1,0 +1,387 @@
+{
+  "id": "granite-4-0-1b",
+  "name": "Granite 4.0 1B",
+  "family": "Granite",
+  "version": "4.0",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.6,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡架构表1B稠密列标注总参数1.6B（含共享输入/输出嵌入）、激活参数1.6B；HF权重元数据safetensors张量参数和为1,631,750,144（约1.63B）。名称1B为档位，官方未另列有效参数口径。",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b"
+  },
+  "languages": [
+    "英语",
+    "德语",
+    "西班牙语",
+    "法语",
+    "日语",
+    "葡萄牙语",
+    "阿拉伯语",
+    "捷克语",
+    "意大利语",
+    "韩语",
+    "荷兰语",
+    "中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "模型卡说明SFT数据来自三部分：宽松许可的公开数据集、内部合成数据与人工整理数据；并公开训练方式（监督微调、强化学习、模型合并）与训练集群（NVIDIA GB200 NVL72，CoreWeave托管）；未提供完整逐样本语料清单。"
+  },
+  "summary": "Granite 4.0 Nano家族1B档位稠密指令模型，官方定位端侧与资源受限部署，覆盖摘要、抽取、RAG、代码与函数调用等能力。",
+  "features": [
+    "官方架构表标注1B稠密档位总参数1.6B、序列长度128K、40层全注意力",
+    "官方称面向端侧部署与研究用例，小算力即可领域微调",
+    "官方列出摘要、分类、抽取、问答、RAG、代码、函数调用、多语言对话与FIM补全等能力",
+    "模型卡给出Transformers安装、生成与工具调用示例（含官方安装命令）",
+    "官方HF集合提供1B与H-1B的GGUF仓库（bf16及Q2_K至Q8_0多种量化）",
+    "2025年10月28日发布，Apache-2.0"
+  ],
+  "limitations": [
+    "官方评测表未披露模型revision、提示模板与解码等完整评测配置，分数不能与外部统一条件横比。",
+    "官方说明指令微调数据以英文为主，多语言表现可能不及英文任务，可用少量示例（few-shot）辅助。",
+    "官方提示模型可能产生不准确、有偏见或不安全的回答，需按用途做安全测试与调优。",
+    "官方GGUF卡提示：模型常使用32位浮点数值全范围，较小数值范围的量化变体可能出现推理精度问题，F16变体在多种硬件组合上已知会失败，推荐bf16全精度变体。",
+    "本站未复现评测或部署。"
+  ],
+  "officialUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch torchvision torchaudio（官方安装命令）",
+        "accelerate（官方安装命令）",
+        "transformers（官方安装命令）"
+      ],
+      "steps": [
+        {
+          "title": "安装PyTorch系列",
+          "description": "官方模型卡安装章节给出的第一条命令；本站未执行安装。",
+          "command": "pip install torch torchvision torchaudio"
+        },
+        {
+          "title": "安装accelerate",
+          "description": "官方模型卡安装章节给出的第二条命令。",
+          "command": "pip install accelerate"
+        },
+        {
+          "title": "安装transformers",
+          "description": "官方模型卡安装章节给出的第三条命令。",
+          "command": "pip install transformers"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用AutoModelForCausalLM与AutoTokenizer加载ibm-granite/granite-4.0-1b，apply_chat_template组织对话；官方示例将device设为\"cuda\"并传给device_map，max_new_tokens=100，并注明在CPU上运行时可去掉device_map。本站未下载权重或执行模型。",
+          "command": null
+        },
+        {
+          "title": "可选：工具调用",
+          "description": "官方卡提供按OpenAI函数定义schema组织tools并交给apply_chat_template的示例，模型以<tool_call>标签返回JSON工具调用。本站未运行示例。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方未给出该型号内存或显存需求，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-gguf",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "Q2_K、Q3_K_S/M/L、Q4_0、Q4_1、Q4_K_S/M、Q5_0、Q5_1、Q5_K_S/M、Q6_K、Q8_0、bf16（官方仓库所列）",
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b-GGUF",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b-GGUF",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取官方GGUF文件",
+          "description": "IBM官方GGUF仓库提供bf16与多种量化等级文件，可用于llama.cpp等GGUF兼容工具；本站未下载或运行。",
+          "command": null
+        },
+        {
+          "title": "注意已知精度问题",
+          "description": "官方提示该模型常使用32位浮点数值全范围，较小数值范围的量化变体可能出现推理精度问题；F16变体在多种硬件组合上已知会失败，推荐使用bf16全精度变体。",
+          "command": null
+        },
+        {
+          "title": "按所选工具加载",
+          "description": "官方GGUF仓库未给出具体加载命令，命令留空；量化等级、内存占用与速度需按所选工具与设备核对。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存占用取决于量化等级与运行时，不将文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-5shot",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "accuracy",
+      "value": 59.39,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方评测表未注明数据版本",
+      "settings": "IBM官方模型卡评测表1B Dense列的MMLU行（Metric列标注5-shot）为59.39；同表并列350M、H 350M、1B与H 1B四个档位。模型卡未披露模型revision、提示模板与解码等配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.0-1b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 5,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision与具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-0-1b-card-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval-average",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 77.38,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方评测表未注明数据版本",
+      "settings": "IBM官方模型卡评测表1B Dense列的IFEval行取Average（同表另列Instruct Strict 80.82与Prompt Strict 73.94）。模型卡未披露模型revision与提示等配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.0-1b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision与具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-0-1b-card-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval-pass1",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 74,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方评测表未注明数据版本",
+      "settings": "IBM官方模型卡评测表1B Dense列的HumanEval行（Metric列标注pass@1）为74。模型卡未披露模型revision、提示与采样配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.0-1b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision与具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-0-1b-card-eval-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mbpp-pass1",
+      "benchmark": "MBPP",
+      "dataset": "MBPP",
+      "language": "code",
+      "metric": "pass@1",
+      "value": 65,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方评测表未注明数据版本",
+      "settings": "IBM官方模型卡评测表1B Dense列的MBPP行（Metric列标注pass@1）为65。模型卡未披露模型revision、提示与采样配置；本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "IBM Granite Team（模型发布方自报）",
+      "externalModelId": "ibm-granite/granite-4.0-1b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方卡未披露该成绩的模型revision与具体评测配置，无法与统一条件下的其他成绩比较。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-4.0-1b",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖模型卡原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-4-0-1b-card-eval-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "端侧通用文本与指令跟随候选：官方评测表列出MMLU 5-shot 59.39与IFEval Average 77.38，并可在同表查看H-1B等档位对照；均为发布方自报，未披露完整评测配置。",
+      "strengths": [
+        "官方表在同一列并列350M、H 350M、1B、H 1B四个档位，档位定位可直接查看。",
+        "覆盖知识（MMLU）与指令跟随（IFEval）两类指标。"
+      ],
+      "limitations": [
+        "官方卡未披露该成绩的模型revision、提示模板与解码配置，不能与外部榜单直接横比。",
+        "官方说明训练数据以英文为主，多语言表现可能不及英文任务。",
+        "未找到许可明确且经核实的同型号独立复测。",
+        "本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-5shot",
+        "ifeval-average"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "轻型代码生成候选：官方评测表列出HumanEval pass@1 74与MBPP pass@1 65，可作为函数级代码生成参考；仓库级任务没有官方成绩。",
+      "strengths": [
+        "官方以pass@1口径给出两项经典代码基准成绩。",
+        "同表可与H-1B及其余档位对照。"
+      ],
+      "limitations": [
+        "HumanEval/MBPP只覆盖函数级题目，不等价于仓库级工程任务。",
+        "官方卡未披露模型revision与提示、采样配置；本站未执行代码验证。"
+      ],
+      "evidenceIds": [
+        "humaneval-pass1",
+        "mbpp-pass1"
+      ]
+    }
+  ]
+}

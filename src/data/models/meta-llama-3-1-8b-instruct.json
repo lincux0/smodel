@@ -1,0 +1,426 @@
+{
+  "id": "meta-llama-3-1-8b-instruct",
+  "name": "Llama 3.1 8B Instruct",
+  "family": "Llama",
+  "version": "3.1",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.03,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡以8B档位标注该型号；HF权重元数据safetensors张量参数和为8,030,261,248（约8.03B）。未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct"
+  },
+  "languages": [
+    "英语",
+    "德语",
+    "法语",
+    "意大利语",
+    "葡萄牙语",
+    "印地语",
+    "西班牙语",
+    "泰语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Llama 3.1 Community License",
+      "url": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡披露：预训练使用约15万亿token的公开来源数据，微调数据包含公开指令数据集与超过2500万条合成样本，知识截止2023年12月；未公开完整可复核的逐样本语料清单。"
+  },
+  "summary": "Meta 的 8B 级指令微调文本模型，官方定位多语言对话、工具调用与通用助手场景，支持 128K 上下文。",
+  "features": [
+    "官方8B档位，128K上下文，采用GQA",
+    "官方声明英语、德语、法语、意大利语、葡萄牙语、印地语、西班牙语、泰语8种支持语言",
+    "官方卡提供Transformers聊天与工具调用（tools+chat template）示例",
+    "官方评测表同时提供英语与多语言基准行"
+  ],
+  "limitations": [
+    "权重需在 Hugging Face 登录并接受 Llama 3.1 Community License；许可为自定义商业许可，含月活超7亿需另行申请等条款，并受可接受使用政策约束。",
+    "官方基准由Meta内部评测库运行，未披露提示模板、解码参数与权重revision，不能与外部榜单直接横比。",
+    "官方多语言MMLU显示印地语、泰语等非英语语种明显低于欧洲语种，官方也说明超出8种支持语言时应自行微调与防护，不能把英语成绩外推到中文。",
+    "模型卡说明该模型应作为系统的一部分部署，并推荐搭配Llama Guard 3等防护组件，但本站未验证这些组件的效果。",
+    "本站未复现官方评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct#use-with-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.43.0",
+        "torch",
+        "accelerate（device_map=\"auto\"需要）"
+      ],
+      "steps": [
+        {
+          "title": "登录并接受许可",
+          "description": "该仓库为需要手动确认的受限仓库，需在 Hugging Face 登录并接受 Llama 3.1 Community License 后才能获取权重；本站未执行。",
+          "command": null
+        },
+        {
+          "title": "准备运行环境",
+          "description": "官方卡要求 transformers >= 4.43.0 才能对该系列做对话推理；官方给出的命令为 pip install --upgrade transformers，此处按终端写法转换为 python -m pip。多卡或自动设备映射需要另装 accelerate。本站未执行安装。",
+          "command": "python -m pip install --upgrade transformers"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用 transformers.pipeline(\"text-generation\", model=\"meta-llama/Meta-Llama-3.1-8B-Instruct\", model_kwargs={\"torch_dtype\": torch.bfloat16}, device_map=\"auto\") 加载并以消息列表调用；工具调用可用 tokenizer.apply_chat_template(messages, tools=...) 生成提示。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存与内存占用取决于精度、上下文长度、批大小与运行时，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-5shot",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "accuracy（macro_avg/acc）",
+      "value": 69.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表",
+      "settings": "Meta官方模型卡说明全部结果由内部评测库运行；该表未披露提示模板、解码参数与权重revision，8B Instruct列同时与Llama 3 8B/70B Instruct、Llama 3.1 405B Instruct对照。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 5,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、提示模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score",
+      "value": 80.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表",
+      "settings": "Meta官方模型卡该行的shot数与指标定义未单独标注（表格# Shots与Metric列留空），同表列出Llama 3 8B Instruct为76.8。内部评测库运行，未披露提示模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，且该行未注明shot数与指标定义，未披露足以复现和对齐的模型revision与提示模板；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k-8shot-cot",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "exact match（em_maj1@1）",
+      "value": 84.5,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表（CoT）",
+      "settings": "Meta官方模型卡8-shot并启用思维链；同表列出Llama 3 8B Instruct为80.6、Llama 3.1 70B Instruct为95.1。内部评测库运行，未披露CoT模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 8,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、CoT模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "math-0shot-cot",
+      "benchmark": "MATH",
+      "dataset": "MATH",
+      "language": "en",
+      "metric": "exact match（final_em，CoT）",
+      "value": 51.9,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表（CoT）",
+      "settings": "Meta官方模型卡0-shot并启用思维链；同表列出Llama 3 8B Instruct为29.1、Llama 3.1 405B Instruct为73.8。内部评测库运行，未披露CoT模板、答案抽取方式与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、CoT模板与答案抽取方式；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval-0shot-pass1",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "en",
+      "metric": "pass@1",
+      "value": 72.6,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表（Code行）",
+      "settings": "Meta官方模型卡0-shot pass@1；同表列出Llama 3 8B Instruct为60.4、Llama 3.1 405B Instruct为89.0。内部评测库运行，未披露提示模板、采样与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、提示模板与采样配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mbpp-plus-0shot-pass1",
+      "benchmark": "MBPP++",
+      "dataset": "MBPP++（base version）",
+      "language": "en",
+      "metric": "pass@1",
+      "value": 72.8,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction tuned models表（Code行）",
+      "settings": "Meta官方模型卡0-shot pass@1，表中标注为“MBPP ++ base version”；同表列出Llama 3 8B Instruct为70.6、Llama 3.1 405B Instruct为88.6。内部评测库运行，未披露判题与采样配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、判题与采样配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "meta-llama-3-1-8b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方内部评测库报告MMLU 5-shot为69.4%、IFEval为80.4%、GSM8K 8-shot CoT为84.5%、MATH 0-shot CoT为51.9%；多语言MMLU显示欧洲语种约60-62%，印地语与泰语在50左右。整体处于8B档位的通用助手水平，成绩口径未完整公开。",
+      "strengths": [
+        "官方在同一张表内并列8B与70B/405B Instruct对照，档位定位可直接查看。",
+        "英语知识、指令遵循、数学与代码各有独立口径，未混用为单一总分。",
+        "官方提供多语言MMLU分语种数值，可观察非英语表现的差距。"
+      ],
+      "limitations": [
+        "全部成绩由发布方内部评测库运行，未披露提示模板、解码参数与模型revision，不能与外部榜单直接横比。",
+        "IFEval行未注明shot数与指标定义，只能按来源原样记录。",
+        "多语言MMLU不含中文行；印地语、泰语明显低于英欧语种，官方提示超出8种支持语言时需自行微调与防护。",
+        "未找到许可明确且确认为独立方的同型号同条件复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-5shot",
+        "ifeval",
+        "gsm8k-8shot-cot",
+        "math-0shot-cot"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "官方模型卡Code行报告HumanEval 0-shot pass@1为72.6%、MBPP++（base version）0-shot pass@1为72.8%，显示其在该档位的短程序功能正确性水平；这不代表仓库级修改或真实工程任务的成功率。",
+      "strengths": [
+        "官方对该型号同时报告HumanEval与MBPP++两项代码基准，metric明确为pass@1。",
+        "同表并列Llama 3 8B Instruct与Llama 3.1 405B Instruct对照值。"
+      ],
+      "limitations": [
+        "两项均为函数级短程序基准，与仓库级修改、依赖环境与长上下文代码任务差距较大。",
+        "内部评测库运行，未披露提示模板、采样参数与判题配置，本站未复现。",
+        "不能将这些分数与不同提示或不同评测框架的HumanEval结果直接排名。"
+      ],
+      "evidenceIds": [
+        "humaneval-0shot-pass1",
+        "mbpp-plus-0shot-pass1"
+      ]
+    }
+  ]
+}

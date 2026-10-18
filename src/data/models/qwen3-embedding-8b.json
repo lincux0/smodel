@@ -1,0 +1,295 @@
+{
+  "id": "qwen3-embedding-8b",
+  "name": "Qwen3-Embedding-8B",
+  "family": "Qwen Embedding",
+  "version": "3",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡与系列表标称8B稠密文本嵌入模型（36层、32K序列长度）；HF权重元数据safetensors张量参数和为7,567,295,488（约7.57B）。未另列有效或激活参数口径。",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B"
+  },
+  "languages": [
+    "多语言（官方声明100余种，包含编程语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://huggingface.co/Qwen/Qwen3-Embedding-8B"
+    },
+    "code": null,
+    "trainingDisclosure": "官方提供模型卡与技术报告；未公开完整训练数据清单。"
+  },
+  "summary": "将文本转换为检索、聚类和相似度计算所用的高维向量，输出维度可按需截断。",
+  "features": [
+    "最高4096维，支持32至4096维自定义输出",
+    "指令感知检索",
+    "32K上下文",
+    "与同系列重排序模型可组合使用"
+  ],
+  "limitations": [
+    "不生成聊天回复，也不输出相关性分数。",
+    "查询指令、池化、归一化和向量维度必须与索引配置一致；官方提示指令通常带来提升，多语言场景建议用英文写指令。",
+    "不能把0.6B或4B型号的榜单成绩转移到此8B型号，反之亦然。",
+    "8B规模的显存与延迟需求明显高于0.6B与4B；官方Transformers示例将单条输入截断到8192 tokens（max_length=8192），长文本需自行核对截断与32K声明的实际配置；本站未实测。"
+  ],
+  "officialUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B#sentence-transformers-usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.51.0",
+        "sentence-transformers>=2.7.0",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方示例准备环境",
+          "description": "打开部署来源链接，按官方安装章节配置依赖；依赖与模型版本需保持匹配。官方建议启用 flash_attention_2 并把 padding_side 设为 left。",
+          "command": null
+        },
+        {
+          "title": "加载指定模型",
+          "description": "按同页推理示例加载此模型并处理对应输入；查询需带指令，文档不带指令。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、输入长度与硬件，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B#vllm-usage",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm>=0.8.5",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方vLLM章节准备环境",
+          "description": "官方vLLM用法标注需要vllm>=0.8.5；本站未执行安装命令。",
+          "command": null
+        },
+        {
+          "title": "按官方示例加载并编码",
+          "description": "官方示例以 LLM(model=\"Qwen/Qwen3-Embedding-8B\", task=\"embed\") 加载模型并调用 embed；查询需带指令，文档不带指令。本站未执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于运行时版本、精度、批大小与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mteb-multilingual-mean-task",
+      "benchmark": "MTEB (Multilingual)",
+      "dataset": "MTEB Multilingual benchmark aggregate",
+      "language": "多语言",
+      "metric": "Mean (Task)",
+      "value": 70.58,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Qwen模型卡 MTEB (Multilingual) 表（8B行）",
+      "settings": "Qwen模型卡逐型号列出8B结果；此项为基准任务均值。模型卡注记中的2025-05-24仅指对照模型分数取自MTEB在线榜单的收集日期，不是Qwen3-Embedding-8B的评测运行日期；本型号运行日未披露。模型revision、指令、池化、归一化和运行配置未在该结果表中完整披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未披露足以复现及对齐的模型revision、任务提示、编码和评测拆分条件；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mteb-eng-v2-mean-task",
+      "benchmark": "MTEB (Eng v2)",
+      "dataset": "MTEB English v2 benchmark aggregate",
+      "language": "英语",
+      "metric": "Mean (Task)",
+      "value": 75.22,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Qwen模型卡 MTEB English v2 表（8B行）",
+      "settings": "Qwen模型卡逐型号列出8B结果；此项为英文基准任务均值。模型卡未披露该表中本型号的评测运行日期、模型revision、任务提示与推理配置；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未披露足以复现及对齐的模型revision、任务提示、编码和评测拆分条件；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "c-mteb-mean-task",
+      "benchmark": "C-MTEB (MTEB Chinese)",
+      "dataset": "C-MTEB benchmark aggregate",
+      "language": "中文",
+      "metric": "Mean (Task)",
+      "value": 73.84,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Qwen模型卡 C-MTEB 表（8B行）",
+      "settings": "Qwen模型卡逐型号列出8B中文基准任务均值；同表含bge-multilingual-gemma2、gte-Qwen2等对照。模型卡未注明本型号评测运行日期；模型revision、任务提示与推理配置未披露；不是本站复测。",
+      "sourceUrl": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Qwen Team（模型发布方自报）",
+      "externalModelId": "Qwen/Qwen3-Embedding-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方表未注明榜单快照日期，也未披露足以复现及对齐的模型revision、任务提示和评测拆分条件；该汇总分仅记录原报告，不用于跨型号排序。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/Qwen/Qwen3-Embedding-8B",
+        "notes": "仅记录少量评测事实并保留发布方署名与来源链接；此引用不更改原报告或模型卡的许可。"
+      },
+      "provenance": {
+        "sourceId": "qwen-team",
+        "runId": "qwen-team-embedding-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "可作为中英文及多语言语义检索的大尺寸候选：发布方模型卡按8B型号报告MTEB多语言任务均值70.58、MTEB英文v2任务均值75.22、C-MTEB任务均值73.84，并称8B尺寸在模型卡标注的2025-06-05采集口径下位列MTEB多语言榜单第一。三个数值均为厂商自测且未披露模型revision与任务级推理配置，不能与其他型号直接排名；目标语料仍需单独评测。",
+      "strengths": [
+        "模型卡按型号逐行列出Qwen3-Embedding-8B结果，未借用0.6B或4B成绩。",
+        "同一系列表同时给出0.6B、4B与8B对照，便于按资源与效果选型；8B输出维度上限为4096。",
+        "覆盖多语言、英文与中文三类汇总口径，并说明支持32至4096维可调输出。"
+      ],
+      "limitations": [
+        "这些官方数值是Qwen发布方列出的结果，不是本站复测；模型卡仅注明多语言表的对照模型成绩取自2025-05-24的MTEB榜单，本型号评测运行日期未披露。",
+        "模型卡未完整披露模型revision和任务级推理配置；汇总分不参与跨型号直接排名。",
+        "官方提示指令写法会影响效果，且多语言场景建议使用英文指令，实际部署需按任务调整。",
+        "本站未在自有语料或中文检索场景验证召回质量；8B的显存需求明显高于0.6B与4B，官方未提供硬件估算。"
+      ],
+      "evidenceIds": [
+        "mteb-multilingual-mean-task",
+        "mteb-eng-v2-mean-task",
+        "c-mteb-mean-task"
+      ]
+    }
+  ]
+}

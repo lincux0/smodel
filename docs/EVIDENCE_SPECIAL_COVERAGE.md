@@ -38,6 +38,19 @@
 | GLM-ASR-Nano-2512 | 官方基准图（GitHub resources/bench.png）与 Open ASR 榜单文件 | 官方图四项转录（Aishell-1 1.81、Wenet 6.73 等，图片读图经复核）；榜单 mean WER 7.03 与 LibriSpeech 2.15 为 `unknown` 第三方记录 | 权重 MIT、代码 Apache-2.0 分记；权重 2025-12-09 上传；RTFx 未注明机器未收录 |
 | DeepSeek-OCR 2 | [模型卡](https://huggingface.co/deepseek-ai/DeepSeek-OCR-2)与报告 | 保留四项（OmniDocBench v1.5 Overall 91.09、Text Edit 0.048、阅读顺序 0.057、图片重复率 4.17%） | Apache-2.0；编辑距离口径；权重 2026-01-27 首传；文本上下文未披露 |
 | BGE-Large-ZH-v1.5 | [模型卡](https://huggingface.co/BAAI/bge-large-zh-v1.5) C-MTEB 三项 + MTEB 结果仓库一项（CC0） | 官方三项标 `first-party`；MTEB 记录 `independence: unknown`，摘要为独立性待确认 | MIT；326M 按 C-Pack 论文口径（MTEB 元数据 1.34B 未采用）；2023-09-12 发布 |
+| LFM2.5-Embedding-350M | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M) NanoBEIR 0.577、MKQA-11 0.691 | 保留两项并标为 `first-party` | LFM Open License v1.0（$10M 商用门槛）；query/document 前缀为使用前提 |
+| LFM2.5-ColBERT-350M | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-ColBERT-350M) NanoBEIR 0.605、MKQA-11 0.694（late-interaction 组最佳） | 保留两项并标为 `first-party` | 多向量 MaxSim 路线；sentence-transformers≥6 与 pylate；存储成本另计 |
+| LFM2.5-Audio-1.5B | [模型卡](https://huggingface.co/LiquidAI/LFM2.5-Audio-1.5B) ASR 表（平均 WER 7.53、LibriSpeech-clean 1.95、AMI 15.63） | 保留三项（speech-recognition）；语音合成无客观指标，证据不足 | LM 1.2B＋FastConformer 115M；仅英语；第三方组件（NeMo/CC-BY-4.0/MIT）许可已注明 |
+| Jina Embeddings v5 Text Nano | [模型卡](https://huggingface.co/jinaai/jina-embeddings-v5-text-nano) MTEB English v2 71.0、MMTEB 65.5 | 保留两项并标为 `first-party`；发布日期官方单列（2026-02-18） | CC BY-NC 4.0；239M/212M 与 8192/32K 的卡内差异已注明 |
+| Nomic Embed Text v1.5 | [模型卡](https://huggingface.co/nomic-ai/nomic-embed-text-v1.5) MTEB 维度对照（768/512/256 维 62.28/61.96/61.04） | 保留三项并标为 `first-party` | Apache-2.0；动态 RoPE 8192；官方无发布日期文字（台账日期未获佐证已注明） |
+| Multilingual-E5-Small / Base | [Small 卡](https://huggingface.co/intfloat/multilingual-e5-small) · [Base 卡](https://huggingface.co/intfloat/multilingual-e5-base) · [报告](https://arxiv.org/html/2402.05672v1) | 各保留三项（Mr. TyDi 64.4/65.9、MIRACL dev 60.8/62.3、MTEB 英文 57.9/59.5） | MIT；前缀范式为使用前提；参数官方未单列（公开部署口径，HF 张量佐证） |
+| LightOn mDenseOn | [模型卡](https://huggingface.co/lightonai/mDenseOn) 四项 + MTEB 结果仓库 PR #653 两项 | 官方四项标 `first-party`；MTEB 两项（提交者身份未核实）标 `unknown`，摘要为独立性待确认 | Apache-2.0；307M 稠密单向量；与 mLateOn 同发布方不同路线 |
+| NVIDIA Llama-NV-Embed-Reasoning-3B | [模型卡](https://huggingface.co/nvidia/llama-nv-embed-reasoning-3b) BRIGHT 平均 38.3 | 保留一项并标为 `first-party` | **权重许可为 CC BY-NC 4.0（LICENSE 原文；HF 元数据标签 cc-by-4.0 与许可证不一致，已按原文记录）**；代码 Apache-2.0；底模 Llama-3.2-3B 另受 Meta 许可约束；台账已同步 |
+| Qwen3-Embedding-8B | [模型卡](https://huggingface.co/Qwen/Qwen3-Embedding-8B) MTEB 多语 70.58、英文 v2 75.22、C-MTEB 73.84 | 保留三项并标为 `first-party`（与 0.6B/4B 条目同来源口径） | Apache-2.0；维度 32–4096 自定义；未重复导入 0.6B/4B 成绩 |
+| Qwen3-Reranker-8B | [技术报告](https://arxiv.org/html/2506.05176v1) Table 4 的 8B 行 | 保留四项（MTEB-R 69.02、CMTEB-R 77.45、MMTEB-R 72.94、MTEB-Code 81.22） | 与 0.6B/4B 同批次（runId 一致）；候选集 top-100 召回；8B 卡片无 vLLM 章节（未单列） |
+| Whisper large-v3 | [模型卡](https://huggingface.co/openai/whisper-large-v3) · [Open ASR 榜单](https://huggingface.co/datasets/hf-audio/open-asr-leaderboard-results) | 官方卡无单列 WER（相对值未收录）；保留榜单一条 7.84%（`unknown`），摘要为独立性待确认 | HF 权重 Apache-2.0、上游代码 MIT 分开记录；与 turbo 条目同文件版本与 runId |
+| GOT-OCR 2.0 | [模型卡](https://huggingface.co/stepfun-ai/GOT-OCR2_0) · [论文](https://arxiv.org/html/2409.01704v1) | 保留四项（Fox 0.035/0.038、格式化 0.097、ChartQA-SE 0.747） | 0.716B（HF 张量口径；论文 580M 并列）；OCRBench 官方来源无此名未收录；代码许可未声明 |
+| CosyVoice 2 0.5B | [模型卡](https://huggingface.co/FunAudioLLM/CosyVoice2-0.5B) · [论文](https://arxiv.org/html/2412.10117v1) | 保留四项（test-zh CER 1.45/SS 75.7、test-en 2.57、test-hard 6.83，仅取 CV2 行） | Apache-2.0；SS 口径差异（0–1 与 %）已注明；2024/12 发布 |
 
 ## 新增的 MTEB 分项
 

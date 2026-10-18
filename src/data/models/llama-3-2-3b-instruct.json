@@ -1,0 +1,332 @@
+{
+  "id": "llama-3-2-3b-instruct",
+  "name": "Llama 3.2 3B Instruct",
+  "family": "Llama",
+  "version": "3.2",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 3.21,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡参数表标注3B（3.21B）；HF权重元数据safetensors张量参数和为3,212,749,824（约3.21B）。未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct"
+  },
+  "context": {
+    "nativeTokens": 131072,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct"
+  },
+  "languages": [
+    "英语",
+    "德语",
+    "法语",
+    "意大利语",
+    "葡萄牙语",
+    "印地语",
+    "西班牙语",
+    "泰语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Llama 3.2 Community License",
+      "url": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方模型卡披露：预训练最多9万亿token的公开来源数据，1B/3B在预训练阶段使用Llama 3.1 8B/70B的logits，并在剪枝后进行知识蒸馏；后训练沿用Llama 3.1配方（SFT、拒绝采样、DPO），知识截止2023年12月；未公开完整可复核的逐样本语料清单。"
+  },
+  "summary": "Meta 发布的 3B 级指令微调文本模型，定位在端侧与低算力设备的多语言对话、检索和摘要任务。",
+  "features": [
+    "官方参数口径3B（3.21B），128K上下文",
+    "官方声明英语、德语、法语、意大利语、葡萄牙语、印地语、西班牙语、泰语8种支持语言",
+    "官方给出SpinQuant与QLoRA量化路线，并配套ExecuTorch端侧示例",
+    "官方示例按聊天消息格式（system/user）调用"
+  ],
+  "limitations": [
+    "权重需在 Hugging Face 登录并接受 Llama 3.2 Community License；许可为自定义商业许可，含月活超7亿需另行申请等条款，并受可接受使用政策约束。",
+    "量化版本在卡片中标注的上下文为8K，与完整精度版的128K不同，选用量化权重时不能沿用128K口径。",
+    "官方基准由Meta内部评测库运行，未披露提示模板、解码参数与权重revision，不能与外部榜单直接横比。",
+    "模型卡未提供代码基准成绩，代码能力不能由语言或数学分数推断。",
+    "本站未复现官方评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct#use-with-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.43.0",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "登录并接受许可",
+          "description": "该仓库为需要手动确认的受限仓库，需在 Hugging Face 登录并接受 Llama 3.2 Community License 后才能获取权重；本站未执行。",
+          "command": null
+        },
+        {
+          "title": "准备运行环境",
+          "description": "官方卡要求 transformers >= 4.43.0 才能对该系列做对话推理；官方给出的命令为 pip install --upgrade transformers，此处按终端写法转换为 python -m pip。本站未执行安装。",
+          "command": "python -m pip install --upgrade transformers"
+        },
+        {
+          "title": "加载模型并生成",
+          "description": "按官方示例用 pipeline(\"text-generation\", model=\"meta-llama/Llama-3.2-3B-Instruct\", torch_dtype=torch.bfloat16, device_map=\"auto\") 加载，并以 system/user 消息列表调用。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；模型卡另给出1B/3B在ExecuTorch（Android OnePlus 12、ARM CPU）上的量化解码速度与内存快照，属官方特定设备测量，不是本站结果，也不构成通用最低配置。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu-5shot",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "accuracy（macro_avg/acc）",
+      "value": 63.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Tuned Models表（bf16列）",
+      "settings": "Meta官方模型卡说明全部结果由内部评测库运行；该表未披露提示模板、解码参数与权重revision，3B列同时列出量化（PTQ/SpinQuant/QLoRA）与Llama 3.1 8B对照。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Llama-3.2-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 5,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、提示模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "llama-3-2-3b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ifeval-0shot",
+      "benchmark": "IFEval",
+      "dataset": "IFEval",
+      "language": "en",
+      "metric": "score（Avg(Prompt/Instruction acc Loose/Strict)）",
+      "value": 77.4,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Tuned Models表（bf16列）",
+      "settings": "Meta官方模型卡0-shot结果，指标为Prompt/Instruction严格与宽松准确率平均；内部评测库运行，未披露提示模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Llama-3.2-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision与提示模板；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "llama-3-2-3b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k-8shot-cot",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "exact match（em_maj1@1）",
+      "value": 77.7,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Tuned Models表（bf16列，CoT）",
+      "settings": "Meta官方模型卡8-shot并启用思维链；同表列出1B为44.4、Llama 3.1 8B为84.5。内部评测库运行，未披露CoT模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Llama-3.2-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 8,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库，未披露足以复现和对齐的模型revision、CoT模板与解码配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "llama-3-2-3b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mgsm-0shot-cot",
+      "benchmark": "MGSM",
+      "dataset": "MGSM",
+      "language": "多语言（官方表未按语种拆分）",
+      "metric": "exact match（em，CoT）",
+      "value": 58.2,
+      "unit": "%",
+      "direction": "higher",
+      "version": "官方模型卡Instruction Tuned Models表（bf16列，CoT）",
+      "settings": "Meta官方模型卡0-shot并启用思维链，同表列出1B为24.5、Llama 3.1 8B为68.9；未披露语种范围、CoT模板与解码配置。本站未复现。",
+      "sourceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "Meta（模型发布方自报）",
+      "externalModelId": "meta-llama/Llama-3.2-3B-Instruct",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": 0,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源使用发布方内部评测库且未按语种拆分，未披露足以复现和对齐的模型revision、CoT模板与语种范围；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
+        "notes": "仅摘录模型卡中的少量型号成绩并保留发布方署名与来源链接；不复制整表或底层基准数据。"
+      },
+      "provenance": {
+        "sourceId": "meta",
+        "runId": "llama-3-2-3b-instruct-meta-card-instruct-table",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "官方内部评测库报告MMLU 5-shot为63.4%、IFEval 0-shot为77.4%、GSM8K 8-shot CoT为77.7%、MGSM 0-shot CoT为58.2%。相比同代1B，指令遵循、数学与多语言推理都有明显提升，但仍低于Llama 3.1 8B对照，不代表目标场景表现。",
+      "strengths": [
+        "官方在同一张表内并列1B/3B与Llama 3.1 8B对照，档位定位可直接查看。",
+        "指令遵循、数学与多语言推理各有独立口径，未混用为单一总分。",
+        "官方声明8种支持语言，并给出超出该集合时需自行评估的提示。"
+      ],
+      "limitations": [
+        "全部成绩由发布方内部评测库运行，未披露提示模板、解码参数与模型revision，不能与外部榜单直接横比。",
+        "多语言MGSM未按语种拆分，中文表现不能由该行推断。",
+        "官方定位为移动端与低算力对话场景，长文与知识密集任务的可靠性需自行评估。",
+        "未找到许可明确且确认为独立方的同型号同条件复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu-5shot",
+        "ifeval-0shot",
+        "gsm8k-8shot-cot",
+        "mgsm-0shot-cot"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "insufficient",
+      "summary": "本轮未找到该型号可核对的代码基准成绩：官方模型卡的指令微调评测表覆盖通用知识、改写、摘要、指令遵循、数学、推理、工具调用、长上下文与多语言，但没有HumanEval、MBPP等代码行。语言或数学分数不能替代代码能力证据。",
+      "strengths": [
+        "官方模型卡将输出模态标注为多语言文本与代码，并给出Transformers加载示例。",
+        "卡片给出量化与端侧推理路线，可支撑低算力试验。"
+      ],
+      "limitations": [
+        "官方能力表没有代码基准行，工具调用（BFCL V2/Nexus）与代码生成不是同一指标。",
+        "未找到许可明确且确认为独立方的同型号代码评测。",
+        "本站未在真实仓库或测试用例上验证生成代码。"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

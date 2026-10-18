@@ -1,0 +1,257 @@
+{
+  "id": "lfm2-5-embedding-350m",
+  "name": "LFM2.5-Embedding-350M",
+  "family": "LFM2.5",
+  "version": "2.5",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.354,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注总参数约354M，骨干为LFM2.5-350M-Base加双向注意力补丁，共17层（10个卷积块＋6个注意力块＋1个池化层），词表65,536；HF权重元数据safetensors张量参数合计354,483,968（约0.354B），与官方口径一致。官方未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M"
+  },
+  "context": {
+    "nativeTokens": 512,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M"
+  },
+  "languages": [
+    "英语",
+    "西班牙语",
+    "德语",
+    "法语",
+    "意大利语",
+    "葡萄牙语",
+    "阿拉伯语",
+    "瑞典语",
+    "挪威语",
+    "日语",
+    "韩语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "LFM Open License v1.0",
+      "url": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "官方说明该模型基于LFM2.5-350M-Base并加装双向注意力补丁，是LFM家族首批双向模型之一，属于LFM2.5系列的embedding/ColBERT联合发布；训练数据清单、语料规模与许可未公开。"
+  },
+  "summary": "350M稠密双编码器检索模型，文档编码为单个1024维向量并用余弦相似度检索，官方定位多语言/跨语言短文本检索与端侧语义搜索。",
+  "features": [
+    "官方标注约354M参数，17层（10个卷积块＋6个注意力块＋1个池化层），输出1024维CLS单向量，相似度为余弦",
+    "文档长度512 token；官方要求查询用 prompt_name=\"query\"、文档用 prompt_name=\"document\" 的非对称提示前缀，提示已存入模型配置",
+    "官方支持11种语言（英语、西班牙语、德语、法语、意大利语、葡萄牙语、阿拉伯语、瑞典语、挪威语、日语、韩语）",
+    "官方提供Sentence Transformers用法（trust_remote_code加载双向补丁、normalize_embeddings）与适配llama.cpp的GGUF量化仓库",
+    "官方称在MacBook Pro M4 Max上经llama.cpp fp16编码查询p50为7.3 ms、p95为9.6 ms，内部GPU栈查询编码p50为1.5 ms（官方声明，本站未复现）",
+    "官方称可通过sentence-transformers直接微调，并提供FlashAttention-2可选路径（官方称与默认实现差异在bf16噪声内）"
+  ],
+  "limitations": [
+    "官方定位短上下文检索：文档上限512 token，超出需自行切分，长文档召回口径与官方成绩不一致。",
+    "官方评测只覆盖其自建的多语言基准，未给出MTEB等公共榜单结果；成绩为发布方自测，本站未复现。",
+    "权重采用LFM Open License v1.0：商用权利以年收入低于1000万美元为条件（许可第5节与定义将Threshold设为10,000,000美元年收入），超过该门槛的商业使用不在该许可范围内；非营利与研究用途不受门槛限制。",
+    "省略官方非对称提示或改动归一化会静默降低检索质量；官方未披露训练语料与评测的完整配置。",
+    "官方未声明代码许可；本站未实测检索质量与延迟。"
+  ],
+  "officialUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "trust_remote_code（官方示例要求，用于加载双向补丁）"
+      ],
+      "steps": [
+        {
+          "title": "安装 Sentence Transformers",
+          "description": "官方How to run给出的安装命令。本站未执行。",
+          "command": "pip install -U sentence-transformers"
+        },
+        {
+          "title": "加载模型并编码",
+          "description": "按官方示例用SentenceTransformer加载LiquidAI/LFM2.5-Embedding-350M并传trust_remote_code=True，查询与文档分别传prompt_name=\"query\"与\"document\"、normalize_embeddings=True，再用点积得到余弦分数。本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和延迟取决于运行时、精度、批大小与序列长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-llama-cpp",
+      "runtime": "llama.cpp",
+      "systems": [],
+      "format": "GGUF",
+      "quantization": "官方GGUF仓库提供多种量化方案（见仓库文件）",
+      "downloadUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M-GGUF",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+      "guideId": "official-quickstart",
+      "dependencies": [],
+      "steps": [
+        {
+          "title": "获取GGUF量化权重",
+          "description": "官方称LFM2.5-Embedding-350M-GGUF仓库提供多种量化方案，面向llama.cpp；官方延迟表即基于llama.cpp fp16测量。本站未下载权重。",
+          "command": null
+        },
+        {
+          "title": "按llama.cpp文档加载",
+          "description": "模型卡未给出本型号的具体加载命令，命令留空；需按llama.cpp当前文档核对嵌入接口与池化设置。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方latency表基于MacBook Pro M4 Max与fp16，属于官方声明与特定条件，不作为通用资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "nanobeir-multilingual-ndcg10",
+      "benchmark": "NanoBEIR Multilingual Extended（NDCG@10）",
+      "dataset": "LiquidAI/nanobeir-multilingual-extended（多语言检索；模型卡列出AVG与11个语种分项）",
+      "language": "多语言（官方表AVG列，含ar、de、en、es、fr、it、ja、ko、no、pt、sv）",
+      "metric": "NDCG@10",
+      "value": 0.577,
+      "unit": "分数（0–1，官方表原始口径）",
+      "direction": "higher",
+      "version": "官方模型卡性能表（NanoBEIR Multilingual Extended — NDCG@10）",
+      "settings": "Liquid AI官方模型卡性能表列出LFM2.5-Embedding-350M的AVG为0.577（英语0.644、日语0.575、韩语0.563等分项同表列出），同表并列LFM2.5-ColBERT-350M（0.605）、Qwen3-Embedding-0.6B（0.556）、gte-multilingual-base（0.528）等对照。表未披露模型revision、编码精度、硬件与评测运行日期，也未说明文档切分与提示前缀口径；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-Embedding-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、编码精度、硬件与提示前缀等足以复现和统一对齐的检索配置，且为发布方自建基准；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+        "notes": "仅摘录官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-embedding-350m-model-card",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mkqa-11-recall20",
+      "benchmark": "MKQA-11（Recall@20）",
+      "dataset": "MKQA（官方取目标11语言子集，模型卡标注MKQA-11）",
+      "language": "多语言（官方表AVG列，含ar、de、en、es、fr、it、ja、ko、no、pt、sv）",
+      "metric": "Recall@20",
+      "value": 0.691,
+      "unit": "分数（0–1，官方表原始口径）",
+      "direction": "higher",
+      "version": "官方模型卡性能表（MKQA-11 — Recall@20）",
+      "settings": "Liquid AI官方模型卡性能表列出LFM2.5-Embedding-350M的跨语言AVG为0.691，同表并列LFM2.5-ColBERT-350M（0.694）、gte-multilingual-base（0.675）、Qwen3-Embedding-0.6B（0.638）等对照，并逐语种列出数值。表未披露模型revision、编码精度与硬件，评测运行日期未披露；本站未复现。",
+      "sourceUrl": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Liquid AI（模型发布方自报）",
+      "externalModelId": "LiquidAI/LFM2.5-Embedding-350M",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露模型revision、语料划分、编码精度与硬件等足以复现和统一对齐的检索配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-Embedding-350M",
+        "notes": "仅摘录官方模型卡表中的少量成绩并保留来源链接；不复制整表或基准数据，基准与数据集继续适用各自许可。"
+      },
+      "provenance": {
+        "sourceId": "liquid-ai",
+        "runId": "lfm2-5-embedding-350m-model-card",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "可作为多语言短文本检索与端侧语义搜索候选：官方模型卡报告NanoBEIR Multilingual Extended NDCG@10 AVG 0.577、MKQA-11 Recall@20 AVG 0.691，同表以单向量（dense）口径对比Qwen3-Embedding-0.6B与gte-multilingual-base等模型。成绩为发布方自测，且官方定位短上下文检索。",
+      "strengths": [
+        "官方同一张表并列稠密与晚交互两类模型，并逐语种列出11种语言结果，便于定位跨语言表现。",
+        "单向量1024维表示，索引体积与查询成本低于同系列ColBERT多向量路线；官方给出llama.cpp与GPU两套延迟数值。",
+        "官方完整给出加载、编码与提示前缀用法，并支持在sentence-transformers内继续微调。"
+      ],
+      "limitations": [
+        "只覆盖512 token以内的文档；长文档需自行切分，官方成绩不代表长文本检索表现。",
+        "官方未给出MTEB等公共榜单结果，也未披露模型revision、编码精度与评测运行日期；未找到许可明确且确认为独立方的同型号复测。",
+        "非对称提示前缀与归一化是官方要求的用法，偏离会降低效果；本站未复现，也未实测索引规模与延迟。"
+      ],
+      "evidenceIds": [
+        "nanobeir-multilingual-ndcg10",
+        "mkqa-11-recall20"
+      ]
+    }
+  ]
+}

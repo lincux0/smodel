@@ -1,0 +1,487 @@
+{
+  "id": "minicpm4-8b",
+  "name": "MiniCPM4 8B",
+  "family": "MiniCPM",
+  "version": "4",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation",
+    "coding"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方模型卡标注8B参数、8T训练token；HF权重元数据safetensors张量参数和为8,185,253,888（约8.19B）。未另列激活或有效参数口径。",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-8B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": 131072,
+    "extension": "官方模型卡说明原生支持32768，并给出修改config.json的LongRoPE factor步骤，称已验证至131072；技术报告5.3节表述为应用YaRN将上下文外推至128K并用NIAH评测。",
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-8B"
+  },
+  "languages": [
+    "中文",
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方卡与技术报告披露：8B版训练8T token（0.5B为1T）；预训练数据通过UltraClean清洗与生成（含中英双语网页数据UltraFinweb），监督微调数据来自UltraChat v2，训练采用ModelTunnel v2配置搜索、FP8计算与多token预测；未公开完整可复核的逐样本清单。"
+  },
+  "summary": "OpenBMB 面向端侧的 8B 级指令模型，主打稀疏注意力与推理加速，官方定位中英文本生成与代码等通用任务。",
+  "features": [
+    "官方口径8B参数、8T训练token",
+    "原生32K上下文；官方给出LongRoPE步骤并称已验证至131072",
+    "支持InfLLM v2稀疏注意力与FRSpec投机解码等加速组件",
+    "官方提供CPM.cu、Transformers、SGLang（fork）与vLLM等多条推理路线",
+    "技术报告5.1节说明主要在中英双语语料上预训练"
+  ],
+  "limitations": [
+    "官方vLLM路线要求nightly预发布版、SGLang路线要求官方fork，版本约束需按卡核对。",
+    "启用InfLLM v2稀疏注意力需另装infllmv2_cuda_impl并配置sparse_config，属额外部署复杂度。",
+    "技术报告Table 8未披露该型号的提示模板、采样参数与各基准指标定义（如shot数），成绩不能与外部榜单直接横比。",
+    "模型卡声明生成内容不代表开发者观点，需用户自行评估与核验。",
+    "本站未复现评测，也未在设备上运行模型。"
+  ],
+  "officialUrl": "https://huggingface.co/openbmb/MiniCPM4-8B",
+  "checkedAt": "2026-10-17",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM4-8B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-8B#inference-with-transformers",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "准备运行环境",
+          "description": "官方卡未给出固定依赖版本，示例需要 transformers 与 torch，并加载远程自定义代码（trust_remote_code=True）。本站未执行安装。",
+          "command": null
+        },
+        {
+          "title": "加载模型并推理",
+          "description": "按官方示例用 AutoModelForCausalLM.from_pretrained('openbmb/MiniCPM4-8B', torch_dtype=torch.bfloat16, device_map=device, trust_remote_code=True) 加载，并用 apply_chat_template 生成提示后调用 generate；卡上另附稀疏注意力（需infllmv2_cuda_impl）与LongRoPE配置说明。本站未下载权重或执行模型。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；官方卡给出端侧芯片上的效率与加速对比（如Jetson AGX Orin、RTX 4090），属官方特定平台测量，不是本站结果，也不构成最低配置要求。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-cpmcu",
+      "runtime": "CPM.cu",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM4-8B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-8B#inference-with-cpmcu",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "CUDA环境",
+        "cpm.cu（OpenBMB官方CUDA推理框架）"
+      ],
+      "steps": [
+        {
+          "title": "获取并构建CPM.cu",
+          "description": "官方卡展示的安装流程为：git clone https://github.com/OpenBMB/cpm.cu.git --recursive，然后进入cpm.cu目录执行 python3 setup.py install；需自行准备CUDA环境。本站未执行。",
+          "command": "git clone https://github.com/OpenBMB/cpm.cu.git --recursive"
+        },
+        {
+          "title": "运行长文本示例",
+          "description": "官方卡称在按说明修改LongRoPE配置后，可在cpm.cu仓库内运行 python3 tests/test_generate.py 复现长文本加速效果；脚本会自动从Hugging Face下载权重，需在cpm.cu目录下执行。本站未执行。",
+          "command": "python3 tests/test_generate.py"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；CPM.cu为CUDA推理框架，资源需求取决于GPU型号、量化与批大小，官方未给出通用最低配置。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    },
+    {
+      "id": "official-vllm",
+      "runtime": "vLLM",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM4-8B",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM4-8B#inference-with-vllm",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "vllm（官方要求nightly预发布版）"
+      ],
+      "steps": [
+        {
+          "title": "安装nightly版vLLM",
+          "description": "官方卡给出 pip install -U vllm --pre --extra-index-url https://wheels.vllm.ai/nightly，此处按终端写法转换为 python -m pip 并保持同一索引参数。本站未执行安装。",
+          "command": "python -m pip install -U vllm --pre --extra-index-url https://wheels.vllm.ai/nightly"
+        },
+        {
+          "title": "启动OpenAI兼容服务",
+          "description": "官方卡给出 vllm serve openbmb/MiniCPM4-8B；调用聊天接口时卡上提示需显式传 add_special_tokens=True，否则BOS等特殊token不会自动加入。本站未执行。",
+          "command": "vllm serve openbmb/MiniCPM4-8B"
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；显存占用取决于批大小、精度、上下文长度与vLLM版本，不将参数量或文件体积换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mmlu",
+      "benchmark": "MMLU",
+      "dataset": "MMLU",
+      "language": "en",
+      "metric": "score",
+      "value": 75.83,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8为MiniCPM4与Qwen3、GLM4、Gemma3、LLaMA3.1、Phi4等开源模型的标准评测对比，该列标注8B参数、8T训练数据；报告未披露该行的模型revision、提示模板、采样与各基准指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "cmmlu",
+      "benchmark": "CMMLU",
+      "dataset": "CMMLU",
+      "language": "zh",
+      "metric": "score",
+      "value": 80.62,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中8B列的中文知识基准成绩；同表列出GLM4-9B为74.49、Gemma3-12B为62.52作为对照。报告未披露提示模板、采样与指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "ceval",
+      "benchmark": "C-Eval",
+      "dataset": "C-Eval",
+      "language": "zh",
+      "metric": "score",
+      "value": 81.36,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中8B列的中文综合基准成绩；同表列出GLM4-9B为74.09、Qwen3-8B为80.35作为对照。报告未披露提示模板、采样与指标定义。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、提示模板、采样配置与指标定义；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "gsm8k",
+      "benchmark": "GSM8K",
+      "dataset": "GSM8K",
+      "language": "en",
+      "metric": "score",
+      "value": 91.51,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中8B列的数学基准成绩；同表列出Qwen3-8B为93.25、Gemma3-12B为94.16作为对照。报告未披露该行的shot数、采样与答案抽取方式。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "text-generation",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、shot数、采样与答案抽取配置；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "mbpp",
+      "benchmark": "MBPP",
+      "dataset": "MBPP",
+      "language": "en",
+      "metric": "score",
+      "value": 78.99,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中8B列的Python入门级程序基准成绩；同表列出Qwen3-8B为77.04、Gemma3-12B为84.44作为对照。报告未说明该行是否为pass@1及其他采样配置。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、判题与采样配置，也未说明指标是否为pass@1；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "humaneval",
+      "benchmark": "HumanEval",
+      "dataset": "HumanEval",
+      "language": "en",
+      "metric": "score",
+      "value": 85.37,
+      "unit": "%",
+      "direction": "higher",
+      "version": "MiniCPM4技术报告Table 8（标准评测）",
+      "settings": "MiniCPM4技术报告Table 8中8B列的函数级代码基准成绩；同表列出Qwen3-8B为85.98、Gemma3-12B为83.54作为对照。报告未说明该行是否为pass@1及其他采样配置。本站未复现。",
+      "sourceUrl": "https://arxiv.org/abs/2506.07900",
+      "date": null,
+      "checkedAt": "2026-10-17",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "coding",
+      "publisher": "MiniCPM Team / OpenBMB（模型发布方自报）",
+      "externalModelId": "openbmb/MiniCPM4-8B",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "来源未披露足以复现和对齐的模型revision、判题与采样配置，也未说明指标是否为pass@1；该结果仅记录原报告口径，不加入跨型号比较组。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/abs/2506.07900",
+        "notes": "仅引用MiniCPM4技术报告中的少量成绩事实并保留出处链接；不复制报告表格或图像。"
+      },
+      "provenance": {
+        "sourceId": "openbmb",
+        "runId": "minicpm4-8b-paper-table8",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "official-only",
+      "summary": "技术报告Table 8报告MMLU为75.83%、CMMLU为80.62%、C-Eval为81.36%、GSM8K为91.51%；官方称其8T训练token规模下成绩对标更大训练量的同规模模型，中文知识相对突出。所有数值均缺少可复现的评测配置。",
+      "strengths": [
+        "同表并列多个开源模型对照，且训练token规模一并标注，便于判断口径。",
+        "中文知识（CMMLU/C-Eval）与英文知识（MMLU）、数学分别报告，未合成单一总分。",
+        "上下文能力另有长文评测章节（NIAH 128K）与稀疏注意力效率说明。"
+      ],
+      "limitations": [
+        "报告未披露提示模板、采样参数、指标定义（shot数）与模型revision，不能与外部榜单直接横比。",
+        "效率与长文结论来自官方自建评测配置（如稀疏注意力开/关），不能直接换算为通用吞吐保证。",
+        "模型卡声明生成内容不代表开发者观点，重要用途需自行评估与核验。",
+        "未找到许可明确且确认为独立方的同型号复测；本站未复现任何一项基准。"
+      ],
+      "evidenceIds": [
+        "mmlu",
+        "cmmlu",
+        "ceval",
+        "gsm8k"
+      ]
+    },
+    {
+      "task": "coding",
+      "status": "official-only",
+      "summary": "技术报告Table 8报告MBPP为78.99%、HumanEval为85.37%，两项均与同表对照模型接近或略低；由于报告未说明判题与采样口径，只能作为官方自报的函数级代码能力信号。",
+      "strengths": [
+        "官方同时给出两个函数级代码基准数值，并列出对照模型。"
+      ],
+      "limitations": [
+        "报告未说明指标是否为pass@1、也未给出提示模板与采样配置，无法与外部结果对齐比较。",
+        "函数级基准不能替代仓库级修改、依赖管理与长上下文代码任务验证。",
+        "本站未运行模型或复核生成代码。"
+      ],
+      "evidenceIds": [
+        "mbpp",
+        "humaneval"
+      ]
+    }
+  ]
+}
