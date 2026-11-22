@@ -2,8 +2,8 @@
 import type { Model } from '../lib/catalog.ts';
 import { taskLabels } from '../lib/catalog.ts';
 import { groupEvidence, selectEvidencePreview, summarizeEvidence } from '../lib/evidence.ts';
-interface Props { model: Model; compact?: boolean; }
-const { model, compact = false } = Astro.props;
+interface Props { model: Model; compact?: boolean; summaryOnly?: boolean; }
+const { model, compact = false, summaryOnly = false } = Astro.props;
 const statusLabels = { 'official-only': '仅官方依据', 'single-source': '单一评测来源', corroborated: '独立多来源佐证', 'independence-unverified': '独立性待确认', insufficient: '证据不足' };
 const sourceLabels = { 'official-report': '官方报告', 'third-party': '第三方评测', 'site-measured': '本站实测' };
 const independenceLabels = { 'first-party': '官方自测', independent: '独立评测', unknown: '独立性待确认' };
@@ -41,7 +41,7 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
       <p>{assessment?.summary ?? '该用途尚无足够评测依据。'}</p>
       {assessment?.strengths.length ? <div><strong>已有依据支持</strong><ul>{assessment.strengths.map((item) => <li>{item}</li>)}</ul></div> : null}
       {assessment?.limitations.length ? <div><strong>证据限制</strong><ul>{assessment.limitations.map((item) => <li>{item}</li>)}</ul></div> : null}
-      {evaluations.length ? groups.map((group) => <section class="capability-group" aria-label={`${group.label} 评测记录`}>
+      {evaluations.length ? (summaryOnly ? <p class="capability-detail-link"><a href={`/models/${model.id}/`}>查看完整评测条件与来源</a></p> : groups.map((group) => <section class="capability-group" aria-label={`${group.label} 评测记录`}>
         <h4 class="capability-group-heading">{group.label}</h4>
         <p class="capability-group-meta">{group.records[0].dataset} · {group.records[0].language} · {group.records[0].version}</p>
         <div class="capability-group-records" data-record-count={group.records.length > 1 ? 'multiple' : 'single'}>{group.records.map((evaluation) => {
@@ -73,7 +73,7 @@ const score = (value: number, unit: string) => unit === '%' ? `${value}%` : unit
             </details>
           </article>;
         })}</div>
-      </section>) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
+      </section>)) : <p class="empty-state">暂无该用途的公开评测成绩；不能从其他用途或缺失值推断能力。</p>}
       </div>
       </details>
     </section>;
