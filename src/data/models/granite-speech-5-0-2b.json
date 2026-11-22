@@ -1,0 +1,164 @@
+{
+  "id": "granite-speech-5-0-2b",
+  "name": "Granite Speech 5.0 2B",
+  "family": "Granite Speech",
+  "version": "5.0",
+  "releaseDate": "2026-10-20",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 2.31,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "HF safetensors合计2,313,207,132（约2.31B）；官方按2B档位发布。",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b"
+  },
+  "context": {
+    "nativeTokens": 4096,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b"
+  },
+  "languages": [
+    "英语",
+    "法语",
+    "德语",
+    "西班牙语",
+    "葡萄牙语",
+    "日语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "IBM公开约390,000小时音频训练数据组成与评测；未公开完整逐样本清单。"
+  },
+  "summary": "Granite Speech 5.0的2B多语种语音识别与翻译模型，支持6种语言、关键词偏置、标点/大小写与说话人属性。",
+  "features": [
+    "2.31B参数，支持6种语言ASR与双向语音翻译",
+    "关键词列表最多2,000项，可用于产品名、人名与缩写偏置",
+    "可在提示中要求标点、大小写与书面化输出",
+    "Apache-2.0，官方支持Transformers、vLLM、llama.cpp与mlx-audio"
+  ],
+  "limitations": [
+    "4,096 token上下文约对应2分钟音频，长录音需分段",
+    "翻译方向与语言组合有限，需按官方表选择",
+    "官方WER与排名为厂商自测，未披露逐测试集完整配置",
+    "本站未实测多语种识别或翻译"
+  ],
+  "officialUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers>=4.52.1",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "average-wer",
+      "benchmark": "Open ASR Leaderboard (English short-form)",
+      "dataset": "9 public English short-form test sets",
+      "language": "en",
+      "metric": "WER",
+      "value": 5.06,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方结果截至2026-10-21",
+      "settings": "IBM自测；Open ASR Leaderboard 9个公开英语短音频测试集平均WER；模型卡未披露逐测试集解码、音频预处理与revision。本站未复现。",
+      "sourceUrl": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "IBM",
+      "externalModelId": "ibm-granite/granite-speech-5.0-2b",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出聚合WER，未披露逐测试集与完整推理条件；不与不同榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/ibm-granite/granite-speech-5.0-2b",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "ibm-granite",
+        "runId": "granite-speech-5-2b-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "官方给出Open ASR英文短音频9个测试集平均WER 5.06%，并支持6种语言ASR与语音翻译；属于厂商自测的聚合结果。",
+      "strengths": [
+        "同时覆盖多语种ASR、语音翻译、关键词偏置与标点/大小写",
+        "Apache-2.0，部署路线较完整"
+      ],
+      "limitations": [
+        "平均WER不能代表目标口音、噪声与领域",
+        "4K上下文限制单次音频长度",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "average-wer"
+      ]
+    }
+  ]
+}

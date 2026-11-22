@@ -1,0 +1,209 @@
+{
+  "id": "jais-asr",
+  "name": "Jais-ASR",
+  "family": "Jais",
+  "version": "3",
+  "releaseDate": "2026-10-15",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 5.72,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "HF safetensors合计5,717,988,224（约5.72B）；官方称基于Jais-3-4B并加入语音组件。",
+    "sourceUrl": "https://huggingface.co/IFM/Jais-ASR"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "阿拉伯语（含19国方言）",
+    "英语",
+    "法语",
+    "西班牙语",
+    "意大利语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "IFM公开阿拉伯语/方言数据与评测概述；未公开完整逐样本清单。"
+  },
+  "summary": "面向阿拉伯语及19国方言的语音识别模型，支持语码转换、变音符号、语言/方言识别与vLLM部署。",
+  "features": [
+    "覆盖现代标准阿拉伯语与19国方言",
+    "支持阿拉伯语与英语、法语、西班牙语、意大利语的自然语码转换",
+    "可选变音符号、语言/方言识别与无语音信号",
+    "Apache-2.0，提供vLLM插件与量化版本"
+  ],
+  "limitations": [
+    "主要面向阿拉伯语，其他语言不是主要优化目标",
+    "BF16权重约11.4GB，部署门槛高于0.5B级ASR",
+    "官方WER/CER为厂商自测，未披露完整测试条件",
+    "本站未实测方言或语码转换"
+  ],
+  "officialUrl": "https://huggingface.co/IFM/Jais-ASR",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/IFM/Jais-ASR",
+      "sourceUrl": "https://huggingface.co/IFM/Jais-ASR",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "arabic-wer",
+      "benchmark": "Open Universal Arabic ASR Leaderboard",
+      "dataset": "6个阿拉伯语公开测试集宏平均",
+      "language": "ar",
+      "metric": "WER",
+      "value": 22.85,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方结果（2026-10-15）",
+      "settings": "IFM自测；Open Universal Arabic ASR Leaderboard协议，6个测试集宏平均；官方未披露逐测试集解码与音频预处理条件。本站未复现。",
+      "sourceUrl": "https://ifm.ai/blog/jais-asr/",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Institute of Foundation Models (IFM)",
+      "externalModelId": "IFM/Jais-ASR",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出宏平均WER，未披露逐测试集条件；不与不同榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ifm.ai/blog/jais-asr/",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "ifm",
+        "runId": "jais-asr-official-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "arabic-cer",
+      "benchmark": "Open Universal Arabic ASR Leaderboard",
+      "dataset": "6个阿拉伯语公开测试集宏平均",
+      "language": "ar",
+      "metric": "CER",
+      "value": 8.37,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方结果（2026-10-15）",
+      "settings": "IFM自测；Open Universal Arabic ASR Leaderboard协议，6个测试集宏平均；官方未披露逐测试集解码与音频预处理条件。本站未复现。",
+      "sourceUrl": "https://ifm.ai/blog/jais-asr/",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Institute of Foundation Models (IFM)",
+      "externalModelId": "IFM/Jais-ASR",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出宏平均CER，未披露逐测试集条件；不与不同榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://ifm.ai/blog/jais-asr/",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "ifm",
+        "runId": "jais-asr-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "官方给出Open Universal Arabic ASR平均WER 22.85%、CER 8.37%，并支持方言与语码转换；属于厂商自测的宏平均结果。",
+      "strengths": [
+        "阿拉伯语方言覆盖广，支持变音符号与语言识别",
+        "提供vLLM与量化版本"
+      ],
+      "limitations": [
+        "WER仍较高，目标场景需验证",
+        "主要面向阿拉伯语",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "arabic-wer",
+        "arabic-cer"
+      ]
+    }
+  ]
+}

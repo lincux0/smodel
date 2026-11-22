@@ -1,0 +1,115 @@
+{
+  "id": "hs-rerank-1",
+  "name": "Hindsight hs-rerank-1",
+  "family": "Hindsight",
+  "version": "1",
+  "releaseDate": "2026-11-03",
+  "variant": "specialized",
+  "tasks": [
+    "reranking"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "score"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.114,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注114M参数，其中98M为词嵌入表，单次前向约15M transformer。",
+    "sourceUrl": "https://huggingface.co/hindsight-ai/hs-rerank-1"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/hindsight-ai/hs-rerank-1"
+  },
+  "languages": [
+    "英语",
+    "西班牙语",
+    "法语",
+    "德语",
+    "葡萄牙语",
+    "日语",
+    "韩语",
+    "中文"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit"
+    },
+    "code": null,
+    "trainingDisclosure": "Hindsight公开模型规模、用途与评测；未公开完整逐样本清单。"
+  },
+  "summary": "Hindsight的114M文本重排模型，面向代理记忆与轻量RAG，可在CPU运行。",
+  "features": [
+    "114M参数，8K上下文",
+    "支持8种语言，CPU可运行",
+    "提供int8 ONNX与TEI部署",
+    "MIT许可"
+  ],
+  "limitations": [
+    "114M中98M为词嵌入表，实际每次前向约15M transformer",
+    "不支持图像或多模态输入",
+    "官方重排成绩为厂商自测",
+    "本站未实测中文重排"
+  ],
+  "officialUrl": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "sourceUrl": "https://huggingface.co/hindsight-ai/hs-rerank-1",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "insufficient",
+      "summary": "本轮未导入Hindsight hs-rerank-1可复核的完整官方重排成绩；官方以对比表为主，暂不据宣传性数字判断重排质量。",
+      "strengths": [],
+      "limitations": [
+        "官方未给出完整逐语言、逐任务分数",
+        "仅支持文本输入",
+        "本站未复现中文重排"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

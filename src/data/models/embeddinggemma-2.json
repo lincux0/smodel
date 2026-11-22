@@ -1,0 +1,160 @@
+{
+  "id": "embeddinggemma-2",
+  "name": "EmbeddingGemma 2",
+  "family": "Gemma",
+  "version": "2",
+  "releaseDate": "2026-10-06",
+  "variant": "specialized",
+  "tasks": [
+    "embedding"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "vector"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.74,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注740M总参数：270M文本骨干（130M transformer+140M embedder）+170M视觉编码器+300M音频编码器。",
+    "sourceUrl": "https://huggingface.co/google/embeddinggemma-2"
+  },
+  "context": {
+    "nativeTokens": 8192,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/google/embeddinggemma-2"
+  },
+  "languages": [
+    "多语言（官方称支持多语种文本）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "Google公开技术报告与评测；未公开完整逐样本清单。"
+  },
+  "summary": "Google DeepMind的740M原生多模态嵌入模型，将文本、图像、音频与视频映射到统一768维空间，面向端侧检索。",
+  "features": [
+    "740M总参数，文本、视觉、音频编码器可按需加载",
+    "统一768维向量，支持Matryoshka截断到512/256/128维",
+    "8K共享上下文，官方称可处理约5.5分钟音频、29张图像或58帧视频",
+    "Apache-2.0，提供ONNX、LiteRT、GGUF等部署路线"
+  ],
+  "limitations": [
+    "站内模态分类仅记录文本+图像；官方还支持音频/视频输入，未在modalities中展开",
+    "740M为模块合计，仅文本可只加载270M",
+    "8K上下文为多模态共享预算，长文档需截断",
+    "官方检索成绩为厂商自测，本站未复现"
+  ],
+  "officialUrl": "https://huggingface.co/google/embeddinggemma-2",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-sentence-transformers",
+      "runtime": "Sentence Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/google/embeddinggemma-2",
+      "sourceUrl": "https://huggingface.co/google/embeddinggemma-2",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "sentence-transformers",
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "mteb-code",
+      "benchmark": "MTEB Code",
+      "dataset": "MTEB Code",
+      "language": "code",
+      "metric": "score",
+      "value": 78.68,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Google官方博客（2026-10-06）",
+      "settings": "Google DeepMind自测；MTEB Code 78.68，较EmbeddingGemma 1的68.76提升9.92分；官方未披露完整任务子集、模型revision与推理条件。本站未复现。",
+      "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "embedding",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/embeddinggemma-2",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出MTEB Code聚合分，未披露完整任务与推理条件；不与不同嵌入模型的榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/embeddinggemma-2/",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "embeddinggemma-2-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "embedding",
+      "status": "official-only",
+      "summary": "官方给出MTEB Code 78.68，并称在sub-1B多模态嵌入中领先；属于厂商自测的聚合结果。",
+      "strengths": [
+        "原生多模态统一嵌入，模块可按需加载",
+        "支持MRL维度截断与端侧部署"
+      ],
+      "limitations": [
+        "MTEB Code不能代表所有检索任务",
+        "8K共享上下文限制长文档",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "mteb-code"
+      ]
+    }
+  ]
+}

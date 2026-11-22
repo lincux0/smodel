@@ -1,0 +1,161 @@
+{
+  "id": "nemotron-3-5-rerank-8b",
+  "name": "Nemotron 3.5 Rerank 8B",
+  "family": "Nemotron",
+  "version": "3.5",
+  "releaseDate": "2026-10-20",
+  "variant": "specialized",
+  "tasks": [
+    "reranking"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "image"
+    ],
+    "output": [
+      "score"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.38,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注8.38B参数；HF safetensors合计8,381,159,424。",
+    "sourceUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16"
+  },
+  "languages": [
+    "多语言（官方称34种文本、18种图像检索语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "OpenMDW-1.1",
+      "url": "https://openmdw.ai/license/1-1/"
+    },
+    "code": null,
+    "trainingDisclosure": "NVIDIA公开训练与评测概述；未公开完整逐样本清单。"
+  },
+  "summary": "NVIDIA的8.38B多模态cross-encoder重排模型，支持文本与文档图像，面向RAG与代理检索的第二阶段排序。",
+  "features": [
+    "8.38B参数，Pixtral视觉编码器加双向Ministral3语言模型",
+    "支持文本、图像或图文混合文档重排",
+    "32K上下文，覆盖34种文本/18种图像检索语言",
+    "官方称ViDoRe v3.1重排榜nDCG@10 60.49第一（截至2026-10-20）"
+  ],
+  "limitations": [
+    "8.38B部署成本高，明显重于0.1B级重排模型",
+    "官方榜单为厂商自测与特定榜单快照",
+    "查询与文档需成对评分，不适合大规模召回",
+    "本站未复现实时或中文图文重排"
+  ],
+  "officialUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "sourceUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "vidore-v3-1-ndcg10",
+      "benchmark": "ViDoRe v3.1 Reranking",
+      "dataset": "ViDoRe v3.1 combined image+text",
+      "language": "多语言",
+      "metric": "nDCG@10",
+      "value": 60.49,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "ViDoRe v3.1（2026-10-20）",
+      "settings": "NVIDIA自测；ViDoRe v3.1重排榜，图文混合输入，nDCG@10 60.49；官方未披露完整推理与硬件条件。本站未复现。",
+      "sourceUrl": "https://huggingface.co/blog/nvidia/nemotron-retriever-world-class-agentic-retrieval",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "reranking",
+      "publisher": "NVIDIA",
+      "externalModelId": "nvidia/Nemotron-3.5-Rerank-8B-BF16",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方给出的是特定榜单快照，未披露完整推理条件；不与不同榜单或不同候选集的结果直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/blog/nvidia/nemotron-retriever-world-class-agentic-retrieval",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "nvidia",
+        "runId": "nemotron-3-5-rerank-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "reranking",
+      "status": "official-only",
+      "summary": "官方给出ViDoRe v3.1图文混合重排nDCG@10 60.49，并称截至2026-10-20排名第一；属于厂商自测的榜单快照。",
+      "strengths": [
+        "支持文本与文档图像的多模态重排",
+        "32K上下文与多语言覆盖"
+      ],
+      "limitations": [
+        "8.38B体量大，部署成本高",
+        "榜单成绩不能外推到任意候选集",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "vidore-v3-1-ndcg10"
+      ]
+    }
+  ]
+}

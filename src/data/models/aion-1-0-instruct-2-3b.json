@@ -1,0 +1,115 @@
+{
+  "id": "aion-1-0-instruct-2-3b",
+  "name": "Microsoft Aion 1.0 Instruct 2.3B",
+  "family": "Aion",
+  "version": "1.0",
+  "releaseDate": "2026-11-19",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 2.29,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方约2.29B（输入输出嵌入绑定）；HF safetensors合计2,288,831,488。",
+    "sourceUrl": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+  },
+  "context": {
+    "nativeTokens": 32768,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B"
+  },
+  "languages": [
+    "英语",
+    "德语",
+    "西班牙语",
+    "葡萄牙语",
+    "意大利语",
+    "法语",
+    "中文",
+    "日语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "微软公开模型卡、使用边界与部分评测；未公开完整训练数据清单。"
+  },
+  "summary": "微软Windows与Edge的2.3B端侧指令模型，面向摘要、改写、指令跟随与结构化输出，替代Phi-4-mini成为浏览器内置小模型。",
+  "features": [
+    "2.3B参数、32K上下文、MIT许可",
+    "微软Edge内置小模型，替代Phi-4-mini",
+    "支持8种语言，面向Windows/Edge端侧任务",
+    "官方提供Transformers、ONNX与GGUF路线"
+  ],
+  "limitations": [
+    "定位为端侧通用小模型，复杂多步推理能力有限",
+    "官方评测以内部任务为主，未披露完整基准条件",
+    "Windows/Edge集成能力不等同于任意平台开箱可用",
+    "本站未实测端侧延迟或结构化输出稳定性"
+  ],
+  "officialUrl": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+      "sourceUrl": "https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未导入Aion 1.0 Instruct可复核的官方聚合评测成绩；官方以目标任务对比为主，暂不据此判断通用文本生成能力。",
+      "strengths": [],
+      "limitations": [
+        "官方未给出完整公开基准表与测试条件",
+        "模型面向Windows/Edge端侧任务，通用能力需另行验证",
+        "本站未复现摘要、改写或结构化输出"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

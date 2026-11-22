@@ -1,0 +1,107 @@
+{
+  "id": "zonos3-mini",
+  "name": "ZONOS3-Mini",
+  "family": "ZONOS",
+  "version": "3",
+  "releaseDate": "2026-11-09",
+  "variant": "specialized",
+  "tasks": [
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.8,
+    "activeB": 0.1,
+    "effectiveB": null,
+    "notes": "官方标注800M总参数、约100M激活参数（latent MoE，64 experts、top-2路由）。",
+    "sourceUrl": "https://huggingface.co/Zyphra/ZONOS3-Mini"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称43种，含中文、日语、韩语、英语等）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方公开架构与训练概述；未公开完整数据清单。"
+  },
+  "summary": "Zyphra的800M总参/100M激活MoE TTS模型，支持43种语言与零样本声音克隆，面向手机和浏览器实时合成。",
+  "features": [
+    "800M总参数、约100M激活参数",
+    "支持43种语言与零样本声音克隆",
+    "官方提供WebGPU、GGML、vLLM与SGLang运行时",
+    "Apache-2.0，官方称Pixel 9浏览器首包低于570ms"
+  ],
+  "limitations": [
+    "总参数与激活参数不同，不能按100M模型估算全部内存",
+    "43种语言的实际质量未逐语种披露",
+    "官方延迟与音质为厂商自测",
+    "本站未实测浏览器或手机实时合成"
+  ],
+  "officialUrl": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-pytorch",
+      "runtime": "PyTorch",
+      "systems": [],
+      "format": "PyTorch / WebGPU",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+      "sourceUrl": "https://huggingface.co/Zyphra/ZONOS3-Mini",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "insufficient",
+      "summary": "本轮未导入ZONOS3-Mini可复核的独立音质评测；官方以主观试听与延迟数据为主，暂不据宣传性数字判断音质。",
+      "strengths": [],
+      "limitations": [
+        "官方音质与延迟为厂商自测",
+        "43种语言未逐语种给出质量数据",
+        "本站未做同条件听测"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

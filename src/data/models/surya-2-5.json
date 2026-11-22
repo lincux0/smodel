@@ -1,0 +1,204 @@
+{
+  "id": "surya-2-5",
+  "name": "Surya 2.5",
+  "family": "Surya",
+  "version": "2.5",
+  "releaseDate": "2026-10-29",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.689,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注689M参数；HF safetensors合计689,356,864。",
+    "sourceUrl": "https://huggingface.co/datalab-to/surya-ocr-2.5"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称支持91种语言）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "修改版 OpenRAIL-M",
+      "url": "https://huggingface.co/datalab-to/surya-ocr-2.5/blob/main/LICENSE"
+    },
+    "code": null,
+    "trainingDisclosure": "Datalab公开训练与评测概述；未公开完整逐样本清单。"
+  },
+  "summary": "Datalab的689M文档OCR模型，支持91种语言、表格HTML与版面分析，官方称OmniParseBench 85.9、1.7倍提速。",
+  "features": [
+    "689M参数，官方称OmniParseBench 85.9（1B以下最高）",
+    "官方称相对Surya 2提速1.7倍，循环率降至0.1%",
+    "支持91种语言与表格HTML输出",
+    "代码Apache-2.0，模型权重为修改版OpenRAIL-M"
+  ],
+  "limitations": [
+    "不返回表格行列坐标，表格几何需Surya 2检查点",
+    "旧扫描、阿拉伯语等困难页面仍较弱",
+    "权重许可对商业规模有限制，需单独确认",
+    "本站未实测91种语言或复杂表格"
+  ],
+  "officialUrl": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-surya-ocr",
+      "runtime": "surya-ocr",
+      "systems": [],
+      "format": "PyTorch",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+      "sourceUrl": "https://huggingface.co/datalab-to/surya-ocr-2.5",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "surya-ocr"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "omniparsebench",
+      "benchmark": "OmniParseBench",
+      "dataset": "2,937页、92种语言",
+      "language": "多语言",
+      "metric": "OmniParseBench headline",
+      "value": 85.9,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Surya 2.5官方博客（2026-10-29）",
+      "settings": "Datalab自测；2,937页、16,288项测试，192 DPI，surya-ocr 0.23.0，完整页面重生成；官方未披露全部推理与硬件条件。本站未复现。",
+      "sourceUrl": "https://www.datalab.to/blog/surya-2-5",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "Datalab",
+      "externalModelId": "datalab-to/surya-ocr-2.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方给出的是自有基准总分，未披露逐语言、逐版面完整条件；不与不同解析流水线直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://www.datalab.to/blog/surya-2-5",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "datalab",
+        "runId": "surya-2-5-official-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "olmocr-bench",
+      "benchmark": "olmOCR-bench",
+      "dataset": "olmOCR-bench",
+      "language": "en",
+      "metric": "score",
+      "value": 83.7,
+      "unit": "分（0–100）",
+      "direction": "higher",
+      "version": "Surya 2.5官方博客（2026-10-29）",
+      "settings": "Datalab自测；olmOCR-bench总分83.7；官方未披露完整解码与硬件条件。本站未复现。",
+      "sourceUrl": "https://www.datalab.to/blog/surya-2-5",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "ocr",
+      "publisher": "Datalab",
+      "externalModelId": "datalab-to/surya-ocr-2.5",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出总分，未披露逐文档类型条件；不与不同解析流水线直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://www.datalab.to/blog/surya-2-5",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "datalab",
+        "runId": "surya-2-5-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "official-only",
+      "summary": "官方给出OmniParseBench 85.9与olmOCR-bench 83.7，并称在1B以下开放OCR中领先、速度提升1.7倍；均为厂商自测。",
+      "strengths": [
+        "同时报告自有基准与olmOCR-bench，便于交叉参考",
+        "支持91种语言与表格HTML"
+      ],
+      "limitations": [
+        "权重为修改版OpenRAIL-M，商用需确认规模条款",
+        "不返回表格行列坐标",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "omniparsebench",
+        "olmocr-bench"
+      ]
+    }
+  ]
+}

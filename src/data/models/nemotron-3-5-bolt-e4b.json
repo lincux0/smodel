@@ -1,0 +1,109 @@
+{
+  "id": "nemotron-3-5-bolt-e4b",
+  "name": "NVIDIA Nemotron 3.5 Bolt E4B",
+  "family": "Nemotron",
+  "version": "3.5",
+  "releaseDate": "2026-10-23",
+  "variant": "instruct",
+  "tasks": [
+    "text-generation"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 8.0,
+    "activeB": null,
+    "effectiveB": 4.0,
+    "notes": "官方标注总参数8B、有效参数4B；HF safetensors合计7,996,156,490（约8.0B）；基于Gemma 4 E4B后训练。",
+    "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16"
+  },
+  "context": {
+    "nativeTokens": 65536,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "documented",
+    "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16"
+  },
+  "languages": [
+    "多语言（官方称35种，含英语、中文、日语等）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "OpenMDW-1.1",
+      "url": "https://openmdw.ai/license/1-1/"
+    },
+    "code": null,
+    "trainingDisclosure": "NVIDIA公开后训练流程与数据截止日期（2026-05），基于Gemma 4 E4B；未公开完整逐样本数据。"
+  },
+  "summary": "NVIDIA基于Gemma 4 E4B后训练的端侧对话模型，总参数8B、有效参数4B，面向本地语音/设备代理与多轮工具调用。",
+  "features": [
+    "总参数8B、有效参数4B，官方目标是在约4GB负载内运行",
+    "64K输入/输出上下文，支持多轮工具调用与可配置推理",
+    "官方提供BF16与GGUF检查点，以及DFlash草稿模型",
+    "支持35种语言，强调低首包延迟"
+  ],
+  "limitations": [
+    "4B为有效参数，不是稠密总参数；不能按4B模型估算全部内存",
+    "约4GB是目标工作负载，不是完整运行时或全部上下文的内存保证",
+    "官方质量与速度数据为厂商自测，未披露完整测试条件",
+    "OpenMDW-1.1含使用条款，商用前需阅读原文"
+  ],
+  "officialUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+      "sourceUrl": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "accelerate"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-generation",
+      "status": "insufficient",
+      "summary": "本轮未导入Nemotron 3.5 Bolt E4B可复核的官方聚合评测成绩；官方以对比图和相对提升描述为主，暂不据此判断绝对能力。",
+      "strengths": [],
+      "limitations": [
+        "官方未给出可机器读取的完整基准表",
+        "总参数与有效参数口径不同，跨模型比较需谨慎",
+        "本站未复现对话、工具调用或多语言表现"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

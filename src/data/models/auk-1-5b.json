@@ -1,0 +1,109 @@
+{
+  "id": "auk-1-5b",
+  "name": "Hunyuan AuK 1.5B",
+  "family": "AuK",
+  "version": "1.5",
+  "releaseDate": "2026-09-09",
+  "variant": "specialized",
+  "tasks": [
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text",
+      "audio"
+    ],
+    "output": [
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注1.5B语音生成与编辑基础模型；AuK-Flash为蒸馏加速版。",
+    "sourceUrl": "https://huggingface.co/tencent/AuK"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方卡未列完整清单）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit"
+    },
+    "code": null,
+    "trainingDisclosure": "腾讯公开技术报告与任务说明；未公开完整逐样本清单。"
+  },
+  "summary": "腾讯混元的1.5B语音生成与编辑基础模型，支持零样本/指令TTS、内容与声学编辑以及副语言编辑。",
+  "features": [
+    "1.5B语音生成与编辑基础模型",
+    "统一自然语言指令接口，覆盖TTS、语音增强、源分离等任务",
+    "支持零样本声音克隆与内容/声学/副语言编辑",
+    "MIT许可，另提供AuK-Flash蒸馏加速版"
+  ],
+  "limitations": [
+    "语言覆盖未在模型卡中完整列出",
+    "语音编辑质量与源音频质量强相关",
+    "官方演示与评测为厂商自测",
+    "本站未实测生成或编辑效果"
+  ],
+  "officialUrl": "https://huggingface.co/tencent/AuK",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-pytorch",
+      "runtime": "PyTorch",
+      "systems": [],
+      "format": "PyTorch checkpoint",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/tencent/AuK",
+      "sourceUrl": "https://huggingface.co/tencent/AuK",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch",
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "insufficient",
+      "summary": "本轮未导入Hunyuan AuK可复核的独立音质评测；官方以任务演示与厂商评测为主，暂不据宣传性数字判断音质。",
+      "strengths": [],
+      "limitations": [
+        "官方音质与编辑效果为厂商自测",
+        "语言覆盖未完整披露",
+        "本站未做同条件听测或编辑复现"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

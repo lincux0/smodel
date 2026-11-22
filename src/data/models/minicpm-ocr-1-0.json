@@ -1,0 +1,113 @@
+{
+  "id": "minicpm-ocr-1-0",
+  "name": "MiniCPM-OCR 1.0",
+  "family": "MiniCPM OCR",
+  "version": "1.0",
+  "releaseDate": "2026-10-28",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.3,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注1.3B参数；HF safetensors合计1,300,434,160。",
+    "sourceUrl": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "中文",
+    "英语"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": {
+      "name": "Apache-2.0",
+      "url": "https://github.com/OpenBMB/MiniCPM-OCR/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "OpenBMB公开模型架构、数据与评测概述；未公开完整逐样本清单。"
+  },
+  "summary": "OpenBMB的1.3B文档解析模型，面向中英文扫描件、照片、弯曲/倾斜页面与表格/公式识别，并配套2B的Jev质量判定模型。",
+  "features": [
+    "1.3B参数，基于SigLIP视觉编码器与Qwen3.5语言模型",
+    "支持中英文文档、扫描件、照片、弯曲与倾斜页面",
+    "支持文本、公式、表格与版面元素解析",
+    "配套MiniCPM-OCR Jev（2B）对解析结果做质量判定"
+  ],
+  "limitations": [
+    "主要语言为中文和英语，其他语种需验证",
+    "Jev为独立2B模型，部署时需额外资源",
+    "官方SOTA表述基于厂商评测，未披露完整条件",
+    "本站未实测复杂版面或手写文档"
+  ],
+  "officialUrl": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+      "sourceUrl": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "insufficient",
+      "summary": "本轮未导入MiniCPM-OCR 1.0可复核的完整官方解析成绩；官方以基准对比与示例展示为主，暂不据宣传性SOTA表述判断解析质量。",
+      "strengths": [],
+      "limitations": [
+        "官方评测条件与逐项分数未完整披露",
+        "中英文以外的语种需自行验证",
+        "本站未实测弯曲、倾斜或手写页面"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

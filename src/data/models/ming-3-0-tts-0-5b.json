@@ -1,0 +1,119 @@
+{
+  "id": "ming-3-0-tts-0-5b",
+  "name": "Ming 3.0 TTS 0.5B",
+  "family": "Ming",
+  "version": "3.0",
+  "releaseDate": "2026-10-19",
+  "variant": "specialized",
+  "tasks": [
+    "text-to-speech"
+  ],
+  "modalities": {
+    "input": [
+      "text"
+    ],
+    "output": [
+      "audio"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.5,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注0.5B稠密骨干；HF safetensors合计约1.48B，口径差异待核实。",
+    "sourceUrl": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "中文",
+    "英语",
+    "德语",
+    "西班牙语",
+    "法语",
+    "韩语",
+    "日语",
+    "粤语",
+    "四川话"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/mit"
+    },
+    "code": {
+      "name": "MIT",
+      "url": "https://github.com/inclusionAI/Ming-3.0-tts/blob/main/LICENSE"
+    },
+    "trainingDisclosure": "官方公开模型架构、任务与评测；未公开完整训练数据清单。"
+  },
+  "summary": "蚂蚁百灵Ming-3.0的0.5B多语种TTS模型，支持自然语言音色设计、声音克隆、情感与韵律控制。",
+  "features": [
+    "0.5B稠密骨干，另有7.9B-A1.3B的tiny MoE版本",
+    "支持自然语言音色设计、参考音频克隆与14种副语言标签",
+    "覆盖7种语言及粤语、四川话等中文方言",
+    "MIT许可，提供推理代码与任务cookbook"
+  ],
+  "limitations": [
+    "0.5B骨干与HF检查点约1.48B的差异需按官方说明核实",
+    "官方音质与可控性为厂商自测，未做独立听测",
+    "长文本、多人对话与方言质量需目标场景验证",
+    "本站未下载权重或试听"
+  ],
+  "officialUrl": "https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-pytorch",
+      "runtime": "PyTorch",
+      "systems": [],
+      "format": "PyTorch checkpoint",
+      "quantization": null,
+      "downloadUrl": "https://github.com/inclusionAI/Ming-3.0-tts",
+      "sourceUrl": "https://github.com/inclusionAI/Ming-3.0-tts",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "torch",
+        "transformers"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "text-to-speech",
+      "status": "insufficient",
+      "summary": "本轮未导入Ming 3.0 TTS可复核的独立音质评测；Artificial Analysis成绩按本站规范仅链接、不导入，暂不据宣传性排名判断音质。",
+      "strengths": [],
+      "limitations": [
+        "官方音质与可控性为厂商自测",
+        "0.5B骨干与检查点参数口径存在差异",
+        "本站未做同条件听测或MOS复现"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

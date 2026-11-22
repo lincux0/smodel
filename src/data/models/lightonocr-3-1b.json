@@ -1,0 +1,109 @@
+{
+  "id": "lightonocr-3-1b",
+  "name": "LightOnOCR-3 1B",
+  "family": "LightOnOCR",
+  "version": "3",
+  "releaseDate": "2026-10-08",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 1.0,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注1B参数；HF safetensors合计1,005,647,872。",
+    "sourceUrl": "https://huggingface.co/lightonai/LightOnOCR-3-1B"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称支持多语种文档）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "LightOn公开三档模型、架构与评测；未公开完整逐样本清单。"
+  },
+  "summary": "LightOnOCR-3的1B文档OCR与版面提取模型，支持纯转写与grounding两种模式，可输出边界框、图像描述与图表数据。",
+  "features": [
+    "0.8B/1B/4B三档，均Apache-2.0",
+    "1B沿用LightOnOCR-2-1B架构，0.8B/4B采用Qwen3.5-VL架构",
+    "grounding模式输出带标签的边界框、图像描述与图表表格",
+    "支持Transformers与vLLM部署"
+  ],
+  "limitations": [
+    "1B不是最新架构，速度/精度取舍需与0.8B/4B对比",
+    "官方未给出完整逐语言、逐版面成绩",
+    "grounding输出比纯转写多约25% token",
+    "本站未实测复杂文档"
+  ],
+  "officialUrl": "https://huggingface.co/lightonai/LightOnOCR-3-1B",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/lightonai/LightOnOCR-3-1B",
+      "sourceUrl": "https://huggingface.co/lightonai/LightOnOCR-3-1B",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "insufficient",
+      "summary": "本轮未导入LightOnOCR-3 1B可复核的完整官方解析成绩；官方以对比图和示例为主，暂不据宣传性数字判断解析质量。",
+      "strengths": [],
+      "limitations": [
+        "官方未给出完整逐语言与逐版面成绩",
+        "1B与0.8B/4B架构不同，不能直接套用同档结论",
+        "本站未实测表格、图表或低质量扫描件"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}

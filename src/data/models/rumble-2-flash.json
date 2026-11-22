@@ -1,0 +1,205 @@
+{
+  "id": "rumble-2-flash",
+  "name": "Rumble-2-Flash",
+  "family": "Rumble",
+  "version": "2",
+  "releaseDate": "2026-11-18",
+  "variant": "specialized",
+  "tasks": [
+    "speech-recognition"
+  ],
+  "modalities": {
+    "input": [
+      "audio"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.51,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "HF safetensors合计508,631,552（约0.51B）；官方按0.5B档位发布。",
+    "sourceUrl": "https://huggingface.co/Reson8/Rumble-2-Flash"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-applicable",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称40+种；评测含中文、德语、法语、意大利语、西班牙语、葡萄牙语、印地语、荷兰语、英语）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "Apache-2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "code": null,
+    "trainingDisclosure": "官方博客公开训练与评测概述；未公开完整数据清单。"
+  },
+  "summary": "0.5B多语种语音识别模型，支持40+语言、自动语言检测与输出格式控制，强调高吞吐和电话录音场景。",
+  "features": [
+    "0.51B参数，官方称覆盖40+语言",
+    "支持数字/单词、填充词、逐字重复与强制语言等输出控制",
+    "官方称批处理吞吐超过7,000 RTFx",
+    "Apache-2.0，Transformers与vLLM原生支持"
+  ],
+  "limitations": [
+    "官方未明确说明流式能力，本条不把实时转写作为已核实能力",
+    "0.5B规模在口音、噪声与专业术语上仍需目标场景验证",
+    "官方WER为厂商自测，未披露完整解码与音频条件",
+    "本站未实测电话录音或批处理吞吐"
+  ],
+  "officialUrl": "https://huggingface.co/Reson8/Rumble-2-Flash",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/Reson8/Rumble-2-Flash",
+      "sourceUrl": "https://huggingface.co/Reson8/Rumble-2-Flash",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "ml-wer",
+      "benchmark": "Open ASR Leaderboard (multilingual)",
+      "dataset": "中文、德语、法语、意大利语、西班牙语、葡萄牙语、印地语、荷兰语、英语平均",
+      "language": "多语言",
+      "metric": "WER",
+      "value": 6.96,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方结果（2026-11-18）",
+      "settings": "Reson8自测；Open ASR Leaderboard多语种9种语言平均WER；官方未披露逐语言、解码与音频预处理条件。本站未复现。",
+      "sourceUrl": "https://huggingface.co/blog/rumble-2-flash",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Reson8",
+      "externalModelId": "Reson8/Rumble-2-Flash",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出多语种聚合WER，未披露逐语言条件；不与不同榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/blog/rumble-2-flash",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "reson8",
+        "runId": "rumble-2-flash-official-2026",
+        "independence": "first-party"
+      }
+    },
+    {
+      "id": "en-wer",
+      "benchmark": "Open ASR Leaderboard (English)",
+      "dataset": "Open ASR Leaderboard English track",
+      "language": "en",
+      "metric": "WER",
+      "value": 6.6,
+      "unit": "%",
+      "direction": "lower",
+      "version": "官方结果（2026-11-18）",
+      "settings": "Reson8自测；Open ASR Leaderboard英语轨道平均WER；官方未披露逐测试集、解码与音频预处理条件。本站未复现。",
+      "sourceUrl": "https://huggingface.co/blog/rumble-2-flash",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Reson8",
+      "externalModelId": "Reson8/Rumble-2-Flash",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "官方仅给出英语轨道聚合WER，未披露逐测试集条件；不与不同榜单快照直接排名。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://huggingface.co/blog/rumble-2-flash",
+        "notes": "仅摘录官方发布的少量聚合评测事实并署名链接，不复制整表或基准数据。"
+      },
+      "provenance": {
+        "sourceId": "reson8",
+        "runId": "rumble-2-flash-official-2026",
+        "independence": "first-party"
+      }
+    }
+  ],
+  "assessments": [
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "官方给出多语种平均WER 6.96%、英语平均WER 6.6%，并称电话录音表现接近30B Nemotron 3.5 Transcribe；均为厂商自测。",
+      "strengths": [
+        "0.5B规模下覆盖40+语言，吞吐与部署成本有优势",
+        "输出控制选项适合转写后处理"
+      ],
+      "limitations": [
+        "流式能力未在卡中明确",
+        "电话录音对比为厂商自测，未披露完整脚本",
+        "本站未复现"
+      ],
+      "evidenceIds": [
+        "ml-wer",
+        "en-wer"
+      ]
+    }
+  ]
+}

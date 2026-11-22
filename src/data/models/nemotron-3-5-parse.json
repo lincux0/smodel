@@ -1,0 +1,108 @@
+{
+  "id": "nemotron-3-5-parse",
+  "name": "Nemotron 3.5 Parse",
+  "family": "Nemotron",
+  "version": "3.5",
+  "releaseDate": "2026-10-17",
+  "variant": "specialized",
+  "tasks": [
+    "ocr"
+  ],
+  "modalities": {
+    "input": [
+      "image"
+    ],
+    "output": [
+      "text"
+    ]
+  },
+  "parameters": {
+    "totalB": 0.631,
+    "activeB": null,
+    "effectiveB": null,
+    "notes": "官方标注630,800,496个唯一可训练参数（约0.631B），包含MTP头；共享词嵌入/输出权重只计一次。",
+    "sourceUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Parse"
+  },
+  "context": {
+    "nativeTokens": null,
+    "extendedTokens": null,
+    "extension": null,
+    "status": "not-provided",
+    "sourceUrl": null
+  },
+  "languages": [
+    "多语言（官方称支持多语种页面，tokenizer约72,505项）"
+  ],
+  "licenses": {
+    "weights": {
+      "name": "OpenMDW-1.1",
+      "url": "https://openmdw.ai/license/1-1/"
+    },
+    "code": null,
+    "trainingDisclosure": "NVIDIA公开模型架构与评测；未公开完整逐样本清单。"
+  },
+  "summary": "NVIDIA的631M文档图像解析模型，输出结构化文本、语义版面、阅读顺序、表格/图表数据与边界框。",
+  "features": [
+    "631M参数，C-RADIOv4-SO400M视觉编码器加10层mBART解码器",
+    "输出文本、表格、图表数据、阅读顺序与边界框",
+    "支持动态矩形NaViT预处理与多语种tokenizer",
+    "可选89.3M MTP头与DFlash2投机解码"
+  ],
+  "limitations": [
+    "631M规模在复杂手写、低质量扫描与密集表格上仍需验证",
+    "官方评测为厂商自测，未披露完整条件",
+    "本站未实测多语种页面或图表解析"
+  ],
+  "officialUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Parse",
+  "checkedAt": "2026-11-22",
+  "deployments": [
+    {
+      "id": "official-transformers",
+      "runtime": "Transformers",
+      "systems": [],
+      "format": "Safetensors",
+      "quantization": null,
+      "downloadUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Parse",
+      "sourceUrl": "https://huggingface.co/nvidia/Nemotron-3.5-Parse",
+      "guideId": "official-quickstart",
+      "dependencies": [
+        "transformers",
+        "torch",
+        "pillow"
+      ],
+      "steps": [
+        {
+          "title": "按官方模型卡准备运行环境",
+          "description": "打开部署来源，按官方安装与加载示例配置依赖并运行；本站未下载权重或执行模型，需在目标设备验证。",
+          "command": null
+        }
+      ],
+      "hardware": {
+        "status": "not-verified",
+        "notes": "本站未实测；内存、显存和速度取决于运行时、精度、量化与输入长度，不将参数量或文件大小换算为资源保证。",
+        "ramGb": null,
+        "vramGb": null,
+        "sourceUrl": null
+      },
+      "verification": {
+        "status": "official-supported",
+        "verifiedAt": null
+      }
+    }
+  ],
+  "evaluations": [],
+  "assessments": [
+    {
+      "task": "ocr",
+      "status": "insufficient",
+      "summary": "本轮未导入Nemotron 3.5 Parse可复核的完整官方解析成绩；官方以基准对比与示例为主，暂不据宣传性数字判断解析质量。",
+      "strengths": [],
+      "limitations": [
+        "官方未给出完整逐语言、逐版面成绩",
+        "631M规模的能力边界需目标文档验证",
+        "本站未实测表格、图表或多语种页面"
+      ],
+      "evidenceIds": []
+    }
+  ]
+}
