@@ -25,7 +25,7 @@ GitHub 仓库：[lincux0/smodel](https://github.com/lincux0/smodel)。
 git clone https://github.com/lincux0/smodel.git
 ```
 
-可通过仓库提交 Issue 或 Pull Request；提交前请阅读[贡献指南](CONTRIBUTING.md)、[内容维护指南](docs/CONTENT_GUIDE.md)和[来源记录](docs/SOURCES.md)。模型详情中的“获取权重”链接会打开官方来源；仓库仅保存目录数据和说明，不包含模型权重。也可从[网站贡献页](https://smodel.vercel.app/contribute/)下载0.1.0源码包及SHA256摘要。
+可通过仓库提交 Issue 或 Pull Request；提交前请阅读[贡献指南](CONTRIBUTING.md)、[内容维护指南](docs/CONTENT_GUIDE.md)和[来源记录](docs/SOURCES.md)。模型详情中的“获取权重”链接会打开官方来源；仓库仅保存目录数据和说明，不包含模型权重。也可从[网站贡献页](https://smodel.vercel.app/contribute/)下载0.1.0源码包及SHA256摘要；该包是包含21个模型的历史快照，最新源码以GitHub仓库为准。
 
 ## 许可
 
