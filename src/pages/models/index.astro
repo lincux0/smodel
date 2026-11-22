@@ -29,15 +29,7 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
     <label class="catalog-search"><span class="filter-label">搜索模型</span><input type="search" data-query="q" placeholder="名称、系列或用途" autocomplete="off" maxlength="120"></label>
     <div class="catalog-filter-grid" aria-label="组合筛选">
       <CatalogSelect label="用途" name="task" options={[{ value: 'all', label: '全部用途' }, ...taskCounts.map(({ id, label }) => ({ value: id, label }))]} />
-      <div class="size-range" role="group" aria-labelledby="size-range-label">
-        <span class="filter-label" id="size-range-label">参数规模</span>
-        <div class="size-slider">
-          <span class="size-slider-fill" data-size-fill aria-hidden="true"></span>
-          <input class="size-slider-input" type="range" data-query="sizeMin" min="0" max={sizeSliderMax} step="0.1" value="0" aria-label="最小参数规模（B）">
-          <input class="size-slider-input" type="range" data-query="sizeMax" min="0" max={sizeSliderMax} step="0.1" value={sizeSliderMax} aria-label="最大参数规模（B）">
-        </div>
-        <div class="size-slider-values" aria-hidden="true"><span data-size-min-value>0B</span><span>–</span><span data-size-max-value>{sizeSliderMax}B</span></div>
-      </div>
+      <CatalogSelect label="模型家族" name="family" options={[{ value: 'all', label: '全部家族' }, ...familyOptions.map((family) => ({ value: family, label: family }))]} />
       <CatalogSelect label="排序方式" name="sort" options={[{ value: 'released', label: '发布日期' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模' }]} />
       <button class="advanced-filter-trigger" type="button" data-advanced-open aria-haspopup="dialog">进阶筛选条件<span data-advanced-count></span></button>
     </div>
@@ -48,11 +40,19 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
       <button class="advanced-close" type="button" data-advanced-close aria-label="关闭进阶筛选">关闭</button>
     </div>
     <div class="advanced-fields">
-      <CatalogSelect label="模型家族" name="family" options={[{ value: 'all', label: '全部家族' }, ...familyOptions.map((family) => ({ value: family, label: family }))]} />
+      <div class="size-range" role="group" aria-labelledby="size-range-label">
+        <span class="filter-label" id="size-range-label">参数规模</span>
+        <div class="size-slider">
+          <span class="size-slider-fill" data-size-fill aria-hidden="true"></span>
+          <input class="size-slider-input" type="range" data-query="sizeMin" min="0" max={sizeSliderMax} step="0.1" value="0" aria-label="最小参数规模（B）">
+          <input class="size-slider-input" type="range" data-query="sizeMax" min="0" max={sizeSliderMax} step="0.1" value={sizeSliderMax} aria-label="最大参数规模（B）">
+        </div>
+        <div class="size-slider-values" aria-hidden="true"><span data-size-min-value>0B</span><span>–</span><span data-size-max-value>{sizeSliderMax}B</span></div>
+      </div>
       <CatalogSelect label="权重许可" name="license" options={[{ value: 'all', label: '全部许可' }, ...licenseOptions.map((license) => ({ value: license, label: license }))]} />
       <CatalogSelect label="部署运行时" name="runtime" options={[{ value: 'all', label: '全部运行时' }, ...runtimeOptions.map((runtime) => ({ value: runtime, label: runtime }))]} />
     </div>
-    <p class="muted">筛选会立即应用，并写入可分享链接；参数规模在主工具栏按 0.1B 范围设置。</p>
+    <p class="muted">参数规模、权重许可和部署运行时会立即应用，并写入可分享链接。</p>
     <div class="advanced-actions">
       <button class="advanced-reset" type="button" data-advanced-reset>清空进阶条件</button>
       <button class="button" type="button" data-advanced-done>完成</button>
@@ -72,9 +72,13 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
   const count = document.querySelector<HTMLElement>('[data-advanced-count]');
   if (dialog && trigger) {
     const selects = [...dialog.querySelectorAll<HTMLSelectElement>('select[data-query]')];
+    const sizeInputs = [...dialog.querySelectorAll<HTMLInputElement>('input[type="range"][data-query^="size"]')];
     const syncCount = () => {
       if (!count) return;
-      const active = selects.filter((select) => select.value !== 'all').length;
+      const activeSelects = selects.filter((select) => select.value !== 'all').length;
+      const sizeActive = sizeInputs.length === 2
+        && (sizeInputs[0].value !== sizeInputs[0].min || sizeInputs[1].value !== sizeInputs[1].max);
+      const active = activeSelects + (sizeActive ? 1 : 0);
       count.textContent = active ? `（${active}）` : '';
     };
     trigger.addEventListener('click', () => {
@@ -87,11 +91,16 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
       if (event.target === dialog) dialog.close();
     });
     selects.forEach((select) => select.addEventListener('change', syncCount));
+    sizeInputs.forEach((input) => input.addEventListener('input', syncCount));
     document.addEventListener('catalog:sync', syncCount, true);
     dialog.querySelector<HTMLButtonElement>('[data-advanced-reset]')?.addEventListener('click', () => {
       for (const select of selects) {
         select.value = 'all';
         select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      for (const input of sizeInputs) {
+        input.value = input.dataset.query === 'sizeMin' ? input.min : input.max;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
       }
       syncCount();
     });
@@ -161,7 +170,8 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
   .advanced-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
   .advanced-dialog-head h2 { margin: 4px 0 0; font-size: 24px; }
   .advanced-close { min-height: 44px; padding: 8px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; }
-  .advanced-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-block: 22px 16px; }
+  .advanced-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-block: 22px 16px; }
+  .advanced-fields .size-range { grid-column: 1 / -1; }
   .advanced-dialog > .muted { font-size: 12px; }
   .advanced-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
   .advanced-reset { min-height: 44px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--accent); cursor: pointer; font-size: 12px; }
@@ -169,6 +179,7 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
     .catalog-tools { grid-template-columns: 1fr; }
     .catalog-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .advanced-fields { grid-template-columns: 1fr; }
+    .advanced-fields .size-range { grid-column: auto; }
     .advanced-fields .sort-control { display: grid; align-items: initial; }
     .advanced-fields .sort-control .filter-label { margin: 0; }
   }
