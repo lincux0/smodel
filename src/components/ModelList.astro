@@ -9,7 +9,7 @@ const { models, interactive = false } = Astro.props;
   {interactive && <p data-selection-error role="status" aria-live="polite" hidden></p>}
   <ul class="model-list">
     {models.map(({ data: model }, index) => (
-      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-checked={model.checkedAt}>
+      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-released={model.releaseDate ?? ''}>
         <div>
           <div class="model-card-top">
             <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
@@ -22,7 +22,7 @@ const { models, interactive = false } = Astro.props;
         <div class="model-facts">
           <span title={model.parameters.notes}>{model.parameters.totalB === null ? '规模未提供' : `公开规模 ${model.parameters.totalB}B`}</span>
           <span>{model.licenses.weights.name}</span>
-          <span>核实于 {model.checkedAt}</span>
+          {model.releaseDate && <span>发布于 {model.releaseDate}</span>}
         </div>
       </li>
     ))}
@@ -140,8 +140,12 @@ const { models, interactive = false } = Astro.props;
             const right = b.dataset.parameters === '' ? null : Number(b.dataset.parameters);
             return left === null ? right === null ? 0 : 1 : right === null ? -1 : left - right;
           }
-          return (b.dataset.checked ?? '').localeCompare(a.dataset.checked ?? '')
-            || (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'zh-CN');
+          const left = a.dataset.released ?? '';
+          const right = b.dataset.released ?? '';
+          if (!left && !right) return (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'zh-CN');
+          if (!left) return 1;
+          if (!right) return -1;
+          return right.localeCompare(left) || (a.dataset.name ?? '').localeCompare(b.dataset.name ?? '', 'zh-CN');
         });
         for (const card of visible) list.append(card);
       });
@@ -205,7 +209,7 @@ const { models, interactive = false } = Astro.props;
       persist(key === 'q' || key === 'sizeMin' || key === 'sizeMax' ? 'replace' : 'push');
     }));
     catalog.querySelector('[data-reset-filters]')?.addEventListener('click', () => {
-      state = { q: '', task: 'all', sizeMin: '', sizeMax: '', license: 'all', runtime: 'all', family: 'all', sort: 'recent' };
+      state = { q: '', task: 'all', sizeMin: '', sizeMax: '', license: 'all', runtime: 'all', family: 'all', sort: 'released' };
       syncControls();
       render();
       persist();

@@ -136,6 +136,7 @@ export const modelSchema = z.object({
   limitations: z.array(text).min(1),
   officialUrl: url,
   checkedAt: date,
+  releaseDate: date.nullable().default(null),
   deployments: z.array(z.object({
     id,
     runtime: text,

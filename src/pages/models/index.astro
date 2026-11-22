@@ -36,7 +36,7 @@ const familyOptions = [...new Set(models.map(({ data }) => data.family))].sort((
           <label><span>最大</span><input type="number" data-query="sizeMax" min="0" step="0.1" inputmode="decimal" placeholder="不限" aria-label="最大参数规模（B）"></label>
         </div>
       </div>
-      <CatalogSelect label="排序方式" name="sort" options={[{ value: 'recent', label: '最近核实' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模' }]} />
+      <CatalogSelect label="排序方式" name="sort" options={[{ value: 'released', label: '发布日期' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模' }]} />
       <button class="advanced-filter-trigger" type="button" data-advanced-open aria-haspopup="dialog">进阶筛选条件<span data-advanced-count></span></button>
     </div>
   </section>

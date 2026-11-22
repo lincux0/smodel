@@ -3,6 +3,7 @@
   "name": "Snowflake Arctic Embed L v2.0",
   "family": "Snowflake Arctic Embed",
   "version": "2.0 (L)",
+  "releaseDate": "2024-12-04",
   "variant": "specialized",
   "tasks": [
     "embedding"

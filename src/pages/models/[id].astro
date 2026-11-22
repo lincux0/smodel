@@ -15,14 +15,16 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', video
   <article class="detail">
     <a class="back-link" href="/models/">返回模型目录</a>
     <header class="intro compact">
-      <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
+      <div class="detail-topbar">
+        <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
+        <div class="copy-group detail-copy">
+          <div class="copy-row"><button class="copy-button" type="button" data-copy data-copy-value={model.officialUrl} data-copy-label="复制官方链接">复制官方链接</button></div>
+          <p class="copy-status" data-copy-status aria-live="polite"></p>
+        </div>
+      </div>
       <h1>{model.name}</h1>
       <p class="lead">{model.summary}</p>
-      <p class="muted">最后核实：<time datetime={model.checkedAt}>{model.checkedAt}</time></p>
-      <div class="copy-group">
-        <div class="copy-row"><button class="copy-button" type="button" data-copy data-copy-value={model.officialUrl} data-copy-label="复制官方链接">复制官方链接</button></div>
-        <p class="copy-status" data-copy-status aria-live="polite"></p>
-      </div>
+      {model.releaseDate && <p class="muted">发布日期：<time datetime={model.releaseDate}>{model.releaseDate}</time></p>}
     </header>
     <section class="detail-section"><h2>特点</h2>
       <ul class="feature-list">{model.features.map((feature) => <li>{feature}</li>)}</ul>
@@ -56,7 +58,7 @@ const modalityLabels = { text: '文本', image: '图像', audio: '音频', video
           {deployment.dependencies.length > 0 && <p>依赖：{deployment.dependencies.join('、')}。</p>}
           <div class="deployment-steps" aria-label="部署步骤">
             {deployment.steps.map((step, index) => (
-              <details class="deployment-step" open={index === 0}>
+              <details class="deployment-step">
                 <summary><span class="model-number">STEP {String(index + 1).padStart(2, '0')}</span>　{step.title}</summary>
                 <div class="step-body">
                   <p>{step.description}</p>

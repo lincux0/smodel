@@ -3,6 +3,7 @@
   "name": "Kokoro-82M",
   "family": "Kokoro",
   "version": "1.0",
+  "releaseDate": "2025-01-27",
   "variant": "specialized",
   "tasks": [
     "text-to-speech"

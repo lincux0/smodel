@@ -3,6 +3,7 @@
   "name": "Granite 4.0 H-1B",
   "family": "Granite",
   "version": "4.0",
+  "releaseDate": "2025-10-28",
   "variant": "instruct",
   "tasks": [
     "text-generation",

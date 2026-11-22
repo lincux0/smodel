@@ -28,6 +28,8 @@
 
 2026-11-22目录与详情调整：页面底色改为 `--page: #f4f5f1`；收录数量左侧竖线移除；参数规模改为 0.1B 步进的最小/最大范围输入，保留旧 `size` 档位 URL 兼容；模型家族、权重许可和部署运行时收进“进阶筛选条件”弹窗，家族筛选复用现有 `family` 元数据；详情页默认只显示“复制官方链接”按钮，移除“使用边界”和“主要特点”二级标题，模型信息表移除分割线，运行条件中的未核实硬件项默认隐藏。内容校验、8 项测试、Astro 检查、117 页构建和 Playwright 验收通过。
 
+2026-11-22 发布日期与详情布局：新增 `releaseDate`，仅显示官方可核实的发布日期，无法确认时不显示；模型卡片移除底部分割线；详情页“复制官方链接”移到顶部标签右侧，简介占满内容宽度，部署步骤默认全部收起；“发布日期”替代模型列表的最后核实日期，排序选项改为发布日期，内部 `checkedAt` 继续保留但不展示。当前 14 个型号有可核实日期，其余保持 `null`。
+
 2026-10-17批次5–7上线：按[计划型号分阶段上线方案](LAUNCH_PLAN.md)上线38个型号（LFM2.5系列9、Qwen2.5/Qwen3.5/Qwen3-VL小档与Qwen3大检索7、Llama/Gemma/经典通用9、InternVL小档2、检索与重排6、语音/OCR 3、Granite 4.0 2），目录110型号、170用途摘要、425条成绩（387官方、38第三方）；新增139条成绩（136官方、3第三方）全部标注不可比，关键数值经抽查与来源核对。NVIDIA Llama-NV-Embed-Reasoning-3B 的权重许可经 LICENSE 原文核实为 CC BY-NC 4.0（HF 元数据标签与许可证不一致，已按原文记录并同步台账）；Jina nano 与 LFM 系列的 CC BY-NC/自定义许可条款已列明。8项Node测试通过，Astro检查0错误/警告/提示，生产构建117页；Playwright验证38个新详情页、目录筛选（向量检索23、视觉20、代码39等）与控制台无错误；测试浏览器与预览进程已关闭。台账已更新（已上线110、计划页29；已上线计数公式范围扩展至第205行）。源码下载包仍为0.1.0历史快照。
 
 2026-10-17批次3–4上线：按[计划型号分阶段上线方案](LAUNCH_PLAN.md)上线21个型号：检索与重排（Jina Embeddings v5 Text Small/v3/v4、Jina Reranker v3/v3.5、LightOn mLateOn、Multilingual-E5-Large、EmbeddingGemma、Snowflake Arctic Embed L/M v2.0、Qwen3-Reranker-4B、Nomic Embed Text v2 MoE、BGE-Large-ZH-v1.5）、视觉理解（InternVL3.5-4B/8B、MiniCPM-V 4.5）、语音识别（SenseVoiceSmall、GLM-ASR-Nano-2512）、文字识别（DeepSeek-OCR 2）与推理蒸馏模型（DeepSeek-R1-Distill-Qwen-1.5B/7B）。目录72型号、112用途摘要、286条成绩（251官方、35第三方）；新增78条成绩（73官方、5第三方）全部标注不可比，关键数值经抽查与来源核对（含GLM-ASR官方基准图读图复核）。Jina Embeddings v4 许可经核实为 Qwen Research License（发布方更正），台账已同步；Jina 系列为非商业许可并已列明条款；SenseVoice/GLM 的权重与代码许可分别记录。8项Node测试通过，Astro检查0错误/警告/提示，生产构建79页；Playwright验证21个新详情页、目录筛选与对比流程、控制台无错误；测试浏览器与预览进程已关闭。台账已更新（已上线72、计划页67）。源码下载包仍为0.1.0历史快照。

@@ -19,7 +19,7 @@ type CatalogQueryOptions = {
 };
 
 const defaults: CatalogQueryState = {
-  q: '', task: 'all', sizeMin: '', sizeMax: '', license: 'all', runtime: 'all', family: 'all', sort: 'recent',
+  q: '', task: 'all', sizeMin: '', sizeMax: '', license: 'all', runtime: 'all', family: 'all', sort: 'released',
 };
 
 const legacySizes: Record<string, [string, string]> = {
@@ -55,7 +55,7 @@ export function parseCatalogQuery(search: string, options: CatalogQueryOptions):
     license: value('license', options.licenses, defaults.license),
     runtime: value('runtime', options.runtimes, defaults.runtime),
     family: value('family', options.families, defaults.family),
-    sort: value('sort', ['recent', 'name', 'size'], defaults.sort),
+    sort: params.get('sort') === 'recent' ? 'released' : value('sort', ['released', 'name', 'size'], defaults.sort),
   };
 }
 

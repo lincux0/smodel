@@ -3,6 +3,7 @@
   "name": "Granite 4.2 8B",
   "family": "Granite",
   "version": "4.2",
+  "releaseDate": "2026-08-25",
   "variant": "instruct",
   "tasks": [
     "text-generation",

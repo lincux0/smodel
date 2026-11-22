@@ -20,6 +20,9 @@ test('真实目录保留未知值，并拒绝重复身份、无效关联和错�
   const invalidDate = structuredClone(sample);
   invalidDate.checkedAt = '2026-02-30';
   assert.throws(() => validateCatalog([invalidDate], guideIds));
+  const invalidRelease = structuredClone(sample);
+  invalidRelease.releaseDate = '2026-02-30';
+  assert.throws(() => validateCatalog([invalidRelease], guideIds));
   const unsafeUrl = structuredClone(sample);
   unsafeUrl.officialUrl = 'javascript:alert(1)';
   assert.throws(() => validateCatalog([unsafeUrl], guideIds));
@@ -156,16 +159,17 @@ test('可比记录只在比较组的基准与测试口径一致时通过', () =>
 test('目录 URL 状态支持规模范围和已知筛选值', () => {
   const options = { tasks: ['coding'], licenses: ['Apache-2.0'], runtimes: ['Transformers'], families: ['Qwen'] };
   const state = parseCatalogQuery('?q=%20Qwen%20%20coder%20&task=unknown&sizeMin=1.55&sizeMax=3&license=Apache-2.0&runtime=Transformers&family=Qwen&sort=invalid', options);
-  assert.deepEqual(state, { q: 'Qwen coder', task: 'all', sizeMin: '1.6', sizeMax: '3', license: 'Apache-2.0', runtime: 'Transformers', family: 'Qwen', sort: 'recent' });
+  assert.deepEqual(state, { q: 'Qwen coder', task: 'all', sizeMin: '1.6', sizeMax: '3', license: 'Apache-2.0', runtime: 'Transformers', family: 'Qwen', sort: 'released' });
   const url = writeCatalogQuery(new URL('https://example.test/models/?ids=qwen-a,qwen-b&task=coding&size=under-1b'), state);
   assert.equal(url.searchParams.get('ids'), 'qwen-a,qwen-b');
   assert.equal(url.searchParams.get('q'), 'Qwen coder');
   assert.equal(url.searchParams.get('sizeMin'), '1.6');
   assert.equal(url.searchParams.get('family'), 'Qwen');
   assert.equal(url.searchParams.has('size'), false);
-  const legacy = parseCatalogQuery('?size=1-3b', options);
+  const legacy = parseCatalogQuery('?size=1-3b&sort=recent', options);
   assert.equal(legacy.sizeMin, '1');
   assert.equal(legacy.sizeMax, '2.9');
+  assert.equal(legacy.sort, 'released');
   const invalid = parseCatalogQuery('?sizeMin=-1&sizeMax=nope&family=missing', options);
   assert.equal(invalid.sizeMin, '');
   assert.equal(invalid.sizeMax, '');

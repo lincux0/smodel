@@ -157,7 +157,7 @@ p { margin-bottom: 14px; }
 .model-list h2 a { color: var(--ink); text-decoration: none; }
 .model-list h2 a::after { position: absolute; inset: 0; content: ''; }
 .model-list li p { max-width: 540px; margin-bottom: 16px; color: var(--ink-soft); font-size: 13px; }
-.model-facts { display: flex; flex-wrap: wrap; gap: 7px; padding-top: 14px; border-top: 1px solid #d9dedb; }
+.model-facts { display: flex; flex-wrap: wrap; gap: 7px; padding-top: 14px; }
 .model-facts span { padding: 5px 8px; background: rgb(255 255 255 / 54%); color: #596360; font-size: 10px; }
 .compare-check { position: relative; z-index: 2; display: inline-flex; min-height: 44px; align-items: center; gap: 7px; padding: 0 4px; color: var(--muted); font-size: 11px; white-space: nowrap; }
 input[type='checkbox'] { appearance: none; display: inline-grid; place-content: center; flex-shrink: 0; width: 17px; height: 17px; margin: 0; border: 1px solid #91a49d; border-radius: 50%; background: var(--paper); cursor: pointer; transition: background var(--duration-fast), border-color var(--duration-fast), box-shadow var(--duration-fast); }
@@ -191,6 +191,13 @@ body.has-compare-tray { padding-bottom: 170px; }
 .detail { max-width: 980px; padding-top: 24px; }
 .detail .intro { padding-block: 40px 56px; }
 .detail .intro h1 { margin-block: 10px 20px; font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
+.detail .intro .lead { max-width: none; }
+.detail-topbar { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.detail-topbar .model-task-tags { min-width: 0; }
+.detail-copy { flex: 0 0 auto; }
+.detail-copy .copy-status { text-align: right; }
+.detail-copy .copy-row { flex-direction: row; }
+.detail-copy .copy-button { width: auto; }
 .detail-section { padding-block: 32px; border-top: 1px solid var(--line); }
 .detail-section > h2 { margin-bottom: 24px; }
 .feature-list { margin: 0; padding-left: 20px; }

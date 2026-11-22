@@ -3,6 +3,7 @@
   "name": "BGE-Large-ZH-v1.5",
   "family": "BGE",
   "version": "Large-ZH-v1.5",
+  "releaseDate": "2023-09-12",
   "variant": "specialized",
   "tasks": [
     "embedding"

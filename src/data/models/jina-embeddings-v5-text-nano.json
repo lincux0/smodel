@@ -3,6 +3,7 @@
   "name": "Jina Embeddings v5 Text Nano",
   "family": "Jina Embeddings",
   "version": "5 Text Nano",
+  "releaseDate": "2026-02-18",
   "variant": "specialized",
   "tasks": [
     "embedding"
