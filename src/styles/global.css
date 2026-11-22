@@ -152,7 +152,7 @@ p { margin-bottom: 14px; }
 :is(.model-task-tag, .task-tile):is([data-task='image-understanding'], [data-task='ocr']) { --task-border: #ddd2e5; --task-bg: #f0eaf4; --task-ink: #665079; }
 :is(.model-task-tag, .task-tile):is([data-task='speech-recognition'], [data-task='text-to-speech']) { --task-border: #e4d8bd; --task-bg: #f4efdf; --task-ink: #75602a; }
 .model-task-tag { padding: 3px 8px; border: 1px solid var(--task-border); border-radius: var(--radius-pill); background: var(--task-bg); color: var(--task-ink); line-height: 1.5; letter-spacing: 0; white-space: nowrap; }
-.model-number { color: #909995; font: 10px var(--mono); }
+.model-number { color: var(--muted); font: 10px var(--mono); }
 .model-list h2 { margin: 0 0 10px; font-size: clamp(18px, 2.1vw, 24px); }
 .model-list h2 a { color: var(--ink); text-decoration: none; }
 .model-list h2 a::after { position: absolute; inset: 0; content: ''; }

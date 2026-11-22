@@ -172,7 +172,7 @@ const { models, interactive = false } = Astro.props;
         const title = document.createElement('strong');
         title.textContent = card.dataset.name ?? '';
         const details = document.createElement('span');
-        details.textContent = `${card.dataset.taskLabels ?? ''} · ${card.dataset.parameters ?? ''} · ${card.dataset.license ?? ''}`;
+        details.textContent = `${card.dataset.taskLabels ?? ''} · ${card.dataset.parameterLabel ?? ''} · ${card.dataset.license ?? ''}`;
         item.append(title, details);
         return item;
       }));
