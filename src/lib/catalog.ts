@@ -183,12 +183,32 @@ export const modelSchema = z.object({
 
 export type Model = z.infer<typeof modelSchema>;
 
+const claimSignature = (evaluation: Model['evaluations'][number]) => JSON.stringify([
+  evaluation.task, evaluation.benchmark, evaluation.dataset, evaluation.language,
+  evaluation.metric, evaluation.unit, evaluation.direction,
+]);
+
+const versionCompatible = (left: Model['evaluations'][number], right: Model['evaluations'][number]) => {
+  const unknown = (version: string) => /未注明|未提供|未单独标注|unknown|not specified/i.test(version);
+  return left.version === right.version || unknown(left.version) || unknown(right.version);
+};
+
 export function validateCatalog(entries: unknown[], guideIds: string[]): Model[] {
   const seen = new Set<string>();
   const guides = new Set(guideIds);
   const comparisonGroups = new Map<string, Model['evaluations']>();
   const models = entries.map((entry) => {
     const model = modelSchema.parse(entry);
+    if (model.modalities.input.includes('audio')
+      && !model.tasks.some((task) => task === 'speech-recognition' || task === 'text-to-speech')) {
+      throw new Error(`${model.id}：音频输入需要语音识别或语音合成用途`);
+    }
+    if (model.modalities.input.includes('video') && !model.tasks.includes('image-understanding')) {
+      throw new Error(`${model.id}：视频输入需要视觉理解用途`);
+    }
+    if (model.modalities.output.includes('audio') && !model.tasks.includes('text-to-speech')) {
+      throw new Error(`${model.id}：音频输出需要语音合成用途`);
+    }
     if (seen.has(model.id)) throw new Error(`重复模型 ID：${model.id}`);
     seen.add(model.id);
     const deployments = new Set<string>();
@@ -242,8 +262,9 @@ export function validateCatalog(entries: unknown[], guideIds: string[]): Model[]
         const verified = references.filter(({ provenance }) => provenance.independence !== 'unknown');
         const independent = verified.filter(({ provenance }) => provenance.independence === 'independent');
         if (!independent.some((left) => verified.some((right) => left.provenance.sourceId !== right.provenance.sourceId
-          && left.provenance.runId !== right.provenance.runId && left.publisher !== right.publisher && left.sourceUrl !== right.sourceUrl))) {
-          throw new Error(`${model.id}：交叉核实需要不同批次、不同评测者且已核实独立性的来源`);
+          && left.provenance.runId !== right.provenance.runId && left.publisher !== right.publisher && left.sourceUrl !== right.sourceUrl
+          && claimSignature(left) === claimSignature(right) && versionCompatible(left, right)))) {
+          throw new Error(`${model.id}：交叉核实需要不同批次、不同评测者且同基准同版本的已核实独立性来源`);
         }
       }
       if (assessment.status === 'single-source' && (!references.length

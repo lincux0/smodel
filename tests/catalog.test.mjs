@@ -31,6 +31,12 @@ test('真实目录保留未知值，并拒绝重复身份、无效关联和错�
   const unsupportedMemory = structuredClone(sample);
   unsupportedMemory.deployments[0].hardware.ramGb = 8;
   assert.throws(() => validateCatalog([unsupportedMemory], guideIds));
+  const audioWithoutSpeech = structuredClone(sample);
+  audioWithoutSpeech.modalities.input.push('audio');
+  assert.throws(() => validateCatalog([audioWithoutSpeech], guideIds), /音频输入/);
+  const videoWithoutVision = structuredClone(sample);
+  videoWithoutVision.modalities.input.push('video');
+  assert.throws(() => validateCatalog([videoWithoutVision], guideIds), /视频输入/);
 });
 
 test('评测 schema 保留空值并校验证据身份、用途与来源关系', () => {
@@ -79,6 +85,9 @@ test('评测 schema 保留空值并校验证据身份、用途与来源关系', 
     provenance: { sourceId: 'independent-lab', runId: 'independent-report', independence: 'independent' } }));
   independent.assessments[0] = { ...independent.assessments[0], status: 'corroborated', evidenceIds: ['sample-result', 'independent-result'] };
   assert.doesNotThrow(() => validateCatalog([independent], guideIds));
+  const differentVersion = structuredClone(independent);
+  differentVersion.evaluations[1].version = 'v2';
+  assert.throws(() => validateCatalog([differentVersion], guideIds), /已核实独立性/);
   independent.evaluations[0].kind = 'third-party';
   independent.evaluations[0].provenance.independence = 'independent';
   assert.doesNotThrow(() => validateCatalog([independent], guideIds));
