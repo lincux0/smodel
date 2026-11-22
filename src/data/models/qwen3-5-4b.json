@@ -12,7 +12,8 @@
   "modalities": {
     "input": [
       "text",
-      "image"
+      "image",
+      "video"
     ],
     "output": [
       "text"
@@ -43,9 +44,9 @@
     "code": null,
     "trainingDisclosure": "官方提供模型卡或技术报告；未公开完整训练数据清单。"
   },
-  "summary": "支持文本生成、编程与图像理解的4B级后训练模型。",
+  "summary": "支持文本生成、编程、图像与视频理解的4B级后训练模型。",
   "features": [
-    "文本与图像输入",
+    "文本、图像与视频输入",
     "默认思考模式，可按官方接口配置关闭",
     "原生262144 token上下文，YaRN可扩展至1010000"
   ],
@@ -55,7 +56,7 @@
     "官方基准结果未在本站复现，不能作为设备速度或质量保证。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3.5-4B",
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-11-22",
   "deployments": [
     {
       "id": "official-transformers",

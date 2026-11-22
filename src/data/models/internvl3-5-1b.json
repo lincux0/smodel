@@ -11,7 +11,8 @@
   "modalities": {
     "input": [
       "text",
-      "image"
+      "image",
+      "video"
     ],
     "output": [
       "text"
@@ -60,7 +61,7 @@
     "本站未验证图像问答、文档解析与OCR的实际效果，也未复核语种覆盖面。"
   ],
   "officialUrl": "https://huggingface.co/OpenGVLab/InternVL3_5-1B",
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-11-22",
   "deployments": [
     {
       "id": "official-transformers",

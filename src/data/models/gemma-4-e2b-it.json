@@ -14,7 +14,8 @@
     "input": [
       "text",
       "image",
-      "audio"
+      "audio",
+      "video"
     ],
     "output": [
       "text"
@@ -45,20 +46,20 @@
     "code": null,
     "trainingDisclosure": "官方提供模型卡或技术报告；未公开完整训练数据清单。"
   },
-  "summary": "面向本地设备的指令微调多模态模型，接受文本、图像和音频输入。",
+  "summary": "面向本地设备的指令微调多模态模型，接受文本、图像、音频和视频输入。",
   "features": [
     "PLE逐层嵌入",
     "原生128K上下文",
     "支持system角色与可配置思考模式",
-    "音频转写与图像理解"
+    "音频转写、图像理解与视频帧输入"
   ],
   "limitations": [
     "E2B命名代表有效参数口径，实际权重不等同于2B稠密模型。",
-    "模型输出为文本，音频输入能力不代表音频生成。",
+    "模型输出为文本，音频与视频输入能力不代表音视频生成。",
     "不同语言与任务效果需要目标场景验证。"
   ],
   "officialUrl": "https://huggingface.co/google/gemma-4-E2B-it",
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-11-22",
   "deployments": [
     {
       "id": "official-transformers",

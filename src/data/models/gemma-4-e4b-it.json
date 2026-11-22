@@ -7,13 +7,15 @@
   "tasks": [
     "text-generation",
     "coding",
-    "image-understanding"
+    "image-understanding",
+    "speech-recognition"
   ],
   "modalities": {
     "input": [
       "text",
       "image",
-      "audio"
+      "audio",
+      "video"
     ],
     "output": [
       "text"
@@ -44,11 +46,11 @@
     "code": null,
     "trainingDisclosure": "官方模型卡公开预训练数据类型（网页文档、代码、数学文本与图像）、数据截止2025年1月、覆盖140余种语言以及CSAM与敏感信息过滤流程，并附技术报告；未公开完整数据清单。"
   },
-  "summary": "Gemma 4 家族面向本地设备的多模态指令模型，接受文本、图像与音频输入，支持可配置思考模式；官方表格口径为4.5B有效参数（含嵌入约8B）。",
+  "summary": "Gemma 4 家族面向本地设备的多模态指令模型，接受文本、图像、音频与视频输入，支持可配置思考模式；官方表格口径为4.5B有效参数（含嵌入约8B）。",
   "features": [
     "PLE逐层嵌入，官方称其面向手机、笔记本等边缘设备",
     "原生128K上下文（家族中12B及以上为256K）",
-    "文本、图像与音频输入，图像支持可变宽高比与token预算",
+    "文本、图像、音频与视频输入，图像支持可变宽高比与token预算",
     "可配置思考模式，原生支持system角色",
     "原生函数调用支持"
   ],
@@ -59,7 +61,7 @@
     "不同语言与任务的实际效果需要在目标场景验证；本站未复现任何基准或设备表现。"
   ],
   "officialUrl": "https://huggingface.co/google/gemma-4-E4B-it",
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-11-22",
   "deployments": [
     {
       "id": "official-transformers",
@@ -282,6 +284,51 @@
         "runId": "gemma-4-e4b-it-gemma4-model-card",
         "independence": "first-party"
       }
+    },
+    {
+      "id": "fleurs-en-wer",
+      "benchmark": "FLEURS ASR",
+      "dataset": "FLEURS",
+      "language": "en",
+      "metric": "word error rate",
+      "value": 0.065,
+      "unit": "ratio",
+      "direction": "lower",
+      "version": "官方技术报告 Table 7",
+      "settings": "Google 官方技术报告 Table 7 将英文列为 WER，Gemma 4 E4B 的英文 FLEURS WER 为 0.065。其他测试语言中带星号的列使用 CER；此记录只取英文 WER。报告未给出该行的模型revision、few-shot、提示模板或生成长度；本站未复现。",
+      "sourceUrl": "https://arxiv.org/html/2607.02770",
+      "date": null,
+      "checkedAt": "2026-11-22",
+      "kind": "official-report",
+      "comparable": false,
+      "task": "speech-recognition",
+      "publisher": "Google DeepMind",
+      "externalModelId": "google/gemma-4-E4B-it",
+      "modelConfig": {
+        "revision": null,
+        "thinking": "not-applicable",
+        "quantization": null,
+        "runtime": null
+      },
+      "conditions": {
+        "split": null,
+        "fewShot": null,
+        "promptTemplate": null,
+        "outputTokens": null
+      },
+      "comparisonGroup": null,
+      "nonComparableReason": "报告给出了数据集、英文列和WER指标，但未披露模型revision及足以统一复测的音频、解码和提示配置。",
+      "rights": {
+        "status": "citation",
+        "license": null,
+        "url": "https://arxiv.org/html/2607.02770",
+        "notes": "仅摘录少量评测事实并署名链接，不覆盖报告原文或第三方内容许可。"
+      },
+      "provenance": {
+        "sourceId": "google-deepmind",
+        "runId": "gemma-4-e4b-it-gemma4-report-2026",
+        "independence": "first-party"
+      }
     }
   ],
   "assessments": [
@@ -331,6 +378,21 @@
       "evidenceIds": [
         "mmmu-pro",
         "math-vision"
+      ]
+    },
+    {
+      "task": "speech-recognition",
+      "status": "official-only",
+      "summary": "可作为英语语音转写候选：官方技术报告 Table 7 的英文 FLEURS WER 为 0.065（越低越好）。该数据只说明报告所列英语测试结果。",
+      "strengths": [
+        "官方报告提供一项明确区分 WER 与 CER 的语音识别结果。"
+      ],
+      "limitations": [
+        "该结果不能代表其他语言或本站音频的实际识别效果。",
+        "音频与解码配置不足以复现统一条件比较。"
+      ],
+      "evidenceIds": [
+        "fleurs-en-wer"
       ]
     }
   ]

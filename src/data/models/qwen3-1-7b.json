@@ -52,7 +52,7 @@
     "本站未复现评测，也未验证设备表现。"
   ],
   "officialUrl": "https://huggingface.co/Qwen/Qwen3-1.7B",
-  "checkedAt": "2026-10-17",
+  "checkedAt": "2026-11-22",
   "deployments": [
     {
       "id": "official-runtime",
@@ -569,22 +569,20 @@
     },
     {
       "task": "coding",
-      "status": "corroborated",
+      "status": "official-only",
       "summary": "官方Qwen3技术报告给出LiveCodeBench v5 Thinking 42.5% 与 Non-thinking 11.6%；结果随推理模式明显变化，不能直接当成项目级代码修改成功率。HuggingFaceTB另在LiveCodeBench v4零样本表列出本型号两种模式的成绩；版本题目范围不同，不能与v5结果直接排名。",
       "strengths": [
-        "官方报告覆盖竞赛式代码生成，且明确区分思考模式。",
-        "另一独立模型卡给出LiveCodeBench v4零样本结果。"
+        "官方报告覆盖竞赛式代码生成，且明确区分思考模式。"
       ],
       "limitations": [
         "LiveCodeBench只覆盖算法题，不等价于仓库级工程任务。",
         "v4与v5题目窗口和评测实现不同，不能按数值直接比较。",
+        "HuggingFaceTB 的 v4 结果仅作版本不同的外部参照，未纳入本摘要证据。",
         "提示、运行时和输出长度并未全部披露，本站未执行代码验证。"
       ],
       "evidenceIds": [
         "livecodebench-v5-thinking",
-        "livecodebench-v5-nonthinking",
-        "smollm3-livecodebench-v4-nonthinking",
-        "smollm3-livecodebench-v4-thinking"
+        "livecodebench-v5-nonthinking"
       ]
     }
   ]
