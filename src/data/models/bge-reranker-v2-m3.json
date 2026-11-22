@@ -3,6 +3,7 @@
   "name": "BGE-reranker-v2-m3",
   "family": "BGE",
   "version": "v2-m3",
+  "releaseDate": "2024-03-15",
   "variant": "specialized",
   "tasks": [
     "reranking"

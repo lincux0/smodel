@@ -3,6 +3,7 @@
   "name": "Fun-CosyVoice3-0.5B-2512",
   "family": "CosyVoice",
   "version": "3",
+  "releaseDate": "2025-12-11",
   "variant": "specialized",
   "tasks": [
     "text-to-speech"

@@ -3,6 +3,7 @@
   "name": "Qwen3-Embedding-8B",
   "family": "Qwen Embedding",
   "version": "3",
+  "releaseDate": "2025-06-03",
   "variant": "specialized",
   "tasks": [
     "embedding"

@@ -3,6 +3,7 @@
   "name": "Gemma 3 1B IT",
   "family": "Gemma",
   "version": "3",
+  "releaseDate": "2025-03-10",
   "variant": "instruct",
   "tasks": [
     "text-generation"

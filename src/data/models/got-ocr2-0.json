@@ -3,6 +3,7 @@
   "name": "GOT-OCR 2.0",
   "family": "GOT (General OCR Theory)",
   "version": "2.0",
+  "releaseDate": "2024-09-12",
   "variant": "specialized",
   "tasks": [
     "ocr"

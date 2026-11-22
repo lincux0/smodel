@@ -3,6 +3,7 @@
   "name": "Whisper large-v3",
   "family": "Whisper",
   "version": "large-v3",
+  "releaseDate": "2023-11-07",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

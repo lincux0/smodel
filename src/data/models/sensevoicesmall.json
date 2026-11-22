@@ -3,6 +3,7 @@
   "name": "SenseVoiceSmall",
   "family": "SenseVoice",
   "version": "Small",
+  "releaseDate": "2024-07-03",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

@@ -3,6 +3,7 @@
   "name": "PaddleOCR-VL",
   "family": "PaddleOCR",
   "version": "首版（0.9B）",
+  "releaseDate": "2025-10-16",
   "variant": "specialized",
   "tasks": [
     "ocr"

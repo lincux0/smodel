@@ -3,6 +3,7 @@
   "name": "Multilingual-E5-Large",
   "family": "E5",
   "version": "Large",
+  "releaseDate": "2023-06-30",
   "variant": "specialized",
   "tasks": [
     "embedding"

@@ -3,6 +3,7 @@
   "name": "Whisper small",
   "family": "Whisper",
   "version": "small",
+  "releaseDate": "2022-09-26",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

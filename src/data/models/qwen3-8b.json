@@ -3,6 +3,7 @@
   "name": "Qwen3-8B",
   "family": "Qwen",
   "version": "3",
+  "releaseDate": "2025-04-27",
   "variant": "instruct",
   "tasks": [
     "text-generation",

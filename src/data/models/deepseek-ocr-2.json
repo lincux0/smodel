@@ -3,6 +3,7 @@
   "name": "DeepSeek-OCR 2",
   "family": "DeepSeek",
   "version": "2",
+  "releaseDate": "2026-01-27",
   "variant": "specialized",
   "tasks": [
     "ocr"

@@ -3,6 +3,7 @@
   "name": "Qwen2.5-Coder-3B-Instruct",
   "family": "Qwen2.5-Coder",
   "version": "2.5",
+  "releaseDate": "2024-11-06",
   "variant": "instruct",
   "tasks": [
     "text-generation",

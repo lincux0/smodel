@@ -3,6 +3,7 @@
   "name": "LightOn mLateOn",
   "family": "LateOn",
   "version": "mLateOn",
+  "releaseDate": "2026-06-22",
   "variant": "specialized",
   "tasks": [
     "embedding"

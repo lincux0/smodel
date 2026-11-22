@@ -3,6 +3,7 @@
   "name": "Nomic Embed Text v2 MoE",
   "family": "Nomic Embed",
   "version": "v2 MoE",
+  "releaseDate": "2025-02-07",
   "variant": "specialized",
   "tasks": [
     "embedding"

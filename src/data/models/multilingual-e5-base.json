@@ -3,6 +3,7 @@
   "name": "Multilingual-E5-Base",
   "family": "E5",
   "version": "Base",
+  "releaseDate": "2023-05-19",
   "variant": "specialized",
   "tasks": [
     "embedding"

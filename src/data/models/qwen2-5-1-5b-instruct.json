@@ -3,6 +3,7 @@
   "name": "Qwen2.5-1.5B-Instruct",
   "family": "Qwen",
   "version": "2.5",
+  "releaseDate": "2024-09-17",
   "variant": "instruct",
   "tasks": [
     "text-generation",

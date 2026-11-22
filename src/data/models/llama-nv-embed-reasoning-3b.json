@@ -3,6 +3,7 @@
   "name": "NVIDIA Llama-NV-Embed-Reasoning-3B",
   "family": "Llama-NV-Embed",
   "version": "Reasoning 3B",
+  "releaseDate": "2026-02-18",
   "variant": "specialized",
   "tasks": [
     "embedding"

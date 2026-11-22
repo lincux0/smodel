@@ -3,6 +3,7 @@
   "name": "Ministral 3 8B Instruct 2512",
   "family": "Ministral",
   "version": "3",
+  "releaseDate": "2025-10-31",
   "variant": "instruct",
   "tasks": [
     "text-generation",

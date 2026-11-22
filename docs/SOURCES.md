@@ -258,6 +258,6 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 - **视频输入**：Gemma 4 E2B/E4B、Qwen3.5-4B、InternVL3.5 1B/2B/4B/8B 的 `modalities.input` 增加 `video`，与官方卡中的 Video Input/Video Understanding 示例或说明对齐。
 - **证据状态**：Qwen3-1.7B 与 Qwen3-4B 的代码用途由 `corroborated` 降为 `official-only`。官方 LiveCodeBench v5 与 HuggingFaceTB SmolLM3-3B 模型卡的 v4 不是同一基准版本，v4 仅保留为外部参照，不再计入摘要证据。`catalog.ts` 现要求交叉佐证记录同基准、同数据集/语言/指标/方向，且双方明确版本时版本一致。
 - **结构校验**：新增音频输入、视频输入、音频输出的用途一致性检查，避免再次出现“模态有音频/视频但用途缺失”。
-- **发布日期**：新增 `releaseDate`。当前仅对官方材料明确给出日期的条目填写：BGE-Large-ZH-v1.5 2023-09-12、DeepSeek-OCR 2025-10-20、Granite 4.0 1B/H-1B 2025-10-28、Granite 4.2 3B/8B 2026-08-25、Jina Embeddings v5 Text Nano/Small 2026-02-18、Kokoro-82M 2025-01-27、MiniCPM-V 4.5 2025-08-26、Qwen3-TTS 12Hz 0.6B/1.7B Base 2026-01-22、Snowflake Arctic Embed L/M v2.0 2024-12-04。其余保持 `null`，页面不显示；不以仓库创建日、`checkedAt` 或论文日期代替。
+- **发布日期**：新增 `releaseDate`。优先保留官方材料明确给出的日期：BGE-Large-ZH-v1.5 2023-09-12、DeepSeek-OCR 2025-10-20、Granite 4.0 1B/H-1B 2025-10-28、Granite 4.2 3B/8B 2026-08-25、Jina Embeddings v5 Text Nano/Small 2026-02-18、Kokoro-82M 2025-01-27、MiniCPM-V 4.5 2025-08-26、Qwen3-TTS 12Hz 0.6B/1.7B Base 2026-01-22、Snowflake Arctic Embed L/M v2.0 2024-12-04。其余 96 个型号采用 Hugging Face 模型仓库 `createdAt` 的日期部分作为上线日期；四个 Whisper 条目使用对应 HF 仓库日期。`checkedAt` 和论文发布日期不作为替代。
 
 修正后目录为 110 型号、171 个用途摘要、426 条成绩（388 官方、38 第三方）；171 个摘要中 5 项独立多来源佐证、138 项仅官方、11 项独立性待确认、17 项证据不足。本次未下载模型权重，未执行模型推理或设备实测。

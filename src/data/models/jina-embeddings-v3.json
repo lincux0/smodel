@@ -3,6 +3,7 @@
   "name": "Jina Embeddings v3",
   "family": "Jina Embeddings",
   "version": "3",
+  "releaseDate": "2024-09-05",
   "variant": "specialized",
   "tasks": [
     "embedding"

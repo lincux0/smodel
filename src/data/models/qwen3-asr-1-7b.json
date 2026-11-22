@@ -3,6 +3,7 @@
   "name": "Qwen3-ASR-1.7B",
   "family": "Qwen",
   "version": "3-ASR",
+  "releaseDate": "2026-01-28",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

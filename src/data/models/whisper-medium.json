@@ -3,6 +3,7 @@
   "name": "Whisper medium",
   "family": "Whisper",
   "version": "medium",
+  "releaseDate": "2022-09-26",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

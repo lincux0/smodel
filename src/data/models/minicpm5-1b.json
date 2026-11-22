@@ -3,6 +3,7 @@
   "name": "MiniCPM5-1B",
   "family": "MiniCPM",
   "version": "5",
+  "releaseDate": "2026-05-21",
   "variant": "instruct",
   "tasks": [
     "text-generation",

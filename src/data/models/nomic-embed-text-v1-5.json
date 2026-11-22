@@ -3,6 +3,7 @@
   "name": "Nomic Embed Text v1.5",
   "family": "Nomic Embed",
   "version": "v1.5",
+  "releaseDate": "2024-02-10",
   "variant": "specialized",
   "tasks": [
     "embedding"

@@ -3,6 +3,7 @@
   "name": "Phi-3.5-mini-instruct",
   "family": "Phi",
   "version": "3.5-mini",
+  "releaseDate": "2024-08-16",
   "variant": "instruct",
   "tasks": [
     "text-generation",

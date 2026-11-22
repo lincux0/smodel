@@ -3,6 +3,7 @@
   "name": "LFM2.5-8B-A1B",
   "family": "LFM2.5",
   "version": "2.5",
+  "releaseDate": "2026-05-28",
   "variant": "instruct",
   "tasks": [
     "text-generation"

@@ -3,6 +3,7 @@
   "name": "BGE-M3",
   "family": "BGE",
   "version": "M3",
+  "releaseDate": "2024-01-27",
   "variant": "specialized",
   "tasks": [
     "embedding"

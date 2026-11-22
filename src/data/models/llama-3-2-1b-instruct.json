@@ -3,6 +3,7 @@
   "name": "Llama 3.2 1B Instruct",
   "family": "Llama",
   "version": "3.2",
+  "releaseDate": "2024-09-18",
   "variant": "instruct",
   "tasks": [
     "text-generation",

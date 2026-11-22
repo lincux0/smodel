@@ -3,6 +3,7 @@
   "name": "Qwen3-Reranker-0.6B",
   "family": "Qwen Reranker",
   "version": "3",
+  "releaseDate": "2025-05-29",
   "variant": "specialized",
   "tasks": [
     "reranking"

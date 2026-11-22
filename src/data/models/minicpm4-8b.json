@@ -3,6 +3,7 @@
   "name": "MiniCPM4 8B",
   "family": "MiniCPM",
   "version": "4",
+  "releaseDate": "2025-06-05",
   "variant": "instruct",
   "tasks": [
     "text-generation",

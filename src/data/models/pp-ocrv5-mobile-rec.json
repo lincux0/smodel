@@ -3,6 +3,7 @@
   "name": "PP-OCRv5 mobile rec",
   "family": "PaddleOCR",
   "version": "5",
+  "releaseDate": "2025-06-04",
   "variant": "specialized",
   "tasks": [
     "ocr"

@@ -3,6 +3,7 @@
   "name": "Whisper large-v3-turbo",
   "family": "Whisper",
   "version": "large-v3-turbo",
+  "releaseDate": "2024-10-01",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

@@ -3,6 +3,7 @@
   "name": "NVIDIA-Nemotron-Nano-9B-v2",
   "family": "Nemotron",
   "version": "Nano-9B-v2",
+  "releaseDate": "2025-08-12",
   "variant": "instruct",
   "tasks": [
     "text-generation",

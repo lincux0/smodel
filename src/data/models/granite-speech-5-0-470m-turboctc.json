@@ -3,6 +3,7 @@
   "name": "Granite Speech 5.0 470M TurboCTC",
   "family": "Granite Speech",
   "version": "5.0",
+  "releaseDate": "2026-08-04",
   "variant": "specialized",
   "tasks": [
     "speech-recognition"

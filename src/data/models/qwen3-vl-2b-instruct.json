@@ -3,6 +3,7 @@
   "name": "Qwen3-VL-2B-Instruct",
   "family": "Qwen",
   "version": "3-VL",
+  "releaseDate": "2025-10-19",
   "variant": "instruct",
   "tasks": [
     "text-generation",

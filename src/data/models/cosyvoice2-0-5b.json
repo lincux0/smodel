@@ -3,6 +3,7 @@
   "name": "CosyVoice2-0.5B",
   "family": "CosyVoice",
   "version": "2",
+  "releaseDate": "2025-07-29",
   "variant": "specialized",
   "tasks": [
     "text-to-speech"

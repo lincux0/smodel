@@ -3,6 +3,7 @@
   "name": "LightOn mDenseOn",
   "family": "DenseOn",
   "version": "mDenseOn",
+  "releaseDate": "2026-06-22",
   "variant": "specialized",
   "tasks": [
     "embedding"

@@ -3,6 +3,7 @@
   "name": "all-MiniLM-L6-v2",
   "family": "MiniLM",
   "version": "L6-v2",
+  "releaseDate": "2022-03-02",
   "variant": "specialized",
   "tasks": [
     "embedding"

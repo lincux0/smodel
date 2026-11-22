@@ -3,6 +3,7 @@
   "name": "EmbeddingGemma",
   "family": "Gemma",
   "version": "EmbeddingGemma",
+  "releaseDate": "2025-07-17",
   "variant": "specialized",
   "tasks": [
     "embedding"

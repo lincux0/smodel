@@ -3,6 +3,7 @@
   "name": "Jina Reranker v3.5",
   "family": "Jina Reranker",
   "version": "3.5",
+  "releaseDate": "2026-07-14",
   "variant": "specialized",
   "tasks": [
     "reranking"

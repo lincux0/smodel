@@ -3,6 +3,7 @@
   "name": "InternVL3.5-4B",
   "family": "InternVL",
   "version": "3.5",
+  "releaseDate": "2025-08-25",
   "variant": "instruct",
   "tasks": [
     "text-generation",

@@ -3,6 +3,7 @@
   "name": "Qwen2.5-Coder-1.5B-Instruct",
   "family": "Qwen Coder",
   "version": "2.5",
+  "releaseDate": "2024-09-18",
   "variant": "instruct",
   "tasks": [
     "coding",

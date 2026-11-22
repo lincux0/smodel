@@ -3,6 +3,7 @@
   "name": "LFM2.5-Audio-1.5B",
   "family": "LFM2.5",
   "version": "2.5",
+  "releaseDate": "2025-12-18",
   "variant": "specialized",
   "tasks": [
     "speech-recognition",

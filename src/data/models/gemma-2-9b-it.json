@@ -3,6 +3,7 @@
   "name": "Gemma 2 9B IT",
   "family": "Gemma",
   "version": "2",
+  "releaseDate": "2024-06-24",
   "variant": "instruct",
   "tasks": [
     "text-generation",

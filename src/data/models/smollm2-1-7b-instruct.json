@@ -3,6 +3,7 @@
   "name": "SmolLM2-1.7B-Instruct",
   "family": "SmolLM",
   "version": "2",
+  "releaseDate": "2024-10-31",
   "variant": "instruct",
   "tasks": [
     "text-generation",
