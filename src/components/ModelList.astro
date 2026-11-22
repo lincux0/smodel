@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { taskLabels } from '../lib/catalog.ts';
-import { parameterBand } from '../lib/catalog-query.ts';
 interface Props { models: CollectionEntry<'models'>[]; interactive?: boolean; }
 const { models, interactive = false } = Astro.props;
 ---
@@ -10,7 +9,7 @@ const { models, interactive = false } = Astro.props;
   {interactive && <p data-selection-error role="status" aria-live="polite" hidden></p>}
   <ul class="model-list">
     {models.map(({ data: model }, index) => (
-      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-size={parameterBand(model.parameters.totalB)} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-checked={model.checkedAt}>
+      <li data-model-card data-id={model.id} data-tasks={model.tasks.join(' ')} data-task-labels={model.tasks.map((task) => taskLabels[task]).join(' / ')} data-name={model.name} data-family={model.family} data-search={`${model.name} ${model.family} ${model.summary} ${model.tasks.map((task) => taskLabels[task]).join(' ')}`} data-parameters={model.parameters.totalB === null ? '' : model.parameters.totalB} data-parameter-label={model.parameters.totalB === null ? '规模未提供' : `${model.parameters.totalB}B`} data-license={model.licenses.weights.name} data-runtimes={JSON.stringify([...new Set(model.deployments.map(({ runtime }) => runtime))])} data-checked={model.checkedAt}>
         <div>
           <div class="model-card-top">
             <div class="model-meta model-task-tags">{model.tasks.map((task) => <span class="model-task-tag" data-task={task}>{taskLabels[task]}</span>)}</div>
@@ -52,7 +51,6 @@ const { models, interactive = false } = Astro.props;
     const selectedCount = catalog.querySelector<HTMLElement>('[data-selected-count]')!;
     const queryControls = [...document.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-query]')];
     const taskControl = catalog.parentElement?.querySelector<HTMLSelectElement>('[data-query="task"]');
-    const sizeControl = catalog.parentElement?.querySelector<HTMLSelectElement>('[data-query="size"]');
     const compareLink = catalog.querySelector<HTMLAnchorElement>('[data-compare-link]')!;
     const copyButton = catalog.querySelector<HTMLButtonElement>('[data-copy-compare]')!;
     const copyFallback = catalog.querySelector<HTMLAnchorElement>('[data-copy-fallback]')!;
@@ -61,9 +59,9 @@ const { models, interactive = false } = Astro.props;
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
     const queryOptions = {
       tasks: [...(taskControl?.options ?? [])].map(({ value }) => value).filter((value) => value !== 'all'),
-      sizes: [...(sizeControl?.options ?? [])].map(({ value }) => value).filter((value) => value !== 'all'),
       licenses: [...new Set(cards.map((card) => card.dataset.license!))],
       runtimes: [...new Set(cards.flatMap((card) => JSON.parse(card.dataset.runtimes ?? '[]') as string[]))],
+      families: [...new Set(cards.map((card) => card.dataset.family!))],
     };
     let state = parseCatalogQuery(location.search, queryOptions);
     const syncControls = () => {
@@ -121,11 +119,16 @@ const { models, interactive = false } = Astro.props;
         const tasks = card.dataset.tasks!.split(' ');
         const search = (card.dataset.search ?? '').toLocaleLowerCase('zh-CN');
         const runtimes = JSON.parse(card.dataset.runtimes ?? '[]') as string[];
+        const minSize = state.sizeMin === '' ? null : Number(state.sizeMin);
+        const maxSize = state.sizeMax === '' ? null : Number(state.sizeMax);
+        const size = card.dataset.parameters === '' ? null : Number(card.dataset.parameters);
         return (!needle || needle.split(' ').every((word) => search.includes(word)))
           && (state.task === 'all' || tasks.includes(state.task))
-          && (state.size === 'all' || card.dataset.size === state.size)
+          && (minSize === null || (size !== null && size >= minSize))
+          && (maxSize === null || (size !== null && size <= maxSize))
           && (state.license === 'all' || card.dataset.license === state.license)
-          && (state.runtime === 'all' || runtimes.includes(state.runtime));
+          && (state.runtime === 'all' || runtimes.includes(state.runtime))
+          && (state.family === 'all' || card.dataset.family === state.family);
       };
       animateLayout(() => {
         const visible = cards.filter(matches);
@@ -199,10 +202,10 @@ const { models, interactive = false } = Astro.props;
       const key = control.dataset.query as keyof typeof state;
       state[key] = key === 'q' ? control.value.trim().replace(/\s+/g, ' ').slice(0, 120) : control.value;
       render();
-      persist(key === 'q' ? 'replace' : 'push');
+      persist(key === 'q' || key === 'sizeMin' || key === 'sizeMax' ? 'replace' : 'push');
     }));
     catalog.querySelector('[data-reset-filters]')?.addEventListener('click', () => {
-      state = { q: '', task: 'all', size: 'all', license: 'all', runtime: 'all', sort: 'recent' };
+      state = { q: '', task: 'all', sizeMin: '', sizeMax: '', license: 'all', runtime: 'all', family: 'all', sort: 'recent' };
       syncControls();
       render();
       persist();

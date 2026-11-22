@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { loadCatalog, validateCatalog } from '../src/lib/catalog.ts';
-import { parameterBand, parseCatalogQuery, writeCatalogQuery } from '../src/lib/catalog-query.ts';
+import { parseCatalogQuery, writeCatalogQuery } from '../src/lib/catalog-query.ts';
 
 test('真实目录保留未知值，并拒绝重复身份、无效关联和错误字段', () => {
   const { models, guideIds } = loadCatalog();
@@ -153,14 +153,21 @@ test('可比记录只在比较组的基准与测试口径一致时通过', () =>
   assert.throws(() => validateCatalog(modelsForGroup, guideIds), /条件不一致/);
 });
 
-test('目录 URL 状态只接受已知筛选值并保留比较参数', () => {
-  const options = { tasks: ['coding'], sizes: ['under-1b', 'unknown'], licenses: ['Apache-2.0'], runtimes: ['Transformers'] };
-  const state = parseCatalogQuery('?q=%20Qwen%20%20coder%20&task=unknown&size=under-1b&license=Apache-2.0&runtime=Transformers&sort=invalid', options);
-  assert.deepEqual(state, { q: 'Qwen coder', task: 'all', size: 'under-1b', license: 'Apache-2.0', runtime: 'Transformers', sort: 'recent' });
-  const url = writeCatalogQuery(new URL('https://example.test/models/?ids=qwen-a,qwen-b&task=coding'), state);
+test('目录 URL 状态支持规模范围和已知筛选值', () => {
+  const options = { tasks: ['coding'], licenses: ['Apache-2.0'], runtimes: ['Transformers'], families: ['Qwen'] };
+  const state = parseCatalogQuery('?q=%20Qwen%20%20coder%20&task=unknown&sizeMin=1.55&sizeMax=3&license=Apache-2.0&runtime=Transformers&family=Qwen&sort=invalid', options);
+  assert.deepEqual(state, { q: 'Qwen coder', task: 'all', sizeMin: '1.6', sizeMax: '3', license: 'Apache-2.0', runtime: 'Transformers', family: 'Qwen', sort: 'recent' });
+  const url = writeCatalogQuery(new URL('https://example.test/models/?ids=qwen-a,qwen-b&task=coding&size=under-1b'), state);
   assert.equal(url.searchParams.get('ids'), 'qwen-a,qwen-b');
   assert.equal(url.searchParams.get('q'), 'Qwen coder');
-  assert.equal(parameterBand(null), 'unknown');
-  assert.equal(parameterBand(0.6), 'under-1b');
-  assert.equal(parameterBand(1.5), '1-3b');
+  assert.equal(url.searchParams.get('sizeMin'), '1.6');
+  assert.equal(url.searchParams.get('family'), 'Qwen');
+  assert.equal(url.searchParams.has('size'), false);
+  const legacy = parseCatalogQuery('?size=1-3b', options);
+  assert.equal(legacy.sizeMin, '1');
+  assert.equal(legacy.sizeMax, '2.9');
+  const invalid = parseCatalogQuery('?sizeMin=-1&sizeMax=nope&family=missing', options);
+  assert.equal(invalid.sizeMin, '');
+  assert.equal(invalid.sizeMax, '');
+  assert.equal(invalid.family, 'all');
 });

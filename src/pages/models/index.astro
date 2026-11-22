@@ -13,13 +13,7 @@ const taskCounts = Object.entries(taskLabels).map(([id, label]) => ({
 })).filter((task) => task.count > 0);
 const licenseOptions = [...new Set(models.map(({ data }) => data.licenses.weights.name))].sort();
 const runtimeOptions = [...new Set(models.flatMap(({ data }) => data.deployments.map(({ runtime }) => runtime)))].sort();
-const sizeOptions = [
-  { id: 'under-1b', label: '小于 1B' },
-  { id: '1-3b', label: '1B 至小于 3B' },
-  { id: '3-8b', label: '3B 至小于 8B' },
-  { id: '8b-plus', label: '8B 及以上' },
-  { id: 'unknown', label: '规模未提供' },
-];
+const familyOptions = [...new Set(models.map(({ data }) => data.family))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
 ---
 <Base title="模型目录">
   <section class="catalog-head">
@@ -34,30 +28,107 @@ const sizeOptions = [
     <label class="catalog-search"><span class="filter-label">搜索模型</span><input type="search" data-query="q" placeholder="名称、系列或用途" autocomplete="off" maxlength="120"></label>
     <div class="catalog-filter-grid" aria-label="组合筛选">
       <CatalogSelect label="用途" name="task" options={[{ value: 'all', label: '全部用途' }, ...taskCounts.map(({ id, label }) => ({ value: id, label }))]} />
-      <CatalogSelect label="参数规模" name="size" options={[{ value: 'all', label: '全部规模' }, ...sizeOptions.map(({ id, label }) => ({ value: id, label }))]} />
-      <CatalogSelect label="权重许可" name="license" options={[{ value: 'all', label: '全部许可' }, ...licenseOptions.map((license) => ({ value: license, label: license }))]} />
-      <CatalogSelect label="部署运行时" name="runtime" options={[{ value: 'all', label: '全部运行时' }, ...runtimeOptions.map((runtime) => ({ value: runtime, label: runtime }))]} />
+      <div class="size-range" role="group" aria-labelledby="size-range-label">
+        <span class="filter-label" id="size-range-label">参数规模（B，0.1 步进）</span>
+        <div class="size-range-inputs">
+          <label><span>最小</span><input type="number" data-query="sizeMin" min="0" step="0.1" inputmode="decimal" placeholder="不限" aria-label="最小参数规模（B）"></label>
+          <span class="size-range-sep" aria-hidden="true">–</span>
+          <label><span>最大</span><input type="number" data-query="sizeMax" min="0" step="0.1" inputmode="decimal" placeholder="不限" aria-label="最大参数规模（B）"></label>
+        </div>
+      </div>
       <CatalogSelect label="排序方式" name="sort" options={[{ value: 'recent', label: '最近核实' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模' }]} />
+      <button class="advanced-filter-trigger" type="button" data-advanced-open aria-haspopup="dialog">进阶筛选条件<span data-advanced-count></span></button>
     </div>
   </section>
+  <dialog class="advanced-dialog" data-advanced-dialog aria-labelledby="advanced-title">
+    <div class="advanced-dialog-head">
+      <div><p class="eyebrow">ADVANCED / FILTER</p><h2 id="advanced-title">进阶筛选条件</h2></div>
+      <button class="advanced-close" type="button" data-advanced-close aria-label="关闭进阶筛选">关闭</button>
+    </div>
+    <div class="advanced-fields">
+      <CatalogSelect label="模型家族" name="family" options={[{ value: 'all', label: '全部家族' }, ...familyOptions.map((family) => ({ value: family, label: family }))]} />
+      <CatalogSelect label="权重许可" name="license" options={[{ value: 'all', label: '全部许可' }, ...licenseOptions.map((license) => ({ value: license, label: license }))]} />
+      <CatalogSelect label="部署运行时" name="runtime" options={[{ value: 'all', label: '全部运行时' }, ...runtimeOptions.map((runtime) => ({ value: runtime, label: runtime }))]} />
+    </div>
+    <p class="muted">筛选会立即应用，并写入可分享链接；参数规模在主工具栏按 0.1B 范围设置。</p>
+    <div class="advanced-actions">
+      <button class="advanced-reset" type="button" data-advanced-reset>清空进阶条件</button>
+      <button class="button" type="button" data-advanced-done>完成</button>
+    </div>
+  </dialog>
   <noscript>
     <p class="notice">筛选和排序需要 JavaScript；以下显示全部 {models.length} 个模型。</p>
     <style is:inline>.catalog-tools { display: none; }</style>
   </noscript>
   <ModelList models={models} interactive />
-  <p class="muted">规模按各来源公开口径筛选，不代表相同统计范围或运行内存；未知规模独立收录，详情保留口径说明。</p>
+  <p class="muted">规模按各来源公开口径筛选，不代表相同统计范围或运行内存；未知规模在设置范围后不参与匹配，详情保留口径说明。</p>
 </Base>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-advanced-dialog]');
+  const trigger = document.querySelector<HTMLButtonElement>('[data-advanced-open]');
+  const count = document.querySelector<HTMLElement>('[data-advanced-count]');
+  if (dialog && trigger) {
+    const selects = [...dialog.querySelectorAll<HTMLSelectElement>('select[data-query]')];
+    const syncCount = () => {
+      if (!count) return;
+      const active = selects.filter((select) => select.value !== 'all').length;
+      count.textContent = active ? `（${active}）` : '';
+    };
+    trigger.addEventListener('click', () => {
+      if (!dialog.open) dialog.showModal();
+    });
+    dialog.querySelectorAll<HTMLButtonElement>('[data-advanced-close], [data-advanced-done]').forEach((button) => {
+      button.addEventListener('click', () => dialog.close());
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    selects.forEach((select) => select.addEventListener('change', syncCount));
+    document.addEventListener('catalog:sync', syncCount, true);
+    dialog.querySelector<HTMLButtonElement>('[data-advanced-reset]')?.addEventListener('click', () => {
+      for (const select of selects) {
+        select.value = 'all';
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      syncCount();
+    });
+    syncCount();
+  }
+</script>
 
 <style>
   .catalog-tools { grid-template-columns: minmax(220px, .8fr) minmax(0, 2fr); }
   .catalog-search { display: grid; align-content: end; gap: 8px; }
   .catalog-search input { width: 100%; min-height: 44px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-md); background: var(--paper); color: var(--ink); font: inherit; }
-  .catalog-filter-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+  .catalog-filter-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
   .catalog-filter-grid .sort-control { min-width: 0; }
   .catalog-filter-grid select { width: 100%; min-width: 0; }
+  .size-range { display: grid; min-width: 0; align-content: end; gap: 8px; }
+  .size-range .filter-label { margin-bottom: 0; }
+  .size-range-inputs { display: flex; align-items: center; gap: 5px; min-width: 0; }
+  .size-range-inputs label { display: flex; min-width: 0; flex: 1; align-items: center; gap: 4px; }
+  .size-range-inputs label span { flex: 0 0 auto; color: var(--muted); font-size: 10px; }
+  .size-range-inputs input { width: 100%; min-width: 0; min-height: 44px; padding: 7px 8px; border: var(--border); border-radius: var(--radius-sm); background: var(--paper); color: var(--ink); font: inherit; font-size: 12px; }
+  .size-range-sep { color: var(--muted); font-size: 12px; }
+  .advanced-filter-trigger { min-height: 44px; align-self: end; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-sm); background: var(--paper); color: var(--accent); cursor: pointer; font: inherit; font-size: 12px; text-align: left; }
+  .advanced-filter-trigger:hover { border-color: var(--accent); background: var(--white); }
+  .advanced-filter-trigger span:not(:empty) { color: var(--muted); font-size: 10px; }
+  .advanced-dialog { width: min(560px, calc(100% - 32px)); padding: 24px; border: 1px solid #b9c5bf; border-radius: var(--radius-lg); background: var(--paper); color: var(--ink); box-shadow: var(--shadow); overflow: visible; }
+  .advanced-dialog::backdrop { background: rgb(20 35 33 / 38%); backdrop-filter: blur(3px); }
+  .advanced-dialog-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .advanced-dialog-head h2 { margin: 4px 0 0; font-size: 24px; }
+  .advanced-close { min-height: 44px; padding: 8px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 12px; }
+  .advanced-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-block: 22px 16px; }
+  .advanced-dialog > .muted { font-size: 12px; }
+  .advanced-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+  .advanced-reset { min-height: 44px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--accent); cursor: pointer; font-size: 12px; }
   @media (max-width: 760px) {
     .catalog-tools { grid-template-columns: 1fr; }
     .catalog-filter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .advanced-fields { grid-template-columns: 1fr; }
+    .advanced-fields .sort-control { display: grid; align-items: initial; }
+    .advanced-fields .sort-control .filter-label { margin: 0; }
   }
   @media (max-width: 480px) {
     .catalog-filter-grid { grid-template-columns: 1fr; }

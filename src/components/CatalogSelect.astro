@@ -1,6 +1,6 @@
 ---
 interface Option { value: string; label: string; }
-interface Props { label: string; name: 'task' | 'size' | 'license' | 'runtime' | 'sort'; options: Option[]; }
+interface Props { label: string; name: 'task' | 'license' | 'runtime' | 'family' | 'sort'; options: Option[]; }
 const { label, name, options } = Astro.props;
 const listId = `catalog-options-${name}`;
 ---
