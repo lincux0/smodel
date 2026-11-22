@@ -66,7 +66,12 @@ const { models, interactive = false } = Astro.props;
     let state = parseCatalogQuery(location.search, queryOptions);
     const syncControls = () => {
       for (const control of queryControls) {
-        control.value = state[control.dataset.query as keyof typeof state];
+        const key = control.dataset.query as keyof typeof state;
+        if (control instanceof HTMLInputElement && control.type === 'range') {
+          control.value = state[key] || (key === 'sizeMin' ? control.min : control.max);
+        } else {
+          control.value = state[key];
+        }
         control.dispatchEvent(new Event('catalog:sync'));
       }
     };
@@ -119,7 +124,7 @@ const { models, interactive = false } = Astro.props;
         const tasks = card.dataset.tasks!.split(' ');
         const search = (card.dataset.search ?? '').toLocaleLowerCase('zh-CN');
         const runtimes = JSON.parse(card.dataset.runtimes ?? '[]') as string[];
-        const minSize = state.sizeMin === '' ? null : Number(state.sizeMin);
+        const minSize = state.sizeMin === '' || Number(state.sizeMin) === 0 ? null : Number(state.sizeMin);
         const maxSize = state.sizeMax === '' ? null : Number(state.sizeMax);
         const size = card.dataset.parameters === '' ? null : Number(card.dataset.parameters);
         return (!needle || needle.split(' ').every((word) => search.includes(word)))
@@ -204,7 +209,12 @@ const { models, interactive = false } = Astro.props;
 
     queryControls.forEach((control) => control.addEventListener(control instanceof HTMLInputElement ? 'input' : 'change', () => {
       const key = control.dataset.query as keyof typeof state;
-      state[key] = key === 'q' ? control.value.trim().replace(/\s+/g, ' ').slice(0, 120) : control.value;
+      let value = control.value;
+      if (control instanceof HTMLInputElement && control.type === 'range') {
+        if (key === 'sizeMin' && value === control.min) value = '';
+        if (key === 'sizeMax' && value === control.max) value = '';
+      }
+      state[key] = key === 'q' ? value.trim().replace(/\s+/g, ' ').slice(0, 120) : value;
       render();
       persist(key === 'q' || key === 'sizeMin' || key === 'sizeMax' ? 'replace' : 'push');
     }));
