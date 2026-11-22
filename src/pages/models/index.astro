@@ -32,6 +32,7 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
       <div class="size-range" role="group" aria-labelledby="size-range-label">
         <span class="filter-label" id="size-range-label">参数规模</span>
         <div class="size-slider">
+          <span class="size-slider-fill" data-size-fill aria-hidden="true"></span>
           <input class="size-slider-input" type="range" data-query="sizeMin" min="0" max={sizeSliderMax} step="0.1" value="0" aria-label="最小参数规模（B）">
           <input class="size-slider-input" type="range" data-query="sizeMax" min="0" max={sizeSliderMax} step="0.1" value={sizeSliderMax} aria-label="最大参数规模（B）">
         </div>
@@ -101,13 +102,27 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
   const sizeMax = document.querySelector<HTMLInputElement>('[data-query="sizeMax"]');
   const sizeMinValue = document.querySelector<HTMLElement>('[data-size-min-value]');
   const sizeMaxValue = document.querySelector<HTMLElement>('[data-size-max-value]');
+  const sizeFill = document.querySelector<HTMLElement>('[data-size-fill]');
   if (sizeMin && sizeMax && sizeMinValue && sizeMaxValue) {
     const syncSizeValues = () => {
-      sizeMinValue.textContent = `${Number(sizeMin.value)}B`;
-      sizeMaxValue.textContent = `${Number(sizeMax.value)}B`;
+      const min = Number(sizeMin.value);
+      const max = Number(sizeMax.value);
+      const total = Number(sizeMin.max);
+      sizeMinValue.textContent = `${min}B`;
+      sizeMaxValue.textContent = `${max}B`;
+      if (sizeFill) {
+        sizeFill.style.left = `${(min / total) * 100}%`;
+        sizeFill.style.right = `${100 - (max / total) * 100}%`;
+      }
     };
-    sizeMin.addEventListener('input', syncSizeValues);
-    sizeMax.addEventListener('input', syncSizeValues);
+    const clampHandles = (changed: HTMLInputElement, other: HTMLInputElement, isMin: boolean) => {
+      if (isMin ? Number(changed.value) > Number(other.value) : Number(changed.value) < Number(other.value)) {
+        other.value = changed.value;
+        other.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    };
+    sizeMin.addEventListener('input', () => { clampHandles(sizeMin, sizeMax, true); syncSizeValues(); });
+    sizeMax.addEventListener('input', () => { clampHandles(sizeMax, sizeMin, false); syncSizeValues(); });
     document.addEventListener('catalog:sync', syncSizeValues, true);
     syncSizeValues();
   }
@@ -122,17 +137,22 @@ const sizeSliderMax = Math.max(10, Math.ceil(Math.max(...models.map(({ data }) =
   .catalog-filter-grid select { width: 100%; min-width: 0; }
   .size-range { display: grid; min-width: 0; align-content: end; gap: 8px; }
   .size-range .filter-label { margin-bottom: 0; }
-  .size-slider { position: relative; display: flex; height: 44px; align-items: center; }
-  .size-slider::before { position: absolute; top: 50%; right: 0; left: 0; height: 4px; border-radius: var(--radius-pill); background: #d9ddda; content: ''; transform: translateY(-50%); }
-  .size-slider-input { position: absolute; right: 0; left: 0; width: 100%; height: 44px; margin: 0; appearance: none; background: transparent; pointer-events: none; }
+  .size-slider { position: relative; display: flex; height: 36px; align-items: center; }
+  .size-slider::before { position: absolute; top: 50%; right: 0; left: 0; height: 4px; border-radius: var(--radius-pill); background: #dfe4df; content: ''; transform: translateY(-50%); }
+  .size-slider-fill { position: absolute; top: 50%; height: 4px; border-radius: var(--radius-pill); background: var(--accent); pointer-events: none; transform: translateY(-50%); }
+  .size-slider-input { position: absolute; right: 0; left: 0; width: 100%; height: 36px; margin: 0; appearance: none; background: transparent; pointer-events: none; }
   .size-slider-input::-webkit-slider-runnable-track { height: 4px; background: transparent; }
   .size-slider-input::-moz-range-track { height: 4px; background: transparent; }
-  .size-slider-input::-webkit-slider-thumb { width: 18px; height: 18px; margin-top: -7px; border: 2px solid var(--paper); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px var(--accent); appearance: none; pointer-events: auto; cursor: grab; }
-  .size-slider-input::-moz-range-thumb { width: 18px; height: 18px; border: 2px solid var(--paper); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px var(--accent); pointer-events: auto; cursor: grab; }
+  .size-slider-input::-webkit-slider-thumb { width: 16px; height: 16px; margin-top: -6px; border: 2px solid var(--accent); border-radius: 50%; background: var(--white); box-shadow: 0 1px 3px rgb(28 39 38 / 18%); appearance: none; pointer-events: auto; cursor: grab; }
+  .size-slider-input::-moz-range-thumb { width: 16px; height: 16px; border: 2px solid var(--accent); border-radius: 50%; background: var(--white); box-shadow: 0 1px 3px rgb(28 39 38 / 18%); pointer-events: auto; cursor: grab; }
+  .size-slider-input:active::-webkit-slider-thumb { cursor: grabbing; }
+  .size-slider-input:active::-moz-range-thumb { cursor: grabbing; }
   .size-slider-input:focus-visible { outline: none; }
-  .size-slider-input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px #3a948c; }
-  .size-slider-input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px #3a948c; }
+  .size-slider-input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgb(23 107 100 / 18%), 0 1px 3px rgb(28 39 38 / 18%); }
+  .size-slider-input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px rgb(23 107 100 / 18%), 0 1px 3px rgb(28 39 38 / 18%); }
   .size-slider-values { display: flex; justify-content: space-between; color: var(--muted); font: 10px var(--mono); }
+  .size-slider-values span:first-child, .size-slider-values span:last-child { min-width: 36px; padding: 2px 6px; border: var(--border); border-radius: var(--radius-pill); background: var(--paper); text-align: center; }
+  .size-slider-values span:nth-child(2) { color: #8a9490; }
   .advanced-filter-trigger { min-height: 44px; align-self: end; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; border: var(--border); border-radius: var(--radius-sm); background: var(--paper); color: var(--accent); cursor: pointer; font: inherit; font-size: 12px; text-align: left; }
   .advanced-filter-trigger:hover { border-color: var(--accent); background: var(--white); }
   .advanced-filter-trigger span:not(:empty) { color: var(--muted); font-size: 10px; }
