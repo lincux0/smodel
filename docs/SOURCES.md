@@ -1,6 +1,6 @@
 # 模型来源与字段口径
 
-模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核与批次1–7扩充于2026-10-17执行，2026-11-22完成 P0 修正（见文末章节）。目录共110个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
+模型元数据核对日期：2026-10-01；首批能力依据核对日期：2026-10-02；2026-10-10 批次已于2026-10-14复核修订；全目录复核与批次1–7扩充于2026-10-17执行，2026-11-22完成 P0 修正（见文末章节）。目录共133个型号。模型身份、参数、上下文、权重许可和部署入口优先取模型维护方的模型卡、技术报告或上游仓库。此处记录来源与字段核对，不代表本站下载或运行模型。`evaluations` 留空表示尚未登记可靠成绩；已有成绩也可能因条件不足而不可直接比较。硬件未做本站实测，来源未提供的数值不推算。
 
 ## 阶段四新增模型
 
@@ -261,3 +261,36 @@ Qwen3与SmolLM3等模型卡中的训练说明不是完整逐样本语料清单�
 - **发布日期**：新增 `releaseDate`。优先保留官方材料明确给出的日期：BGE-Large-ZH-v1.5 2023-09-12、DeepSeek-OCR 2025-10-20、Granite 4.0 1B/H-1B 2025-10-28、Granite 4.2 3B/8B 2026-08-25、Jina Embeddings v5 Text Nano/Small 2026-02-18、Kokoro-82M 2025-01-27、MiniCPM-V 4.5 2025-08-26、Qwen3-TTS 12Hz 0.6B/1.7B Base 2026-01-22、Snowflake Arctic Embed L/M v2.0 2024-12-04。其余 96 个型号采用 Hugging Face 模型仓库 `createdAt` 的日期部分作为上线日期；四个 Whisper 条目使用对应 HF 仓库日期。`checkedAt` 和论文发布日期不作为替代。
 
 修正后目录为 110 型号、171 个用途摘要、426 条成绩（388 官方、38 第三方）；171 个摘要中 5 项独立多来源佐证、138 项仅官方、11 项独立性待确认、17 项证据不足。本次未下载模型权重，未执行模型推理或设备实测。
+
+
+## 2026-11-22 新批次：23 个 9–11 月型号
+
+本轮从[模型上线台账](../doc/模型上线台账.xlsx)计划页新增并上线 23 个型号，目录由 110 增至 133。发布日期优先采用官方公告；官方无独立公告日时使用 Hugging Face `createdAt`，并在条目中注明。新增 26 个用途摘要、10 条官方评测（均不可比），其余用途保留“证据不足”并写明缺口。
+
+| 型号 | 官方来源 | 关键口径 / 注意 |
+| --- | --- | --- |
+| LFM3-1.7B | [HF](https://huggingface.co/LiquidAI/LFM3-1.7B) | 1.73B、256K、16 语；LFM Open License v1.0，非 Apache/MIT。 |
+| NVIDIA Nemotron 3.5 Bolt E4B | [HF](https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16) | 总参 8B、有效 4B；64K；OpenMDW-1.1。 |
+| Microsoft Aion 1.0 Instruct 2.3B | [HF](https://huggingface.co/microsoft/Aion-1.0-Instruct-2.3B) | 2.29B、32K、MIT；发布日期取 Edge 官方博客 2026-11-19。 |
+| Spark-X2.6 4B | [HF](https://huggingface.co/XHToken/Spark-X2.6-4B) | 4.11B、1M 最大位置、Apache-2.0；无独立官方公告日，用 HF `createdAt`。 |
+| Udgam-384M-Chat | [HF](https://huggingface.co/udgamlabs/Udgam-384M-Chat) | 384.4M、4K、Apache-2.0；BFCL v3 simple 60.0% 为厂商自测。 |
+| Granite Speech 5.0 2B | [HF](https://huggingface.co/ibm-granite/granite-speech-5.0-2b) | 2.31B、4,096 token（约 2 分钟音频）、6 语；平均 WER 5.06%。 |
+| Rumble-2-Flash | [HF](https://huggingface.co/Reson8/Rumble-2-Flash) | 0.51B、40+ 语、Apache-2.0；多语 WER 6.96%、英语 6.6%；流式能力未明确。 |
+| Jais-ASR | [HF](https://huggingface.co/IFM/Jais-ASR) | 5.72B、阿拉伯语 19 方言；WER 22.85%、CER 8.37%。 |
+| Ming 3.0 TTS 0.5B | [HF](https://huggingface.co/inclusionAI/Ming-3.0-tts-0.5B) | 官方骨干 0.5B，HF 检查点约 1.48B，口径差异已注明；MIT。 |
+| ZONOS3-Mini | [HF](https://huggingface.co/Zyphra/ZONOS3-Mini) | 800M 总参/约 100M 激活、43 语、Apache-2.0。 |
+| Phonon 31M | [HF](https://huggingface.co/gradium/phonon-31m-en) | 31M 英文、Apache-2.0；40M 多语种为 CC BY-NC，未纳入。 |
+| Hunyuan AuK 1.5B | [HF](https://huggingface.co/tencent/AuK) | 1.5B、MIT；语言清单以官方卡为准，未扩写。 |
+| MiniCPM-OCR 1.0 | [HF](https://huggingface.co/openbmb/MiniCPM-OCR-1.0) | 1.3B、中英为主、Apache-2.0；Jev 2B 为独立质量判定模型。 |
+| LightOnOCR-3 1B | [HF](https://huggingface.co/lightonai/LightOnOCR-3-1B) | 1B、Apache-2.0；0.8B/4B 为不同架构。 |
+| Surya 2.5 | [HF](https://huggingface.co/datalab-to/surya-ocr-2.5) | 689M；OmniParseBench 85.9、olmOCR 83.7；权重为修改版 OpenRAIL-M。 |
+| OXR-1.0 | [HF](https://huggingface.co/SoMarkAI/OXR-1.0) | 1.3B；自定义 OXR 许可；官方建议 24GB 显存起测。 |
+| Nemotron 3.5 Parse | [HF](https://huggingface.co/nvidia/Nemotron-3.5-Parse) | 630.8M、OpenMDW-1.1；含 MTP 头。 |
+| EmbeddingGemma 2 | [HF](https://huggingface.co/google/embeddinggemma-2) | 740M（270M 文本+170M 视觉+300M 音频）、8K、Apache-2.0；站内模态只记录文本+图像。 |
+| Nemotron 3.5 Embed 1B | [HF](https://huggingface.co/nvidia/Nemotron-3.5-Embed-1B-BF16) | 1.55B 含视觉编码器、32K、OpenMDW-1.1；查询仅文本。 |
+| Nemotron 3.5 Rerank 8B | [HF](https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16) | 8.38B、32K；ViDoRe v3.1 nDCG@10 60.49。 |
+| Hindsight hs-embed-1 | [HF](https://huggingface.co/hindsight-ai/hs-embed-1) | 112M、384 维、8K、MIT；98M 为词嵌入表。 |
+| Hindsight hs-rerank-1 | [HF](https://huggingface.co/hindsight-ai/hs-rerank-1) | 114M、8K、MIT；98M 为词嵌入表。 |
+| MiniCPM-V 4.7 1B | [HF](https://huggingface.co/openbmb/MiniCPM-V-4.7-1B) | 1.55B、图像/视频、Apache-2.0；同代 35B-A3B 未纳入。 |
+
+新增条目中，LFM3、Nemotron Bolt、Aion、Spark、Granite Speech、Rumble、Jais、EmbeddingGemma 2、Nemotron Rerank、Surya 的评测均有明确官方出处；其余型号未导入可复核的完整官方聚合成绩，`assessments` 保留证据不足。AA 数据仍仅链接、不导入。核对后目录为 133 型号、197 个用途摘要、436 条成绩（398 官方、38 第三方）。

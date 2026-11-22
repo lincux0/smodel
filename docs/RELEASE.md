@@ -20,6 +20,8 @@
 
 ## 上线验证
 
+2026-11-22 新批次上线：新增 23 个 2026-09 至 2026-11 发布的型号（LFM3-1.7B、Nemotron 3.5 Bolt E4B、Aion 1.0 Instruct 2.3B、Spark-X2.6 4B、Udgam-384M-Chat、Granite Speech 5.0 2B、Rumble-2-Flash、Jais-ASR、Ming 3.0 TTS 0.5B、ZONOS3-Mini、Phonon 31M、Hunyuan AuK 1.5B、MiniCPM-OCR 1.0、LightOnOCR-3 1B、Surya 2.5、OXR-1.0、Nemotron 3.5 Parse、EmbeddingGemma 2、Nemotron 3.5 Embed 1B、Nemotron 3.5 Rerank 8B、Hindsight hs-embed-1、Hindsight hs-rerank-1、MiniCPM-V 4.7 1B），目录由 110 增至 133 个型号。新增 26 个用途摘要、10 条官方评测（均不可比），其余用途保留证据不足；LFM Open License、OXR 自定义许可、Surya 修改版 OpenRAIL-M 等条款已在条目中列明。`npm test` 8/8、Astro 检查无错误、生产构建 140 页通过；Playwright 验证目录 133/133、家族与搜索筛选、23 个新详情页均 200、320px 无横向溢出、控制台无错误。台账同步为已上线 133、计划 29。未下载权重或执行模型推理。
+
 2026-11-22 P0修正：补齐 Gemma 4 E4B 语音识别与 FLEURS 英文 WER 0.065；为 Gemma 4 E2B/E4B、Qwen3.5-4B、InternVL3.5 1B/2B/4B/8B 补 video 输入；Qwen3-1.7B/4B 代码用途因 LiveCodeBench v5 与 v4 版本不同，从 `corroborated` 降为 `official-only`。同时新增音频/视频输入与用途、音频输出的结构校验，以及交叉佐证的同基准同版本要求。目录仍 110 型号，171 个用途摘要、426 条成绩（388 官方、38 第三方）；171 个摘要中 5 项独立多来源佐证、138 项仅官方、11 项独立性待确认、17 项证据不足。内容校验、8 项 Node 测试、Astro 检查与生产构建均通过；未下载权重或执行推理。
 
 2026-11-22 P1修正：对比页空硬件值不再显示“未核实 GB”，统一为“未核实”；目录对比栏的未知规模改为“规模未提供”；模型序号颜色由 `#909995` 调整为 `--muted`，在纸面与较深卡片背景上的实测对比度分别为 5.17:1 和 4.68:1。内容校验、8 项 Node 测试、Astro 检查与 117 页生产构建通过；Playwright 验证对比页、目录对比栏、模型序号计算样式与控制台无错误。
