@@ -5,6 +5,11 @@ import ModelList from '../components/ModelList.astro';
 import { taskLabels } from '../lib/catalog.ts';
 
 const models = await getCollection('models');
+const featuredIds = ['qwen3-0-6b', 'gemma-3-4b-it', 'bge-m3', 'whisper-large-v3-turbo'];
+const featured = featuredIds.flatMap((id) => {
+  const model = models.find((entry) => entry.id === id);
+  return model ? [model] : [];
+});
 const tasks = Object.entries(taskLabels).map(([id, label], index) => ({
   id,
   label,
@@ -44,7 +49,7 @@ const activeTasks = new Set(models.flatMap(({ data }) => data.tasks));
 
   <section class="section" aria-labelledby="featured-heading">
     <div class="section-heading"><div><p class="kicker">02 / 样本条目</p><h2 id="featured-heading">先看几个具体型号</h2></div><a href="/models/">前往完整目录 ↗</a></div>
-    <ModelList models={models.slice(0, 4)} />
+    <ModelList models={featured} />
   </section>
 
 </Base>

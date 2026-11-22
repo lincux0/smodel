@@ -40,6 +40,10 @@ const sizeOptions = [
       <CatalogSelect label="排序方式" name="sort" options={[{ value: 'recent', label: '最近核实' }, { value: 'name', label: '名称 A–Z' }, { value: 'size', label: '公开规模' }]} />
     </div>
   </section>
+  <noscript>
+    <p class="notice">筛选和排序需要 JavaScript；以下显示全部 {models.length} 个模型。</p>
+    <style is:inline>.catalog-tools { display: none; }</style>
+  </noscript>
   <ModelList models={models} interactive />
   <p class="muted">规模按各来源公开口径筛选，不代表相同统计范围或运行内存；未知规模独立收录，详情保留口径说明。</p>
 </Base>
